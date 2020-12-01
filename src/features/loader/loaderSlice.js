@@ -6,16 +6,16 @@ export const loaderSlice = createSlice({
     value: true,
   },
   reducers: {
-    start: state => {
+    loadStart: state => {
       state.value = true;
     },
-    end: state => {
+    loadEnd: state => {
         state.value = false;
       }
   }
 });
 
-export const { start, end } = loaderSlice.actions;
+export const { loadStart, loadEnd } = loaderSlice.actions;
 
 export const loading = state => state.loader.value;
 

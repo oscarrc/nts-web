@@ -1,9 +1,29 @@
-import React from 'react';
-import Lottie from "lottie-react";
+import React, {useEffect, useState} from 'react';
+import Lottie from 'lottie-react';
+import webmidi from 'webmidi';
+import { useDispatch } from 'react-redux';
+import { loadEnd } from './loaderSlice';
 
-import loading from '../../assets/loader.json'
+import loader from '../../assets/loader.json'
 
 export function Loader() {
-    return <Lottie animationData={loading} />;
-}
+    const [midi, setMidi] = useState(true);   
+    const dispatch = useDispatch();
 
+    useEffect(() => {  
+        webmidi.enable( (err) => {
+            if (err) {
+                setMidi(false);
+            }else{
+                dispatch(loadEnd())
+            }
+            
+        }, true);
+    });
+        
+    if(!midi){
+        return <h1>MIDI IS NOT ENABLED</h1>
+    }
+
+    return <Lottie animationData={loader} />;
+}
