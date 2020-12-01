@@ -1,0 +1,7 @@
+color palete
+
+#212122
+#AFB0AB
+#D2B083
+#F8283A
+#530C13

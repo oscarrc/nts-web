@@ -7,9 +7,11 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "lottie-react": "^2.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
+    "react-rotary-knob": "^1.1.8",
     "react-scripts": "4.0.1"
   },
   "scripts": {
