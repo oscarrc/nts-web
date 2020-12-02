@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Dot Matrix';
+  src: url('assets/Square-Dot-Matrix.ttf') format('truetype');
+}
+
 #app {
   text-align: center;
   height: 100vh;  
@@ -18,7 +23,7 @@
   background-color: transparent;
 }
 
-.btn-gold.ant-btn:hover{
+.btn-gold.ant-btn:hover, .btn-gold.ant-btn:focus, .btn-gold.ant-btn:active{
   color: #d32029;
   border-color: #d32029;
   background-color: transparent;
@@ -42,7 +47,11 @@
   width: 100%;
 }
 
-
+.main.ant-layout-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .footer.ant-layout-footer{
   padding: 24px 72px;

@@ -1,29 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import Lottie from 'lottie-react';
-import webmidi from 'webmidi';
-import { useDispatch } from 'react-redux';
-import { loadEnd } from './loaderSlice';
+import { createSlice } from '@reduxjs/toolkit';
 
-import loader from '../../assets/loader.json'
-
-export function Loader() {
-    const [midi, setMidi] = useState(true);   
-    const dispatch = useDispatch();
-
-    useEffect(() => {  
-        webmidi.enable( (err) => {
-            if (err) {
-                setMidi(false);
-            }else{
-                dispatch(loadEnd())
-            }
-            
-        }, true);
-    });
-        
-    if(!midi){
-        return <h1>MIDI IS NOT ENABLED</h1>
+export const loaderSlice = createSlice({
+  name: 'loader',
+  initialState: {
+    value: true,
+  },
+  reducers: {
+    loadStart: state => {
+      state.value = true;
+    },
+    loadEnd: state => {
+      state.value = false;
     }
+  }
+});
 
-    return <Lottie animationData={loader} />;
-}
+export const { loadStart, loadEnd } = loaderSlice.actions;
+
+export const loading = state => state.loader.value;
+
+export default loaderSlice.reducer;
