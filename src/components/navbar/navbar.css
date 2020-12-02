@@ -1,0 +1,17 @@
+.ant-page-header-heading-title .logo{
+    max-height: 8rem;
+    min-height: 2rem;
+    height: 4rem;
+}
+
+.ant-page-header-heading-sub-title{
+    display: flex;
+    align-self: flex-end;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+}
+
+.ant-page-header-heading-extra{
+    display: flex;
+    align-self: center;
+}

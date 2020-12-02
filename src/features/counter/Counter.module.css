@@ -49,7 +49,6 @@
 }
 
 .asyncButton {
-  composes: button;
   position: relative;
   margin-left: 8px;
 }

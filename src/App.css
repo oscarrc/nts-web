@@ -1,3 +1,28 @@
 #app {
   text-align: center;
+  height: 100vh;  
+  background-color: #212122;
+}
+
+.transparent{
+  background-color: transparent !important;
+}
+
+.text-gold{
+  color: #f3cc62;
+}
+
+.header.ant-layout-header {
+  height: auto;
+  width: 100%;
+}
+
+
+
+.footer.ant-layout-footer{
+  padding: 24px 72px;
+}
+
+a.link:hover{
+  color: #d32029;
 }

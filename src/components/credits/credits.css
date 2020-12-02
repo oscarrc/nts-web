@@ -1,0 +1,11 @@
+.credits.ant-space-align-center{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.credits p{
+    margin: 0;
+}
