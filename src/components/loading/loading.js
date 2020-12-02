@@ -3,7 +3,7 @@ import webmidi from 'webmidi';
 
 import { useDispatch } from 'react-redux';
 
-import { loadEnd } from '../../features/loader/loader';
+import { loadEnd } from '../../features/loader';
 
 import './loading.css';
 
