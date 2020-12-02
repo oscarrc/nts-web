@@ -12,6 +12,31 @@
   color: #f3cc62;
 }
 
+.btn-gold.ant-btn{
+  color: #f3cc62;
+  border-color: #f3cc62;
+  background-color: transparent;
+}
+
+.btn-gold.ant-btn:hover{
+  color: #d32029;
+  border-color: #d32029;
+  background-color: transparent;
+}
+
+.menu-dark.ant-dropdown-menu{
+  background-color: #212122;
+}
+
+.menu-dark .ant-dropdown-menu-item{
+  color: #f3cc62;
+}
+
+.menu-dark .ant-dropdown-menu-item:hover{
+  color: #d32029;
+  background-color: transparent;
+}
+
 .header.ant-layout-header {
   height: auto;
   width: 100%;
