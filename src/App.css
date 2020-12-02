@@ -26,6 +26,11 @@
   color: #d32029 !important;
 }
 
+.text-lcd{
+  font-family: "Dot Matrix";
+  color: #d32029;
+}
+
 .btn-gold.ant-btn{
   color: #f3cc62;
   border-color: #f3cc62;

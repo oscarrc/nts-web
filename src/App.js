@@ -1,9 +1,14 @@
 import React from 'react';
-import { Layout, Row, Col, Divider } from 'antd';
+import { Layout, Row, Col } from 'antd';
 
+import { Amplifier } from './components/synth/amplifier';
+import { Arpegiator } from './components/synth/arpegiator';
 import { Credits } from './components/credits/credits';
 import { Display } from './components/display/display';
+import { Effects } from './components/synth/effects';
 import { NavBar } from './components/navbar/navbar';
+import { Oscilator } from './components/synth/oscilator';
+import { Vcfilter } from './components/synth/vcfilter';
 
 import './App.css';
 import "antd/dist/antd.css";
@@ -20,20 +25,20 @@ function App() {
         <Row justify="space-between" align="center">
           <Col span={4}>
             <Display />
-            <Divider className="text-gold">OSC</Divider>
-            <Divider className="text-gold">ARP</Divider>
+            <Oscilator />
+            <Arpegiator />
           </Col>
           
           <Col span={2}>
-            <Divider className="text-gold">VCF</Divider>
+            <Vcfilter />
           </Col>
 
           <Col span={2}>
-            <Divider className="text-gold">AMP</Divider>
+            <Amplifier />
           </Col>
           
           <Col span={4}>
-            <Divider className="text-gold">EFFECTS</Divider>
+            <Effects />
           </Col>
         </Row>
       </Content>

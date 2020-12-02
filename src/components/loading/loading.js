@@ -23,7 +23,7 @@ export function Loading() {
     });
 
     return  (
-        <h2 className="error">
+        <h2 className="text-lcd">
             { midi ? "Please, allow the app to use midi ": "ERROR. MIDI is not enabled for this app" }
         </h2>
     );

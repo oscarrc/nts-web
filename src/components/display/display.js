@@ -5,8 +5,8 @@ import './display.css';
 
 export function Display() { 
     return  (
-        <Space className="display">
-            TEST
+        <Space className="display" direction="vertical">
+            <h2 className="text-lcd">TEST</h2>
         </Space>
     );
 }
