@@ -1,9 +1,8 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col, Divider } from 'antd';
 
 import { NavBar } from './components/navbar/navbar';
 import { Credits } from './components/credits/credits';
-import { Loading } from './components/loading/loading';
 
 import './App.css';
 import "antd/dist/antd.css";
@@ -17,7 +16,21 @@ function App() {
         <NavBar />
       </Header>
       <Content className="main transparent">
-        <Loading />
+        <Row justify="space-between" align="center">
+          <Col span={2}>
+            <Divider className="text-gold">OSC</Divider>
+            <Divider className="text-gold">ARP</Divider>
+          </Col>
+          <Col span={2}>
+            <Divider className="text-gold">VCF</Divider>
+          </Col>
+          <Col span={3}>
+            <Divider className="text-gold">AMP</Divider>
+          </Col>
+          <Col span={5}>
+            <Divider className="text-gold">EFFECTS</Divider>
+          </Col>
+        </Row>
       </Content>
       <Footer className="footer transparent">
         <Credits />

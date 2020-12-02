@@ -13,8 +13,17 @@
   background-color: transparent !important;
 }
 
-.text-gold{
+.text-gold, .text-gold.ant-divider-horizontal.ant-divider-with-text{
   color: #f3cc62;
+}
+
+.text-gold.ant-divider-horizontal.ant-divider-with-text::before, .text-gold.ant-divider-horizontal.ant-divider-with-text::after{
+  border-top: 1px solid;
+  border-top-color: #f3cc62;
+}
+
+.text-red{
+  color: #d32029 !important;
 }
 
 .btn-gold.ant-btn{
@@ -48,9 +57,7 @@
 }
 
 .main.ant-layout-content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 24px 72px;
 }
 
 .footer.ant-layout-footer{
