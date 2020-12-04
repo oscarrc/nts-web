@@ -17,10 +17,16 @@ function App() {
   const { Header, Footer, Content } = Layout;
 
   useEffect( () => {
-    const script = document.createElement('script');
-    script.src = "/webaudio-controls.js";
-    script.async = true;
-    document.body.appendChild(script);
+    const controls = document.createElement('script');
+    const pianoroll = document.createElement('script');
+
+    controls.src= "/webaudio-controls.js";
+    controls.async= true;
+    pianoroll.src= "/webaudio-pianoroll.js";
+    pianoroll.async= true;
+
+    document.body.appendChild(controls);
+    document.body.appendChild(pianoroll);
   })
 
   return (
