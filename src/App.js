@@ -30,18 +30,18 @@ function App() {
       </Header>
       <Content className="main transparent">
         <Row justify="space-between" align="top">
-          <Col span={24} lg={6}>
+          <Col span={24} md={12} lg={6}>
             <Display />
             <Oscilator />
             <Arpegiator />
           </Col>          
-          <Col span={12} xs={24} lg={4}>
+          <Col span={24} md={10} lg={4}>
             <Vcfilter />
           </Col>
-          <Col span={12} xs={24} lg={4}>
+          <Col span={24} md={10} lg={4}>
             <Amplifier />
           </Col>          
-          <Col span={24} lg={6}>
+          <Col span={24} md={12} lg={6}>
             <Effects />
           </Col>
         </Row>        

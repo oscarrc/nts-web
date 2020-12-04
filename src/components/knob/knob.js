@@ -16,13 +16,13 @@ export function Knob(props) {
 
       setValue(props.value);
 
-      return () =>document.getElementById(props.name).removeEventListener("input", handleChange);      
+      return () => document.getElementById(props.name).removeEventListener("input", handleChange);      
     }, [setValue, props.name, props.value])
 
     return  (
         <div className='knob-wrapper'>            
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
-          <webaudio-knob class="knob" diameter="60" id={props.name}  name={props.name} src={knob} min={ props.min } max={ props.max } value={ value }></webaudio-knob>
+          <webaudio-knob class="knob" diameter="60" id={props.name} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={ value }></webaudio-knob>
           { props.param ? <webaudio-param class="param" link={props.name}></webaudio-param> : null }
         </div>
     );
