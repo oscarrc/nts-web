@@ -29,7 +29,7 @@ function App() {
         <NavBar />
       </Header>
       <Content className="main transparent">
-        <Row justify="space-between" align="top">
+        <Row justify="space-between" align="top" gutter={[0,20]}>
           <Col span={24} md={12} lg={6}>
             <Display />
             <Oscilator />
@@ -38,11 +38,11 @@ function App() {
           <Col span={24} md={10} lg={4}>
             <Vcfilter />
           </Col>
-          <Col span={24} md={10} lg={4}>
-            <Amplifier />
-          </Col>          
           <Col span={24} md={12} lg={6}>
             <Effects />
+          </Col>          
+          <Col span={24} md={10} lg={4}>            
+            <Amplifier />
           </Col>
         </Row>        
       </Content>
