@@ -20,9 +20,9 @@ function App() {
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
 
-    controls.src= "/webaudio-controls.js";
+    controls.src= "assets/js/webaudio-controls.js";
     controls.async= true;
-    pianoroll.src= "/webaudio-pianoroll.js";
+    pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
 
     document.body.appendChild(controls);
