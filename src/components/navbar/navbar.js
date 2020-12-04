@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageHeader, Button, Dropdown, Menu, Space } from 'antd';
-import { DownOutlined, LinkOutlined, DownloadOutlined } from '@ant-design/icons';
+import { PageHeader, Button, Dropdown, Menu, Space, Upload } from 'antd';
+import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import korg from '../../assets/korg.svg';
 import './navbar.css';
 
@@ -22,12 +22,14 @@ export function NavBar() {
             subTitle={<strong className="text-gold">NTS-web</strong>}
             extra={[
                 <Space>
+                    <Upload>
+                        <Button ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
+                    </Upload>
                     <Dropdown key="menu" overlay={menu}>
                         <Button ghost className="btn-gold">
                             Export <DownOutlined />
                         </Button>
                     </Dropdown>
-                    <Button ghost className="btn-gold">Import</Button>
                 </Space>
             ]}
         >

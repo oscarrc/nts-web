@@ -30,8 +30,9 @@
   color: #b4b4b4;
 }
 
-.text-light, .text-light.ant-divider-horizontal.ant-divider-with-text{
+.text-light.ant-divider-horizontal.ant-divider-with-text{
   color: #b4b4b4;
+  font-size: 14px;
 }
 
 .text-light.ant-divider-horizontal.ant-divider-with-text::before, .text-light.ant-divider-horizontal.ant-divider-with-text::after{
