@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Row, Col } from 'antd';
 
 import { Amplifier } from './components/synth/amplifier';
@@ -16,31 +16,35 @@ import "antd/dist/antd.css";
 function App() {
   const { Header, Footer, Content } = Layout;
 
+  useEffect( () => {
+    const script = document.createElement('script');
+    script.src = "/webaudio-controls.js";
+    script.async = true;
+    document.body.appendChild(script);
+  })
+
   return (
     <Layout id="app">
       <Header className="header transparent">
         <NavBar />
       </Header>
       <Content className="main transparent">
-        <Row justify="space-between" align="center">
-          <Col span={4}>
+        <Row justify="space-between" align="top">
+          <Col span={6}>
             <Display />
             <Oscilator />
             <Arpegiator />
-          </Col>
-          
-          <Col span={2}>
+          </Col>          
+          <Col span={4}>
             <Vcfilter />
           </Col>
-
-          <Col span={2}>
-            <Amplifier />
-          </Col>
-          
           <Col span={4}>
+            <Amplifier />
+          </Col>          
+          <Col span={6}>
             <Effects />
           </Col>
-        </Row>
+        </Row>        
       </Content>
       <Footer className="footer transparent">
         <Credits />

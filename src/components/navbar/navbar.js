@@ -6,11 +6,11 @@ import './navbar.css';
 
 const menu = (
     <Menu className="menu-dark">
-        <Menu.Item key="1" icon={<LinkOutlined />}>
-        Copy link
+        <Menu.Item key="copy" icon={<LinkOutlined />}>
+            Copy link
         </Menu.Item>
-        <Menu.Item key="2" icon={<DownloadOutlined />}>
-        Save file
+        <Menu.Item key="save" icon={<DownloadOutlined />}>
+            Save file
         </Menu.Item>
     </Menu>
 )
@@ -22,12 +22,12 @@ export function NavBar() {
             subTitle={<strong className="text-gold">NTS-web</strong>}
             extra={[
                 <Space>
-                    <Dropdown overlay={menu}>
-                        <Button className="btn-gold">
+                    <Dropdown key="menu" overlay={menu}>
+                        <Button ghost className="btn-gold">
                             Export <DownOutlined />
                         </Button>
                     </Dropdown>
-                    <Button className="btn-gold">Import</Button>
+                    <Button ghost className="btn-gold">Import</Button>
                 </Space>
             ]}
         >
