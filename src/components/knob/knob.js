@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import './knob.css';
-import knob from '../../assets/selector.png';
+import knob from '../../assets/knob.png';
 
 export function Knob(props) {
     const [value, setValue] = useState(props.value);
