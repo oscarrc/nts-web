@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { Layout, Row, Col, Divider } from 'antd';
+import { Layout, Row, Col, Collapse} from 'antd';
+import { DoubleRightOutlined } from '@ant-design/icons';
 
 import { Amplifier } from './components/synth/amplifier';
 import { Arpegiator } from './components/synth/arpegiator';
@@ -17,6 +18,7 @@ import "antd/dist/antd.css";
 
 function App() {
   const { Header, Footer, Content } = Layout;
+  const { Panel } = Collapse;
 
   useEffect( () => {
     const controls = document.createElement('script');
@@ -59,14 +61,17 @@ function App() {
             <Vcfilter />
           </Col>
         </Row>
-        <Divider className="divider-gold" />
-        <Row justify="space-between" align="center">
-          <Col span={6}></Col>
-          <Col span={12}>
-            <Keyboard />
-          </Col>
-          <Col span={4}></Col>
-        </Row>
+        <Collapse className="transparent"  bordered={false}  >
+          <Panel showArrow={false} header={ <span className='text-gold'><DoubleRightOutlined rotate={90} /> <strong >More controls</strong> <DoubleRightOutlined rotate={90} /></span> } key="1">            
+            <Row justify="space-between" align="center">
+              <Col span={6}></Col>
+              <Col span={12}>
+                <Keyboard />
+              </Col>
+              <Col span={4}></Col>
+            </Row>
+          </Panel>
+        </Collapse>
       </Content>
       <Footer className="footer transparent">
         <Credits />

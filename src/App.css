@@ -9,8 +9,13 @@
   background-color: #212122;
 }
 
-.transparent{
+.transparent, .transparent .ant-collapse-header{
   background-color: transparent !important;
+}
+
+.transparent .ant-collapse-item:last-child{
+  /* border-top: 1px solid; */
+  border-color: #f3cc62;
 }
 
 .text-gold, .text-gold.ant-divider-horizontal.ant-divider-with-text{

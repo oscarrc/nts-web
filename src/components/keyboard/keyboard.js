@@ -9,6 +9,7 @@ export function Keyboard(props) {
         const handleResize = () => {
             const actualWidth = document.getElementsByClassName('keyboard-wrapper')[0].offsetWidth;
             keyboard.current.width = actualWidth;
+            keyboard.current.height = actualWidth / 4;
         }
 
         handleResize();
