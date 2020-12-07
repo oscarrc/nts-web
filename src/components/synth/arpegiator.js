@@ -1,5 +1,5 @@
 import React from 'react';
-import { Divider, Row, Col, Select } from 'antd';
+import { Divider, Row, Col } from 'antd';
 import { Knob } from '../knob/knob';
 import { Selector } from '../selector/selector';
 
