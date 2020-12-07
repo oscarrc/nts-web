@@ -17,7 +17,7 @@
   color: #f3cc62;
 }
 
-.text-gold.ant-divider-horizontal.ant-divider-with-text::before, .text-gold.ant-divider-horizontal.ant-divider-with-text::after{
+.divider-gold.ant-divider, .text-gold.ant-divider-horizontal.ant-divider-with-text::before, .text-gold.ant-divider-horizontal.ant-divider-with-text::after{
   border-top: 1px solid;
   border-top-color: #f3cc62;
 }
@@ -95,9 +95,9 @@ a.link:hover{
     text-shadow: 0 0 1px #111;
 }
 
-.control-select.ant-select{
+.control-select.ant-select, .control-input.ant-imput{
   padding: 0 7px;
-  margin-top: 20px;
+  margin: 16px 0;
   width: 100%;
   text-align: left;
   color: #d32029;
@@ -125,4 +125,18 @@ a.link:hover{
 .control-select.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector{
   border-color: #d32029;
   box-shadow: 0 0 0 2px rgba(211, 32, 41, 0.3)
+}
+
+.select-row .ant-col{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.padded-row .ant-col{
+  padding-bottom: 25px;
+}
+
+.padded-row .ant-col:last-child{
+  padding: 0;
 }

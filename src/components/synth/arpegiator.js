@@ -1,17 +1,18 @@
 import React from 'react';
 import { Divider, Row, Col, Select } from 'antd';
 import { Knob } from '../knob/knob';
+import { Selector } from '../selector/selector';
 
 export function Arpegiator() { 
-    const { Option } = Select;
+    // const { Option } = Select;
 
     return  (
         <div>
             <Divider className="text-gold">ARP</Divider>
-            <Row>
-                <Col span={8}>
-                    <label className="control-label" htmlFor="type">TYPE</label>
-                    <Select className="control-select text-lcd" size="medium" name="type" placeholder="Arp type">
+            <Row className="padded-row" justify="space-between">   
+                <Col span={24}>
+                    <Selector name="TYPE" />
+                    {/* <Select className="control-select text-lcd" size="medium" name="type" placeholder="Arp type">
                         <Option key="u">Up</Option>
                         <Option key="d">Down</Option>
                         <Option key="ud">Up-Down</Option>
@@ -22,12 +23,12 @@ export function Arpegiator() {
                         <Option key="divcon">Div-Conv</Option>                      
                         <Option key="rand">Random</Option>
                         <Option key="stoc">Stochastic</Option>
-                    </Select>
+                    </Select> */}
                 </Col>
-                <Col span={8}>
+                <Col span={24}>
                     <Knob name="LENGTH" />
                 </Col>
-                <Col span={8}>                    
+                <Col span={24}>                    
                     <Knob name="INTERVAL" />
                 </Col>
             </Row>

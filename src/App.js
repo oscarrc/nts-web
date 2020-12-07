@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Col, Divider } from 'antd';
 
 import { Amplifier } from './components/synth/amplifier';
 import { Arpegiator } from './components/synth/arpegiator';
@@ -38,19 +38,26 @@ function App() {
         <Row justify="space-between" align="top" gutter={[0,20]}>
           <Col span={24} md={12} lg={6}>
             <Display />
-            <Oscilator />
-            <Arpegiator />
-          </Col>          
-          <Col span={24} md={10} lg={4}>
-            <Vcfilter />
-          </Col>
-          <Col span={24} md={12} lg={6}>
-            <Effects />
+            <Row justify="space-between" align="top">
+              <Col span={10}>
+                <Oscilator />
+              </Col>
+              <Col span={10}>
+                <Arpegiator />
+              </Col>
+            </Row>
           </Col>          
           <Col span={24} md={10} lg={4}>            
             <Amplifier />
           </Col>
-        </Row>        
+          <Col span={24} md={12} lg={6}>
+            <Effects />
+          </Col>          
+          <Col span={24} md={10} lg={4}>
+            <Vcfilter />
+          </Col>
+        </Row>
+        <Divider className="divider-gold" />     
       </Content>
       <Footer className="footer transparent">
         <Credits />
