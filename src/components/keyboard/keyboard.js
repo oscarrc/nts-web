@@ -30,5 +30,5 @@ Keyboard.defaultProps = {
     keys: 36,
     height: 150,
     width: 480,
-    colors: "#888;#000;#000;#888;#777;#eee;#ddd;#333;#222"
+    colors: "#212122;#b4b4b4;#b4b4b4;#000;#212122;#eee;#ddd;#333;#222"
 };
