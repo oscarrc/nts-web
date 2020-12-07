@@ -10,6 +10,8 @@ import { NavBar } from './components/navbar/navbar';
 import { Oscilator } from './components/synth/oscilator';
 import { Vcfilter } from './components/synth/vcfilter';
 
+import { Keyboard } from './components/keyboard';
+
 import './App.css';
 import "antd/dist/antd.css";
 
@@ -57,7 +59,14 @@ function App() {
             <Vcfilter />
           </Col>
         </Row>
-        <Divider className="divider-gold" />     
+        <Divider className="divider-gold" />
+        <Row>
+          <Col span={2}></Col>
+          <Col span={16}>
+            <Keyboard />
+          </Col>
+          <Col span={6}></Col>
+        </Row>
       </Content>
       <Footer className="footer transparent">
         <Credits />
