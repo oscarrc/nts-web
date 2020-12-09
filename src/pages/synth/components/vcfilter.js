@@ -1,7 +1,6 @@
 import React from 'react';
 import { Divider, Row, Col, Select } from 'antd';
-import { Knob } from '../../../components';
-import Switch from '../../../assets/switch.png';
+import { Button, Knob } from '../../../components';
 
 export function Vcfilter() { 
     const { Option } = Select;
@@ -11,7 +10,7 @@ export function Vcfilter() {
             <Divider className="text-gold">VCF</Divider>                       
             <Row className="select-row" justify="space-between">         
                 <Col span={4}>                    
-                    <webaudio-switch src={Switch}></webaudio-switch>
+                    <Button name="vcf" />
                 </Col>       
                 <Col span={20}>
                     <Select className="control-select text-lcd" size="medium" name="eg-type" placeholder="Filter" defaultValue="lp2">

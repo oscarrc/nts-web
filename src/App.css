@@ -231,3 +231,10 @@ a.link:hover{
 .more .ant-divider-horizontal.ant-divider-with-text{
   margin-bottom: 1px;
 }
+
+.switch-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+}

@@ -1,21 +1,20 @@
 import React from 'react';
 import { Divider, Row, Col } from 'antd';
-import { Knob, Selector } from '../../../components';
-import Switch from '../../../assets/switch.png';
+import { Button, Knob, Selector } from '../../../components';
 
 export function Effects() { 
     return  (
         <div className="effects">
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
-                <Col className="text-light" span={6}>                    
-                    <webaudio-switch src={Switch}></webaudio-switch> Mod
+                <Col span={6}> 
+                    <Button name="Mod" tag={ true }/>
                 </Col>
-                <Col className="text-light" span={6}>                    
-                    <webaudio-switch src={Switch}></webaudio-switch> Delay
+                <Col span={6}>    
+                    <Button name="Delay" tag={ true }/>                 
                 </Col>
-                <Col className="text-light" span={6}>                    
-                    <webaudio-switch src={Switch}></webaudio-switch> Reverb
+                <Col span={6}>                
+                    <Button name="Reverb" tag={ true } />
                 </Col>
             </Row>
             <Divider className="text-light">Mod</Divider>
