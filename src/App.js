@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
-import { Synth } from './pages'
+import { Synth, Sequencer } from './pages'
 import { Header, Footer } from './components';
 
 import './App.css';
@@ -27,6 +27,7 @@ function App() {
       <Header/>
       <Switch>
           <Route exact path="/" component={Synth} />
+          <Route exact path="/sequencer" component={Sequencer} />
       </Switch>
       <Footer />
     </Layout>

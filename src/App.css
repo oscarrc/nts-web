@@ -181,8 +181,8 @@ a.link:hover{
   margin-bottom: 24px;
 }
 
-.keyboard-wrapper{
-  width: 100;
+.keyboard-wrapper, .pianoroll-wrapper{
+  width: 100%;
 }
 
 .knob-wrapper {

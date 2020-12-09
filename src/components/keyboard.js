@@ -12,9 +12,11 @@ export function Keyboard(props) {
 
         handleResize();
 
-        window.addEventListener("resize", () => {
-            handleResize();
-        });     
+        window.addEventListener("resize", handleResize);     
+
+        return () => {
+            window.removeEventListener("resize", handleResize);   
+        };   
     })
 
     return  (
