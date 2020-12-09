@@ -35,7 +35,7 @@ export const osc = {
         min: 0,
         max: 127,
         step: 1,
-        label: "Alternate",
+        label: "Alt",
         cc: 55
     }
 };
