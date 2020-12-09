@@ -37,11 +37,11 @@ export function Synth() {
         <Collapse className="transparent"  bordered={false}  >
           <Panel showArrow={false} header={ <span className='text-gold'><strong >Show Keyboard</strong></span> } key="1">            
             <Row justify="space-between" align="center">
-              <Col span={6}></Col>
-              <Col span={12}>
+              <Col span={12} order={1} lg={{ span: 6, order: 1 }}></Col>
+              <Col span={24} order={3} lg={{ span: 12, order: 2 }}>
                 <Keyboard />
               </Col>
-              <Col span={4}></Col>
+              <Col span={12} order={2} lg={{ span: 6, order: 3 }}></Col>
             </Row>
           </Panel>
         </Collapse>
