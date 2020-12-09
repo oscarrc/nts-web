@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import { Synth } from './pages'
@@ -24,7 +25,9 @@ function App() {
   return (
     <Layout id="app">
       <Header/>
-      <Synth />
+      <Switch>
+          <Route exact path="/" component={Synth} />
+      </Switch>
       <Footer />
     </Layout>
   );

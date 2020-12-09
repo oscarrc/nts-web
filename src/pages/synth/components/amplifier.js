@@ -5,7 +5,7 @@ import { Knob } from '../../../components';
 export function Amplifier() { 
     const {Option} = Select
     return  (
-        <div>
+        <div className="amp">
             <Divider className="text-gold">AMP</Divider> 
             <Row justify="space-between">                
                 <Col span={24}>

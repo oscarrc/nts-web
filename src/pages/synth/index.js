@@ -1,9 +1,8 @@
 import React from 'react';
 import { Layout, Row, Col, Collapse} from 'antd';
-import { DoubleRightOutlined } from '@ant-design/icons';
 
 import { Display, Keyboard } from '../../components';
-import { Amplifier, Arpegiator, Effects, Oscilator, Vcfilter } from './components';
+import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter } from './components';
 
 
 export function Synth() {
@@ -32,6 +31,7 @@ export function Synth() {
           </Col>          
           <Col span={24} md={10} lg={4}>
             <Vcfilter />
+            <More />
           </Col>
         </Row>
         <Collapse className="transparent"  bordered={false}  >

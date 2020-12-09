@@ -5,7 +5,7 @@ import Switch from '../../../assets/switch.png';
 
 export function Effects() { 
     return  (
-        <div>
+        <div className="effects">
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
                 <Col className="text-light" span={6}>                    

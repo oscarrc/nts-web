@@ -4,7 +4,7 @@ import { Knob, Selector } from '../../../components';
 
 export function Oscilator() { 
     return  (        
-        <div>
+        <div className="osc">
             <Divider className="text-gold">OSC</Divider>
             <Row justify="space-between" className="padded-row">
                 <Col span={24}>

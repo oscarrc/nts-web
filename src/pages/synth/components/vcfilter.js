@@ -7,7 +7,7 @@ export function Vcfilter() {
     const { Option } = Select;
 
     return  (
-        <div>
+        <div className="vcf">
             <Divider className="text-gold">VCF</Divider>                       
             <Row className="select-row" justify="space-between">         
                 <Col span={4}>                    

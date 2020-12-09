@@ -4,7 +4,7 @@ import { Knob, Selector } from '../../../components';
 
 export function Arpegiator() { 
     return  (
-        <div>
+        <div className="arp">
             <Divider className="text-gold">ARP</Divider>
             <Row className="padded-row" justify="space-between">   
                 <Col span={24}>
