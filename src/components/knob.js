@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import './selector.css';
-import selector from '../../assets/selector.png';
+import knob from '../assets/knob.png';
 
-export function Selector(props) {
+export function Knob(props) {
     const [value, setValue] = useState(props.value);
     const handleChange = (value) => {
       console.log(value)
@@ -20,18 +19,19 @@ export function Selector(props) {
     }, [setValue, props.name, props.value])
 
     return  (
-        <div className='selector-wrapper'>   
-          { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }      
-          <webaudio-knob class="selector" diameter="60" id={props.name} name={props.name} src={selector} step={props.step} min={ 0 } max={ props.values.length - 1  } value={ value }></webaudio-knob>
+        <div className='knob-wrapper'>            
+          { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
+          <webaudio-knob class="knob" diameter="60" id={props.name} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={ value }></webaudio-knob>
+          { props.param ? <webaudio-param class="param" link={props.name}></webaudio-param> : null }
         </div>
     );
 }
 
-Selector.defaultProps = {
+Knob.defaultProps = {
     name: null,
-    bg: null,
-    max: 5,
+    max: 10,
     min: 0,
     value: 0,
-    values: ["a","b","c"],
+    step: 1,
+    param: false
 };

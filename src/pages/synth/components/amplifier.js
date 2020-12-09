@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider, Row, Col, Select } from 'antd';
-import { Knob } from '../knob/knob';
+import { Knob } from '../../../components';
 
 export function Amplifier() { 
     const {Option} = Select

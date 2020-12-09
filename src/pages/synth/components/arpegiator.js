@@ -1,7 +1,6 @@
 import React from 'react';
 import { Divider, Row, Col } from 'antd';
-import { Knob } from '../knob/knob';
-import { Selector } from '../selector/selector';
+import { Knob, Selector } from '../../../components';
 
 export function Arpegiator() { 
     // const { Option } = Select;

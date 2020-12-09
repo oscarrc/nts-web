@@ -1,8 +1,7 @@
 import React from 'react';
 import { Divider, Row, Col } from 'antd';
-import { Knob } from '../knob/knob';
-import { Selector } from '../selector/selector';
-import Switch from '../../assets/switch.png';
+import { Knob, Selector } from '../../../components';
+import Switch from '../../../assets/switch.png';
 
 export function Effects() { 
     return  (

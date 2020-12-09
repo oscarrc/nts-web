@@ -145,3 +145,85 @@ a.link:hover{
 .padded-row .ant-col:last-child{
   padding: 0;
 }
+
+.credits.ant-space-align-center{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.credits p{
+  margin: 0;
+}
+
+.display {
+  background-color: #2a1215;
+  border: 2px solid #434343;
+  border-radius: .5rem;
+  box-shadow: 0px 0px 0px 4px #262626 inset;
+  height: 20vh;
+  min-width: 100%;
+  background-color: #2a1215;
+  background-size: 25px 25px, 25px 25px, 5px 5px, 5px 5px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+  background-image: -webkit-linear-gradient(transparent 2px, transparent 2px),
+                  -webkit-linear-gradient(0, transparent 2px, transparent 2px),
+                  -webkit-linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
+                  -webkit-linear-gradient(0, rgba(211,32,41,.1) 1px, transparent 1px);
+  background-image:-moz-linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
+                  -moz-linear-gradient(0, rgba(211,32,41,.1) 1px, transparent 1px);
+  background-image: linear-gradient(transparent 2px, transparent 2px),
+                  linear-gradient(90deg, transparent 2px, transparent 2px),
+                  linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
+  margin-bottom: 24px;
+}
+
+.keyboard-wrapper{
+  width: 100;
+}
+
+.knob-wrapper {
+  width: 100%;
+}
+
+.knob-wrapper .knob{
+  display: block;
+  margin-top: 5px;
+}
+
+.error {
+  font-family: "Dot Matrix";
+  display: inline-block;
+  color: #d32029;
+  padding: 1px;
+  size: 4rem;    
+  background-color: #2a1215;
+}
+
+.ant-page-header-heading-title .logo{
+  max-height: 8rem;
+  min-height: 2rem;
+  height: 4rem;
+  width: 100%;
+  max-width: 10rem;
+}
+
+.ant-page-header-heading-sub-title{
+  display: flex;
+  align-self: flex-end;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+}
+
+.ant-page-header-heading-extra{
+  display: flex;
+  align-self: center;
+}
+
+.selector-wrapper .selector{
+  margin-top: 2px;
+  margin-bottom: 2px;
+}

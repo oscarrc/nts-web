@@ -3,9 +3,7 @@ import webmidi from 'webmidi';
 
 import { useDispatch } from 'react-redux';
 
-import { loadEnd } from '../../features/loader';
-
-import './loading.css';
+import { loadEnd } from '../features/loader';
 
 export function Loading() { 
     const [midi, setMidi] = useState(true);   

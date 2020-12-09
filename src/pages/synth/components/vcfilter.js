@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Row, Col, Select } from 'antd';
-import { Knob } from '../knob/knob';
-import Switch from '../../assets/switch.png';
+import { Knob } from '../../../components';
+import Switch from '../../../assets/switch.png';
 
 export function Vcfilter() { 
     const { Option } = Select;
