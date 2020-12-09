@@ -35,7 +35,7 @@ export function Synth() {
           </Col>
         </Row>
         <Collapse className="transparent"  bordered={false}  >
-          <Panel showArrow={false} header={ <span className='text-gold'><DoubleRightOutlined rotate={90} /> <strong >More controls</strong> <DoubleRightOutlined rotate={90} /></span> } key="1">            
+          <Panel showArrow={false} header={ <span className='text-gold'><strong >Show Keyboard</strong></span> } key="1">            
             <Row justify="space-between" align="center">
               <Col span={6}></Col>
               <Col span={12}>

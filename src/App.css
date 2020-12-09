@@ -13,8 +13,8 @@
   background-color: transparent !important;
 }
 
-.transparent .ant-collapse-item:last-child{
-  /* border-top: 1px solid; */
+.transparent .ant-collapse-header:last-child, .transparent .ant-collapse-item:last-child{
+  border-top: 1px solid;
   border-color: #f3cc62;
 }
 
