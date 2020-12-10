@@ -374,11 +374,11 @@ export const vcf = {
             },
             {
                 value: 84,
-                label: "HightPass 2p"
+                label: "HighPass 2p"
             },
             {
                 value: 105,
-                label: "HightPass 4p"
+                label: "HighPass 4p"
             },
             {
                 value: 127,
