@@ -1,0 +1,27 @@
+import webmidi from 'webmidi';
+
+const midiStart = () => {
+    webmidi.enable( (err) => {
+        if (err) {
+            return false;
+        }
+
+        return true;        
+    }, true);
+}
+
+const midiControlChange = (cc, value, id, channel) => {
+    const output = webmidi.getOutputById(id);
+    output.sendControlChange(cc, value, channel);
+}
+
+const midiPlayNote = (note, id, channel, stop = false) => {
+    const output = webmidi.getOutputById(id);
+    if(stop){
+        output.stopNote(note, channel);
+    }else{
+        output.playNote(note, channel);
+    }
+}
+
+export { midiStart, midiControlChange, midiPlayNote }
