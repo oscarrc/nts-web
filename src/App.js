@@ -1,14 +1,21 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import { Synth, Sequencer } from './pages'
 import { Header, Footer } from './components';
 
+import { midiStart } from './utils/midi';
+import { loadEnd } from  './redux/reducers/load';
+
 import './App.css';
 import "antd/dist/antd.css";
 
 function App() {
+  const dispatch = useDispatch();
+
   useEffect( () => {
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
@@ -20,6 +27,8 @@ function App() {
 
     document.body.appendChild(controls);
     document.body.appendChild(pianoroll);
+    
+    midiStart(() => { dispatch(loadEnd()) });
   })
 
   return (

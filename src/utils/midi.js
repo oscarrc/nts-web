@@ -1,12 +1,8 @@
 import webmidi from 'webmidi';
 
-const midiStart = () => {
+const midiStart = (callback) => {
     webmidi.enable( (err) => {
-        if (err) {
-            return false;
-        }
-
-        return true;        
+        if (!err) callback();
     }, true);
 }
 

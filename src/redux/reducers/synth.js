@@ -1,32 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { defaultPath } from '../../config/defaults';
 
 export const synthSlice = createSlice({
   name: 'synthesizer',
   initialState: {
-    value: {
-        osc: {
-
-        },
-        arp: {
-
-        },
-        amp:{
-
-        },
-        effects: {
-
-        },
-        vcf:{
-
-        }
-    },
+    value: defaultPath,
   },
   reducers: {
-    loadStart: state => {
-      state.value = true;
-    },
-    loadEnd: state => {
-      state.value = false;
+    setControl: (state, action) => {
+      state.value = { ...state.value, ...action.payload};
     }
   }
 });

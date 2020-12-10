@@ -4,17 +4,17 @@ export const midiSlice = createSlice({
   name: 'midi',
   initialState: {
     value: {
-        deviceId: "",
-        outputDevice: "",
+        outputDevices: [],
+        outputDevice: {},
         outputChannel: "",
+        inputDevices: {},
         inputDevice: "",
         inputChannel: "",
-        devices: []
     },
   },
   reducers: {
     setOptions: (state, action )=> {
-      state.value = action.payload;
+      state.value = { ...state.value, ...action.payload };
     },
     setDevices: (state, action) =>{
         state.value.devices = action.payload;

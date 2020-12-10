@@ -50,10 +50,15 @@
   color: #d32029;
 }
 
-.btn-gold.ant-btn{
+.btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
   color: #f3cc62;
   border-color: #f3cc62;
 }
+
+.btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
+  opacity: .75;
+}
+
 
 .btn-gold.ant-btn:hover, .btn-gold.ant-btn:focus, .btn-gold.ant-btn:active{
   color: #d32029;
@@ -179,6 +184,9 @@ a.link:hover{
                   linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
   margin-bottom: 16px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .keyboard-wrapper, .pianoroll-wrapper{

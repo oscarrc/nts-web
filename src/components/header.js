@@ -1,6 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { PageHeader, Button, Dropdown, Menu, Space, Upload, Layout } from 'antd';
-import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined, SettingOutlined } from '@ant-design/icons';
+
 import korg from '../assets/korg.svg';
 
 const menu = (
@@ -16,6 +18,7 @@ const menu = (
 
 export function Header() {
     const { Header } = Layout;
+    const isLoading = useSelector(state => state.loader).value;
     
     return  (
         <Header className="header transparent">
@@ -25,13 +28,14 @@ export function Header() {
                 extra={[
                     <Space>
                         <Upload>
-                            <Button ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
+                            <Button disabled={isLoading} ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
                         </Upload>
-                        <Dropdown key="menu" overlay={menu}>
+                        <Dropdown disabled={isLoading} key="menu" overlay={menu}>
                             <Button ghost className="btn-gold">
                                 Export <DownOutlined />
                             </Button>
                         </Dropdown>
+                        <Button disabled={isLoading} ghost className="btn-gold" icon={<SettingOutlined />}></Button>
                     </Space>
                 ]}
             >
