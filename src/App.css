@@ -50,6 +50,10 @@
   color: #d32029;
 }
 
+.text-left{
+  text-align: left;
+}
+
 .btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
   color: #f3cc62;
   border-color: #f3cc62;
@@ -185,8 +189,6 @@ a.link:hover{
                   linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
   margin-bottom: 16px;
   padding: 5px;
-  display: flex;
-  align-items: center;
 }
 
 .keyboard-wrapper, .pianoroll-wrapper{
