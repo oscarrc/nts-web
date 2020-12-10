@@ -15,10 +15,10 @@ export function Synth() {
           <Col span={24} md={12} lg={6}>
             <Display />
             <Row justify="space-between" align="top">
-              <Col span={10}>
+              <Col span={24}>
                 <Oscilator />
               </Col>
-              <Col span={10}>
+              <Col span={24}>
                 <Arpegiator />
               </Col>
             </Row>

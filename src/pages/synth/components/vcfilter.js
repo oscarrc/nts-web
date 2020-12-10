@@ -1,10 +1,9 @@
 import React from 'react';
-import { Divider, Row, Col, Select } from 'antd';
-import { Button, Knob } from '../../../components';
+import { Divider, Row, Col } from 'antd';
+import { Button, Knob, Dropdown } from '../../../components';
+import { vcf } from '../../../config/midi';
 
 export function Vcfilter() { 
-    const { Option } = Select;
-
     return  (
         <div className="vcf">
             <Divider className="text-gold">VCF</Divider>                       
@@ -13,32 +12,25 @@ export function Vcfilter() {
                     <Button name="vcf" />
                 </Col>       
                 <Col span={20}>
-                    <Select className="control-select text-lcd" size="medium" name="eg-type" placeholder="Filter" defaultValue="lp2">
-                            <Option key="lp2">Low Pass 2-pole</Option>
-                            <Option key="lp4">Low Pass 4-pole</Option>
-                            <Option key="bp2">Band Pass 2-pole</Option>
-                            <Option key="bp4">Band Pass 4-pole</Option>                     
-                            <Option key="hp2">High Pass 2-Pole</Option>
-                            <Option key="hp4">High Pass 4-Pole</Option>
-                        </Select>
-                    </Col>
+                    <Dropdown name="filter" cc={ vcf.type.cc } values={ vcf.type.values } />
+                </Col>
             </Row>                     
             <Divider className="text-light">Filter</Divider>
             <Row>
                 <Col span={12}>
-                    <Knob name="CUTOFF" />
+                    <Knob name={vcf.filter.cutoff.label} max={vcf.filter.cutoff.max} min={vcf.filter.cutoff.min} step={vcf.filter.cutoff.step} cc={vcf.filter.cutoff.cc} value="0" />
                 </Col>
                 <Col span={12}>
-                    <Knob name="RESONANCE" />
+                    <Knob name={vcf.filter.res.label} max={vcf.filter.res.max} min={vcf.filter.res.min} step={vcf.filter.res.step} cc={vcf.filter.res.cc} value="0" />
                 </Col>
             </Row>
             <Divider className="text-light">Sweep</Divider>
             <Row>                
                 <Col span={12}>
-                    <Knob name="RATE" />
+                    <Knob name={vcf.sweep.rate.label} max={vcf.sweep.rate.max} min={vcf.sweep.rate.min} step={vcf.sweep.rate.step} cc={vcf.sweep.depth.cc} value="0" />
                 </Col>
                 <Col span={12}>
-                    <Knob name="DEPTH" />
+                    <Knob name={vcf.sweep.depth.label} max={vcf.sweep.depth.max} min={vcf.sweep.depth.min} step={vcf.sweep.depth.step} cc={vcf.sweep.depth.cc} value="0" />
                 </Col>
             </Row>
         </div>

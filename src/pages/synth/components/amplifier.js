@@ -1,49 +1,42 @@
 import React from 'react';
-import { Divider, Row, Col, Select } from 'antd';
-import { Knob } from '../../../components';
+import { Divider, Row, Col } from 'antd';
+import { Knob, Dropdown } from '../../../components';
+import { amp } from '../../../config/midi';
 
 export function Amplifier() { 
-    const {Option} = Select
+    const renderKnobs = (opt, cols) => {
+        let knobs = []
+
+        Object.keys(opt).forEach( (knob) => {
+            knobs.push(
+                <Col span={cols}>
+                    <Knob name={opt[knob].label} max={opt[knob].max} min={opt[knob].min} step={opt[knob].step} cc={opt[knob].cc} value="0" />
+                </Col>
+            )
+        })
+
+        return knobs;
+    }
+    
     return  (
         <div className="amp">
             <Divider className="text-gold">AMP</Divider> 
             <Row justify="space-between">                
                 <Col span={24}>
-                    <Select className="control-select text-lcd" size="medium" name="eg-type" placeholder="Amp" defaultValue="open">
-                        <Option key="adsr">ADSR</Option>
-                        <Option key="ahr">AHR</Option>
-                        <Option key="ar">AR</Option>
-                        <Option key="loop">AR Loop</Option>                      
-                        <Option key="open">Open</Option>
-                    </Select>
+                    <Dropdown name="amp" cc={ amp.type.cc } values={ amp.type.values } />
                 </Col>
             </Row>           
             <Divider className="text-light">EG</Divider>
             <Row>
-                <Col span={12}>
-                    <Knob name="ATTACK" />
-                </Col>
-                <Col span={12}>
-                    <Knob name="RELEASE" />
-                </Col>
+                { renderKnobs(amp.eg, 12) }
             </Row>
             <Divider className="text-light">Tremolo</Divider>
             <Row>                
-                <Col span={12}>
-                    <Knob name="RATE" />
-                </Col>
-                <Col span={12}>
-                    <Knob name="DEPTH" />
-                </Col>
+                { renderKnobs(amp.trem, 12) }
             </Row>
             <Divider className="text-light">LFO</Divider>
             <Row>                
-                <Col span={12}>
-                    <Knob name="RATE" />
-                </Col>
-                <Col span={12}>
-                    <Knob name="DEPTH" />
-                </Col>
+                { renderKnobs(amp.lfo, 12) }
             </Row>
         </div>
     );
