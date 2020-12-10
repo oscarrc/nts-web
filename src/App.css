@@ -173,7 +173,8 @@ a.link:hover{
   border-radius: .5rem;
   box-shadow: 0px 0px 0px 4px #262626 inset;
   height: 210px;
-  min-width: 100%;
+  width: 100%;
+  overflow: hidden;
   background-color: #2a1215;
   background-size: 25px 25px, 25px 25px, 5px 5px, 5px 5px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
@@ -188,7 +189,7 @@ a.link:hover{
                   linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
   margin-bottom: 16px;
-  padding: 5px;
+  padding: 4px;
 }
 
 .keyboard-wrapper, .pianoroll-wrapper{

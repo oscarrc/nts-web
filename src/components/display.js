@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space } from 'antd';
+import { Space, Row, Col } from 'antd';
 import { useSelector } from 'react-redux';
 
 export function Display() { 
@@ -7,7 +7,13 @@ export function Display() {
     const controlValues = useSelector(state => state.synthesizer).value;
 
     const renderDisplay = (values) => {
-        return <p className="text-lcd text-left">{JSON.stringify(values)}</p>
+        return (
+            <Row>
+                <Col>
+                    <p className="text-lcd">{JSON.stringify(values)}</p>
+                </Col>
+            </Row>
+        )
     }
 
     return  (
