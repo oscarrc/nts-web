@@ -17,10 +17,14 @@ export function Dropdown(props) {
 
     const handleChange = useCallback((value) => {
         if(props.active) midiControlChange(props.cc, value, "", "");
+        console.log(1)
     }, [props.active, props.cc]);
 
     useEffect( () => {
         const element = document.getElementById(props.name + props.cc);
+
+        handleChange(element.value)
+
         element.addEventListener("change", (event)=>{
           handleChange(event.target.value)
         });

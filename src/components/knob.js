@@ -5,17 +5,18 @@ import knob from '../assets/knob.png';
 
 export function Knob(props) {
     const handleChange = useCallback((value) => {
-      midiControlChange(props.cc, value, "", "");
+        midiControlChange(props.cc, value, "", "");
     },[props.cc]);
     
     useEffect( () => {      
       const element = document.getElementById(props.name + props.cc);
       
+      element.value = props.value;
+      handleChange(element.value);
+
       element.addEventListener("input", (event)=>{
         handleChange(event.target.value)
       });
-
-      element.value = props.value;
 
       return () => { if (element) element.removeEventListener("input", handleChange) };      
     }, [handleChange, props.name, props.value, props.cc])

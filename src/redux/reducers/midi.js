@@ -10,6 +10,7 @@ export const midiSlice = createSlice({
         inputDevices: {},
         inputDevice: "",
         inputChannel: "",
+        settings: false
     },
   },
   reducers: {
@@ -18,6 +19,9 @@ export const midiSlice = createSlice({
     },
     setDevices: (state, action) =>{
         state.value.devices = action.payload;
+    },
+    toggleSettings: (state) => {
+      state.value.settings = !state.value.settings;
     }
   }
 });

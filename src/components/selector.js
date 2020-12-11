@@ -12,11 +12,12 @@ export function Selector(props) {
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
       
+      element.value = props.value;
+      handleChange(element.value);
+      
       element.addEventListener("input", (event)=>{
         handleChange(event.target.value)
       });
-
-      element.value = props.value;
 
       return () => { if (element) element.removeEventListener("input", handleChange) };     
     }, [handleChange, props.name, props.value, props.cc])
