@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { setControl } from  '../../../redux/reducers/synth';
 
-import { randomPatch } from '../../../utils/randomize';
+import { randomPatch } from '../../../utils/patch';
 
 import Button from '../../../assets/button.png';
 

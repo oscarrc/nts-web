@@ -66,4 +66,29 @@ const randomPatch = () => {
     return patch;
 }
 
-export { randomPatch };
+const savePatch = (patch) => {
+    const filename = "patch.nts";
+    const contentType = "application/json;charset=utf-8;";
+
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+      let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(patch)))], { type: contentType });
+      navigator.msSaveOrOpenBlob(blob, filename);
+    } else {
+      let a = document.createElement('a');
+      a.download = filename;
+      a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(patch));
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+}
+
+const linkPatch = (patch) => {
+    const encoded = Buffer.from(JSON.stringify(patch)).toString('base64');
+    const url = window.location.protocol + '//' + window.location.host  + '?patch=' + encoded;
+
+    navigator.clipboard.writeText(url);
+}
+
+export { randomPatch, savePatch, linkPatch };
