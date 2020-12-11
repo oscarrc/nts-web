@@ -1,8 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { PageHeader, Button, Dropdown, Menu, Space, Upload, Layout } from 'antd';
 import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined, SettingOutlined } from '@ant-design/icons';
-import { savePatch, linkPatch } from '../utils/patch';
+import { savePatch, linkPatch, loadPatchFile } from '../utils/patch';
+import { setControl } from  '../redux/reducers/synth';
 
 import korg from '../assets/korg.svg';
 
@@ -10,13 +11,14 @@ export function Header() {
     const { Header } = Layout;
     const isLoading = useSelector(state => state.loader).value;
     const patch = useSelector(state => state.synthesizer).value;
+    const dispatch = useDispatch();
 
-    const exportPatch = () => {    
-        savePatch(patch)
-    }
-
-    const copyLink = () => {
-        linkPatch(patch)
+    const exportPatch = () => savePatch(patch);
+    const copyLink = () => linkPatch(patch);
+    const importPatch = async (file) => {
+        const patch = await loadPatchFile(file);
+        dispatch(setControl(patch));
+        return false;
     }
 
     const menu = (
@@ -37,7 +39,7 @@ export function Header() {
                 subTitle={<strong className="text-gold">NTS-web</strong>}
                 extra={[
                     <Space>
-                        <Upload>
+                        <Upload accept=".nts" showUploadList={false} beforeUpload={ file => importPatch(file)} customRequest={ () => false }>
                             <Button disabled={isLoading} ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
                         </Upload>
                         <Dropdown disabled={isLoading} key="menu" overlay={menu}>

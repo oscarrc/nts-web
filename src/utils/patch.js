@@ -91,4 +91,17 @@ const linkPatch = (patch) => {
     navigator.clipboard.writeText(url);
 }
 
-export { randomPatch, savePatch, linkPatch };
+const loadPatchFile = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            resolve(JSON.parse(e.target.result));
+        };
+        
+        reader.onerror = reject;
+        
+        reader.readAsText(file);
+    })
+}
+
+export { randomPatch, savePatch, linkPatch, loadPatchFile };
