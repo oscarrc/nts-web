@@ -45,24 +45,24 @@ export function Settings() {
         <Form form={form} size="small" labelCol = {{ span: 4 }} wrapperCol={{ span: 20 }} onFinish={saveSettings} >
           <Divider className="text-light">Input</Divider>
           <Item className="text-light" label="Channel" name="inputChannel">
-            <Select className="control-select text-lcd">
+            <Select className="control-select text-lcd" value={ midiState.inputChannel }>
               { renderOptions(channels) }
             </Select>
           </Item>
           <Item label="Device" name="inputDevice">
-            <Select className="control-select text-lcd">
-              { renderOptions(midiState.inputDevices) }
+            <Select className="control-select text-lcd" value={ midiState.inputDevice?.id }>
+              { renderOptions(midiState.inputDevices, true) }
             </Select>
           </Item>
           <Divider className="text-light">Output</Divider>
           <Item label="Channel" name="outputChannel">
-            <Select className="control-select text-lcd">
+            <Select className="control-select text-lcd" value={ midiState.outputChannel }>
               { renderOptions(channels) }
             </Select>
           </Item>
           <Item label="Device" name="outputDevice">
-            <Select className="control-select text-lcd">
-              { renderOptions(midiState.outputDevices) }
+            <Select className="control-select text-lcd" value={ midiState.outputDevice?.id }>
+              { renderOptions(midiState.outputDevices, true) }
             </Select>
           </Item>
         </Form>
