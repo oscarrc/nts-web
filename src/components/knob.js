@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
+import { midiControlChange } from '../utils/midi';
 
 import knob from '../assets/knob.png';
 
 export function Knob(props) {
-    const [value, setValue] = useState(props.value);
-    const handleChange = (value) => {
-      console.log(value)
-    }
+    const handleChange = useCallback((value) => {
+      midiControlChange(props.cc, value, "", "");
+    },[props.cc]);
     
     useEffect( () => {      
       const id = props.name + props.cc;
@@ -15,15 +15,13 @@ export function Knob(props) {
         handleChange(event.target.value)
       });
 
-      setValue(props.value);
-
       return () => document.getElementById(id).removeEventListener("input", handleChange);      
-    }, [props.name, props.value, props.cc])
+    }, [handleChange, props.name, props.value, props.cc])
 
     return  (
         <div className='knob-wrapper'>            
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
-          <webaudio-knob class="knob" diameter="60" id={props.name + props.cc} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={ value }></webaudio-knob>
+          <webaudio-knob class="knob" diameter="60" id={props.name + props.cc} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={ props.value }></webaudio-knob>
           { props.param ? <webaudio-param class="param" link={props.name}></webaudio-param> : null }
         </div>
     );

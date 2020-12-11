@@ -1,23 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { Button, Knob, Selector } from '../../../components';
 import { effects } from '../../../config/midi';
 
 export function Effects() { 
-    const renderControls = (ctrls, name, span) => {
+    const effectValues = useSelector(state => state.synthesizer).value.effects;
+
+    const renderControls = (ctrls, name, span, val) => {
         let controls = [];
 
         Object.keys(ctrls).forEach( (control) => {
             if(control === 'type'){
                 controls.push(
                     <Col span={span}> 
-                        <Selector name={ name } max={ ctrls[control].values.length - 1 } values={ ctrls[control].values } cc={ ctrls[control].cc } min="1" />
+                        <Selector name={ name } max={ ctrls[control].values.length - 1 } values={ ctrls[control].values } cc={ ctrls[control].cc } min="1" active={ val.active } value={ val[control] } />
                     </Col>
                 );
             }else{
                 controls.push(                    
                     <Col span={span}>
-                        <Knob name={ctrls[control].label} max={ctrls[control].max} min={ctrls[control].min} step={ctrls[control].step} cc={ctrls[control].cc} value="0" />
+                        <Knob name={ctrls[control].label} max={ctrls[control].max} min={ctrls[control].min} step={ctrls[control].step} cc={ctrls[control].cc} value={ val[control] }/>
                     </Col>
                 );
             }
@@ -42,15 +45,15 @@ export function Effects() {
             </Row>
             <Divider className="text-light">Mod</Divider>
             <Row>
-                { renderControls(effects.mod, "MOD", 6) }
+                { renderControls(effects.mod, "MOD", 6, effectValues.mod) }
             </Row>
             <Divider className="text-light">Delay</Divider>
             <Row>      
-                { renderControls(effects.delay, "DELAY", 6) }
+                { renderControls(effects.delay, "DELAY", 6, effectValues.delay) }
             </Row>
             <Divider className="text-light">Reverb</Divider>
             <Row>   
-                { renderControls(effects.reverb, "REVERB", 6) }
+                { renderControls(effects.reverb, "REVERB", 6, effectValues.reverb) }
             </Row>
         </div>
     );
