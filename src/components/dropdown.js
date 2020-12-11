@@ -20,17 +20,16 @@ export function Dropdown(props) {
     }, [props.active, props.cc]);
 
     useEffect( () => {
-        const id = props.name + props.cc;
-  
-        document.getElementById(id).addEventListener("change", (event)=>{
+        const element = document.getElementById(props.name + props.cc);
+        element.addEventListener("change", (event)=>{
           handleChange(event.target.value)
         });
     
-        return () => document.getElementById(id).removeEventListener("change", handleChange);      
+        return () => { if(element) element.removeEventListener("change", handleChange) };      
       }, [handleChange, props.name, props.value, props.cc])
 
     return  (
-        <Select className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } defaultValue={ props.value } defaultActiveFirstOption={ true }>
+        <Select className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } value={ props.values[props.value].label } defaultActiveFirstOption={ true }>
             { renderOptions(props.values) }
         </Select>
     );

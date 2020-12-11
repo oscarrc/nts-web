@@ -13,7 +13,7 @@ const randomPatch = () => {
             length: Math.floor(Math.random() * (arp.length.max + 1)),
         },
         amp: {
-            type: Math.floor(Math.random() * (arp.type.values.length - 1) + 1),
+            type: Math.floor(Math.random() * amp.type.values.length),
             eg: {
                 attack: Math.floor(Math.random() * (amp.eg.attack.max + 1)),
                 release: Math.floor(Math.random() * (amp.eg.release.max + 1)),

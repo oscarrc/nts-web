@@ -10,13 +10,15 @@ export function Selector(props) {
     }, [props.active, props.cc, props.values]);
     
     useEffect( () => {
-      const id = props.name + props.cc;
-
-      document.getElementById(id).addEventListener("input", (event)=>{
+      const element = document.getElementById(props.name + props.cc);
+      
+      element.addEventListener("input", (event)=>{
         handleChange(event.target.value)
       });
 
-      return () => document.getElementById(id).removeEventListener("input", handleChange);      
+      element.value = props.value;
+
+      return () => { if (element) element.removeEventListener("input", handleChange) };     
     }, [handleChange, props.name, props.value, props.cc])
 
     return  (
