@@ -1,24 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { defaultSettings } from '../../config/defaults';
 
 export const midiSlice = createSlice({
   name: 'midi',
   initialState: {
-    value: {
-        outputDevices: [],
-        outputDevice: {},
-        outputChannel: "",
-        inputDevices: [],
-        inputDevice: "",
-        inputChannel: "",
-        settings: false
-    },
+    value: defaultSettings
   },
   reducers: {
     setOptions: (state, action )=> {
       state.value = { ...state.value, ...action.payload };
     },
     setDevices: (state, action) =>{
-        state.value.devices = action.payload;
+      state.value.devices = action.payload;
     },
     toggleSettings: (state) => {
       state.value.settings = !state.value.settings;

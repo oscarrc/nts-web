@@ -1,4 +1,4 @@
-export const defaultPath = {
+const defaultPath = {
     osc: {
         type: 0,
         shape: 0,
@@ -59,3 +59,15 @@ export const defaultPath = {
         }
     }
 };
+
+const defaultSettings = {
+    outputDevices: [],
+    outputDevice: "",
+    outputChannel: "all",
+    inputDevices: [],
+    inputDevice: "",
+    inputChannel: "all",
+    settings: false
+}
+
+export { defaultPath, defaultSettings }

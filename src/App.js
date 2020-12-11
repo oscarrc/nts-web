@@ -10,6 +10,7 @@ import { Header, Footer, Settings } from './components';
 import { midiStart } from './utils/midi';
 import { loadPatchLink } from './utils/patch';
 import { loadEnd } from  './redux/reducers/load';
+import { setOptions } from  './redux/reducers/midi';
 import { setControl } from  './redux/reducers/synth';
 
 import './App.css';
@@ -32,7 +33,12 @@ function App() {
     document.body.appendChild(controls);
     document.body.appendChild(pianoroll);
     
-    midiStart(() => { dispatch(loadEnd()) });
+    midiStart().then(
+      devices => {
+          dispatch(loadEnd());
+          dispatch(setOptions(devices))
+      }
+    );
 
     if(patch) dispatch(setControl(loadPatchLink(patch)));
   });

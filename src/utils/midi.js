@@ -1,9 +1,15 @@
 import webmidi from 'webmidi';
 
-const midiStart = (callback) => {
-    webmidi.enable( (err) => {
-        if (!err) callback();
-    }, true);
+const midiStart = () => {
+    return new Promise((resolve, reject) => {
+        webmidi.enable( (err) => {
+            if (err) reject(err);
+            resolve ({
+                inputDevices: webmidi.inputs,
+                outputDevices: webmidi.outputs
+            })
+        }, true);
+    })
 }
 
 const midiControlChange = (cc, value, id, channel) => {
