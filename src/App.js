@@ -35,6 +35,9 @@ function App() {
     
     midiStart().then(
       devices => {
+          if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0];
+          if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0];
+
           dispatch(loadEnd());
           dispatch(setOptions(devices))
       }
