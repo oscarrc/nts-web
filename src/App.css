@@ -69,6 +69,11 @@
   border-color: #d32029;
 }
 
+.modal-dark .ant-modal-header, .modal-dark .ant-modal-content, .modal-dark .ant-modal-footer{
+  background-color: #212122;
+  border: none;
+}
+
 .menu-dark.ant-dropdown-menu{
   background-color: #212122;
 }
@@ -248,4 +253,21 @@ a.link:hover{
   flex-direction: row;
   align-items: center;
   text-align: left;
+}
+
+.settings .ant-modal-header{
+  padding-bottom: 0;
+}
+
+.settings .ant-modal-body{
+  padding: 0 24px;
+}
+
+.settings .ant-form-item-label {
+  display: flex;
+  align-items: center;
+}
+
+.settings .ant-form-item-label > label  {
+  color: #b4b4b4;
 }

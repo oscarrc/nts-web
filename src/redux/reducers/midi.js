@@ -26,7 +26,8 @@ export const midiSlice = createSlice({
   }
 });
 
-export const { setOptions, setDevices } = midiSlice.actions;
+export const { setOptions, setDevices, toggleSettings } = midiSlice.actions;
 export const midi = state => state.midi.value;
+export const settings = state => state.midi.value.settings;
 
 export default midiSlice.reducer;

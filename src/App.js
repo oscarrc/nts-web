@@ -5,7 +5,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import { Synth, Sequencer } from './pages'
-import { Header, Footer } from './components';
+import { Header, Footer, Settings } from './components';
 
 import { midiStart } from './utils/midi';
 import { loadPatchLink } from './utils/patch';
@@ -45,6 +45,7 @@ function App() {
           <Route exact path="/sequencer" component={Sequencer} />
       </Switch>
       <Footer />
+      <Settings />
     </Layout>
   );
 }

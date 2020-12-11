@@ -4,6 +4,7 @@ import { PageHeader, Button, Dropdown, Menu, Space, Upload, Layout } from 'antd'
 import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined, SettingOutlined } from '@ant-design/icons';
 import { savePatch, linkPatch, loadPatchFile } from '../utils/patch';
 import { setControl } from  '../redux/reducers/synth';
+import { toggleSettings } from  '../redux/reducers/midi';
 
 import korg from '../assets/korg.svg';
 
@@ -20,6 +21,7 @@ export function Header() {
         dispatch(setControl(patch));
         return false;
     }
+    const openSettings = () => dispatch(toggleSettings());
 
     const menu = (
         <Menu className="menu-dark">
@@ -47,7 +49,7 @@ export function Header() {
                                 Export <DownOutlined />
                             </Button>
                         </Dropdown>
-                        <Button disabled={isLoading} ghost className="btn-gold" icon={<SettingOutlined />}></Button>
+                        <Button disabled={isLoading} onClick={ openSettings } ghost className="btn-gold" icon={<SettingOutlined />}></Button>
                     </Space>
                 ]}
             >
