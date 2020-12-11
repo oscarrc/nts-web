@@ -104,4 +104,9 @@ const loadPatchFile = (file) => {
     })
 }
 
-export { randomPatch, savePatch, linkPatch, loadPatchFile };
+const loadPatchLink = (link) => {
+    const decoded = JSON.parse(Buffer(link, 'base64').toString('UTF-8'));
+    return decoded;
+}
+
+export { randomPatch, savePatch, linkPatch, loadPatchFile, loadPatchLink };
