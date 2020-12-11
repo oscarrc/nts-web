@@ -8,7 +8,6 @@ export const synthSlice = createSlice({
   },
   reducers: {
     setControl: (state, action) => {
-      console.log(action)
       state.value = { ...state.value, ...action.payload};
     }
   }
