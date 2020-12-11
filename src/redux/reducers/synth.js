@@ -8,12 +8,13 @@ export const synthSlice = createSlice({
   },
   reducers: {
     setControl: (state, action) => {
+      console.log(action)
       state.value = { ...state.value, ...action.payload};
     }
   }
 });
 
-export const { loadStart, loadEnd } = synthSlice.actions;
+export const { setControl } = synthSlice.actions;
 export const synth = state => state.synthesizer.value;
 
 export default synthSlice.reducer;
