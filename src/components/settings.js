@@ -3,7 +3,7 @@ import { Modal, Form, Select, Divider, Button } from 'antd';
 import { channels } from '../config/midi';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleSettings, setOptions } from  '../redux/reducers/midi';
-
+//TODO Fix current settings
 export function Settings() {   
     const { Option } = Select;
     const { Item } = Form;
