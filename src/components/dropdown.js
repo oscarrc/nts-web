@@ -16,8 +16,7 @@ export function Dropdown(props) {
     }
 
     const handleChange = useCallback((value) => {
-        if(props.active) midiControlChange(props.cc, value, "", "");
-        console.log(1)
+       if(props.active) midiControlChange(props.cc, value, "", "");
     }, [props.active, props.cc]);
 
     useEffect( () => {
