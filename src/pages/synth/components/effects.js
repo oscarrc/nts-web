@@ -34,13 +34,13 @@ export function Effects() {
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
                 <Col span={6}> 
-                    <Button name="Mod" tag={ true } active={ effectValues.mod.active } />
+                    <Button name="Mod" tag={ true } cc={ effects.mod.type.cc } onValue={ effectValues.mod.type } active={ effectValues.mod.active } />
                 </Col>
                 <Col span={6}>    
-                    <Button name="Delay" tag={ true } active={ effectValues.delay.active } />                 
+                    <Button name="Delay" tag={ true } cc={ effects.delay.type.cc }  onValue={ effectValues.delay.type } active={ effectValues.delay.active } />                 
                 </Col>
                 <Col span={6}>                
-                    <Button name="Reverb" tag={ true } active={ effectValues.reverb.active } />
+                    <Button name="Reverb" tag={ true } cc={ effects.reverb.type.cc }  onValue={ effectValues.reverb.type } active={ effectValues.reverb.active } />
                 </Col>
             </Row>
             <Divider className="text-light">Mod</Divider>
