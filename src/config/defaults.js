@@ -26,20 +26,20 @@ export const defaultPath = {
     },
     effects: {
         mod: {
-            active: false,
+            active: 0,
             type: 0,
             time: 0,
             depth: 0
         },
         delay: {
-            active: false,
+            active: 0,
             type:0,
             time: 0,
             depth: 0,
             mix: 0
         },
         reverb: {
-            active: false,
+            active: 0,
             type: 0,
             time: 0,
             depth: 0,
@@ -47,7 +47,7 @@ export const defaultPath = {
         }
     },
     vcf: {
-        active: false,
+        active: 0,
         type: 0,
         filter: {
             cutoff: 0,

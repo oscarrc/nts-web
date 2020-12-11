@@ -28,7 +28,7 @@ const randomPatch = () => {
             }
         },
         vcf: {
-            active: Math.random() < 0.5,
+            active: Math.random() < 0.5 ? 1 : 0,
             type: Math.floor(Math.random() * (vcf.type.values.length - 1)),
             filter: {
                 cutoff: Math.floor(Math.random() * (vcf.filter.cutoff.max + 1)),
@@ -41,20 +41,20 @@ const randomPatch = () => {
         },
         effects: {
             mod: {
-                active: Math.random() < 0.5,
+                active: Math.random() < 0.5 ? 1 : 0,
                 type: Math.floor(Math.random() * (effects.mod.type.values.length - 1) + 1),
                 time: Math.floor(Math.random() * (effects.mod.time.max + 1)),
                 depth: Math.floor(Math.random() * (effects.mod.depth.max + 1)),
             },
             delay: {
-                active: Math.random() < 0.5,
+                active: Math.random() < 0.5 ? 1 : 0,
                 type: Math.floor(Math.random() * (effects.delay.type.values.length - 1) + 1),
                 time: Math.floor(Math.random() * (effects.delay.time.max + 1)),
                 depth: Math.floor(Math.random() * (effects.delay.depth.max + 1)),
                 mix: Math.floor(Math.random() * (effects.delay.mix.max + 1)),
             },
             reverb:{
-                active: Math.random() < 0.5,
+                active: Math.random() < 0.5 ? 1 : 0,
                 type: Math.floor(Math.random() * (effects.reverb.type.values.length - 1) + 1),
                 time: Math.floor(Math.random() * (effects.reverb.time.max + 1)),
                 depth: Math.floor(Math.random() * (effects.reverb.depth.max + 1)),
