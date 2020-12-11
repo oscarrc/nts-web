@@ -7,7 +7,7 @@ export const midiSlice = createSlice({
         outputDevices: [],
         outputDevice: {},
         outputChannel: "",
-        inputDevices: {},
+        inputDevices: [],
         inputDevice: "",
         inputChannel: "",
         settings: false

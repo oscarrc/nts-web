@@ -271,3 +271,7 @@ a.link:hover{
 .settings .ant-form-item-label > label  {
   color: #b4b4b4;
 }
+
+.settings .control-select.ant-select{
+  margin: 0;
+}
