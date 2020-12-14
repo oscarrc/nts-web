@@ -1,12 +1,14 @@
 import React, { useEffect, useCallback } from 'react';
 import { midiControlChange } from '../utils/midi';
-
+import { useSelector } from 'react-redux';
 import knob from '../assets/knob.png';
 
 export function Knob(props) {
+    const midiConfig = useSelector(state => state.midi).value;
+    
     const handleChange = useCallback((value) => {
-        midiControlChange(props.cc, value, "", "");
-    },[props.cc]);
+        midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
+    },[props.cc, midiConfig]);
     
     useEffect( () => {      
       const element = document.getElementById(props.name + props.cc);

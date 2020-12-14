@@ -1,8 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
 
 export function Dropdown(props) {
+    const midiConfig = useSelector(state => state.midi).value;
     const { Option } = Select;
 
     const renderOptions = (opt) => {
@@ -16,8 +18,8 @@ export function Dropdown(props) {
     }
 
     const handleChange = useCallback((value) => {
-       if(props.active) midiControlChange(props.cc, value, "", "");
-    }, [props.active, props.cc]);
+       if(props.active) midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
+    }, [props.active, props.cc, midiConfig]);
 
     useEffect( () => {
         const element = document.getElementById(props.name + props.cc);

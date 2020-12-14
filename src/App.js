@@ -35,8 +35,10 @@ function App() {
     
     midiStart().then(
       devices => {
-          if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0];
-          if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0];
+          devices.inputDevices = devices.inputDevices.map( d => { return {id: d.id, name: d.name } })
+          devices.outputDevices = devices.outputDevices.map( d => { return {id: d.id, name: d.name } })
+          if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0].id;
+          if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
 
           dispatch(loadEnd());
           dispatch(setOptions(devices))

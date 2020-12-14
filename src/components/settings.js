@@ -13,6 +13,7 @@ export function Settings() {
 
     const saveSettings = (values) => {
       dispatch(setOptions(values));
+      closeSettings();
     }
 
     const closeSettings = () => dispatch(toggleSettings());
