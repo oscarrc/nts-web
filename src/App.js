@@ -43,7 +43,6 @@ function App() {
       }
     );
     
-    //TODO Fix patch not loading
     if(patch) dispatch(setControl(loadPatchLink(patch)));
   });
 

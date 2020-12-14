@@ -8,7 +8,7 @@ export function Knob(props) {
     
     const handleChange = useCallback((value) => {
         midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
-    },[props.cc, midiConfig]);
+    },[props, midiConfig]);
     
     useEffect( () => {      
       const element = document.getElementById(props.name + props.cc);
