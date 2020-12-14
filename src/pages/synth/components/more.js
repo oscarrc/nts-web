@@ -28,10 +28,14 @@ export function More() {
             <Divider className="text-gold">More</Divider> 
             <Row justify="space-between">                
                 <Col className="text-light" span={12}>                    
-                    <webaudio-switch id="randomize" src={Button} type="kick"></webaudio-switch> Randomize
+                    <span className="switch-button-col">
+                        <webaudio-switch id="randomize" src={Button} type="kick"></webaudio-switch> Randomize
+                    </span>
                 </Col>
                 <Col className="text-light" span={12}>                    
-                    <webaudio-switch id="sequencer" src={Button} type="kick"></webaudio-switch> Sequencer
+                    <span className="switch-button-col">
+                        <webaudio-switch id="sequencer" src={Button} type="kick"></webaudio-switch> Sequencer
+                    </span>
                 </Col>
             </Row>        
         </div>

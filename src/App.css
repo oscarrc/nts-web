@@ -255,6 +255,13 @@ a.link:hover{
   text-align: left;
 }
 
+.switch-button-col{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .settings .ant-modal-header{
   padding-bottom: 0;
 }
