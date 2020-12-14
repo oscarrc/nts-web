@@ -3,7 +3,7 @@ import { Modal, Form, Select, Divider, Button } from 'antd';
 import { channels } from '../config/midi';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleSettings, setOptions } from  '../redux/reducers/midi';
-//TODO Fix current settings
+
 export function Settings() {   
     const { Option } = Select;
     const { Item } = Form;
@@ -46,23 +46,23 @@ export function Settings() {
         <Form form={form} size="small" labelCol = {{ span: 4 }} wrapperCol={{ span: 20 }} onFinish={saveSettings} >
           <Divider className="text-light">Input</Divider>
           <Item className="text-light" label="Channel" name="inputChannel">
-            <Select className="control-select text-lcd" value={ midiState.inputChannel }>
+            <Select className="control-select text-lcd" defaultValue={ midiState.inputChannel }>
               { renderOptions(channels) }
             </Select>
           </Item>
           <Item label="Device" name="inputDevice">
-            <Select className="control-select text-lcd" value={ midiState.inputDevice?.id }>
+            <Select className="control-select text-lcd" defaultValue={ midiState.inputDevice }>
               { renderOptions(midiState.inputDevices, true) }
             </Select>
           </Item>
           <Divider className="text-light">Output</Divider>
           <Item label="Channel" name="outputChannel">
-            <Select className="control-select text-lcd" value={ midiState.outputChannel }>
+            <Select className="control-select text-lcd" defaultValue={ midiState.outputChannel }>
               { renderOptions(channels) }
             </Select>
           </Item>
           <Item label="Device" name="outputDevice">
-            <Select className="control-select text-lcd" value={ midiState.outputDevice?.id }>
+            <Select className="control-select text-lcd" defaultValue={ midiState.outputDevice }>
               { renderOptions(midiState.outputDevices, true) }
             </Select>
           </Item>

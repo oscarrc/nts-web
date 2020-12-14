@@ -5,8 +5,8 @@ const midiStart = () => {
         webmidi.enable( (err) => {
             if (err) reject(err);
             resolve ({
-                inputDevices: webmidi.inputs,
-                outputDevices: webmidi.outputs
+                inputDevices: webmidi.inputs.map( d => { return {id: d.id, name: d.name } }),
+                outputDevices: webmidi.outputs.map( d => { return {id: d.id, name: d.name } })
             })
         }, true);
     })
