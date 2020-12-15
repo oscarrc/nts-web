@@ -12,7 +12,7 @@ export function Vcfilter() {
             <Divider className="text-gold">VCF</Divider>                       
             <Row className="select-row" justify="space-between">         
                 <Col span={4}>                    
-                    <Button name="vcf" active={ vcfValues.active } cc={ vcf.type.cc } onValue={ vcfValues.type } offValue={ 127 } />
+                    <Button name="vcf" active={ vcfValues.active } cc={ vcf.type.cc } onValue={ vcf.type.values[vcfValues.type].value } offValue={ 127 } />
                 </Col>       
                 <Col span={20}>
                     <Dropdown name="filter" cc={ vcf.type.cc } values={ vcf.type.values } value={ vcfValues.type } active={ vcfValues.active } />

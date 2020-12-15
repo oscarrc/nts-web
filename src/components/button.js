@@ -7,18 +7,18 @@ import button from '../assets/button.png';
 export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
 
-    const handleChange = useCallback((value) => {
-        value = value === 0 ? props.offValue : props.onValue;
+    const handleChange = useCallback((value) => {        
+        value = value === 1 ? props.onValue : props.offValue;
         midiControlChange(props.cc, value,  midiConfig.outputDevice, midiConfig.outputChannel);
     },[props, midiConfig]);
     
     useEffect(() => {
         const element = document.getElementById(props.name + '-btn');
-      
+        
         element.value = props.active;
 
-        element.addEventListener("input", (event)=>{
-            handleChange(event.target.value)
+        element.addEventListener("change", (event)=>{
+            handleChange(event.target.value);
         });
     
         return () => { if (element) element.removeEventListener("input", handleChange) };    
