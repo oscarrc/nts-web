@@ -5,6 +5,8 @@ import { pathToStore } from '../utils/store';
 
 import button from '../assets/button.png';
 
+//TODO set state on change
+//TODO use built-in midi
 export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
