@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
@@ -23,6 +23,10 @@ export function Dropdown(props) {
        if(props.active) midiControlChange(props.cc, props.values[value].value, midiConfig.outputDevice, midiConfig.outputChannel);
        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.active, props.path, props.cc, props.values, midiConfig, dispatch]);
+
+    useEffect( () => {
+        handleChange(props.value);
+    }, [handleChange, props.value])
 
     return  (
         <Select onChange={handleChange} className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } value={ props.values[props.value].label }>
