@@ -1,10 +1,12 @@
 import React, { useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
+import { pathToStore } from '../utils/store';
 
 export function Dropdown(props) {
     const midiConfig = useSelector(state => state.midi).value;
+    const dispatch = useDispatch();
     const { Option } = Select;
 
     const renderOptions = (opt) => {
@@ -19,7 +21,8 @@ export function Dropdown(props) {
 
     const handleChange = useCallback((value) => {
        if(props.active) midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
-    },[props, midiConfig]);
+       if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
+    },[props.active, props.path, props.cc, midiConfig, dispatch]);
 
     useEffect( () => {
         const element = document.getElementById(props.name + props.cc);
@@ -45,5 +48,6 @@ Dropdown.defaultProps = {
     cc: null,
     values: [],
     value: 0,
-    active: true
+    active: true,
+    path: null
 };

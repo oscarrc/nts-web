@@ -1,16 +1,19 @@
 import React, { useEffect, useCallback } from 'react';
 import { midiControlChange } from '../utils/midi';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { pathToStore } from '../utils/store';
 
 import button from '../assets/button.png';
 
 export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
+    const dispatch = useDispatch();
 
     const handleChange = useCallback((value) => {        
         value = value === 1 ? props.onValue : props.offValue;
         midiControlChange(props.cc, value,  midiConfig.outputDevice, midiConfig.outputChannel);
-    },[props, midiConfig]);
+        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
+    },[props.path, props.onValue, props.offValue, props.cc, dispatch, midiConfig]);
     
     useEffect(() => {
         const element = document.getElementById(props.name + '-btn');
@@ -37,5 +40,6 @@ Button.defaultProps = {
     cc: null,
     onValue: null,
     offValue: 0,
-    active: 0
+    active: 0,
+    path: null
 };

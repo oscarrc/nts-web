@@ -1,16 +1,19 @@
 import React, { useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { midiControlChange } from '../utils/midi';
+import { pathToStore } from '../utils/store';
 
 import selector from '../assets/selector.png';
 
 export function Selector(props) {
     const midiConfig = useSelector(state => state.midi).value;
+    const dispatch = useDispatch();
     
     const handleChange = useCallback((value) => {
       const val = props.values[value].value;
       if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
-    }, [props.active, props.cc, props.values, midiConfig]);
+      if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, val) });
+    }, [props.active, props.cc, props.values, props.path, dispatch, midiConfig]);
     
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
@@ -42,4 +45,5 @@ Selector.defaultProps = {
     max: 5,
     active: true,
     values: [],
+    path: null
 };
