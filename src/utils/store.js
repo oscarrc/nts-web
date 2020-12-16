@@ -31,4 +31,12 @@ const pathToStore = (obj, path, val) => {
     return obj;
 }
 
-export { pathToStore }
+const combinePayload = (obj, state) => {
+    Object.keys(obj).forEach( control => {
+        obj[control] = { ...state[control], ...obj[control] }
+    })
+
+    return obj;
+}
+
+export { pathToStore, combinePayload }

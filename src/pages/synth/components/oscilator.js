@@ -18,7 +18,8 @@ export function Oscilator() {
                         max={ osc.type.values.length - 1 }
                         values={ osc.type.values }
                         cc={ osc.type.cc }
-                        value={ oscValues.type } 
+                        value={ oscValues.type }
+                        path="osc.type" 
                     />
                 </Col>
                 <Col span={6}>
@@ -29,7 +30,8 @@ export function Oscilator() {
                         step={osc.shape.step}
                         cc={osc.shape.cc}
                         value={ oscValues.shape } 
-                        path="osc.shape" />
+                        path="osc.shape" 
+                    />
                 </Col>
                 <Col span={6}>
                     <Knob 
@@ -39,6 +41,7 @@ export function Oscilator() {
                         step={osc.alt.step}
                         cc={osc.alt.cc}
                         value={ oscValues.alt }
+                        path="osc.alt" 
                     />
                 </Col>
             </Row>

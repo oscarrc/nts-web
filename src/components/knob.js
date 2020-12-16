@@ -12,10 +12,7 @@ export function Knob(props) {
     const handleChange = useCallback((value) => {
         midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
 
-        if(props.path) { 
-          const payload = pathToStore({}, props.path, value);
-          dispatch({type:'synthesizer/setControl', payload});
-        };
+        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.cc, props.path, midiConfig, dispatch]);
     
     useEffect( () => {      

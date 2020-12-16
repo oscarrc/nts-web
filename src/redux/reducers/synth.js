@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { defaultPatch } from '../../config/defaults';
+import { combinePayload } from '../../utils/store';
 
 export const synthSlice = createSlice({
   name: 'synthesizer',
@@ -8,7 +9,8 @@ export const synthSlice = createSlice({
   },
   reducers: {
     setControl: (state, action) => {
-      state.value = { ...state.value, ...action.payload};
+      const payload = combinePayload(action.payload, state.value);
+      state.value = { ...state.value, ...payload};
     }
   }
 });
