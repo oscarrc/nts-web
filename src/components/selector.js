@@ -12,26 +12,23 @@ export function Selector(props) {
     const handleChange = useCallback((value) => {
       const val = props.values[value].value;
       if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
-      if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, val) });
+      if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     }, [props.active, props.cc, props.values, props.path, dispatch, midiConfig]);
     
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
-      
-      element.value = props.value;
-      handleChange(element.value);
-      
+            
       element.addEventListener("input", (event)=>{
         handleChange(event.target.value)
       });
 
       return () => { if (element) element.removeEventListener("input", handleChange) };     
-    }, [handleChange, props.name, props.value, props.cc])
+    }, [handleChange, props.name, props.cc])
 
     return  (
         <div className='selector-wrapper'>   
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }      
-          <webaudio-knob class="selector" diameter="60" id={props.name + props.cc} name={props.name} src={selector} step={props.step} min={ props.min } max={ props.max } value={ props.value }></webaudio-knob>
+          <webaudio-knob class="selector" diameter="60" id={props.name + props.cc} name={props.name} src={selector} step={props.step} min={ props.min } max={ props.max } defvalue={ props.value }></webaudio-knob>
         </div>
     );
 }
