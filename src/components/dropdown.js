@@ -35,7 +35,7 @@ export function Dropdown(props) {
       }, [handleChange, props.name, props.value, props.cc])
 
     return  (
-        <Select className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } value={ props.values[props.value].label } defaultActiveFirstOption={ true }>
+        <Select className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } defaultValue={ props.values[props.value].label }>
             { renderOptions(props.values) }
         </Select>
     );
