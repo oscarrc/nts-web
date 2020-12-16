@@ -28,7 +28,8 @@ export function Oscilator() {
                         min={osc.shape.min}
                         step={osc.shape.step}
                         cc={osc.shape.cc}
-                        value={ oscValues.shape } />
+                        value={ oscValues.shape } 
+                        path="osc.shape" />
                 </Col>
                 <Col span={6}>
                     <Knob 

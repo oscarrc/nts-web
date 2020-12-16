@@ -1,14 +1,18 @@
 import React, { useEffect, useCallback } from 'react';
 import { midiControlChange } from '../utils/midi';
-import { useSelector } from 'react-redux';
+import { pathToStore } from '../utils/store';
+import { useSelector, useDispatch } from 'react-redux';
 import knob from '../assets/knob.png';
 
+//TODO dispatch firing multiple times
 export function Knob(props) {
     const midiConfig = useSelector(state => state.midi).value;
+    const dispatch = useDispatch();
     
     const handleChange = useCallback((value) => {
         midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
-    },[props, midiConfig]);
+        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
+    },[props.cc, props.path, midiConfig, dispatch]);
     
     useEffect( () => {      
       const element = document.getElementById(props.name + props.cc);
@@ -17,7 +21,7 @@ export function Knob(props) {
       handleChange(element.value);
 
       element.addEventListener("input", (event)=>{
-        handleChange(event.target.value)
+        handleChange(event.target.value);
       });
 
       return () => { if (element) element.removeEventListener("input", handleChange) };      
@@ -39,5 +43,6 @@ Knob.defaultProps = {
     value: 0,
     step: 1,
     cc: null,
-    param: false
+    param: false,
+    path: null
 };

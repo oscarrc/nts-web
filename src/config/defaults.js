@@ -1,4 +1,4 @@
-const defaultPath = {
+const defaultPatch = {
     osc: {
         type: 0,
         shape: 0,
@@ -70,4 +70,4 @@ const defaultSettings = {
     settings: false
 }
 
-export { defaultPath, defaultSettings }
+export { defaultPatch, defaultSettings }

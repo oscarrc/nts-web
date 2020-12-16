@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { defaultPath } from '../../config/defaults';
+import { defaultPatch } from '../../config/defaults';
 
 export const synthSlice = createSlice({
   name: 'synthesizer',
   initialState: {
-    value: defaultPath,
+    value: defaultPatch,
   },
   reducers: {
     setControl: (state, action) => {
