@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
-import { setControl } from  '../../../redux/reducers/synth';
 
 import { randomPatch } from '../../../utils/patch';
 
@@ -15,7 +14,7 @@ export function More() {
     useEffect( () => {
         document.getElementById("randomize").addEventListener("click", ()=>{        
             const patch = randomPatch();  
-            dispatch(setControl(patch));
+            dispatch({type:'synthesizer/setControl', payload: patch});
         });
 
         document.getElementById("sequencer").addEventListener("click", ()=>{            

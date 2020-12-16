@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PageHeader, Button, Dropdown, Menu, Space, Upload, Layout } from 'antd';
 import { DownOutlined, LinkOutlined, DownloadOutlined, UploadOutlined, SettingOutlined } from '@ant-design/icons';
 import { savePatch, linkPatch, loadPatchFile } from '../utils/patch';
-import { setControl } from  '../redux/reducers/synth';
-import { toggleSettings } from  '../redux/reducers/midi';
 
 import korg from '../assets/korg.svg';
 
@@ -18,10 +16,10 @@ export function Header() {
     const copyLink = () => linkPatch(patch);
     const importPatch = async (file) => {
         const patch = await loadPatchFile(file);
-        dispatch(setControl(patch));
+        dispatch({ type: 'synthesizer/setControl', payload: patch});
         return false;
     }
-    const openSettings = () => dispatch(toggleSettings());
+    const openSettings = () => dispatch({type: 'midi/toggleSettings'});
 
     const menu = (
         <Menu className="menu-dark">

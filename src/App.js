@@ -9,9 +9,6 @@ import { Header, Footer, Settings } from './components';
 
 import { midiStart } from './utils/midi';
 import { loadPatchLink } from './utils/patch';
-import { loadEnd } from  './redux/reducers/load';
-import { setOptions } from  './redux/reducers/midi';
-import { setControl } from  './redux/reducers/synth';
 
 import './App.css';
 import "antd/dist/antd.css";
@@ -38,12 +35,12 @@ function App() {
           if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0].id;
           if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
 
-          dispatch(loadEnd());
-          dispatch(setOptions(devices))
+          dispatch({ type: "loader/loadEnd" });
+          dispatch({ type: "midi/setOptions", payload: devices})
       }
     );
     
-    if(patch) dispatch(setControl(loadPatchLink(patch)));
+    if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
   });
 
   return (
