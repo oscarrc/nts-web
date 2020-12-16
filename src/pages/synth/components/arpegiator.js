@@ -12,13 +12,31 @@ export function Arpegiator() {
             <Divider className="text-gold">ARP</Divider>
             <Row className="padded-row" justify="space-between">   
                 <Col span={6}>
-                    <Selector name="TYPE" max={ arp.type.values.length - 1 } values={ arp.type.values } cc={ arp.type.cc } value={ arpValues.type } />
+                    <Selector 
+                        name="TYPE" 
+                        max={ arp.type.values.length - 1 }
+                        values={ arp.type.values }
+                        cc={ arp.type.cc }
+                        value={ arpValues.type }
+                    />
                 </Col>
                 <Col span={6}>
-                    <Selector name="SCALE" max={ arp.scale.values.length - 1 } values={ arp.scale.values } cc={ arp.scale.cc } value={ arpValues.scale } />
+                    <Selector 
+                        name="SCALE"
+                        max={ arp.scale.values.length - 1 }
+                        values={ arp.scale.values }
+                        cc={ arp.scale.cc }
+                        value={ arpValues.scale }
+                    />
                 </Col>
                 <Col span={6}>      
-                    <Knob name={arp.length.label} max={arp.length.max} min={arp.length.min} step={arp.length.step} cc={arp.length.cc} value={ arpValues.length } />
+                    <Knob name={arp.length.label}
+                        max={arp.length.max}
+                        min={arp.length.min}
+                        step={arp.length.step}
+                        cc={arp.length.cc}
+                        value={ arpValues.length }
+                    />
                 </Col>
             </Row>
         </div>

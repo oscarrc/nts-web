@@ -13,13 +13,32 @@ export function Oscilator() {
             <Divider className="text-gold">OSC</Divider>
             <Row justify="space-between" className="padded-row">
                 <Col span={6}>
-                    <Selector name="TYPE" max={ osc.type.values.length - 1 } values={ osc.type.values } cc={ osc.type.cc } value={ oscValues.type } />
+                    <Selector 
+                        name="TYPE"
+                        max={ osc.type.values.length - 1 }
+                        values={ osc.type.values }
+                        cc={ osc.type.cc }
+                        value={ oscValues.type } 
+                    />
                 </Col>
                 <Col span={6}>
-                    <Knob name={osc.shape.label} max={osc.shape.max} min={osc.shape.min} step={osc.shape.step} cc={osc.shape.cc} value={ oscValues.shape } />
+                    <Knob 
+                        name={osc.shape.label}
+                        max={osc.shape.max}
+                        min={osc.shape.min}
+                        step={osc.shape.step}
+                        cc={osc.shape.cc}
+                        value={ oscValues.shape } />
                 </Col>
                 <Col span={6}>
-                    <Knob name={osc.alt.label} max={osc.alt.max} min={osc.alt.min} step={osc.alt.step} cc={osc.alt.cc} value={ oscValues.alt } />
+                    <Knob 
+                        name={osc.alt.label}
+                        max={osc.alt.max}
+                        min={osc.alt.min}
+                        step={osc.alt.step}
+                        cc={osc.alt.cc}
+                        value={ oscValues.alt }
+                    />
                 </Col>
             </Row>
         </div>

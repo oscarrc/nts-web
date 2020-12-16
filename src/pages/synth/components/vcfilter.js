@@ -7,34 +7,58 @@ import { vcf } from '../../../config/midi';
 export function Vcfilter() { 
     const vcfValues = useSelector(state => state.synthesizer).value.vcf;
 
+    const renderControls = (ctrls, span, values) => {
+        let controls = [];
+
+        
+        Object.keys(ctrls).forEach( (control) => {
+            controls.push(
+                <Col span={span}>
+                    <Knob 
+                        name={ctrls[control].label}
+                        max={ctrls[control].max}
+                        min={ctrls[control].min}
+                        step={ctrls[control].step}
+                        cc={ctrls[control].cc}
+                        values={values[control]}
+                    />
+                </Col>
+            )
+        });
+
+        return controls;
+    }
+
     return  (
         <div className="vcf">
             <Divider className="text-gold">VCF</Divider>                       
             <Row className="select-row" justify="space-between">         
                 <Col span={4}>                    
-                    <Button name="vcf" active={ vcfValues.active } cc={ vcf.type.cc } onValue={ vcf.type.values[vcfValues.type].value } offValue={ 127 } />
+                    <Button 
+                        name="vcf"
+                        active={ vcfValues.active }
+                        cc={ vcf.type.cc }
+                        onValue={ vcf.type.values[vcfValues.type].value }
+                        offValue={ 127 } 
+                    />
                 </Col>       
                 <Col span={20}>
-                    <Dropdown name="filter" cc={ vcf.type.cc } values={ vcf.type.values } value={ vcfValues.type } active={ vcfValues.active } />
+                    <Dropdown 
+                        name="filter"
+                        cc={ vcf.type.cc }
+                        values={ vcf.type.values }
+                        value={ vcfValues.type }
+                        active={ vcfValues.active } 
+                    />
                 </Col>
             </Row>                     
             <Divider className="text-light">Filter</Divider>
             <Row>
-                <Col span={12}>
-                    <Knob name={vcf.filter.cutoff.label} max={vcf.filter.cutoff.max} min={vcf.filter.cutoff.min} step={vcf.filter.cutoff.step} cc={vcf.filter.cutoff.cc} value={ vcfValues.filter.cutoff } />
-                </Col>
-                <Col span={12}>
-                    <Knob name={vcf.filter.res.label} max={vcf.filter.res.max} min={vcf.filter.res.min} step={vcf.filter.res.step} cc={vcf.filter.res.cc} value={ vcfValues.filter.res } />
-                </Col>
+                { renderControls(vcf.filter, 12, vcfValues.filter) }
             </Row>
             <Divider className="text-light">Sweep</Divider>
             <Row>                
-                <Col span={12}>
-                    <Knob name={vcf.sweep.rate.label} max={vcf.sweep.rate.max} min={vcf.sweep.rate.min} step={vcf.sweep.rate.step} cc={vcf.sweep.rate.cc} value={ vcfValues.sweep.rate } />
-                </Col>
-                <Col span={12}>
-                    <Knob name={vcf.sweep.depth.label} max={vcf.sweep.depth.max} min={vcf.sweep.depth.min} step={vcf.sweep.depth.step} cc={vcf.sweep.depth.cc} value={ vcfValues.sweep.depth } />
-                </Col>
+                { renderControls(vcf.sweep, 12, vcfValues.sweep) }
             </Row>
         </div>
     );

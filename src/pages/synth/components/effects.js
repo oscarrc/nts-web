@@ -14,13 +14,28 @@ export function Effects() {
             if(control === 'type'){
                 controls.push(
                     <Col span={span}> 
-                        <Selector name={ name } max={ ctrls[control].values.length - 1 } values={ ctrls[control].values } cc={ ctrls[control].cc } min="1" active={ val.active } value={ val[control] } />
+                        <Selector 
+                            name={ name }
+                            max={ ctrls[control].values.length - 1 }
+                            values={ ctrls[control].values }
+                            cc={ ctrls[control].cc }
+                            min="1"
+                            active={ val.active }
+                            value={ val[control] }
+                        />
                     </Col>
                 );
             }else{
                 controls.push(                    
                     <Col span={span}>
-                        <Knob name={ctrls[control].label} max={ctrls[control].max} min={ctrls[control].min} step={ctrls[control].step} cc={ctrls[control].cc} value={ val[control] }/>
+                        <Knob 
+                            name={ctrls[control].label}
+                            max={ctrls[control].max}
+                            min={ctrls[control].min}
+                            step={ctrls[control].step}
+                            cc={ctrls[control].cc}
+                            value={ val[control] }
+                        />
                     </Col>
                 );
             }
@@ -29,18 +44,30 @@ export function Effects() {
         return controls;
     }
 
+    const renderButton = (ctrls, name, value ) => {
+        return (
+            <Button 
+                name={ name }
+                tag={ true }
+                cc={ ctrls.type.cc }
+                onValue={ ctrls.type.values[value.type].value }
+                active={ value.active }
+            />
+        )
+    }
+
     return  (
         <div className="effects">
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
                 <Col span={6}> 
-                    <Button name="Mod" tag={ true } cc={ effects.mod.type.cc } onValue={ effects.mod.type.values[effectValues.mod.type].value } active={ effectValues.mod.active } />
+                    { renderButton(effects.mod, "Mod", effectValues.mod) }
                 </Col>
-                <Col span={6}>    
-                    <Button name="Delay" tag={ true } cc={ effects.delay.type.cc }  onValue={ effects.delay.type.values[effectValues.delay.type].value } active={ effectValues.delay.active } />                 
+                <Col span={6}>
+                    { renderButton(effects.delay, "Delay", effectValues.delay) }              
                 </Col>
                 <Col span={6}>                
-                    <Button name="Reverb" tag={ true } cc={ effects.reverb.type.cc }  onValue={ effects.reverb.type.values[effectValues.reverb.type].value } active={ effectValues.reverb.active } />
+                    { renderButton(effects.reverb, "Reverb", effectValues.reverb) }   
                 </Col>
             </Row>
             <Divider className="text-light">Mod</Divider>
