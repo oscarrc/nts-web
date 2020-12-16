@@ -17,7 +17,7 @@ export function Knob(props) {
     
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
-
+      handleChange(props.value);
       element.addEventListener("change", (event)=>{
         handleChange(event.target.value);
       });

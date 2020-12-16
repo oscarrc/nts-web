@@ -12,14 +12,14 @@ export function Selector(props) {
     const dispatch = useDispatch();
     
     const handleChange = useCallback((value) => {
-      const val = props.values[value].value;
+      const val = props.values[value]?.value;
       if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
       if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     }, [props.active, props.cc, props.values, props.path, dispatch, midiConfig]);
     
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
-
+      handleChange(props.value);
       element.addEventListener("input", (event)=>{
         handleChange(event.target.value)
       });

@@ -21,6 +21,7 @@ export function Button(props) {
         const element = document.getElementById(props.name + '-btn');
         
         element.value = props.active;
+        handleChange(props.active);
 
         element.addEventListener("change", (event)=>{
             handleChange(event.target.value);
