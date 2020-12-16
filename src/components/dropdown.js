@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
 
-//TODO Fix select
 export function Dropdown(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const { Option } = Select;
