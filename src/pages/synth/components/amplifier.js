@@ -7,7 +7,7 @@ import { amp } from '../../../config/midi';
 export function Amplifier() {
     const ampValues = useSelector(state => state.synthesizer).value.amp;
 
-    const renderKnobs = (opt, cols, val) => {
+    const renderKnobs = (opt, cols, val, path) => {
         let knobs = []
         
         Object.keys(opt).forEach( (knob) => {
@@ -19,7 +19,7 @@ export function Amplifier() {
                         min={opt[knob].min} 
                         step={opt[knob].step} 
                         cc={opt[knob].cc} 
-                        value={val[knob]} 
+                        value={val[knob]}
                     />
                 </Col>
             )
@@ -33,20 +33,20 @@ export function Amplifier() {
             <Divider className="text-gold">AMP</Divider> 
             <Row justify="space-between">                
                 <Col span={24}>
-                    <Dropdown name="amp" cc={ amp.type.cc } values={ amp.type.values } value={ ampValues.type } />
+                    <Dropdown name="amp" cc={ amp.type.cc } values={ amp.type.values } value={ ampValues.type } path="amp.type" />
                 </Col>
             </Row>           
             <Divider className="text-light">EG</Divider>
             <Row>
-                { renderKnobs(amp.eg, 12, ampValues.eg) }
+                { renderKnobs(amp.eg, 12, ampValues.eg, 'amp.eg') }
             </Row>
             <Divider className="text-light">Tremolo</Divider>
             <Row>                
-                { renderKnobs(amp.trem, 12, ampValues.trem) }
+                { renderKnobs(amp.trem, 12, ampValues.trem, 'amp.trem') }
             </Row>
             <Divider className="text-light">LFO</Divider>
             <Row>                
-                { renderKnobs(amp.lfo, 12, ampValues.lfo) }
+                { renderKnobs(amp.lfo, 12, ampValues.lfo, 'amp.lfo') }
             </Row>
         </div>
     );
