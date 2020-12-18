@@ -34,7 +34,7 @@ export function Selector(props) {
     return  (
         <div className='selector-wrapper'>   
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }      
-          <webaudio-knob class="selector" diameter="60" id={props.name + props.cc} name={props.name} src={selector} step={props.step} min={ props.min } max={ props.max }></webaudio-knob>
+          <webaudio-knob class="selector" diameter="60" id={props.name + props.cc} name={props.name} src={selector} step={props.step} min={ props.min } max={ props.max } value={props.value}></webaudio-knob>
         </div>
     );
 }
