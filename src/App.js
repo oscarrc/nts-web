@@ -27,8 +27,8 @@ function App() {
     pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
 
-    document.body.appendChild(controls);
-    document.body.appendChild(pianoroll);
+    if(controls !== HTMLElement) document.body.appendChild(controls);
+    if(pianoroll !== HTMLElement) document.body.appendChild(pianoroll);
     
     midiStart().then(
       devices => {
