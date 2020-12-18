@@ -5,6 +5,7 @@ import { pathToStore } from '../utils/store';
 
 import selector from '../assets/selector.png';
 
+//TODO fix old midiConfig values or double triggering
 export function Selector(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
