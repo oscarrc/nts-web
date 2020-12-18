@@ -1,5 +1,6 @@
 import webmidi from 'webmidi';
 
+//TODO fix midi not allowed
 const midiStart = () => {
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {

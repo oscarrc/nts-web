@@ -31,6 +31,7 @@ const pathToStore = (obj, path, val) => {
     return obj;
 }
 
+//TODO fix deeply nested objects
 const combinePayload = (obj, state) => {
     Object.keys(obj).forEach( control => {
         obj[control] = { ...state[control], ...obj[control] }
