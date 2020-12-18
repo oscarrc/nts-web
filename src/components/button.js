@@ -11,24 +11,25 @@ export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
 
-    const handleChange = useCallback((value) => {        
-        value = value === 1 ? props.onValue : props.offValue;
-        midiControlChange(props.cc, value,  midiConfig.outputDevice, midiConfig.outputChannel);
+    const handleChange = useCallback((value) => {     
+        midiControlChange(props.cc, value === 1 ? props.onValue : props.offValue,  midiConfig.outputDevice, midiConfig.outputChannel);
         if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.path, props.onValue, props.offValue, props.cc, dispatch, midiConfig]);
     
     useEffect(() => {
         const element = document.getElementById(props.name + '-btn');
-        
-        element.value = props.active;
-        handleChange(props.active);
-
         element.addEventListener("change", (event)=>{
             handleChange(event.target.value);
         });
     
-        return () => { if (element) element.removeEventListener("input", handleChange) };    
-    },[handleChange, props.active, props.name])
+        return () => { if (element) element.removeEventListener("input", handleChange) };   
+        // eslint-disable-next-line 
+    },[])
+
+    useEffect( () => {        
+        const element = document.getElementById(props.name + '-btn');        
+        element.value = props.active;
+    }, [props.cc, props.name, props.value])
 
     return  (
         <span className="text-light switch-button">
