@@ -29,7 +29,7 @@ export function Button(props) {
     useEffect( () => {        
         const element = document.getElementById(props.name + '-btn');        
         element.value = props.active;
-    }, [props.cc, props.name, props.value])
+    }, [props.cc, props.name, props.active])
 
     return  (
         <span className="text-light switch-button">
