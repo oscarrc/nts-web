@@ -24,9 +24,8 @@ export function Dropdown(props) {
        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.active, props.path, props.cc, props.values, midiConfig, dispatch]);
 
-    useEffect( () => {
-        handleChange(props.value);
-    }, [handleChange, props.value])
+    // eslint-disable-next-line
+    useEffect( () => handleChange(props.value), [])
 
     return  (
         <Select onChange={handleChange} className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } value={ props.values[props.value].label }>
