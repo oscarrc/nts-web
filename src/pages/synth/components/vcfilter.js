@@ -39,7 +39,8 @@ export function Vcfilter() {
                         active={ vcfValues.active }
                         cc={ vcf.type.cc }
                         onValue={ vcf.type.values[vcfValues.type].value }
-                        offValue={ 127 } 
+                        offValue={ 127 }
+                        path="vcf.active"
                     />
                 </Col>       
                 <Col span={20}>
@@ -49,6 +50,7 @@ export function Vcfilter() {
                         values={ vcf.type.values }
                         value={ vcfValues.type }
                         active={ vcfValues.active } 
+                        path="vcf.type"
                     />
                 </Col>
             </Row>                     

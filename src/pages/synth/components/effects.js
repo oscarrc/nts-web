@@ -44,7 +44,7 @@ export function Effects() {
         return controls;
     }
 
-    const renderButton = (ctrls, name, value ) => {
+    const renderButton = (ctrls, name, value, path ) => {
         return (
             <Button 
                 name={ name }
@@ -52,6 +52,7 @@ export function Effects() {
                 cc={ ctrls.type.cc }
                 onValue={ ctrls.type.values[value.type].value }
                 active={ value.active }
+                path={ path }
             />
         )
     }
@@ -61,13 +62,13 @@ export function Effects() {
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
                 <Col span={6}> 
-                    { renderButton(effects.mod, "Mod", effectValues.mod) }
+                    { renderButton(effects.mod, "Mod", effectValues.mod, "effects.mod.active") }
                 </Col>
                 <Col span={6}>
-                    { renderButton(effects.delay, "Delay", effectValues.delay) }              
+                    { renderButton(effects.delay, "Delay", effectValues.delay, "effects.delay.active") }              
                 </Col>
                 <Col span={6}>                
-                    { renderButton(effects.reverb, "Reverb", effectValues.reverb) }   
+                    { renderButton(effects.reverb, "Reverb", effectValues.reverb, "effects.reverb.active") }   
                 </Col>
             </Row>
             <Divider className="text-light">Mod</Divider>
