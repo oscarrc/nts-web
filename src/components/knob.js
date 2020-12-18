@@ -4,26 +4,29 @@ import { pathToStore } from '../utils/store';
 import { useSelector, useDispatch } from 'react-redux';
 import knob from '../assets/knob.png';
 
-//TODO dispatch firing multiple times
-//TODO use built-in midi from component
 export function Knob(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
     
-    const handleChange = useCallback((value) => {
+    const handleChange = useCallback((value) => {        
         midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
         if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.cc, props.path, midiConfig, dispatch]);
     
     useEffect( () => {
       const element = document.getElementById(props.name + props.cc);
-      handleChange(props.value);
       element.addEventListener("change", (event)=>{
         handleChange(event.target.value);
       });
       
-      return () => { if (element) element.removeEventListener("input", handleChange) };      
-    }, [handleChange, props.name, props.cc, props.value])
+      return () => { if (element) element.removeEventListener("change", handleChange) };       
+      // eslint-disable-next-line     
+    }, [])
+
+    useEffect( () => {
+      const element = document.getElementById(props.name + props.cc);
+      element.value = props.value;
+    }, [props.name, props.cc, props.value])
 
     return  (
         <div className='knob-wrapper'>            
