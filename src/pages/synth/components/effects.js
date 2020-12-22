@@ -7,7 +7,7 @@ import { effects } from '../../../config/midi';
 export function Effects() { 
     const effectValues = useSelector(state => state.synthesizer).value.effects;
 
-    const renderControls = (ctrls, name, span, val) => {
+    const renderControls = (ctrls, name, span, val, path) => {
         let controls = [];
 
         Object.keys(ctrls).forEach( (control) => {
@@ -22,6 +22,7 @@ export function Effects() {
                             min="1"
                             active={ val.active }
                             value={ val[control] }
+                            path={ path + "." + control}
                         />
                     </Col>
                 );
@@ -35,6 +36,7 @@ export function Effects() {
                             step={ctrls[control].step}
                             cc={ctrls[control].cc}
                             value={ val[control] }
+                            path={ path + "." + control}
                         />
                     </Col>
                 );
@@ -73,15 +75,15 @@ export function Effects() {
             </Row>
             <Divider className="text-light">Mod</Divider>
             <Row>
-                { renderControls(effects.mod, "MOD", 6, effectValues.mod) }
+                { renderControls(effects.mod, "MOD", 6, effectValues.mod, "effects.mod") }
             </Row>
             <Divider className="text-light">Delay</Divider>
             <Row>      
-                { renderControls(effects.delay, "DELAY", 6, effectValues.delay) }
+                { renderControls(effects.delay, "DELAY", 6, effectValues.delay, "effects.delay") }
             </Row>
             <Divider className="text-light">Reverb</Divider>
             <Row>   
-                { renderControls(effects.reverb, "REVERB", 6, effectValues.reverb) }
+                { renderControls(effects.reverb, "REVERB", 6, effectValues.reverb, "effects.reverb") }
             </Row>
         </div>
     );
