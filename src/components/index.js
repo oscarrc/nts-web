@@ -7,3 +7,4 @@ export { Keyboard } from './keyboard';
 export { Knob } from './knob';
 export { Selector } from './selector';
 export { Settings } from './settings';
+export { Wheel } from './wheel';
