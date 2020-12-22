@@ -5,12 +5,12 @@ import { pathToStore } from '../utils/store';
 
 import button from '../assets/button.png';
 
-//TODO fix old midiConfig values or double triggering
+//TODO Fix randomize and patch not firing handle change
 export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
     const control = useRef(null);
-
+    
     const handleChange = useCallback((value) => {     
         midiControlChange(props.cc, value === 1 ? props.onValue : props.offValue,  midiConfig.outputDevice, midiConfig.outputChannel);
         if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });

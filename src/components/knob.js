@@ -3,6 +3,7 @@ import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 import { useSelector, useDispatch } from 'react-redux';
 import knob from '../assets/knob.png';
+//TODO Fix randomize and patch not firing handle change
 
 export function Knob(props) {
     const midiConfig = useSelector(state => state.midi).value;

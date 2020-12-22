@@ -4,7 +4,7 @@ import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 
 import selector from '../assets/selector.png';
-
+//TODO Fix randomize and patch not firing handle change
 export function Selector(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
@@ -12,16 +12,15 @@ export function Selector(props) {
 
     const handleChange = useCallback((value) => {
       const val = props.values[value]?.value;
-      console.log(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel)
       if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
       if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     }, [props.active, props.cc, props.values, props.path, dispatch, midiConfig]);
     
     useEffect( () => {
       const current = control.current;
-      current.addEventListener("input", (event) => handleChange(event.target.value));      
+      current.addEventListener("input", (event) => handleChange(event.target.value)); 
       return () => current.removeEventListener("input", handleChange);
-    }, [control, handleChange])
+    }, [control, handleChange, props.value])
 
     useEffect( () => control.current.value = props.value, [props.value]);
     

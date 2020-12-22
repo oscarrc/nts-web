@@ -4,7 +4,7 @@ import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 
-//TODO fix old midiConfig values or double triggering
+//TODO Fix randomize and patch not firing handle change
 export function Dropdown(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
