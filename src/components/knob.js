@@ -4,7 +4,6 @@ import { pathToStore } from '../utils/store';
 import { useSelector, useDispatch } from 'react-redux';
 import knob from '../assets/knob.png';
 
-//TODO fix old midiConfig values or double triggering (TEST useRef)
 export function Knob(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();

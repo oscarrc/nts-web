@@ -2,10 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import wheel from '../assets/wheel.png';
 
 export function Wheel(props) {
-    const knob = useRef(null);
+    const control = useRef(null);
 
     useEffect( () => {
-        const current = knob.current;
+        const current = control.current;
         const onEvent = (event) => {
             console.log(event.target.value)
             current.value = 0;
@@ -15,7 +15,7 @@ export function Wheel(props) {
     })
 
     return  (
-        <webaudio-knob ref={knob} sprites="127" width={props.width} height={props.height} src={wheel} step={props.step} min={ props.min } max={ props.max } ></webaudio-knob>
+        <webaudio-knob ref={control} sprites="127" width={props.width} height={props.height} src={wheel} step={props.step} min={ props.min } max={ props.max } ></webaudio-knob>
     );
 }
 
