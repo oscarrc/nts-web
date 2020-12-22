@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Row, Col, Collapse} from 'antd';
 
-import { Display, Keyboard, Wheel } from '../../components';
+import { Display, Keyboard, Pad, Wheel } from '../../components';
 import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter } from './components';
 
 
@@ -37,13 +37,15 @@ export function Synth() {
         <Collapse className="transparent"  bordered={false}  >
           <Panel showArrow={false} header={ <span className='text-gold'><strong >More controls</strong></span> } key="1">            
             <Row justify="space-between" align="center">
-              <Col span={12} order={1} lg={{ span: 6, order: 1 }}>
+              <Col span={12} order={1} lg={{ span: 3, order: 1 }}>
                 <Wheel />
               </Col>
               <Col span={24} order={3} lg={{ span: 12, order: 2 }}>
                 <Keyboard />
               </Col>
-              <Col span={12} order={2} lg={{ span: 6, order: 3 }}></Col>
+              <Col span={12} order={2} lg={{ span: 6, order: 3 }}>
+                <Pad />
+              </Col>
             </Row>
           </Panel>
         </Collapse>
