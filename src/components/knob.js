@@ -12,7 +12,7 @@ export function Knob(props) {
 
     const handleChange = useCallback((value) => {
         midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
-        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });  ;
+        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.cc, props.path, midiConfig, dispatch]);
     
     useEffect( () => {
@@ -22,7 +22,7 @@ export function Knob(props) {
     }, [control, handleChange])
 
     useEffect( () => control.current.value = props.value, [props.value]);
-
+    
     return  (
         <div className='knob-wrapper'>            
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
