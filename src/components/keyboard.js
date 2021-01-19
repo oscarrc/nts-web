@@ -1,7 +1,11 @@
 import React, {useEffect, useRef} from 'react';
+import { useSelector } from 'react-redux';
+
+import { midiPlayNote } from '../utils/midi';
 
 export function Keyboard(props) {
     const keyboard = useRef(null);
+    const midiConfig = useSelector(state => state.midi).value;
 
     useEffect( () => {  
         const handleResize = () => {
@@ -13,10 +17,12 @@ export function Keyboard(props) {
         handleResize();
 
         window.addEventListener("resize", handleResize);     
+        keyboard.current.addEventListener("change", event => midiPlayNote(event.note[1], midiConfig.outputDevice, midiConfig.outputChannel, event.note[0]));
 
         return () => {
             window.removeEventListener("resize", handleResize);   
-        };   
+        }; 
+        
     })
 
     return  (

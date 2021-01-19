@@ -11,7 +11,6 @@ export function Settings() {
     const dispatch = useDispatch();
 
     const saveSettings = (values) => {
-      console.log(values)
       dispatch({type: 'midi/setOptions', payload: values});
       closeSettings();
     }
