@@ -20,7 +20,7 @@ export function Selector(props) {
     useEffect( () => {      
       const val = props.values[props.value]?.value;
       if( control.current.value !== props.value) control.current.value = props.value;  
-      if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
+      if( props.active ) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
     }, [props.values, props.cc, props.active, props.value, midiConfig]);
     
     return  (

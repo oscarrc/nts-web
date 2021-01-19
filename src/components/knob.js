@@ -10,10 +10,12 @@ export function Knob(props) {
     const control = useRef(null);
     
     useEffect( () => {
-      const current = control.current;
-      current.addEventListener("input", (event) => {
-        dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, event.target.value) });
-      });
+      const current = control.current;      
+      const update = (value) => dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value)});
+
+      current.addEventListener("input", (event) => update(event.target.value) );
+      
+      return () => current.removeEventListener("input", update);
     }, [props.path, dispatch])
 
     useEffect( () => {

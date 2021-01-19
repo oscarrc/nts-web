@@ -13,7 +13,6 @@ const midiStart = () => {
 }
 
 const midiControlChange = (cc, value, id, channel) => {
-    console.log("MIDI")
     if(webmidi.enabled){
         const output = webmidi.getOutputById(id);
         if(output) output.sendControlChange(cc, value, channel);
