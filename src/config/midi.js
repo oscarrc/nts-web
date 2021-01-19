@@ -268,7 +268,7 @@ export const effects = {
                 },
                 {
                     value: 100,
-                    label: "Hight Pass"
+                    label: "High Pass"
                 },
                 {
                     value: 127,

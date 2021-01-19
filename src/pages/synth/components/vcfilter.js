@@ -9,7 +9,7 @@ export function Vcfilter() {
 
     const renderControls = (ctrls, span, values, path) => {
         let controls = [];
-
+        //TODO vcf value not changing
         
         Object.keys(ctrls).forEach( (control) => {
             controls.push(

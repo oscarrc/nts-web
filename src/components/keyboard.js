@@ -43,5 +43,5 @@ Keyboard.defaultProps = {
     height: 150,
     width: 480,
     colors: "#212122;#b4b4b4;#b4b4b4;#000;#212122;#eee;#ddd;#333;#222",
-    octave: 0
+    octave: 1
 };
