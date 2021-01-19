@@ -421,7 +421,7 @@ export const vcf = {
 };
 
 export const channels = [
-    "0",
+    "all",
     "1",
     "2",
     "3",
