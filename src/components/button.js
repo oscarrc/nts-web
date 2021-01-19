@@ -5,7 +5,6 @@ import { pathToStore } from '../utils/store';
 
 import button from '../assets/button.png';
 
-//TODO Fix randomize and patch not firing handle change
 export function Button(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();

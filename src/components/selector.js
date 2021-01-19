@@ -4,7 +4,7 @@ import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 
 import selector from '../assets/selector.png';
-//TODO Fix randomize and patch not firing handle change
+
 export function Selector(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
