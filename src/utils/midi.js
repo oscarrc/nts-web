@@ -21,9 +21,9 @@ const midiControlChange = (cc, value, id, channel) => {
 
 const midiPlayNote = (note, id, channel, play) => {
     let noteString =  ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
-    let octave = (note / 12);
+    let octave = (note / 12) - 1;
     let noteIndex = (note % 12);
-  
+    
     octave = octave < 1 ? 0 :  Math.floor(octave)
     note = noteString[noteIndex] + octave;
 

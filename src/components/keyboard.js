@@ -32,7 +32,7 @@ export function Keyboard(props) {
 
     return  (
         <div className='keyboard-wrapper'>
-            <webaudio-keyboard  ref={keyboard} min={props.min} colors={props.colors} keys={props.keys} height={props.height} width={props.width}>
+            <webaudio-keyboard  ref={keyboard} min={ props.octave * 12 } colors={props.colors} keys={props.keys} height={props.height} width={props.width}>
             </webaudio-keyboard>
         </div>
     );
@@ -43,5 +43,5 @@ Keyboard.defaultProps = {
     height: 150,
     width: 480,
     colors: "#212122;#b4b4b4;#b4b4b4;#000;#212122;#eee;#ddd;#333;#222",
-    min: 0
+    octave: 0
 };
