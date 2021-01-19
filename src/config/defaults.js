@@ -27,20 +27,20 @@ const defaultPatch = {
     effects: {
         mod: {
             active: 0,
-            type: 0,
+            type: 1,
             time: 0,
             depth: 0
         },
         delay: {
             active: 0,
-            type:0,
+            type:1,
             time: 0,
             depth: 0,
             mix: 0
         },
         reverb: {
             active: 0,
-            type: 0,
+            type: 1,
             time: 0,
             depth: 0,
             mix: 0

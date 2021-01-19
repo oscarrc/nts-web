@@ -20,6 +20,7 @@ export function Amplifier() {
                         step={opt[knob].step} 
                         cc={opt[knob].cc} 
                         value={val[knob]}
+                        path={ path + '.' + opt[knob].label.toLowerCase() }
                     />
                 </Col>
             )

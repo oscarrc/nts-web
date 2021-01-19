@@ -4,6 +4,7 @@ import { Select } from 'antd';
 import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 
+//TODO Fix randomize and patch not firing handle change
 export function Dropdown(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
@@ -24,9 +25,8 @@ export function Dropdown(props) {
        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
     },[props.active, props.path, props.cc, props.values, midiConfig, dispatch]);
 
-    useEffect( () => {
-        handleChange(props.value);
-    }, [handleChange, props.value])
+    // eslint-disable-next-line
+    useEffect( () => handleChange(props.value), [])
 
     return  (
         <Select onChange={handleChange} className="control-select text-lcd" size="medium" id= { props.name + props.cc } name={ props.name } placeholder={ props.name } value={ props.values[props.value].label }>

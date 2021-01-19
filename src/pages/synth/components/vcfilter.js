@@ -7,7 +7,7 @@ import { vcf } from '../../../config/midi';
 export function Vcfilter() { 
     const vcfValues = useSelector(state => state.synthesizer).value.vcf;
 
-    const renderControls = (ctrls, span, values) => {
+    const renderControls = (ctrls, span, values, path) => {
         let controls = [];
 
         
@@ -21,6 +21,7 @@ export function Vcfilter() {
                         step={ctrls[control].step}
                         cc={ctrls[control].cc}
                         values={values[control]}
+                        path={path + '.' + control}
                     />
                 </Col>
             )
@@ -39,7 +40,8 @@ export function Vcfilter() {
                         active={ vcfValues.active }
                         cc={ vcf.type.cc }
                         onValue={ vcf.type.values[vcfValues.type].value }
-                        offValue={ 127 } 
+                        offValue={ 127 }
+                        path="vcf.active"
                     />
                 </Col>       
                 <Col span={20}>
@@ -49,16 +51,17 @@ export function Vcfilter() {
                         values={ vcf.type.values }
                         value={ vcfValues.type }
                         active={ vcfValues.active } 
+                        path="vcf.type"
                     />
                 </Col>
             </Row>                     
             <Divider className="text-light">Filter</Divider>
             <Row>
-                { renderControls(vcf.filter, 12, vcfValues.filter) }
+                { renderControls(vcf.filter, 12, vcfValues.filter, "vcf.filter") }
             </Row>
             <Divider className="text-light">Sweep</Divider>
             <Row>                
-                { renderControls(vcf.sweep, 12, vcfValues.sweep) }
+                { renderControls(vcf.sweep, 12, vcfValues.sweep, "vcf.sweep") }
             </Row>
         </div>
     );

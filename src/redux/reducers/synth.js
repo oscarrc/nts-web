@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { defaultPatch } from '../../config/defaults';
-import { combinePayload } from '../../utils/store';
+import merge from 'lodash/merge'
 
 export const synthSlice = createSlice({
   name: 'synthesizer',
@@ -9,8 +9,7 @@ export const synthSlice = createSlice({
   },
   reducers: {
     setControl: (state, action) => {
-      const payload = combinePayload(action.payload, state.value);
-      state.value = { ...state.value, ...payload};
+      state.value = merge({}, state.value, action.payload);
     }
   }
 });

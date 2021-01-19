@@ -18,6 +18,7 @@ export function Arpegiator() {
                         values={ arp.type.values }
                         cc={ arp.type.cc }
                         value={ arpValues.type }
+                        path="arp.type"
                     />
                 </Col>
                 <Col span={6}>
@@ -27,6 +28,7 @@ export function Arpegiator() {
                         values={ arp.scale.values }
                         cc={ arp.scale.cc }
                         value={ arpValues.scale }
+                        path="arp.scale"
                     />
                 </Col>
                 <Col span={6}>      
@@ -36,6 +38,7 @@ export function Arpegiator() {
                         step={arp.length.step}
                         cc={arp.length.cc}
                         value={ arpValues.length }
+                        path="arp.length"
                     />
                 </Col>
             </Row>
