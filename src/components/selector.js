@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
@@ -10,19 +10,18 @@ export function Selector(props) {
     const dispatch = useDispatch();
     const control = useRef(null);
 
-    const handleChange = useCallback((value) => {
-      const val = props.values[value]?.value;
-      if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
-      if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
-    }, [props.active, props.cc, props.values, props.path, dispatch, midiConfig]);
-    
     useEffect( () => {
       const current = control.current;
-      current.addEventListener("input", (event) => handleChange(event.target.value)); 
-      return () => current.removeEventListener("input", handleChange);
-    }, [control, handleChange, props.value])
+      current.addEventListener("input", (event) => {
+        dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, event.target.value) })
+      }); 
+    }, [props.path, dispatch])
 
-    useEffect( () => control.current.value = props.value, [props.value]);
+    useEffect( () => {      
+      const val = props.values[props.value]?.value;
+      if( control.current.value !== props.value) control.current.value = props.value;  
+      if(props.active) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
+    }, [props.values, props.cc, props.active, props.value, midiConfig]);
     
     return  (
         <div className='selector-wrapper'>   

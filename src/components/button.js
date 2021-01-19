@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { midiControlChange } from '../utils/midi';
 import { useSelector, useDispatch } from 'react-redux';
 import { pathToStore } from '../utils/store';
@@ -11,18 +11,17 @@ export function Button(props) {
     const dispatch = useDispatch();
     const control = useRef(null);
     
-    const handleChange = useCallback((value) => {     
-        midiControlChange(props.cc, value === 1 ? props.onValue : props.offValue,  midiConfig.outputDevice, midiConfig.outputChannel);
-        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
-    },[props.path, props.onValue, props.offValue, props.cc, dispatch, midiConfig]);
-    
     useEffect( () => {
         const current = control.current;
-        current.addEventListener("change", (event) => handleChange(event.target.value));      
-        return () => current.removeEventListener("change", handleChange);
-      }, [control, handleChange])
+        current.addEventListener("change", (event) => {
+            dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, event.target.value) });
+        });      
+      }, [props.path, dispatch])
 
-    useEffect( () => control.current.value = props.active, [props.active]);
+    useEffect( () => {
+        if( control.current.value !== props.active) control.current.value = props.active; 
+        midiControlChange(props.cc, props.active === 1 ? props.onValue : props.offValue,  midiConfig.outputDevice, midiConfig.outputChannel);
+    }, [props.active, props.cc, props.onValue, props.offValue, midiConfig]);
 
     return  (
         <span className="text-light switch-button">
