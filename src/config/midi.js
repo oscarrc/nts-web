@@ -438,4 +438,4 @@ export const channels = [
     "14",
     "15",
     "16"
-  ];
+];
