@@ -26,7 +26,12 @@ export function Button(props) {
 
     return  (
         <span className="text-light switch-button">
-            <webaudio-switch ref={control} src={button} id={ props.name + '-btn' } value={ props.active } ></webaudio-switch> { props.tag ? props.name : ''}
+            <webaudio-switch 
+                ref={control}
+                src={button}
+                id={ props.name + '-btn' }
+                value={ props.active }>
+            </webaudio-switch> { props.tag ? props.name : ''}
         </span>
     );
 }

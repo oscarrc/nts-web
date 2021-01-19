@@ -26,7 +26,18 @@ export function Knob(props) {
     return  (
         <div className='knob-wrapper'>            
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
-          <webaudio-knob ref={control} className="knob" diameter="60" id={props.name + props.cc} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={props.value}></webaudio-knob>
+          <webaudio-knob 
+            ref={control} 
+            className="knob" 
+            diameter="60" 
+            id={props.name + props.cc} 
+            name={props.name} 
+            src={knob} 
+            step={props.step} 
+            min={ props.min } 
+            max={ props.max } 
+            value={props.value}>              
+          </webaudio-knob>
           { props.param ? <webaudio-param className="param" link={props.name}></webaudio-param> : null }
         </div>
     );
