@@ -63,10 +63,10 @@ const defaultPatch = {
 const defaultSettings = {
     outputDevices: [],
     outputDevice: "",
-    outputChannel: "all",
+    outputChannel: "0",
     inputDevices: [],
     inputDevice: "",
-    inputChannel: "all",
+    inputChannel: "0",
     settings: false
 }
 
