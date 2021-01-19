@@ -27,7 +27,7 @@ export function Selector(props) {
     return  (
         <div className='selector-wrapper'>   
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }      
-          <webaudio-knob 
+          <webaudio-knob
             ref={control} 
             className="selector" 
             diameter="60" 
