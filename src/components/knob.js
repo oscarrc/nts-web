@@ -12,9 +12,7 @@ export function Knob(props) {
     useEffect( () => {
       const current = control.current;      
       const update = (value) => dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value)});
-
-      current.addEventListener("input", (event) => update(event.target.value) );
-      
+      current.addEventListener("input", (event) => update(event.target.value) );      
       return () => current.removeEventListener("input", update);
     }, [props.path, dispatch])
 
