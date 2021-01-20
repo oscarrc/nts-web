@@ -9,18 +9,18 @@ export function Vcfilter() {
 
     const renderControls = (ctrls, span, values, path) => {
         let controls = [];
-        
+
         Object.keys(ctrls).forEach( (control) => {
             controls.push(
-                <Col span={span}>
+                <Col span={ span }>
                     <Knob 
-                        name={ctrls[control].label}
-                        max={ctrls[control].max}
-                        min={ctrls[control].min}
-                        step={ctrls[control].step}
-                        cc={ctrls[control].cc}
-                        value={values[control]}
-                        path={path + '.' + control}
+                        name={ ctrls[control].label }
+                        max={ ctrls[control].max }
+                        min={ ctrls[control].min }
+                        step={ ctrls[control].step }
+                        cc={ ctrls[control].cc }
+                        value={ values[control] }
+                        path={ path + '.' + control }
                     />
                 </Col>
             )
