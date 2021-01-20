@@ -198,7 +198,7 @@ a.link:hover{
 }
 
 .display.small{
-  margin: 20px 0;
+  margin: 10px auto;
   height: auto;
   border-radius: 2px;
   padding-top: 2px;
