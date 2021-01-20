@@ -18,6 +18,10 @@
   border-color: #f3cc62;
 }
 
+.transparent .ant-collapse-content-box{
+  margin-bottom: 35px;
+}
+
 .text-gold, .text-gold.ant-divider-horizontal.ant-divider-with-text{
   color: #f3cc62;
 }
