@@ -3,6 +3,14 @@
   src: url('assets/Square-Dot-Matrix.ttf') format('truetype');
 }
 
+.text-left{
+  text-align: left;
+}
+
+.text-center{
+  text-align: center;
+}
+
 #app {
   text-align: center;
   min-height: 100vh;  
