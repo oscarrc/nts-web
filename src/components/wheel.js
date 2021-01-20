@@ -13,7 +13,7 @@ export function Wheel(props) {
         }
         current.addEventListener("change", event => onEvent(event))
         return () => current.removeEventListener("change", onEvent)
-    })
+    }, [control])
 
     return  (
         <div>
