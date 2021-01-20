@@ -1,9 +1,12 @@
 import webmidi from 'webmidi';
 
+//TODO handle hot connections
+
 const midiStart = () => {
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {
             if (err) reject(err);
+            
             resolve ({
                 inputDevices: webmidi.inputs.map( d => { return {id: d.id, name: d.name } }),
                 outputDevices: webmidi.outputs.map( d => { return {id: d.id, name: d.name } })
