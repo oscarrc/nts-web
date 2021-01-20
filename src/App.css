@@ -197,6 +197,17 @@ a.link:hover{
   padding: 4px;
 }
 
+.display.small{
+  margin: 20px 0;
+  height: auto;
+  border-radius: 2px;
+  padding-top: 2px;
+}
+
+.display.small .text-lcd{
+  margin: 0;
+}
+
 .keyboard-wrapper, .pianoroll-wrapper{
   width: 100%;
 }

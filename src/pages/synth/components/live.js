@@ -1,20 +1,29 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Button } from 'antd';
 import { Keyboard } from '../../../components';
+import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 
 // TODO octave change control
 // TODO maybe a pitch bend control
-export function Live() {   
+export function Live() {       
+    const dispatch = useDispatch();
+    const octave = useSelector(state => state.midi).value.octave;
+    const octaveUp = () => dispatch({ type: 'midi/octaveUp'});
+    const octaveDown = () => dispatch({ type: 'midi/octaveDown'});
+
     return  (
         <Row justify="space-between" align="center">
-            <Col span={12} order={1} lg={{ span: 1, order: 1 }}>
+            <Col span={2} justify="center">
+                <Button disabled={ octave === 10 } onClick={ octaveUp } block ghost className="btn-gold" icon={<CaretUpOutlined />}></Button>
+                <div class="display small"><h2 className="text-lcd">{octave}</h2></div>
+                <Button disabled={ octave === 0 } onClick={ octaveDown } block ghost className="btn-gold" icon={<CaretDownOutlined />}></Button>
             </Col>
-            
-            <Col span={12} order={2} lg={{ span: 1, order: 3 }}>
+            <Col span={18}>
+                <Keyboard octave={octave} />
+            </Col>   
+            <Col span={1}>
                 
-            </Col>
-            <Col span={24} order={3} lg={{ span: 18, order: 2 }}>
-                <Keyboard />
             </Col>
         </Row>
     );
