@@ -13,10 +13,12 @@ export function Keyboard(props) {
         const handleResize = () => {
             const actualWidth = document.getElementsByClassName('keyboard-wrapper')[0].offsetWidth;
             keyboard.current.width = actualWidth;
-            keyboard.current.height = actualWidth / 4;
+            keyboard.current.height = actualWidth / 5;
         }
 
-        const playNote = (note) => midiPlayNote(note[1], midiConfig.outputDevice, midiConfig.outputChannel, note[0]);
+        const playNote = (note) => {
+            midiPlayNote(note[1], midiConfig.outputDevice, midiConfig.outputChannel, note[0]);
+        }
 
         handleResize();
 
@@ -27,21 +29,26 @@ export function Keyboard(props) {
             window.removeEventListener("resize", handleResize);   
             current.removeEventListener("change", playNote);   
         }; 
-        
-    })
+    });
+    
+    useEffect( () => {
+        const current = keyboard.current;
+        current.min = props.octave * 12;
+        current.keys = props.keys;
+    }, [props.octave, props.keys])
 
     return  (
         <div className='keyboard-wrapper'>
-            <webaudio-keyboard  ref={keyboard} min={ props.octave * 12 } colors={props.colors} keys={props.keys} height={props.height} width={props.width}>
+            <webaudio-keyboard  ref={keyboard} colors={props.colors} height={props.height} width={props.width}>
             </webaudio-keyboard>
         </div>
     );
 }
 
 Keyboard.defaultProps = {
-    keys: 36,
+    keys: 37,
     height: 150,
     width: 480,
     colors: "#212122;#b4b4b4;#b4b4b4;#000;#212122;#eee;#ddd;#333;#222",
-    octave: 1
+    octave: 5
 };
