@@ -40,4 +40,14 @@ const midiPlayNote = (note, id, channel, play) => {
     }
 }
 
-export { midiStart, midiControlChange, midiPlayNote }
+const midiSendPitchBend = (value, id, channel) => {
+    if(webmidi.enabled){
+        const output = webmidi.getOutputById(id);
+
+        if(output){
+            output.sendPitchBend(value, channel);
+        }
+    }
+}
+
+export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend }

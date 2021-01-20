@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { midiSendPitchBend } from '../utils/midi';
 import wheel from '../assets/wheel.png';
 
 export function Wheel(props) {
@@ -7,7 +8,7 @@ export function Wheel(props) {
     useEffect( () => {
         const current = control.current;
         const onEvent = (event) => {
-            console.log(event.target.value)
+            midiSendPitchBend(event.target.value);
             current.value = 0;
         }
         current.addEventListener("change", event => onEvent(event))
@@ -20,9 +21,9 @@ export function Wheel(props) {
 }
 
 Wheel.defaultProps = {
-    height: 110,
-    width: 64,
-    min: 0,
-    max: 127,
-    step: 1
+    height: 165,
+    width: 96,
+    min: -1,
+    max: 1,
+    step: 0.01
 };

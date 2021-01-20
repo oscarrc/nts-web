@@ -45,7 +45,8 @@ function App() {
     ).catch( err => console.log(err)); // TODO properly handle no midi
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout id="app">

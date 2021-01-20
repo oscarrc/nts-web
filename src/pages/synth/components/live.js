@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import { Keyboard, Wheel, Octave } from '../../../components';
 
-// TODO maybe a pitch bend control
 export function Live() {       
     const octave = useSelector(state => state.midi).value.octave;
 
