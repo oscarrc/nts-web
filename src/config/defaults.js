@@ -67,7 +67,7 @@ const defaultSettings = {
     inputDevices: [],
     inputDevice: "",
     inputChannel: "all",
-    octave: 0,
+    octave: 3,
     settings: false
 }
 
