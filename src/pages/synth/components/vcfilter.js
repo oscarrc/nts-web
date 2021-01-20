@@ -9,7 +9,6 @@ export function Vcfilter() {
 
     const renderControls = (ctrls, span, values, path) => {
         let controls = [];
-        //TODO vcf value not changing
         
         Object.keys(ctrls).forEach( (control) => {
             controls.push(
@@ -20,7 +19,7 @@ export function Vcfilter() {
                         min={ctrls[control].min}
                         step={ctrls[control].step}
                         cc={ctrls[control].cc}
-                        values={values[control]}
+                        value={values[control]}
                         path={path + '.' + control}
                     />
                 </Col>
