@@ -16,7 +16,10 @@ export function Wheel(props) {
     })
 
     return  (
-        <webaudio-knob ref={control} sprites="127" width={props.width} height={props.height} src={wheel} step={props.step} min={ props.min } max={ props.max } ></webaudio-knob>
+        <div>
+            <webaudio-knob id="pitch-bend" ref={control} sprites="127" width={props.width} height={props.height} src={wheel} step={props.step} min={ props.min } max={ props.max } ></webaudio-knob>
+            <webaudio-param link="pitch-bend"></webaudio-param>
+        </div>
     );
 }
 
