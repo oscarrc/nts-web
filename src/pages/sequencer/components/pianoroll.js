@@ -50,7 +50,7 @@ export function Pianoroll(props) {
 
 Pianoroll.defaultProps = {
     xrange: 16,
-    yrange: 16,
+    yrange: 32,
     timebase: 16,
     loop: 1,
     xscroll: 1,
