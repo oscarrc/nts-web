@@ -8,4 +8,6 @@ This is still a work in progress, I'm working on the minimum functionalities req
 
 ### Do you wanna help?
 
-Feel free to open a PR or [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y43D7I3)
+[Buy me a coffee](https://www.buymeacoffee.com/oscarrc)
+
+Or open a PR
