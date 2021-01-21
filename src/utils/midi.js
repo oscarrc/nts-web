@@ -23,7 +23,7 @@ const midiControlChange = (cc, value, id, channel) => {
 }
 
 const midiPlayNote = (note, id, channel, play) => {
-    let noteString =  ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
+    const noteString =  ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
     let octave = (note / 12);
     let noteIndex = (note % 12);
      
@@ -45,11 +45,8 @@ const midiPlayNote = (note, id, channel, play) => {
 
 const midiSendPitchBend = (value, id, channel) => {
     if(webmidi.enabled){
-        const output = webmidi.getOutputById(id);
-        
-        if(output){
-            output.sendPitchBend(value, channel);
-        }
+        const output = webmidi.getOutputById(id);        
+        if(output) output.sendPitchBend(value, channel);
     }
 }
 
