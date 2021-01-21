@@ -20,5 +20,5 @@ export function Octave(props) {
 
 Octave.defaultProps = {
     min: 0,
-    max: 7
+    max: 6
 }

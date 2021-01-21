@@ -27,7 +27,9 @@ export function Keyboard(props) {
         return () => {
             window.removeEventListener("resize", handleResize);   
             current.removeEventListener("change", playNote);   
-        }; 
+        };
+
+        // eslint-disable-next-line
     }, []);
     
     useEffect( () => {

@@ -15,7 +15,7 @@ export const midiSlice = createSlice({
     },
     octaveUp: (state) => {
       const octave = state.value.octave;
-      state.value.octave = octave < 7 ? octave + 1 : octave;
+      state.value.octave = octave < 6 ? octave + 1 : octave;
     },
     octaveDown: (state) => {
       const octave = state.value.octave;
