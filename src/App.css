@@ -352,3 +352,7 @@ a.link:hover{
 .octave-wrapper .display .text-lcd{
   margin: 0;
 }
+
+.controls {
+  margin-bottom: 10px;
+}

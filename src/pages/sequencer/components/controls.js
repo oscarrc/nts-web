@@ -1,15 +1,17 @@
 import React from 'react';
 import { Row, Col, Button, InputNumber  } from 'antd';
-import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, PauseOutlined, RollbackOutlined, RedoOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 export function Controls(props) {  
     return (
-        <Row>
-            <Col className="text-left" span={12}>
-                <Button ghost className="btn-gold" icon={props.play ? <PauseOutlined /> : <CaretRightOutlined />}></Button>
+        <Row className="controls">
+            <Col className="text-left" span={12}>                
+                <Button ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
             </Col>
             <Col className="text-right" span={12}>
+                <Button ghost className="btn-gold" icon={<CaretRightOutlined />}></Button>
                 <InputNumber className="control-number text-lcd" min={1} max={100000} defaultValue={props.tempo} />
+                <Button ghost className="btn-gold" icon={<RedoOutlined />}></Button>
             </Col>
         </Row>
     )
