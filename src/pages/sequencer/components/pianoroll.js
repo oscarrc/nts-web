@@ -6,15 +6,15 @@ import { Row, Col  } from 'antd';
 export function Pianoroll(props) {   
     // const midiConfig = useSelector(state => state.midi).value; 
     const pianoroll = useRef(null);    
-    const actx = new AudioContext();
-
+    
     useEffect( () => {  
+        const current = pianoroll.current;
         const handleResize = () => {
             const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
             const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
                                  document.getElementsByClassName('footer')[0].clientHeight - 32;
-            pianoroll.current.width = actualWidth;
-            pianoroll.current.height = actualHeight;
+            current.width = actualWidth;
+            current.height = actualHeight;
         }
 
         handleResize();
@@ -27,6 +27,7 @@ export function Pianoroll(props) {
 
     useEffect( () => {
         if(props.play){
+            const actx = new AudioContext();
             actx.resume();
             pianoroll.current.play(actx, (e) => console.log(e));
         }else if(typeof pianoroll.current.stop === "function"){
@@ -62,7 +63,7 @@ export function Pianoroll(props) {
                     colnote="#2a1215"
                     colnotesel="#d32029"
                     colnoteborder="#434343"
-                    ></webaudio-pianoroll>
+                ></webaudio-pianoroll>
             </Col>
         </Row>
     );
