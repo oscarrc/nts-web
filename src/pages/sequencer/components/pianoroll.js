@@ -24,7 +24,7 @@ export function Pianoroll(props) {
         return () => {
             window.removeEventListener("resize", handleResize);   
         };
-    });
+    }, []);
 
     useEffect( () => {
         if(props.play){
