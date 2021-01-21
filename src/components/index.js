@@ -5,6 +5,7 @@ export { Footer } from './footer';
 export { Header } from './header';
 export { Keyboard } from './keyboard';
 export { Knob } from './knob';
+export { Octave } from './octave';
 export { Pad } from './pad';
 export { Selector } from './selector';
 export { Settings } from './settings';

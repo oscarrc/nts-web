@@ -1,17 +1,20 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
-import { Keyboard, Pad, Wheel } from '../../../components';
+import { Keyboard, Pad, Octave } from '../../../components';
 
-export function Live() {   
+export function Live() {       
+    const octave = useSelector(state => state.midi).value.octave;
+
     return  (
-        <Row justify="space-between" align="center">
-            <Col span={12} order={1} lg={{ span: 2, order: 1 }}>
-                <Wheel />
+        <Row justify="space-around" align="stretch">
+            <Col span={2}>
+                <Octave />
             </Col>
-            <Col span={24} order={3} lg={{ span: 15, order: 2 }}>
-                <Keyboard />
-            </Col>
-            <Col span={12} order={2} lg={{ span: 6, order: 3 }}>
+            <Col span={18}>
+                <Keyboard octave={octave} />
+            </Col>   
+            <Col span={2}>
                 <Pad />
             </Col>
         </Row>

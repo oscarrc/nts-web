@@ -12,11 +12,19 @@ export const midiSlice = createSlice({
     },
     toggleSettings: (state) => {
       state.value.settings = !state.value.settings;
+    },
+    octaveUp: (state) => {
+      const octave = state.value.octave;
+      state.value.octave = octave < 6 ? octave + 1 : octave;
+    },
+    octaveDown: (state) => {
+      const octave = state.value.octave;
+      state.value.octave = octave !== 0 ? octave - 1 : 0;
     }
   }
 });
 
-export const { setOptions, setDevices, toggleSettings } = midiSlice.actions;
+export const { setOptions, toggleSettings, octaveUp, octaveDown } = midiSlice.actions;
 export const midi = state => state.midi.value;
 
 export default midiSlice.reducer;

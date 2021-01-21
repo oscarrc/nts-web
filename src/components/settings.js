@@ -42,26 +42,31 @@ export function Settings() {
           </Button>,
         ]}
       >
-        <Form form={form} size="small" labelCol = {{ span: 4 }} wrapperCol={{ span: 20 }} onFinish={saveSettings} >
+        <Form form={form} size="small" labelCol = {{ span: 4 }} wrapperCol={{ span: 20 }} onFinish={saveSettings} initialValues={{
+          inputDevice: midiState.inputDevice,
+          inputChannel: midiState.inputChannel,
+          outputDevice: midiState.outputDevice,
+          outputChannel: midiState.outputChannel
+        }} >
           <Divider className="text-light">Input</Divider>
           <Item label="Device" name="inputDevice">
-            <Select className="control-select text-lcd" defaultValue={ midiState.inputDevice }>
+            <Select className="control-select text-lcd">
               { renderOptions(midiState.inputDevices, true) }
             </Select>
           </Item>
           <Item className="text-light" label="Channel" name="inputChannel">
-            <Select className="control-select text-lcd" defaultValue={ midiState.inputChannel }>
+            <Select className="control-select text-lcd">
               { renderOptions(channels) }
             </Select>
           </Item>
           <Divider className="text-light">Output</Divider>
           <Item label="Device" name="outputDevice">
-            <Select className="control-select text-lcd" defaultValue={ midiState.outputDevice }>
+            <Select className="control-select text-lcd">
               { renderOptions(midiState.outputDevices, true) }
             </Select>
           </Item>
           <Item label="Channel" name="outputChannel">
-            <Select className="control-select text-lcd" defaultValue={ midiState.outputChannel }>
+            <Select className="control-select text-lcd">
               { renderOptions(channels) }
             </Select>
           </Item>

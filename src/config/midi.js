@@ -268,7 +268,7 @@ export const effects = {
                 },
                 {
                     value: 100,
-                    label: "Hight Pass"
+                    label: "High Pass"
                 },
                 {
                     value: 127,
@@ -421,7 +421,7 @@ export const vcf = {
 };
 
 export const channels = [
-    "0",
+    "all",
     "1",
     "2",
     "3",
@@ -438,4 +438,4 @@ export const channels = [
     "14",
     "15",
     "16"
-  ];
+];

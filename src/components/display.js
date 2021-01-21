@@ -8,7 +8,7 @@ export function Display() {
 
     const renderDisplay = (values) => {
         return (
-            <Row>
+            <Row justify="space-between">
                 <Col>
                     <p className="text-lcd">{JSON.stringify(values)}</p>
                 </Col>
@@ -17,7 +17,7 @@ export function Display() {
     }
 
     return  (
-        <Space className="display" direction="vertical">
+        <Space className="display bg-grid" direction="vertical">
             { isLoading ? 
                 <h2 className="text-lcd">PLEASE, ALLOW THE APP TO USE YOUR MIDI DEVICES</h2> 
                 : renderDisplay(controlValues)

@@ -18,15 +18,19 @@ function App() {
   const query = new URLSearchParams(useLocation().search);
 
   useEffect( () => {
+    // const options = document.createElement('script');
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
     const patch = query.get('patch');
-
+    
+    // options.src= "assets/js/webaudio-options.js";
+    // options.async= true;
     controls.src= "assets/js/webaudio-controls.js";
     controls.async= true;
     pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
-
+    
+    // if(options !== HTMLElement) document.body.appendChild(options);
     if(controls !== HTMLElement) document.body.appendChild(controls);
     if(pianoroll !== HTMLElement) document.body.appendChild(pianoroll);
     
@@ -41,7 +45,8 @@ function App() {
     ).catch( err => console.log(err)); // TODO properly handle no midi
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout id="app">

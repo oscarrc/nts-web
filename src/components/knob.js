@@ -1,32 +1,41 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { midiControlChange } from '../utils/midi';
 import { pathToStore } from '../utils/store';
 import { useSelector, useDispatch } from 'react-redux';
 import knob from '../assets/knob.png';
-//TODO Fix randomize and patch not firing handle change
 
 export function Knob(props) {
     const midiConfig = useSelector(state => state.midi).value;
     const dispatch = useDispatch();
     const control = useRef(null);
-
-    const handleChange = useCallback((value) => {
-        midiControlChange(props.cc, value, midiConfig.outputDevice, midiConfig.outputChannel);
-        if(props.path) dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value) });
-    },[props.cc, props.path, midiConfig, dispatch]);
     
     useEffect( () => {
-      const current = control.current;
-      current.addEventListener("input", (event) => handleChange(event.target.value));      
-      return () => current.removeEventListener("input", handleChange);
-    }, [control, handleChange])
+      const current = control.current;      
+      const update = (value) => dispatch({type:'synthesizer/setControl', payload: pathToStore({}, props.path, value)});
+      current.addEventListener("input", (event) => update(event.target.value) );      
+      return () => current.removeEventListener("input", update);
+    }, [props.path, dispatch])
 
-    useEffect( () => control.current.value = props.value, [props.value]);
+    useEffect( () => {
+      if( control.current.value !== props.value) control.current.value = props.value;  
+      midiControlChange(props.cc, props.value, midiConfig.outputDevice, midiConfig.outputChannel);
+    }, [props.value, props.cc, midiConfig]);
     
     return  (
         <div className='knob-wrapper'>            
           { props.name ? <label className="control-label" htmlFor={ props.name }>{ props.name }</label> : null }       
-          <webaudio-knob ref={control} className="knob" diameter="60" id={props.name + props.cc} name={props.name} src={knob} step={props.step} min={ props.min } max={ props.max } value={props.value}></webaudio-knob>
+          <webaudio-knob 
+            ref={control} 
+            className="knob" 
+            diameter="60" 
+            id={props.name + props.cc} 
+            name={props.name} 
+            src={knob} 
+            step={props.step} 
+            min={ props.min } 
+            max={ props.max }
+            value={ props.value }>              
+          </webaudio-knob>
           { props.param ? <webaudio-param className="param" link={props.name}></webaudio-param> : null }
         </div>
     );
