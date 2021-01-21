@@ -22,7 +22,7 @@ const midiControlChange = (cc, value, id, channel) => {
     }
 }
 
-const midiPlayNote = (note, id, channel, play) => {
+const midiPlayNote = (note, id, channel, play, duration = false) => {
     const noteString =  ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
     let octave = (note / 12);
     let noteIndex = (note % 12);
@@ -34,8 +34,11 @@ const midiPlayNote = (note, id, channel, play) => {
         const output = webmidi.getOutputById(id);
 
         if(output){
+            let options = {};
+            if (duration) options.duration = duration * 1000;
+            
             if(play){
-                output.playNote(note, channel);
+                output.playNote(note, channel, options);
             }else{
                 output.stopNote(note, channel);
             }

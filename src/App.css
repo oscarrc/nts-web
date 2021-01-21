@@ -363,7 +363,6 @@ a.link:hover{
 }
 
 .btn-group .ant-input-number{
-  border-radius: 0;
   top: -1px;
   border: 1px solid #f3cc62;
 }

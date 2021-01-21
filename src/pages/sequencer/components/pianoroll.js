@@ -1,43 +1,45 @@
 import React, {useEffect, useRef} from 'react';
 import { Row, Col  } from 'antd';
-// import { useSelector } from 'react-redux';
-// import { midiPlayNote } from '../../../utils/midi';
+import { useSelector } from 'react-redux';
+import { midiPlayNote } from '../../../utils/midi';
 
 export function Pianoroll(props) {   
-    // const midiConfig = useSelector(state => state.midi).value; 
-    const pianoroll = useRef(null);    
-    
+    const midiConfig = useSelector(state => state.midi).value; 
+    const pianoroll = useRef();    
+
+    const handleResize = (current) => {
+        const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0].offsetWidth;
+        const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
+                             document.getElementsByClassName('footer')[0].clientHeight - 32;
+        current.width = actualWidth;
+        current.height = actualHeight;
+    }
+
     useEffect( () => {  
-        const current = pianoroll.current;
-        const handleResize = () => {
-            const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
-            const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
-                                 document.getElementsByClassName('footer')[0].clientHeight - 32;
-            current.width = actualWidth;
-            current.height = actualHeight;
-        }
-
-        handleResize();
-        window.addEventListener("resize", () => handleResize());
-
+        const current = pianoroll.current;        
+        window.addEventListener("resize", () => handleResize(current));
+        setTimeout(() => handleResize(current), 100);
         return () => {
             window.removeEventListener("resize", handleResize);   
         };
-    });
+    }, []);
 
     useEffect( () => {
         if(props.play){
             const actx = new AudioContext();
             actx.resume();
-            pianoroll.current.play(actx, (e) => console.log(e));
+            pianoroll.current.play(actx, (e) => {
+                midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t);
+            });
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
-    }, [props.play]);
+    }, [props.play, midiConfig]);
 
-    useEffect( () => {
-        pianoroll.current.tempo = props.tempo;
-        pianoroll.current.loop = props.loop;
+    useEffect( () => {        
+        const current = pianoroll.current;
+        current.tempo = props.tempo;
+        current.loop = props.loop;
     }, [props.tempo, props.loop])
 
     return (
@@ -63,6 +65,8 @@ export function Pianoroll(props) {
                     colnote="#2a1215"
                     colnotesel="#d32029"
                     colnoteborder="#434343"
+                    editmode="dragmono"
+                    preload={0}
                 ></webaudio-pianoroll>
             </Col>
         </Row>
@@ -78,7 +82,7 @@ Pianoroll.defaultProps = {
     xscroll: 1,
     yscroll: 1,
     snap: 1,
-    octadj: -1,
+    octadj: -2,
     tempo: 120,
-    play: 0
+    play: false
 };
