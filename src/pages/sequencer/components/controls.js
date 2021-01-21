@@ -1,12 +1,15 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import { Row, Col, Button, InputNumber  } from 'antd';
 import { CaretRightOutlined, RollbackOutlined, RedoOutlined } from '@ant-design/icons';
 
 export function Controls(props) {  
+    const history = useHistory();
+
     return (
         <Row className="controls">
             <Col className="text-left" span={12}>                
-                <Button ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
+                <Button onClick={ () =>  history.push("/") } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
             </Col>
             <Col className="text-right" span={12}>
                 <Button ghost className="btn-gold" icon={<CaretRightOutlined />}></Button>
