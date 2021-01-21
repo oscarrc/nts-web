@@ -11,7 +11,7 @@ export function Controls(props) {
             <Col className="text-left" span={12}>                
                 <Button onClick={ () =>  history.push("/") } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
             </Col>
-            <Col className="text-right" span={12}>
+            <Col className="text-right btn-group" span={12}>
                 <Button ghost className="btn-gold" icon={<CaretRightOutlined />}></Button>
                 <InputNumber className="control-number text-lcd" min={1} max={100000} defaultValue={props.tempo} />
                 <Button ghost className="btn-gold" icon={<RedoOutlined />}></Button>

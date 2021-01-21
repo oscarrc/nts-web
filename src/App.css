@@ -139,27 +139,32 @@ a.link:hover{
   font-size: 1rem;
 }
 
-.control-select.ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  background-color: #2a1215;
+.control-select.ant-select:not(.ant-select-customize-input) .ant-select-selector, .ant-input-number-input {
+  background-color: #2a1215!important;
   border: 1px solid #434343;
   border-radius: .25rem;
-  box-shadow: 0px 0px 0px 2px #262626 inset;
+  box-shadow: 0px 0px 0px 2px #262626 inset !important;
 }
 
 .control-select.ant-select:not(.ant-select-customize-input) .ant-select-selector:hover,
-.control-select.ant-select:not(.ant-select-disabled):hover .ant-select-selector{
-  border-color: #d32029;
+.control-select.ant-select:not(.ant-select-disabled):hover .ant-select-selector, .ant-input-number:hover{
+  border-color: #d32029 !important;
 }
 
 .control-select.ant-select-single .ant-select-selector .ant-select-selection-placeholder,
 .control-select.ant-select-single.ant-select-open .ant-select-selection-item,
-.control-select.ant-select .ant-select-arrow{
+.control-select.ant-select .ant-select-arrow, .ant-input-number-input{
   color: #d32029;
 }
 
 .control-select.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector{
   border-color: #d32029;
   box-shadow: 0 0 0 2px rgba(211, 32, 41, 0.3)
+}
+
+.btn-group .ant-input-number-handler-wrap{
+  background: transparent;
+  border-left: 1px solid #d32029;
 }
 
 .select-row .ant-col{
@@ -355,4 +360,41 @@ a.link:hover{
 
 .controls {
   margin-bottom: 10px;
+}
+
+.btn-group .ant-input-number{
+  border-radius: 0;
+  top: -1px;
+  border: 1px solid #f3cc62;
+}
+
+.btn-group .ant-input-number-handler-down{
+  border-top: 1px solid #d32029;
+}
+
+.btn-group .ant-input-number-handler-up-inner, 
+.btn-group .ant-input-number-handler-down-inner,
+.btn-group .ant-input-number-handler:hover .ant-input-number-handler-up-inner, 
+.btn-group .ant-input-number-handler:hover .ant-input-number-handler-down-inner{
+  color: #d32029;
+  opacity: 1;
+}
+
+.ant-input-number-handler:active{
+  background-color: transparent !important;
+}
+
+.btn-group .ant-input-number-handler-up-inner, 
+.btn-group .ant-input-number-handler-down-inner{
+  opacity: 0.5
+}
+
+.btn-group *:first-child{
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.btn-group *:last-child{
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
