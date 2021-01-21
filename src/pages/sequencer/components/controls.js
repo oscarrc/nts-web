@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Row, Col, Button, InputNumber  } from 'antd';
 import { CaretRightOutlined, RollbackOutlined, RedoOutlined } from '@ant-design/icons';
@@ -13,6 +13,16 @@ export function Controls(props) {
     const setTempo = (value) => dispatch({type:'sequencer/setTempo', payload: {
         tempo: value
     }});
+
+    useEffect( () => {
+        const handleKey = (event) => {
+            if (event.keyCode === 32) togglePlay();
+        }
+        document.addEventListener("keyup", (event) => handleKey(event) );
+
+        return () => document.removeEventListener("keyup", handleKey);
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <Row className="controls">

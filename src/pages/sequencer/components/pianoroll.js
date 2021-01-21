@@ -31,7 +31,6 @@ export function Pianoroll(props) {
             const actx = new AudioContext();
             actx.resume();
             pianoroll.current.play(actx, (e) => {
-                console.log(e.g - e.t)
                 midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t);
             });
         }else if(typeof pianoroll.current.stop === "function"){
@@ -39,9 +38,10 @@ export function Pianoroll(props) {
         }
     }, [props.play, midiConfig]);
 
-    useEffect( () => {
-        pianoroll.current.tempo = props.tempo;
-        pianoroll.current.loop = props.loop;
+    useEffect( () => {        
+        const current = pianoroll.current;
+        current.tempo = props.tempo;
+        current.loop = props.loop;
     }, [props.tempo, props.loop])
 
     return (
@@ -84,7 +84,7 @@ Pianoroll.defaultProps = {
     xscroll: 1,
     yscroll: 1,
     snap: 1,
-    octadj: -1,
+    octadj: -2,
     tempo: 120,
-    play: 0
+    play: false
 };
