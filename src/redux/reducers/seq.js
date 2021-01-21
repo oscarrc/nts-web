@@ -4,7 +4,7 @@ export const seqSlice = createSlice({
   name: 'sequencer',
   initialState: {
     value: {
-        play: 0,
+        play: false,
         loop: 1,
         tempo: 120
     },
@@ -14,7 +14,7 @@ export const seqSlice = createSlice({
       state.value.play = !state.value.play;
     },
     toggleLoop: state => {
-        state.value.loop = !state.value.loop;
+        state.value.loop = state.value.loop ? 0 : 1;
     },
     setTempo: (state, action) => {
         state.value.tempo = action.payload.tempo;

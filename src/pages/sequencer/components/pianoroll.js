@@ -1,12 +1,16 @@
 import React, {useEffect, useRef} from 'react';
 import { Row, Col  } from 'antd';
+// import { useSelector } from 'react-redux';
+// import { midiPlayNote } from '../../../utils/midi';
 
-export function Pianoroll(props) {    
-    const pianoroll = useRef(null);
+export function Pianoroll(props) {   
+    // const midiConfig = useSelector(state => state.midi).value; 
+    const pianoroll = useRef(null);    
+    const actx = new AudioContext();
 
     useEffect( () => {  
         const handleResize = () => {
-            const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0].offsetWidth;
+            const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
             const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
                                  document.getElementsByClassName('footer')[0].clientHeight - 32;
             pianoroll.current.width = actualWidth;
@@ -14,13 +18,26 @@ export function Pianoroll(props) {
         }
 
         handleResize();
-
-        window.addEventListener("resize", handleResize);     
+        window.addEventListener("resize", () => handleResize());
 
         return () => {
             window.removeEventListener("resize", handleResize);   
         };
-    }, [])
+    });
+
+    useEffect( () => {
+        if(props.play){
+            actx.resume();
+            pianoroll.current.play(actx, (e) => console.log(e));
+        }else if(typeof pianoroll.current.stop === "function"){
+            pianoroll.current.stop();
+        }
+    }, [props.play]);
+
+    useEffect( () => {
+        pianoroll.current.tempo = props.tempo;
+        pianoroll.current.loop = props.loop;
+    }, [props.tempo, props.loop])
 
     return (
         <Row>
@@ -49,7 +66,7 @@ export function Pianoroll(props) {
             </Col>
         </Row>
     );
-}
+};
 
 
 Pianoroll.defaultProps = {
@@ -61,5 +78,6 @@ Pianoroll.defaultProps = {
     yscroll: 1,
     snap: 1,
     octadj: -1,
-    tempo: 120
+    tempo: 120,
+    play: 0
 };
