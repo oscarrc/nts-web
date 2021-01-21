@@ -1,10 +1,10 @@
 import React, {useEffect, useRef} from 'react';
 import { Row, Col  } from 'antd';
-// import { useSelector } from 'react-redux';
-// import { midiPlayNote } from '../../../utils/midi';
+import { useSelector } from 'react-redux';
+import { midiPlayNote } from '../../../utils/midi';
 
 export function Pianoroll(props) {   
-    // const midiConfig = useSelector(state => state.midi).value; 
+    const midiConfig = useSelector(state => state.midi).value; 
     const pianoroll = useRef(null);    
     
     useEffect( () => {  
@@ -18,6 +18,7 @@ export function Pianoroll(props) {
         }
 
         handleResize();
+        
         window.addEventListener("resize", () => handleResize());
 
         return () => {
@@ -29,11 +30,14 @@ export function Pianoroll(props) {
         if(props.play){
             const actx = new AudioContext();
             actx.resume();
-            pianoroll.current.play(actx, (e) => console.log(e));
+            pianoroll.current.play(actx, (e) => {
+                console.log(e.g - e.t)
+                midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t);
+            });
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
-    }, [props.play]);
+    }, [props.play, midiConfig]);
 
     useEffect( () => {
         pianoroll.current.tempo = props.tempo;
@@ -63,6 +67,8 @@ export function Pianoroll(props) {
                     colnote="#2a1215"
                     colnotesel="#d32029"
                     colnoteborder="#434343"
+                    editmode="dragmono"
+                    preload={0}
                 ></webaudio-pianoroll>
             </Col>
         </Row>
