@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 
-export function Octave() {       
+export function Octave(props) {       
     const dispatch = useDispatch();
     const octave = useSelector(state => state.midi).value.octave;
     const octaveUp = () => dispatch({ type: 'midi/octaveUp'});
@@ -11,9 +11,14 @@ export function Octave() {
 
     return  (
         <div className="octave-wrapper">
-            <Button disabled={ octave === 10 } onClick={ octaveUp } block ghost className="btn-gold" icon={<CaretUpOutlined />}></Button>
+            <Button disabled={ octave === props.max } onClick={ octaveUp } block ghost className="btn-gold" icon={<CaretUpOutlined />}></Button>
             <div className="display bg-grid"><h2 className="text-lcd">{octave}</h2></div>
-            <Button disabled={ octave === 0 } onClick={ octaveDown } block ghost className="btn-gold" icon={<CaretDownOutlined />}></Button>
+            <Button disabled={ octave === props.min } onClick={ octaveDown } block ghost className="btn-gold" icon={<CaretDownOutlined />}></Button>
         </div>
     );
+}
+
+Octave.defaultProps = {
+    min: 0,
+    max: 7
 }

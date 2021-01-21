@@ -314,12 +314,12 @@ a.link:hover{
 }
 
 .pad-wrapper .pad .indicator{
-  position: absolute;
+  position: relative;
   top: 50%;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  left: 6px;
+  width: calc(100% - 12px);
+  height: 2px;
+  border-radius: 0;
   background-color: #d32029;
   background:  radial-gradient(circle, rgba(211,32,41,1) 0%, rgba(255,0,0,0.75) 100%);
   -webkit-box-shadow: 0px 0px 8px 1px rgba(255,0,0,1);
