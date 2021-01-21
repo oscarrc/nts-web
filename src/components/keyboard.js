@@ -28,7 +28,7 @@ export function Keyboard(props) {
             window.removeEventListener("resize", handleResize);   
             current.removeEventListener("change", playNote);   
         }; 
-    });
+    }, []);
     
     useEffect( () => {
         const current = keyboard.current;
