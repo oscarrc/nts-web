@@ -8,7 +8,7 @@ export function Pad(props) {
 
     return  (
         <div className="pad-wrapper">
-            <div ref={pad} className="pad">
+            <div ref={pad} className="pad bg-grid">
                 <div className="indicator"></div>
             </div>
         </div>

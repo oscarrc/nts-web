@@ -11,9 +11,8 @@ export function Keyboard(props) {
         const current = keyboard.current;
 
         const handleResize = () => {
-            const actualWidth = document.getElementsByClassName('keyboard-wrapper')[0].offsetWidth;
-            keyboard.current.width = actualWidth;
-            keyboard.current.height = actualWidth / 5;
+            keyboard.current.width = document.getElementsByClassName('keyboard-wrapper')[0].offsetWidth;
+            keyboard.current.height = document.getElementsByClassName('keyboard-wrapper')[0].offsetHeight;
         }
 
         const playNote = (note) => {
