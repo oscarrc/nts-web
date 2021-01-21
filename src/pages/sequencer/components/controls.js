@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Button, InputNumber  } from 'antd';
-import { CaretRightOutlined, PauseOutlined, RollbackOutlined, RedoOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, RollbackOutlined, RedoOutlined } from '@ant-design/icons';
 
 export function Controls(props) {  
     return (
