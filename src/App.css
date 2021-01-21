@@ -11,6 +11,10 @@
   text-align: center;
 }
 
+.text-right{
+  text-align: right;
+}
+
 #app {
   text-align: center;
   min-height: 100vh;  
