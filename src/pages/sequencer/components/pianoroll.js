@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useCallback} from 'react';
 import { Row, Col  } from 'antd';
 import { useSelector } from 'react-redux';
 import { midiPlayNote } from '../../../utils/midi';
@@ -6,21 +6,19 @@ import { midiPlayNote } from '../../../utils/midi';
 export function Pianoroll(props) {   
     const midiConfig = useSelector(state => state.midi).value; 
     const pianoroll = useRef(null);    
-    
+
+    const handleResize = (current) => {
+        const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
+        const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
+                             document.getElementsByClassName('footer')[0].clientHeight - 32;
+        current.width = actualWidth;
+        current.height = actualHeight;
+    }
+
     useEffect( () => {  
-        const current = pianoroll.current;
-        const handleResize = () => {
-            const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
-            const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
-                                 document.getElementsByClassName('footer')[0].clientHeight - 32;
-            current.width = actualWidth;
-            current.height = actualHeight;
-        }
-
-        handleResize();
-        
-        window.addEventListener("resize", () => handleResize());
-
+        const current = pianoroll.current;        
+        window.addEventListener("resize", () => handleResize(current));
+        setTimeout(() => handleResize(current), 100);
         return () => {
             window.removeEventListener("resize", handleResize);   
         };
