@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Row, Col, Collapse} from 'antd';
+import { useDispatch } from 'react-redux';
 
 import { Display } from '../../components';
 import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './components';
@@ -8,6 +9,11 @@ import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from 
 export function Synth() {
   const { Panel } = Collapse;
   const { Content } = Layout;
+  const dispatch = useDispatch();
+
+  const setDisplay = (screen) => {
+    dispatch({type:'display/setDisplay', payload: { screen }});
+  }
 
   return (
     <Content className="main transparent">
@@ -15,21 +21,21 @@ export function Synth() {
           <Col span={24} md={12} lg={6}>
             <Display />
             <Row justify="space-between" align="top">
-              <Col span={24}>
+              <Col span={24} onMouseEnter={ () => setDisplay("osc")}>
                 <Oscilator />
               </Col>
-              <Col span={24}>
+              <Col span={24} onMouseEnter={ () => setDisplay("arp")}>
                 <Arpegiator />
               </Col>
             </Row>
           </Col>          
-          <Col span={24} md={10} lg={4}>            
+          <Col span={24} md={10} lg={4} onMouseEnter={ () => setDisplay("amp")}>            
             <Amplifier />
           </Col>
-          <Col span={24} md={12} lg={6}>
+          <Col span={24} md={12} lg={6} onMouseEnter={ () => setDisplay("effects")}>
             <Effects />
           </Col>          
-          <Col span={24} md={10} lg={4}>
+          <Col span={24} md={10} lg={4} onMouseEnter={ () => setDisplay("vcf")}>
             <Vcfilter />
             <More />
           </Col>

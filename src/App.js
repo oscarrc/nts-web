@@ -27,12 +27,13 @@ function App() {
     // options.async= true;
     controls.src= "assets/js/webaudio-controls.js";
     controls.async= true;
+    controls.type="text/javascript";
     pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
     
     // if(options !== HTMLElement) document.body.appendChild(options);
-    if(controls !== HTMLElement) document.body.appendChild(controls);
-    if(pianoroll !== HTMLElement) document.body.appendChild(pianoroll);
+    document.body.appendChild(controls);
+    document.body.appendChild(pianoroll);
     
     midiStart().then(
       devices => {
@@ -42,7 +43,7 @@ function App() {
           dispatch({ type: "loader/loadEnd" });
           dispatch({ type: "midi/setOptions", payload: devices})
       }
-    ).catch( err => console.log(err)); // TODO properly handle no midi
+    ).catch( err => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }})); // TODO properly handle no midi
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
     // eslint-disable-next-line
