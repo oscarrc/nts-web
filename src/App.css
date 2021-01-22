@@ -412,5 +412,9 @@ a.link:hover{
 }
 
 .title{
-  margin-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.display .ant-space-item {
+  width: 100%;
 }
