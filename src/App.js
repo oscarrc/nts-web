@@ -43,7 +43,7 @@ function App() {
           dispatch({ type: "loader/loadEnd" });
           dispatch({ type: "midi/setOptions", payload: devices})
       }
-    ).catch( err => console.log(err)); // TODO properly handle no midi
+    ).catch( err => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }})); // TODO properly handle no midi
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
     // eslint-disable-next-line

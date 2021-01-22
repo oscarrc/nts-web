@@ -69,6 +69,14 @@ export function Display() {
                     </Col>                    
                 );                
                 break;
+            case "nomidi":
+                content = (                    
+                    <Col>
+                        <h2>NO MIDI</h2> 
+                        <p>Your device or browser has no midi support</p>
+                    </Col>                    
+                );
+                break;
             default:
                 content = [
                     <Col span={24}><h2 className="title">{screen}</h2></Col>,
