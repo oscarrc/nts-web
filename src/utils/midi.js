@@ -15,6 +15,13 @@ const midiStart = () => {
     })
 }
 
+const midiDeviceConnection = (cb) => {
+    webmidi.addListener("connected", function(e) {
+        console.log(e);
+        cb();
+    });
+}
+
 const midiControlChange = (cc, value, id, channel) => {
     if(webmidi.enabled){
         const output = webmidi.getOutputById(id);
@@ -53,4 +60,4 @@ const midiSendPitchBend = (value, id, channel) => {
     }
 }
 
-export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend }
+export { midiStart, midiDeviceConnection, midiControlChange, midiPlayNote, midiSendPitchBend }

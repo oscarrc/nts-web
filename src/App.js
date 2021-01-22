@@ -7,7 +7,7 @@ import { Layout } from 'antd';
 import { Synth, Sequencer } from './pages'
 import { Header, Footer, Settings } from './components';
 
-import { midiStart } from './utils/midi';
+import { midiStart, midiDeviceConnection } from './utils/midi';
 import { loadPatchLink } from './utils/patch';
 
 import './App.css';
@@ -39,11 +39,11 @@ function App() {
       devices => {
           if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0].id;
           if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
-
+          dispatch({ type: "midi/setOptions", payload: devices});
           dispatch({ type: "loader/loadEnd" });
-          dispatch({ type: "midi/setOptions", payload: devices})
+          midiDeviceConnection( () => dispatch({ type:"midi/toggleSettings"}));
       }
-    ).catch( err => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }})); // TODO properly handle no midi
+    ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
     // eslint-disable-next-line
