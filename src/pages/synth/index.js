@@ -17,7 +17,7 @@ export function Synth() {
 
   return (
     <Content className="main transparent">
-        <Row justify="space-between" align="top" gutter={[0,20]}>
+        <Row justify="space-between" align="top" gutter={[0,20]} onMouseLeave={ () => setDisplay("welcome")}>
           <Col span={24} md={12} lg={6}>
             <Display />
             <Row justify="space-between" align="top">
@@ -40,7 +40,7 @@ export function Synth() {
             <More />
           </Col>
         </Row>
-        <Collapse className="transparent"  bordered={false}  >
+        <Collapse className="transparent"  bordered={false} >
           <Panel showArrow={false} header={ <span className='text-gold'><strong >Live controls</strong></span> } key="1">
             <Live />
           </Panel>
