@@ -4,7 +4,7 @@
 
 A web controller for the Korg NTS-1.
 
-![NTS-web](https://raw.githubusercontent.com/oscarrc/nts-web/midiin/public/assets/img/screenshot.png "NTS-web Korg NTS-1 web controller")
+![NTS-web](https://github.com/oscarrc/portfolio/blob/master/public/img/bg.png?raw=true "NTS-web Korg NTS-1 web controller")
 
 ### THIS IS A WORK IN PROGRESS
 
