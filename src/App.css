@@ -61,7 +61,7 @@
   border-top-color: #434343;
 }
 
-.text-lcd{
+.text-lcd, .text-lcd *{
   font-family: "Dot Matrix";
   color: #d32029;
 }
@@ -209,6 +209,7 @@ a.link:hover{
 }
 
 .display {
+  display: flex;
   background-color: #2a1215;
   border: 2px solid #434343;
   border-radius: .5rem;
@@ -218,7 +219,7 @@ a.link:hover{
   overflow: hidden;
   background-color: #2a1215;
   margin-bottom: 16px;
-  padding: 4px;
+  padding: 5px;
 }
 
 .keyboard-wrapper, .pianoroll-wrapper{
