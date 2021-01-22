@@ -7,7 +7,7 @@ import { Layout } from 'antd';
 import { Synth, Sequencer } from './pages'
 import { Header, Footer, Settings } from './components';
 
-import { midiStart, midiDeviceConnection } from './utils/midi';
+import { midiStart } from './utils/midi';
 import { loadPatchLink } from './utils/patch';
 
 import './App.css';
@@ -37,7 +37,6 @@ function App() {
           if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
           dispatch({ type: "midi/setOptions", payload: devices});
           dispatch({ type: "loader/loadEnd" });
-          midiDeviceConnection( () => dispatch({ type:"midi/toggleSettings"}));
       }
     ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
     
