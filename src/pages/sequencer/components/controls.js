@@ -14,6 +14,11 @@ export function Controls(props) {
         tempo: value
     }});
 
+    const goBack = () => {
+        history.push("/");
+        dispatch({type:'sequencer/togglePlay'});
+    }
+
     useEffect( () => {
         const handleKey = (event) => {
             if (event.keyCode === 32) togglePlay();
@@ -27,7 +32,7 @@ export function Controls(props) {
     return (
         <Row className="controls">
             <Col className="text-left" span={12}>                
-                <Button onClick={ () =>  history.push("/") } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
+                <Button onClick={ goBack } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
             </Col>
             <Col className="text-right btn-group" span={12}>
                 <Button onClick={ togglePlay } ghost className="btn-gold" icon={<CaretRightOutlined />}></Button>
