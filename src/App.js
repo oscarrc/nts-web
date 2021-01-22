@@ -18,20 +18,16 @@ function App() {
   const query = new URLSearchParams(useLocation().search);
 
   useEffect( () => {
-    // const options = document.createElement('script');
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
     const patch = query.get('patch');
     
-    // options.src= "assets/js/webaudio-options.js";
-    // options.async= true;
     controls.src= "assets/js/webaudio-controls.js";
     controls.async= true;
     controls.type="text/javascript";
     pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
     
-    // if(options !== HTMLElement) document.body.appendChild(options);
     document.body.appendChild(controls);
     document.body.appendChild(pianoroll);
     
