@@ -46,7 +46,7 @@ export function Display() {
         switch(screen){
             case "welcome":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>WELCOME TO NTS-WEB</h2> 
                         <p>If you like it, please, support me by buying me a coffee.</p>
                         <p>Link at the bottom.</p>
@@ -55,7 +55,7 @@ export function Display() {
                 break;
             case "link":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>LINK COPIED TO CLIPBOARD</h2> 
                         <p>Go and share it with your firends.</p>
                     </Col>                    
@@ -63,7 +63,7 @@ export function Display() {
                 break;
             case "import":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>PATCH IMPORTED</h2> 
                         <p>Your patch has been successfully imported.</p>
                     </Col>                    
@@ -71,7 +71,7 @@ export function Display() {
                 break;
             case "nomidi":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>NO MIDI</h2> 
                         <p>Your device or browser has no midi support</p>
                     </Col>                    
