@@ -1,7 +1,6 @@
 {
   "name": "nts-web",
   "version": "0.1.0",
-  "homepage": "http://oscarrc.github.io/nts-web",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
@@ -25,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -e nts-web"
   },
   "eslintConfig": {
     "extends": "react-app"
