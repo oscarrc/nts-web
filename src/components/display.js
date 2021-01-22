@@ -7,35 +7,13 @@ export function Display() {
     const controlValues = useSelector(state => state.synthesizer).value;
     const screen = useSelector(state => state.display).value;
 
-    const renderLine = (values, span) => {
-        const line = [];
-
+    const renderLine = (values) => {
+        let line = [];
         Object.keys(values).forEach( (key) => {
-            if(typeof values[key] === 'object'){                
-                line.push(
-                    <Row>
-                        <Col span={24}><h3>{key}</h3></Col>
-                        {renderLine(values[key], 24/values[key].length)}
-                    </Row>
-                );
-            }else{
-                line.push(<Col span={span}>{key}: {values[key]}</Col>);
-            }
+            if(key !== "active") line.push(<Col className="line" span={6}>{key}: {values[key]}</Col>);
         })
-
+       
         return line;
-    }
-
-    const renderSection = (values, screen) => {
-        let section = [
-            <Col span={24}><h2>{screen}</h2></Col>
-        ];
-
-        Object.keys(values).forEach( (key) => {
-            section.push(renderLine(values[key]));
-        });
-
-        return section;
     }
 
     const renderDisplay = (values) => {
@@ -68,19 +46,43 @@ export function Display() {
                 )
                 break;
             default:
-                content = renderSection(values[screen], screen)
+                content = [
+                    <Col span={24}><h2 className="title">{screen}</h2></Col>
+                ];
+        
+                Object.keys(values[screen]).forEach( (key) => {
+                    if(typeof values[screen][key] === "object"){
+                        content.push(
+                            <Col span={24}>
+                                <Row>
+                                    <Col span={24}><h3 className="line bordered">{key}</h3></Col>
+                                    {renderLine(values[screen][key])}
+                                </Row>
+                            </Col>
+                        );
+                    }else{
+                        if(key !== "active" && key !== "type"){
+                            content.push(
+                                <Col span={6}>
+                                    {key} : {values[screen][key]}
+                                </Col>
+                            )
+                        }
+                    }
+                });
+        
                 break;
         }
 
         return (
-            <Row justify="center" align="middle" className="text-lcd">
+            <Row className="text-lcd">
                 {content}
             </Row>
         )
     }
 
     return  (
-        <Space className="display bg-grid">
+        <Space align="start" className="display bg-grid">
             { isLoading ? 
                 <h2 className="text-lcd">PLEASE, ALLOW THE APP TO USE YOUR MIDI DEVICES</h2> 
                 : renderDisplay(controlValues)
