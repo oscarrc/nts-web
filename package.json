@@ -24,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "node_modules/gh-pages/bin/gh-pages.js -d build -e nts-web -r https://github.com/oscarrc/oscarrc.github.io.git"
+    "deploy": "node_modules/gh-pages/bin/gh-pages.js -d build -r https://github.com/oscarrc/nts-web.github.io.git -b master"
   },
   "eslintConfig": {
     "extends": "react-app"
