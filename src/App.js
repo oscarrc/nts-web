@@ -17,6 +17,15 @@ function App() {
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
 
+  const initMidiDevices = (devices) => { 
+      const input = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
+      const output = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
+      console.log(input)
+      devices.inputDevice = input >= 0 ? devices.inputDevices[input].id : ""
+      devices.outputDevice = output >= 0 ? devices.outputDevices[output].id : ""
+      dispatch({ type: "midi/setOptions", payload: devices});
+  }
+
   useEffect( () => {
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
@@ -33,9 +42,7 @@ function App() {
     
     midiStart().then(
       devices => {
-          if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0].id;
-          if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
-          dispatch({ type: "midi/setOptions", payload: devices});
+          initMidiDevices(devices);
           dispatch({ type: "loader/loadEnd" });
       }
     ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
