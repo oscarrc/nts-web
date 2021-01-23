@@ -33,3 +33,7 @@ Open an [issue](https://github.com/oscarrc/nts-web/issues) and let me know.
 ### Do you wanna help?
 
 [Buy me a coffee](https://ko-fi.com/Y8Y43D7I3), and feel free to open a PR
+
+### License
+
+This work is license under the [MIT License](https://github.com/oscarrc/nts-web/blob/master/LICENSE)
