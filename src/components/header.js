@@ -20,8 +20,8 @@ export function Header() {
     const importPatch = async (file) => {
         const patch = await loadPatchFile(file);
         dispatch({ type: 'synthesizer/setControl', payload: patch});
+        dispatch({ type: 'sequencer/stopPlay', payload: patch});
         dispatch({ type: 'display/setDisplay', payload: { screen: "import"}});
-        return false;
     }
     const openSettings = () => dispatch({type: 'midi/toggleSettings'});
 

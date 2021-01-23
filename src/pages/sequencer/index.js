@@ -9,7 +9,7 @@ export function Sequencer() {
 
   return (
     <Content className="main transparent">
-      <Controls play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} />
+      <Controls play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} seq={seqValues.sequence} />
       <Pianoroll play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} seq={seqValues.sequence} />
     </Content>
   );

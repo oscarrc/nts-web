@@ -14,8 +14,8 @@ export function Controls(props) {
     }});
 
     const goBack = () => {
+        dispatch({type:'sequencer/stopPlay'});
         history.push("/");
-        dispatch({type:'sequencer/togglePlay'});
     }
 
     useEffect( () => {
@@ -48,5 +48,5 @@ export function Controls(props) {
 Controls.defaultProps = {
     tempo: 120,
     loop: 1,
-    play: 0
+    play: false
 }

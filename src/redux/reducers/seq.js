@@ -14,6 +14,9 @@ export const seqSlice = createSlice({
     togglePlay: state => {
       state.value.play = !state.value.play;
     },
+    stopPlay: state => {
+      state.value.play = false;
+    },
     toggleLoop: state => {
         state.value.loop = state.value.loop ? 0 : 1;
     },
@@ -26,7 +29,7 @@ export const seqSlice = createSlice({
   }
 });
 
-export const { togglePlay, toggleLoop, setTempo, setSequence } = seqSlice.actions;
+export const { togglePlay, stopPlay, toggleLoop, setTempo, setSequence } = seqSlice.actions;
 export const seq = state => state.sequencer.value;
 
 export default seqSlice.reducer;

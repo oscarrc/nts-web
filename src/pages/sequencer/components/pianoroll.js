@@ -15,19 +15,21 @@ export function Pianoroll(props) {
         current.height = actualHeight;
     }
 
+    useEffect( () => {
+        const current = pianoroll.current;
+        if(props.seq) current.setMMLString(props.seq);
+    }, [props.seq]);
+
     useEffect( () => {  
         const current = pianoroll.current;
-
-        if(props.seq) current.setMMLString(props.seq);
-
         window.addEventListener("resize", () => handleResize(current));
         setTimeout(() => handleResize(current), 100);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, [props.seq]);
+    }, []);
 
     useEffect( () => {
-        if(props.play === true){
+        if(props.play){
             const actx = new AudioContext();
             actx.resume();
             pianoroll.current.play(actx, (e) => {
