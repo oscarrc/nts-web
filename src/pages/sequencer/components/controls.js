@@ -37,7 +37,7 @@ export function Controls(props) {
     const goBack = () => {        
         dispatch({ type:'sequencer/stopPlay' });
         setSequence();
-        props.pianoroll.stop();
+        if(props.pianoroll) props.pianoroll.stop();
         history.push("/");
     }
 
