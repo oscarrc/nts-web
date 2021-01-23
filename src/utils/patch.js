@@ -67,7 +67,7 @@ const randomPatch = () => {
 }
 
 const savePatch = (patch) => {
-    const filename = "patch.nts";
+    const filename = "patch.ntspatch";
     const contentType = "application/json;charset=utf-8;";
 
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
