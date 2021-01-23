@@ -16,9 +16,10 @@ export function Pianoroll(props) {
     }
 
     useEffect( () => {
+        console.log(props.seq)
         const current = pianoroll.current;
         if(props.seq) current.setMMLString(props.seq);
-    }, [props.seq]);
+    });
 
     useEffect( () => {  
         const current = pianoroll.current;
@@ -48,8 +49,10 @@ export function Pianoroll(props) {
 
     return (
         <Row>
+            { props.play }
             <Col className="pianoroll-wrapper">            
-                <webaudio-pianoroll 
+                <webaudio-pianoroll
+                    id="pianoroll"
                     ref={pianoroll}
                     wheelzoom={1}
                     xrange={props.xrange}

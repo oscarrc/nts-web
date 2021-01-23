@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { Row, Col, Button, InputNumber, Space  } from 'antd';
+import { Row, Col, Button, InputNumber, Space, Upload  } from 'antd';
 import { CaretRightOutlined, RollbackOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
+import { saveSequence, loadSequenceFile } from '../../../utils/sequence';
 
 export function Controls(props) {  
     const history = useHistory();
@@ -12,6 +13,16 @@ export function Controls(props) {
     const setTempo = (value) => dispatch({type:'sequencer/setTempo', payload: {
         tempo: value
     }});
+
+    const importSequence = async (file) => {
+        const seq = await loadSequenceFile(file);
+        dispatch({ type: 'sequencer/setSequence', payload: { sequence: seq }});
+    }
+
+    const downloadSequence = () => {
+        const sequence = document.getElementById(props.id).getMMLString();
+        saveSequence(sequence);
+    }
 
     const goBack = () => {
         dispatch({type:'sequencer/stopPlay'});
@@ -33,8 +44,10 @@ export function Controls(props) {
             <Col className="text-left" span={12}>                
                 <Space>
                     <Button onClick={ goBack } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
-                    <Button ghost className="btn-gold" icon={<DownloadOutlined />}></Button>
-                    <Button ghost className="btn-gold" icon={<UploadOutlined />}></Button>
+                    <Button ghost onClick={ downloadSequence } className="btn-gold" icon={<DownloadOutlined />}></Button>
+                    <Upload accept=".ntsseq" showUploadList={false} beforeUpload={ file => importSequence(file) } customRequest={ () => false }>
+                        <Button ghost className="btn-gold" icon={<UploadOutlined />}></Button>
+                    </Upload>
                 </Space>
             </Col>
             <Col className="text-right btn-group" span={12}>
@@ -48,5 +61,6 @@ export function Controls(props) {
 Controls.defaultProps = {
     tempo: 120,
     loop: 1,
-    play: false
+    play: false,
+    id: "pianoroll"
 }
