@@ -8,24 +8,36 @@ import { saveSequence, loadSequenceFile } from '../../../utils/sequence';
 export function Controls(props) {  
     const history = useHistory();
     const dispatch = useDispatch();
+
+    const setSequence = () => {
+        if(props.pianoroll){
+            const sequence = props.pianoroll.getMMLString();        
+            dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
+        }
+    }
     
-    const togglePlay = () => dispatch({type:'sequencer/togglePlay'});
-    const setTempo = (value) => dispatch({type:'sequencer/setTempo', payload: {
-        tempo: value
-    }});
+    const togglePlay = () => {
+        dispatch({type:'sequencer/togglePlay'});        
+        setSequence();
+    }
+
+    const setTempo = (value) => dispatch({type:'sequencer/setTempo', payload: { tempo: value }});
 
     const importSequence = async (file) => {
         const seq = await loadSequenceFile(file);
         dispatch({ type: 'sequencer/setSequence', payload: { sequence: seq }});
     }
 
-    const downloadSequence = () => {
-        const sequence = document.getElementById(props.id).getMMLString();
+    const downloadSequence = () => {        
+        const sequence = props.pianoroll.getMMLString();    
+        dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
         saveSequence(sequence);
     }
 
-    const goBack = () => {
-        dispatch({type:'sequencer/stopPlay'});
+    const goBack = () => {        
+        dispatch({ type:'sequencer/stopPlay' });
+        setSequence();
+        props.pianoroll.stop();
         history.push("/");
     }
 
@@ -62,5 +74,5 @@ Controls.defaultProps = {
     tempo: 120,
     loop: 1,
     play: false,
-    id: "pianoroll"
+    pianoroll: null
 }

@@ -16,7 +16,6 @@ export function Pianoroll(props) {
     }
 
     useEffect( () => {
-        console.log(props.seq)
         const current = pianoroll.current;
         if(props.seq) current.setMMLString(props.seq);
     });
