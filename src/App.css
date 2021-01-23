@@ -428,6 +428,7 @@ a.link:hover{
 
   .credits.ant-space-align-center{
     justify-content: center;
+    flex-direction: column;
   }
 
   .credits p{
