@@ -70,7 +70,7 @@
   text-align: left;
 }
 
-.btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
+.btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover, .btn-gold.ant-btn:focus{
   color: #f3cc62;
   border-color: #f3cc62;
 }
@@ -80,7 +80,7 @@
 }
 
 
-.btn-gold.ant-btn:hover, .btn-gold.ant-btn:focus, .btn-gold.ant-btn:active{
+.btn-gold.ant-btn:hover, .btn-gold.ant-btn:active{
   color: #d32029;
   border-color: #d32029;
 }
