@@ -20,7 +20,7 @@ function App() {
   const initMidiDevices = (devices) => { 
       const input = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
       const output = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
-      console.log(input)
+      
       devices.inputDevice = input >= 0 ? devices.inputDevices[input].id : ""
       devices.outputDevice = output >= 0 ? devices.outputDevices[output].id : ""
       dispatch({ type: "midi/setOptions", payload: devices});
