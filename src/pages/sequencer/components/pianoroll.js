@@ -15,13 +15,17 @@ export function Pianoroll(props) {
         current.height = actualHeight;
     }
 
+    useEffect( () => {
+        const current = pianoroll.current;
+        if(props.seq) current.setMMLString(props.seq);
+    });
+
     useEffect( () => {  
-        const current = pianoroll.current;        
+        const current = pianoroll.current;
         window.addEventListener("resize", () => handleResize(current));
         setTimeout(() => handleResize(current), 100);
-        return () => {
-            window.removeEventListener("resize", handleResize);   
-        };
+
+        return () => window.removeEventListener("resize", handleResize);
     }, []);
 
     useEffect( () => {
@@ -44,8 +48,10 @@ export function Pianoroll(props) {
 
     return (
         <Row>
+            { props.play }
             <Col className="pianoroll-wrapper">            
-                <webaudio-pianoroll 
+                <webaudio-pianoroll
+                    id="pianoroll"
                     ref={pianoroll}
                     wheelzoom={1}
                     xrange={props.xrange}
@@ -84,5 +90,6 @@ Pianoroll.defaultProps = {
     snap: 1,
     octadj: -2,
     tempo: 120,
-    play: false
+    play: false,
+    seq: ""
 };

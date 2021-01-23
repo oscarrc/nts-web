@@ -20,8 +20,8 @@ export function Header() {
     const importPatch = async (file) => {
         const patch = await loadPatchFile(file);
         dispatch({ type: 'synthesizer/setControl', payload: patch});
+        dispatch({ type: 'sequencer/stopPlay', payload: patch});
         dispatch({ type: 'display/setDisplay', payload: { screen: "import"}});
-        return false;
     }
     const openSettings = () => dispatch({type: 'midi/toggleSettings'});
 
@@ -42,8 +42,8 @@ export function Header() {
                 title={<img className="logo" src={korg} alt="nts-web"/>}
                 subTitle={<strong className="text-gold">NTS-web</strong>}
                 extra={[
-                    <Space>
-                        <Upload accept=".nts" showUploadList={false} beforeUpload={ file => importPatch(file) } customRequest={ () => false }>
+                    <Space key="headeractions">
+                        <Upload accept=".ntspatch" showUploadList={false} beforeUpload={ file => importPatch(file) } customRequest={ () => false }>
                             <Button disabled={isLoading} ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
                         </Upload>
                         <Dropdown disabled={isLoading} key="menu" overlay={menu}>

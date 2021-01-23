@@ -17,33 +17,35 @@ function App() {
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
 
+  const initMidiDevices = (devices) => { 
+      const input = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
+      const output = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
+      
+      devices.inputDevice = input >= 0 ? devices.inputDevices[input].id : ""
+      devices.outputDevice = output >= 0 ? devices.outputDevices[output].id : ""
+      dispatch({ type: "midi/setOptions", payload: devices});
+  }
+
   useEffect( () => {
-    // const options = document.createElement('script');
     const controls = document.createElement('script');
     const pianoroll = document.createElement('script');
     const patch = query.get('patch');
     
-    // options.src= "assets/js/webaudio-options.js";
-    // options.async= true;
     controls.src= "assets/js/webaudio-controls.js";
     controls.async= true;
     controls.type="text/javascript";
     pianoroll.src= "assets/js/webaudio-pianoroll.js";
     pianoroll.async= true;
     
-    // if(options !== HTMLElement) document.body.appendChild(options);
     document.body.appendChild(controls);
     document.body.appendChild(pianoroll);
     
     midiStart().then(
       devices => {
-          if( devices.inputDevices.length ) devices.inputDevice = devices.inputDevices[0].id;
-          if( devices.outputDevices.length ) devices.outputDevice = devices.outputDevices[0].id;
-
+          initMidiDevices(devices);
           dispatch({ type: "loader/loadEnd" });
-          dispatch({ type: "midi/setOptions", payload: devices})
       }
-    ).catch( err => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }})); // TODO properly handle no midi
+    ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
     // eslint-disable-next-line

@@ -1,7 +1,5 @@
 import webmidi from 'webmidi';
 
-//TODO handle hot connections
-
 const midiStart = () => {
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {

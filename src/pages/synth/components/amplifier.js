@@ -12,7 +12,7 @@ export function Amplifier() {
         
         Object.keys(opt).forEach( (knob) => {
             knobs.push(
-                <Col span={cols}>
+                <Col span={cols} key={opt[knob].label + opt[knob].cc}>
                     <Knob 
                         name={opt[knob].label} 
                         max={opt[knob].max} 

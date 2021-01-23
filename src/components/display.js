@@ -10,7 +10,7 @@ export function Display() {
     const renderLine = (values) => {
         let line = [];
         Object.keys(values).forEach( (key) => {
-            if(key !== "active") line.push(<Col className="line" span={6}>{key}: {values[key]}</Col>);
+            if(key !== "active") line.push(<Col className="line" span={6} key={Math.random()*values[key] + key}>{key}: {values[key]}</Col>);
         });       
         return line;
     }
@@ -21,7 +21,7 @@ export function Display() {
         Object.keys(values).forEach( (key) => {
             if(typeof values[key] === "object"){
                 content.push(
-                    <Col span={24}>
+                    <Col span={24} key={Math.random()*values[key] + key}>
                         <Row>
                             <Col span={24}><h3 className="line bordered">{key}</h3></Col>
                             {renderLine(values[key])}
@@ -30,7 +30,7 @@ export function Display() {
                 );
             }else if(key !== "active" && (key !== "type" || screen === "osc" || screen === "arp")){
                 content.push(
-                    <Col span={ screen === "osc" || screen === "arp" ? 24 : 6} className={ screen === "osc" || screen === "arp" ? "line" : "" }>
+                    <Col key={Math.random()*values[key] + key} span={ screen === "osc" || screen === "arp" ? 24 : 6} className={ screen === "osc" || screen === "arp" ? "line" : "" }>
                         {key} : {values[key]}
                     </Col>
                 )
@@ -46,7 +46,7 @@ export function Display() {
         switch(screen){
             case "welcome":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>WELCOME TO NTS-WEB</h2> 
                         <p>If you like it, please, support me by buying me a coffee.</p>
                         <p>Link at the bottom.</p>
@@ -55,7 +55,7 @@ export function Display() {
                 break;
             case "link":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>LINK COPIED TO CLIPBOARD</h2> 
                         <p>Go and share it with your firends.</p>
                     </Col>                    
@@ -63,7 +63,7 @@ export function Display() {
                 break;
             case "import":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>PATCH IMPORTED</h2> 
                         <p>Your patch has been successfully imported.</p>
                     </Col>                    
@@ -71,7 +71,7 @@ export function Display() {
                 break;
             case "nomidi":
                 content = (                    
-                    <Col>
+                    <Col span={24}>
                         <h2>NO MIDI</h2> 
                         <p>Your device or browser has no midi support</p>
                     </Col>                    
@@ -79,7 +79,7 @@ export function Display() {
                 break;
             default:
                 content = [
-                    <Col span={24}><h2 className="title">{screen}</h2></Col>,
+                    <Col key={Math.random() + screen} span={24}><h2 className="title">{screen}</h2></Col>,
                     renderScreen(values[screen], screen)
                 ];
                 break;
