@@ -12,7 +12,7 @@ export function Vcfilter() {
 
         Object.keys(ctrls).forEach( (control) => {
             controls.push(
-                <Col span={ span }>
+                <Col span={ span } key={ctrls[control].label + ctrls[control].cc}>
                     <Knob 
                         name={ ctrls[control].label }
                         max={ ctrls[control].max }

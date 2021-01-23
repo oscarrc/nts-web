@@ -13,7 +13,7 @@ export function Effects() {
         Object.keys(ctrls).forEach( (control) => {
             if(control === 'type'){
                 controls.push(
-                    <Col span={span}> 
+                    <Col span={span} key={name + ctrls[control].cc}> 
                         <Selector 
                             name={ name }
                             max={ ctrls[control].values.length - 1 }
@@ -28,7 +28,7 @@ export function Effects() {
                 );
             }else{
                 controls.push(                    
-                    <Col span={span}>
+                    <Col span={span} key={ctrls[control].label + ctrls[control].cc}>
                         <Knob 
                             name={ctrls[control].label}
                             max={ctrls[control].max}
