@@ -114,6 +114,7 @@
 
 .footer.ant-layout-footer{
   padding: 24px 72px;
+  
 }
 
 a.link:hover{
@@ -190,7 +191,7 @@ a.link:hover{
 }
 
 .credits p{
-  margin: 0;
+  margin: 0
 }
 
 .bg-grid{
@@ -421,6 +422,15 @@ a.link:hover{
 
 @media (max-width: 768px){
   [class^="ant-layout-"]{
-    padding: 0 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .credits.ant-space-align-center{
+    justify-content: center;
+  }
+
+  .credits p{
+    margin-bottom: 10px;
   }
 }
