@@ -1,6 +1,6 @@
 {
   "name": "nts-web",
-  "version": "0.1",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
