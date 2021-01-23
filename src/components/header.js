@@ -42,7 +42,7 @@ export function Header() {
                 title={<img className="logo" src={korg} alt="nts-web"/>}
                 subTitle={<strong className="text-gold">NTS-web</strong>}
                 extra={[
-                    <Space>
+                    <Space key="headeractions">
                         <Upload accept=".nts" showUploadList={false} beforeUpload={ file => importPatch(file) } customRequest={ () => false }>
                             <Button disabled={isLoading} ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
                         </Upload>
