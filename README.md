@@ -24,6 +24,7 @@ If you miss any feature, please, request it.
 * Sequence melodies with the built-in sequencer
     * Control the tempo of the sequencer
     * Play notes any octave
+* Save and load your sequences
 
 ### Found a bug?
 
