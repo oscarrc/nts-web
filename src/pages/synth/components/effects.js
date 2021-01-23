@@ -63,13 +63,13 @@ export function Effects() {
         <div className="effects">
             <Divider className="text-gold">EFFECTS</Divider>
             <Row className="select-row" justify="space-between">         
-                <Col span={6}> 
+                <Col span={8}> 
                     { renderButton(effects.mod, "Mod", effectValues.mod, "effects.mod.active") }
                 </Col>
-                <Col span={6}>
+                <Col span={8}>
                     { renderButton(effects.delay, "Delay", effectValues.delay, "effects.delay.active") }              
                 </Col>
-                <Col span={6}>                
+                <Col span={8}>                
                     { renderButton(effects.reverb, "Reverb", effectValues.reverb, "effects.reverb.active") }   
                 </Col>
             </Row>

@@ -418,3 +418,9 @@ a.link:hover{
 .display .ant-space-item {
   width: 100%;
 }
+
+@media (max-width: 768px){
+  [class^="ant-layout-"]{
+    padding: 0 10px !important;
+  }
+}
