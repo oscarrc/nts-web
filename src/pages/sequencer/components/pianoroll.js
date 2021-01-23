@@ -16,16 +16,18 @@ export function Pianoroll(props) {
     }
 
     useEffect( () => {  
-        const current = pianoroll.current;        
+        const current = pianoroll.current;
+
+        if(props.seq) current.setMMLString(props.seq);
+
         window.addEventListener("resize", () => handleResize(current));
         setTimeout(() => handleResize(current), 100);
-        return () => {
-            window.removeEventListener("resize", handleResize);   
-        };
-    }, []);
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, [props.seq]);
 
     useEffect( () => {
-        if(props.play){
+        if(props.play === true){
             const actx = new AudioContext();
             actx.resume();
             pianoroll.current.play(actx, (e) => {
@@ -84,5 +86,6 @@ Pianoroll.defaultProps = {
     snap: 1,
     octadj: -2,
     tempo: 120,
-    play: false
+    play: false,
+    seq: ""
 };
