@@ -1,6 +1,10 @@
 {
   "name": "nts-web",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oscarrc/nts-web.git"
+  },
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
@@ -23,8 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "node_modules/gh-pages/bin/gh-pages.js -d build -r https://github.com/oscarrc/nts-web.github.io.git -b master"
+    "predeploy": "npm run build && cp build/index.html build/200.html",
+    "deploy": "surge build nts-web.oscarrc.me"
   },
   "eslintConfig": {
     "extends": "react-app"
