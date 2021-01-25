@@ -32,9 +32,7 @@ export function Pianoroll(props) {
         if(props.play){
             const actx = new AudioContext();
             actx.resume();
-            pianoroll.current.play(actx, (e) => {
-                midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t);
-            });
+            pianoroll.current.play(actx, (e) => midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t));
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
