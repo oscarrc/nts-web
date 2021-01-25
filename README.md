@@ -17,6 +17,7 @@ If you miss any feature, please, request it.
 
 ### Features
 
+* Installable, and works offline as a PWA
 * Control any parameter from within the app
 * Import and export your patches
 * Play with the on screen keyboard 
