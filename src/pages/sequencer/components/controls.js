@@ -10,8 +10,9 @@ export function Controls(props) {
     const dispatch = useDispatch();
 
     const setSequence = () => {
-        if(props.pianoroll){
-            const sequence = props.pianoroll.getMMLString();        
+        const pianoroll = document.getElementById(props.pianoroll);
+        if(pianoroll){
+            const sequence = pianoroll.getMMLString();        
             dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
         }
     }
@@ -29,15 +30,18 @@ export function Controls(props) {
     }
 
     const downloadSequence = () => {        
-        const sequence = props.pianoroll.getMMLString();    
-        dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
-        saveSequence(sequence);
+        const pianoroll = document.getElementById(props.pianoroll);
+        if(pianoroll) {
+            const sequence = pianoroll.getMMLString();
+            dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
+            saveSequence(sequence);
+        }
     }
 
     const goBack = () => {        
         dispatch({ type:'sequencer/stopPlay' });
         setSequence();
-        if(props.pianoroll) props.pianoroll.stop();
+        if(document.getElementById(props.pianoroll)) document.getElementById(props.pianoroll).stop();
         history.push("/");
     }
 
