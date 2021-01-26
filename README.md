@@ -15,6 +15,12 @@ This is still a work in progress, so expect some bugs and issues.
 
 If you miss any feature, please, request it.
 
+### How it works
+
+1. Connect your NTS-1 device to the computer
+2. Go to the [NTS-web page](https://https://nts-web.oscarrc.me) (if you're already there just refresh the page)
+3. Start tweaking parameters
+
 ### Features
 
 * Installable, and works offline as a PWA
