@@ -28,6 +28,14 @@ If you miss any feature, please, request it.
     * Play notes any octave
 * Save and load your sequences
 
+### TODOs
+
+- [ ] React to control change inputs
+- [ ] Implement the hability to switch patches on the fly vía patch banks
+- [ ] Implement the hability to switch patterns on the fly vía pattern or sequence banks
+- [ ] Export all patches from banks along with the sequence in a single file
+- [ ] Retrieve user oscilators and effects vía Sysex (help needed)
+
 ### Found a bug?
 
 Open an [issue](https://github.com/oscarrc/nts-web/issues) and let me know.
