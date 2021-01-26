@@ -18,11 +18,8 @@ function App() {
   const query = new URLSearchParams(useLocation().search);
 
   const initMidiDevices = (devices) => { 
-      const input = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
-      const output = devices.inputDevices.findIndex( device => device.name.includes("NTS"));
-      
-      devices.inputDevice = input >= 0 ? devices.inputDevices[input].id : ""
-      devices.outputDevice = output >= 0 ? devices.outputDevices[output].id : ""
+      devices.inputDevice = devices.inputDevices.length > 0 ? devices.inputDevices[0].id : ""
+      devices.outputDevice = devices.inputDevices.length >= 0 ? devices.outputDevices[0].id : ""
       dispatch({ type: "midi/setOptions", payload: devices});
   }
 
