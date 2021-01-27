@@ -6,8 +6,8 @@ const midiStart = () => {
             if (err) reject(err);
             
             resolve ({
-                inputDevices: webmidi.inputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
-                outputDevices: webmidi.outputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } })
+                inputDevices: webmidi.inputs.filter(d => d.includes({name: "NTS"})).map( d => { return {id: d.id, name: d.name } }),
+                outputDevices: webmidi.outputs.filter(d => d.includes({name: "NTS"})).map( d => { return {id: d.id, name: d.name } })
             })
         }, true);
     })

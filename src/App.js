@@ -39,8 +39,8 @@ function App() {
     
     midiStart().then(
       devices => {
-          initMidiDevices(devices);
           dispatch({ type: "loader/loadEnd" });
+          initMidiDevices(devices);
       }
     ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
     
