@@ -25,13 +25,18 @@ export function Pad() {
         }
 
         currentPad.addEventListener("mousedown", (event) => sendPitchBend(event));
+        currentPad.addEventListener("touchstart", (event) => sendPitchBend(event));
         currentPad.addEventListener("mouseup", () => restorePitch());
-        currentPad.addEventListener("mouseleave", () => restorePitch());
+        currentPad.addEventListener("touchend", () => restorePitch());
+        currentPad.addEventListener("mouseleave", () => restorePitch());        
+        currentPad.addEventListener("touchcancel", () => restorePitch());
 
         return () => {
             currentPad.removeEventListener("mousedown", sendPitchBend);
-            currentPad.removeEventListener("mouseup", restorePitch);
-            currentPad.removeEventListener("mouseleave", restorePitch);
+            currentPad.removeEventListener("mouseup", restorePitch);            
+            currentPad.removeEventListener("touchend", restorePitch);
+            currentPad.removeEventListener("mouseleave", restorePitch);            
+            currentPad.removeEventListener("touchcancel", restorePitch);
         }
     }, [midiConfig])
 
