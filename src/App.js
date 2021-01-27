@@ -16,10 +16,10 @@ import "antd/dist/antd.css";
 function App() {
   const dispatch = useDispatch();
   const query = new URLSearchParams(useLocation().search);
-
+  
   const initMidiDevices = (devices) => { 
       devices.inputDevice = devices.inputDevices.length > 0 ? devices.inputDevices[0].id : ""
-      devices.outputDevice = devices.inputDevices.length >= 0 ? devices.outputDevices[0].id : ""
+      devices.outputDevice = devices.inputDevices.length > 0 ? devices.outputDevices[0].id : ""
       dispatch({ type: "midi/setOptions", payload: devices});
   }
 
@@ -42,7 +42,7 @@ function App() {
           dispatch({ type: "loader/loadEnd" });
           initMidiDevices(devices);
       }
-    ).catch( () => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}));
+    ).catch( (err) => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}) );
     
     if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
     // eslint-disable-next-line

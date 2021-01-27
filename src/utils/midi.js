@@ -5,11 +5,9 @@ const midiStart = () => {
         webmidi.enable( (err) => {
             if (err) reject(err);
             
-            const condition = new RegExp("NTS");
-
             resolve ({
-                inputDevices: webmidi.inputs.filter(d => condition.test(d.name)).map( d => { return {id: d.id, name: d.name } }),
-                outputDevices: webmidi.outputs.filter(d => condition.test(d.name)).map( d => { return {id: d.id, name: d.name } })
+                inputDevices: webmidi.inputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
+                outputDevices: webmidi.outputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } })
             })
         }, true);
     })
