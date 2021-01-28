@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { useHistory } from "react-router-dom";
 import { Pianoroll, Controls }  from './partials';
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSequence, loadSequenceFile } from '../../utils/sequence';
+import { saveSequenceFile, loadSequenceFile } from '../../utils/sequence';
 
 export function Sequencer() {
   const { Content } = Layout;
@@ -22,7 +22,7 @@ export function Sequencer() {
   const saveSequence = () => {
 	const sequence = pianoroll.getMMLString()
 	dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
-	saveSequence(sequence);
+	saveSequenceFile(sequence);
   }
   const goBack = () => {
 	dispatch({ type:'sequencer/stopPlay' });
