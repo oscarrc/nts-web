@@ -8,6 +8,7 @@ export function Sequencer() {
   const dispatch = useDispatch();
   const seqValues = useSelector(state => state.sequencer).value;  
   const midiConfig = useSelector(state => state.midi).value; 
+  const pianoroll = document.getElementById("pianoroll");
   const setSequence = (event) => dispatch({ type: 'sequencer/setSequence', payload: { sequence: event.sequence }});
   const setTempo = (event) => dispatch({type:'sequencer/setTempo', payload: { tempo: event.tempo }});
   const togglePlay = (event) => {
