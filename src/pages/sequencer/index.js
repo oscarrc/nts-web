@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout } from 'antd';
-import { Pianoroll, Controls }  from './components';
+import { Pianoroll, Controls }  from './partials';
 import { useSelector } from 'react-redux';
 
 export function Sequencer() {

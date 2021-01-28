@@ -3,7 +3,7 @@ import { Layout, Row, Col, Collapse} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Display } from '../../components';
-import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './components';
+import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './partials';
 
 import { midiListenControlChange } from '../../utils/midi';
 import { pathToStore } from '../../utils/store';
