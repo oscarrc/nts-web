@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { Layout, Row, Col, Collapse} from 'antd';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Display } from '../../components';
 import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './components';
 
 import { midiListenControlChange } from '../../utils/midi';
+import { pathToStore } from '../../utils/store';
+
 import { cc } from '../../config/midi';
 
 export function Synth() {
@@ -19,9 +21,7 @@ export function Synth() {
   }
 
   const setControl = (midi) => {
-    console.log(midi)
-    const decoded = parseInt(midi.data.slice(4).join(""), 2);
-    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[decoded], midi.value)});
+    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], midi.value)});
   }
 
   useEffect(() => {
