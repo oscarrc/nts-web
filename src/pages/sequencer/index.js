@@ -18,7 +18,7 @@ export function Sequencer() {
 
   return (
     <Content className="main transparent">
-      <Controls play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} pianoroll={"pianoroll"} />
+      <Controls play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} pianoroll={pianoroll} />
       <Pianoroll play={seqValues.play} loop={seqValues.loop} tempo={seqValues.tempo} sequence={seqValues.sequence} outputDevice={midiConfig.outputDevice} outputChannel={midiConfig.outputChannel} />
     </Content>
   );
