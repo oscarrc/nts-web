@@ -6,9 +6,9 @@ export function Pianoroll(props) {
     const pianoroll = useRef();    
 
     const handleResize = (current) => {
-        const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0].offsetWidth;
-        const actualHeight = document.getElementsByClassName('main')[0].clientHeight - 
-                             document.getElementsByClassName('footer')[0].clientHeight - 32;
+        const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
+        const actualHeight = document.getElementsByClassName('main')[0]?.clientHeight - 
+                             document.getElementsByClassName('footer')[0]?.clientHeight - 32;
         current.width = actualWidth;
         current.height = actualHeight;
     }
