@@ -3,14 +3,14 @@ import { Layout, Row, Col, Collapse} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { Display } from '../../components';
-import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './partials';
-
 import { midiListenControlChange } from '../../utils/midi';
 import { pathToStore } from '../../utils/store';
 import { randomPatch } from '../../utils/patch';
 
 import { cc, synth } from '../../config/midi';
+
+import { Display } from '../../components';
+import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './partials';
 
 export function Synth() {
   const { Panel } = Collapse;
