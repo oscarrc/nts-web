@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { Button, Knob, Selector } from '../../../components';
-import { effects } from '../../../config/midi';
 
-export function Effects() { 
-    const effectValues = useSelector(state => state.synthesizer).value.effects;
+export function Effects(props) { 
+    const effectValues = props.values;
+    const effects = props.spec;
 
     const renderControls = (ctrls, name, span, val, path) => {
         let controls = [];

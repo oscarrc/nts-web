@@ -32,6 +32,5 @@ export function Controls(props) {
 Controls.defaultProps = {
     tempo: 120,
     loop: 1,
-    play: false,
-    pianoroll: null
+    play: false
 }

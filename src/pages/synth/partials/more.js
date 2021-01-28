@@ -1,26 +1,23 @@
-import React, { useEffect } from 'react';
-import { useHistory } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
 import { Divider, Row, Col } from 'antd';
-
-import { randomPatch } from '../../../utils/patch';
-
 import Button from '../../../assets/button.png';
 
-export function More() { 
-    const history = useHistory();
-    const dispatch = useDispatch();
+export function More(props) { 
+    const randomize = useRef();
+    const sequencer = useRef();
 
     useEffect( () => {
-        document.getElementById("randomize").addEventListener("click", ()=>{        
-            const patch = randomPatch();  
-            dispatch({type:'synthesizer/setControl', payload: patch});
-        });
+        const randomizeCurrent = randomize.current;
+        const sequencerCurrent = sequencer.current;
+        
+        randomizeCurrent.addEventListener("click", props.onRandom);
+        sequencerCurrent.addEventListener("click", props.onSequencer);
 
-        document.getElementById("sequencer").addEventListener("click", ()=>{            
-            history.push("/sequencer");
-        });
-    })
+        return () => {
+            randomizeCurrent.removeEventListener("click", props.onRandom);
+            sequencerCurrent.removeEventListener("click", props.onSequencer);
+        }
+    }, [props.onRandom, props.onSequencer])
 
     return  (
         <div className="more">
@@ -28,12 +25,12 @@ export function More() {
             <Row justify="space-between">                
                 <Col className="text-light" span={12}>                    
                     <span className="switch-button-col">
-                        <webaudio-switch id="randomize" src={Button} type="kick"></webaudio-switch> Randomize
+                        <webaudio-switch ref={randomize} src={Button} type="kick"></webaudio-switch> Randomize
                     </span>
                 </Col>
                 <Col className="text-light" span={12}>                    
                     <span className="switch-button-col">
-                        <webaudio-switch id="sequencer" src={Button} type="kick"></webaudio-switch> Sequencer
+                        <webaudio-switch ref={sequencer} src={Button} type="kick"></webaudio-switch> Sequencer
                     </span>
                 </Col>
             </Row>        

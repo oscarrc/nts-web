@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { Knob, Selector } from '../../../components';
-import { arp } from '../../../config/midi';
 
-export function Arpegiator() {   
-    const arpValues = useSelector(state => state.synthesizer).value.arp;
+export function Arpegiator(props) {   
+    const arpValues = props.values;
+    const arp = props.spec;
 
     return  (
         <div className="arp">

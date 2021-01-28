@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
 import { Divider, Row, Col } from 'antd';
 import { Knob, Selector } from '../../../components';
-import { osc } from '../../../config/midi';
 
-export function Oscilator() { 
-    const oscValues = useSelector(state => state.synthesizer).value.osc;
+export function Oscilator(props) { 
+    const oscValues = props.values;
+    const osc = props.spec;
 
     return  (        
         <div className="osc">

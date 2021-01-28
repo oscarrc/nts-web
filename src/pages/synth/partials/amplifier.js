@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { Knob, Dropdown } from '../../../components';
-import { amp } from '../../../config/midi';
 
-export function Amplifier() {
-    const ampValues = useSelector(state => state.synthesizer).value.amp;
+export function Amplifier(props) {
+    const ampValues = props.values;
+    const amp = props.spec;
 
     const renderKnobs = (opt, cols, val, path) => {
         let knobs = []

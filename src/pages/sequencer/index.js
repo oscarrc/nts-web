@@ -6,50 +6,49 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveSequenceFile, loadSequenceFile } from '../../utils/sequence';
 
 export function Sequencer() {
-  const { Content } = Layout;
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const seqValues = useSelector(state => state.sequencer).value;  
-  const midiConfig = useSelector(state => state.midi).value; 
-  const pianoroll = document.getElementById("pianoroll");
-  
-  const setTempo = (tempo) => dispatch({type:'sequencer/setTempo', payload: { tempo: tempo }});
-  const togglePlay = () => dispatch({type: "sequencer/togglePlay"});
-  const loadSequence = async (file) => {
-	const sequence = await loadSequenceFile(file);
-	dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
-  }  
-  const saveSequence = () => {
-	const sequence = pianoroll.getMMLString()
-	dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
-	saveSequenceFile(sequence);
-  }
-  const goBack = () => {
-	dispatch({ type:'sequencer/stopPlay' });
-	dispatch({ type: 'sequencer/setSequence', payload: { sequence: pianoroll?.getMMLString() } });
-	pianoroll?.stop();
-	history.push("/");
-  }
+	const { Content } = Layout;
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const seqValues = useSelector(state => state.sequencer).value;  
+	const midiConfig = useSelector(state => state.midi).value; 
+	const pianoroll = document.getElementById("pianoroll");
+	
+	const setTempo = (tempo) => dispatch({type:'sequencer/setTempo', payload: { tempo: tempo }});
+	const togglePlay = () => dispatch({type: "sequencer/togglePlay"});
+	const loadSequence = async (file) => {
+		const sequence = await loadSequenceFile(file);
+		dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
+	}  
+	const saveSequence = () => {
+		const sequence = pianoroll.getMMLString()
+		dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
+		saveSequenceFile(sequence);
+	}
+	const goBack = () => {
+		dispatch({ type:'sequencer/stopPlay' });
+		dispatch({ type: 'sequencer/setSequence', payload: { sequence: pianoroll?.getMMLString() } });
+		pianoroll?.stop();
+		history.push("/");
+	}
 
-  return (
-    <Content className="main transparent">
-      <Controls 
-        play={seqValues.play}
-        loop={seqValues.loop}
-        tempo={seqValues.tempo}
-        pianoroll={pianoroll}
-		onBack={goBack}
-		onTempo={setTempo}
-		onSave={saveSequence}
-		onLoad={loadSequence} 
-		onPlay={togglePlay} />
-      <Pianoroll 
-        play={seqValues.play} 
-        loop={seqValues.loop} 
-        tempo={seqValues.tempo} 
-        sequence={seqValues.sequence} 
-        outputDevice={midiConfig.outputDevice} 
-        outputChannel={midiConfig.outputChannel} />
-    </Content>
-  );
+	return (
+		<Content className="main transparent">
+			<Controls 
+				play={seqValues.play}
+				loop={seqValues.loop}
+				tempo={seqValues.tempo}
+				onBack={goBack}
+				onTempo={setTempo}
+				onSave={saveSequence}
+				onLoad={loadSequence} 
+				onPlay={togglePlay} />
+			<Pianoroll 
+				play={seqValues.play} 
+				loop={seqValues.loop} 
+				tempo={seqValues.tempo} 
+				sequence={seqValues.sequence} 
+				outputDevice={midiConfig.outputDevice} 
+				outputChannel={midiConfig.outputChannel} />
+		</Content>
+	);
 }
