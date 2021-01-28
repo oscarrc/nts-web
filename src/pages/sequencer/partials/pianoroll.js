@@ -1,10 +1,8 @@
 import React, {useEffect, useRef} from 'react';
-import { Row, Col  } from 'antd';
-import { useSelector } from 'react-redux';
+import { Row, Col } from 'antd';
 import { midiPlayNote } from '../../../utils/midi';
 
 export function Pianoroll(props) {   
-    const midiConfig = useSelector(state => state.midi).value; 
     const pianoroll = useRef();    
 
     const handleResize = (current) => {
@@ -17,8 +15,8 @@ export function Pianoroll(props) {
 
     useEffect( () => {
         const current = pianoroll.current;
-        if(props.seq) current.setMMLString(props.seq);
-    });
+        if(props.sequence) current.setMMLString(props.sequence);
+    }, [props.sequence]);
 
     useEffect( () => {  
         const current = pianoroll.current;
@@ -32,11 +30,11 @@ export function Pianoroll(props) {
         if(props.play){
             const actx = new AudioContext();
             actx.resume();
-            pianoroll.current.play(actx, (e) => midiPlayNote(e.n, midiConfig.outputDevice, midiConfig.outputChannel, true, e.g - e.t));
+            pianoroll.current.play(actx, (e) => midiPlayNote(e.n, props.outputDevice, props.outputChannel, true, e.g - e.t));
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
-    }, [props.play, midiConfig]);
+    }, [props.play, props.outputDevice, props.outputChannel]);
 
     useEffect( () => {        
         const current = pianoroll.current;
@@ -46,7 +44,6 @@ export function Pianoroll(props) {
 
     return (
         <Row>
-            { props.play }
             <Col className="pianoroll-wrapper">            
                 <webaudio-pianoroll
                     id="pianoroll"
@@ -89,5 +86,7 @@ Pianoroll.defaultProps = {
     octadj: -2,
     tempo: 120,
     play: false,
-    seq: ""
+    sequence: "",
+    outputDevice: "",
+    outputChannel: "all"
 };

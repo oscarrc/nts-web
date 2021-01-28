@@ -25,8 +25,8 @@ export function Controls(props) {
     const setTempo = (value) => dispatch({type:'sequencer/setTempo', payload: { tempo: value }});
 
     const importSequence = async (file) => {
-        const seq = await loadSequenceFile(file);
-        dispatch({ type: 'sequencer/setSequence', payload: { sequence: seq }});
+        const sequence = await loadSequenceFile(file);
+        dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
     }
 
     const downloadSequence = () => {        
