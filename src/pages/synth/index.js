@@ -22,7 +22,7 @@ export function Synth() {
   const synthValues = useSelector(state => state.synthesizer).value;
 
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
-  const setControl = (midi) => dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], midi.value)});
+  const setControl = (midi) => dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], midi.data[2])});
   const setSequencer = () => history.push("/sequencer");
   const randomize = () => {
     const patch = randomPatch();  
