@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Row, Col, Collapse} from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { Display } from '../../components';
 import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './components';
 
+import { midiListenControlChange } from '../../utils/midi';
+import { cc } from '../../config/midi';
 
 export function Synth() {
   const { Panel } = Collapse;
   const { Content } = Layout;
   const dispatch = useDispatch();
+  const midiConfig = useSelector(state => state.midi).value;
 
   const setDisplay = (screen) => {
     dispatch({type:'display/setDisplay', payload: { screen }});
   }
+
+  const setControl = (midi) => {
+    console.log(midi)
+    const decoded = parseInt(midi.data.slice(4).join(""), 2);
+    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[decoded], midi.value)});
+  }
+
+  useEffect(() => {
+    if(midiConfig.inputDevice) midiListenControlChange(setControl, midiConfig.inputDevice, midiConfig.inputChannel);
+    return () => midiListenControlChange(setControl, midiConfig.inputDevice, midiConfig.inputChannel, false);
+  }, [midiConfig])
 
   return (
     <Content className="main transparent">

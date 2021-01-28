@@ -51,4 +51,12 @@ const midiSendPitchBend = (value, id, channel) => {
     }
 }
 
-export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend }
+const midiListenControlChange = ( cb, id, channel, enable = true ) => {
+    if(enable){
+        webmidi.getInputById(id).addListener("controlchange", channel, cb);
+    }else{
+        webmidi.getInputById(id).removeListener("controlchange", channel, cb);
+    }
+}
+
+export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend, midiListenControlChange }

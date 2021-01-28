@@ -420,6 +420,38 @@ export const vcf = {
     }
 };
 
+export const cc = {
+    53: "osc.type",
+    54: "osc.shape",
+    55: "osc.alt",
+    117: "arp.type",
+    118: "arp.scale",
+    119: "arp.lenght",
+    14: "amp.type",
+    16: "amp.eg.attack",
+    19: "amp.eg.release",
+    20: "amp.trem.depth",
+    21: "amp.trem.rate",
+    24: "amp.lfo.rate",
+    26: "amp.lfo.depth",
+    88: "effects.mod.type",
+    28: "effects.mod.time",
+    29: "effects.mod.depth",
+    89: "effects.delay.type",
+    30: "effects.delay.time",
+    31: "effects.delay.depth",
+    33: "effects.delay.mix",
+    90: "effects.reverb.type",
+    34: "effects.reverb.time",
+    35: "effects.reverb.depth",
+    36: "effects.reverb.mix",
+    42: "vcf.type",
+    43: "vcf.filter.cutoff",
+    44: "vcf.filter.res",
+    45: "vcf.sweep.depth",
+    46: "vcf.sweep.rate",
+}
+
 export const channels = [
     "all",
     "1",
