@@ -23,7 +23,10 @@ export function Synth() {
 
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
   const setControl = (midi) => {
-    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], midi.data[2])});
+    const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
+    const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
+    console.log(value);
+    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
   }
   const setSequencer = () => history.push("/sequencer");
   const randomize = () => {
