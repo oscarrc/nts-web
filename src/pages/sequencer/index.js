@@ -11,7 +11,6 @@ export function Sequencer() {
 	const history = useHistory();
 	const seqValues = useSelector(state => state.sequencer).value;  
 	const midiConfig = useSelector(state => state.midi).value; 
-	const pianoroll = document.getElementById("pianoroll");
 	
 	const setTempo = (tempo) => dispatch({type:'sequencer/setTempo', payload: { tempo: tempo }});
 	const togglePlay = () => dispatch({type: "sequencer/togglePlay"});
@@ -20,11 +19,13 @@ export function Sequencer() {
 		dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
 	}  
 	const saveSequence = () => {
+		const pianoroll = document.getElementById("pianoroll");
 		const sequence = pianoroll.getMMLString()
 		dispatch({ type: 'sequencer/setSequence', payload: { sequence: sequence }});
 		saveSequenceFile(sequence);
 	}
 	const goBack = () => {
+		const pianoroll = document.getElementById("pianoroll");
 		dispatch({ type:'sequencer/stopPlay' });
 		dispatch({ type: 'sequencer/setSequence', payload: { sequence: pianoroll?.getMMLString() } });
 		pianoroll?.stop();
