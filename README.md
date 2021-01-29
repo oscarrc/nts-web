@@ -15,11 +15,11 @@ This is still a work in progress, so expect some bugs and issues.
 
 #### TODOs
 
-- [ ] React to control change inputs
+- [ ] React to control change inputs (in progress)
+- [ ] Retrieve user oscilators and effects vía Sysex (help needed) (in progress)
 - [ ] Implement the hability to switch patches on the fly vía patch banks
 - [ ] Implement the hability to switch patterns on the fly vía pattern or sequence banks
 - [ ] Export all patches from banks along with the sequence in a single file
-- [ ] Retrieve user oscilators and effects vía Sysex (help needed)
 
 If you miss any feature, please, request it.
 
