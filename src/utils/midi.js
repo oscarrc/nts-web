@@ -59,11 +59,16 @@ const midiListenControlChange = ( cb, id, channel, enable = true ) => {
     const input = webmidi.getInputById(id);
     if(webmidi.enabled && input){
         if(enable){
+            let data;
             input.addListener("controlchange", channel, cb);
             input.addListener("sysex", "all", function (e) {
                 console.log(e);
+                data = e.data
             });
             webmidi.outputs[0].sendSysex(0x42, [0x50, 0x00, 0x02]);
+            setTimeout( () => {
+                webmidi.outputs[0].sendSysex(0x42, [0x00, 0x00, 0x57, 0x19, 0x01, 0x00]); 
+            }, 1000)           
         }else{
             input.removeListener("controlchange", channel, cb);
         }
