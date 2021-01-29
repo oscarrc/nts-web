@@ -461,3 +461,10 @@ export const channels = [
     "15",
     "16"
 ];
+
+export const sysex = {
+    mod: 1,
+    delay: 2,
+    reverb: 3,
+    osc: 4
+}

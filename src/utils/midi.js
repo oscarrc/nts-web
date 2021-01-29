@@ -51,19 +51,19 @@ const midiSendPitchBend = (value, id, channel) => {
     }
 }
 
-const midiGetUserPrograms = (id, channel, type) => {
-
+const midiGetUserPrograms = (id, vendor, device, channel, type) => {
+    for(let i = 0; i<16; i++){
+        webmidi.getOutputById(id).sendSysex(vendor, [48 + channel, 0, device, 25, type, i]);
+    }
 }
 
 const midiListenControlChange = ( cb, id, channel, enable = true ) => {
     const input = webmidi.getInputById(id);
     if(webmidi.enabled && input){
         if(enable){
-            let data;
             input.addListener("controlchange", channel, cb);
             input.addListener("sysex", "all", function (e) {
                 console.log(e);
-                data = e.data
             });
             webmidi.outputs[0].sendSysex(0x42, [0x50, 0x00, 0x02]);
             setTimeout( () => {
@@ -75,4 +75,4 @@ const midiListenControlChange = ( cb, id, channel, enable = true ) => {
     }
 }
 
-export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend, midiListenControlChange }
+export { midiStart, midiControlChange, midiPlayNote, midiSendPitchBend, midiListenControlChange, midiGetUserPrograms }

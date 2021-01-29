@@ -69,8 +69,9 @@ const defaultSettings = {
     inputChannel: "all",
     octave: 3,
     settings: false,
-    sysexChannel: "0x00",
-    sysexDevice: "0x57"
+    sysexVendor: 66,
+    sysexDevice: 87,
+    sysexChannel: 0
 }
 
 export { defaultPatch, defaultSettings }
