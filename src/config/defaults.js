@@ -72,7 +72,7 @@ const defaultSettings = {
     vendor: 66,
     channel: 0,
     device: 87,
-    userprgr: {
+    userprog: {
         osc: 4,
         mod: 6,
         delay: 6,

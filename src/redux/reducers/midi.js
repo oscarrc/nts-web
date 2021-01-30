@@ -21,8 +21,8 @@ export const midiSlice = createSlice({
       const octave = state.value.octave;
       state.value.octave = octave !== 0 ? octave - 1 : 0;
     },
-    setUserPgrms: (state, action) => {
-      state.value.userprgr[action.payload.type] = state.value.userprgr[action.payload.type] + 1;
+    setUserPrograms: (state, action) => {
+      state.value.userprog[action.payload.type] = state.value.userprog[action.payload.type] + 1;
     }
   }
 });

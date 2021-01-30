@@ -51,15 +51,33 @@ const midiSendPitchBend = (value, id, channel) => {
     }
 }
 
-const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, channel, type, cb) => {
+const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, channel, cb) => {
+    let type = 1;
+    let bank = 0;
     const input = webmidi.getInputById(inputId);
     const output = webmidi.getOutputById(outputId);
+    
+    const requestAll = e => {
+        cb(e, type);
+        if(bank < 16){
+            bank++
+            output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
+        }else if(type < 5){
+            bank = 0;
+            type ++
+            output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
+        }
+    };
+    
+    if(webmidi.enabled && input){
+        if(input.hasListener("sysex", inputChannel, requestAll)){
+            input.removeListener("sysex", channel, requestAll);
+        }else{            
+            input.addListener("sysex", channel, requestAll);
+        }
 
-    if(!input.hasListener("sysex", inputChannel, cb))
-        input.addListener("sysex", inputChannel, cb);
-
-    for(let i=0; i<16; i++)
-        setTimeout( () => output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, i]), 50*i);
+        output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank])
+    }
 }
 
 const midiListenControlChange = ( id, channel, cb ) => {

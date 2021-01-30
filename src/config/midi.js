@@ -464,9 +464,4 @@ export const channels = [
     "16"
 ];
 
-export const sysex = {
-    mod: 1,
-    delay: 2,
-    reverb: 3,
-    osc: 4
-}
+export const sysex = ["mod", "delay", "reverb", "osc"]

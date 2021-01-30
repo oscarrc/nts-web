@@ -7,6 +7,7 @@ import { midiListenControlChange, midiGetUserPrograms } from '../../utils/midi';
 import { pathToStore } from '../../utils/store';
 import { randomPatch } from '../../utils/patch';
 
+import { defaultSettings } from '../../config/defaults';
 import { cc, synth, sysex } from '../../config/midi';
 
 import { Display } from '../../components';
@@ -24,31 +25,33 @@ export function Synth() {
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
   const setSequencer = () => history.push("/sequencer");
   const setControl = (midi) => {
-    console.log(midi.data)
     // const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
     // const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
     // dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
   }
-  const setUserPrograms = (e) => {
-    // const set = e.data.length === 53;
-    // if(set) dispatch({type:'midi/setUserPgrms', payload: { tyep: type }})
-    console.log(e)
+  
+  const setUserPrograms = (e, t) => {
+    const set = e.data.length === 53;
+    if(set) dispatch({type:'midi/setUserPrograms', payload: { type: sysex[t-1] }})
   }
+
   const randomize = () => {
     const patch = randomPatch();  
     dispatch({type:'synthesizer/setControl', payload: patch})
   }
 
   useEffect(() => {
+    dispatch({type:'midi/setOptions', payload: { userprog: defaultSettings.userprog }});
+
     if(midiConfig.inputDevice){
       midiListenControlChange(midiConfig.inputDevice, midiConfig.inputChannel, setControl);
-      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, 4, setUserPrograms);
+      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, setUserPrograms);
     }
     return () => {
       midiListenControlChange(midiConfig.inputDevice, midiConfig.inputChannel, setControl);
-      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, 4, setUserPrograms);
+      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, setUserPrograms);
     }
-  }, [midiConfig])
+  }, [midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.outputChannel])
 
   return (
     <Content className="main transparent">
