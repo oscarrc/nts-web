@@ -3,11 +3,11 @@ import { Layout, Row, Col, Collapse} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 
-import { midiListenControlChange } from '../../utils/midi';
+import { midiListenControlChange, midiGetUserPrograms } from '../../utils/midi';
 import { pathToStore } from '../../utils/store';
 import { randomPatch } from '../../utils/patch';
 
-import { cc, synth } from '../../config/midi';
+import { cc, synth, sysex } from '../../config/midi';
 
 import { Display } from '../../components';
 import { Amplifier, Arpegiator, Effects, More, Oscilator, Vcfilter, Live } from './partials';
@@ -22,20 +22,32 @@ export function Synth() {
   const synthValues = useSelector(state => state.synthesizer).value;
 
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
-  const setControl = (midi) => {
-    const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
-    const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
-    dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
-  }
   const setSequencer = () => history.push("/sequencer");
+  const setControl = (midi) => {
+    console.log(midi.data)
+    // const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
+    // const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
+    // dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
+  }
+  const setUserPrograms = (e) => {
+    // const set = e.data.length === 53;
+    // if(set) dispatch({type:'midi/setUserPgrms', payload: { tyep: type }})
+    console.log(e)
+  }
   const randomize = () => {
     const patch = randomPatch();  
     dispatch({type:'synthesizer/setControl', payload: patch})
   }
 
   useEffect(() => {
-    if(midiConfig.inputDevice) midiListenControlChange(setControl, midiConfig.inputDevice, midiConfig.inputChannel);
-    return () => midiListenControlChange(setControl, midiConfig.inputDevice, midiConfig.inputChannel, false);
+    if(midiConfig.inputDevice){
+      midiListenControlChange(midiConfig.inputDevice, midiConfig.inputChannel, setControl);
+      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, 4, setUserPrograms);
+    }
+    return () => {
+      midiListenControlChange(midiConfig.inputDevice, midiConfig.inputChannel, setControl);
+      midiGetUserPrograms(midiConfig.inputDevice, midiConfig.outputDevice, midiConfig.inputChannel, midiConfig.vendor, midiConfig.device, midiConfig.channel, 4, setUserPrograms);
+    }
   }, [midiConfig])
 
   return (

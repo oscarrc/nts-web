@@ -51,26 +51,25 @@ const midiSendPitchBend = (value, id, channel) => {
     }
 }
 
-const midiGetUserPrograms = (id, vendor, device, channel, type) => {
-    for(let i = 0; i<16; i++){
-        webmidi.getOutputById(id).sendSysex(vendor, [48 + channel, 0, device, 25, type, i]);
-    }
+const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, channel, type, cb) => {
+    const input = webmidi.getInputById(inputId);
+    const output = webmidi.getOutputById(outputId);
+
+    if(!input.hasListener("sysex", inputChannel, cb))
+        input.addListener("sysex", inputChannel, cb);
+
+    for(let i=0; i<16; i++)
+        setTimeout( () => output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, i]), 50*i);
 }
 
-const midiListenControlChange = ( cb, id, channel, enable = true ) => {
+const midiListenControlChange = ( id, channel, cb ) => {
     const input = webmidi.getInputById(id);
+    
     if(webmidi.enabled && input){
-        if(enable){
-            input.addListener("controlchange", channel, cb);
-            input.addListener("sysex", "all", function (e) {
-                console.log(e);
-            });
-            webmidi.outputs[0].sendSysex(0x42, [0x50, 0x00, 0x02]);
-            setTimeout( () => {
-                webmidi.outputs[0].sendSysex(0x42, [0x00, 0x00, 0x57, 0x19, 0x01, 0x00]); 
-            }, 1000)           
-        }else{
+        if(input.hasListener("controlchange", channel, cb)){            
             input.removeListener("controlchange", channel, cb);
+        }else{            
+            input.addListener("controlchange", channel, cb);
         }
     }
 }

@@ -69,9 +69,15 @@ const defaultSettings = {
     inputChannel: "all",
     octave: 3,
     settings: false,
-    sysexVendor: 66,
-    sysexDevice: 87,
-    sysexChannel: 0
+    vendor: 66,
+    channel: 0,
+    device: 87,
+    userprgr: {
+        osc: 4,
+        mod: 6,
+        delay: 6,
+        reverb: 6
+    }
 }
 
 export { defaultPatch, defaultSettings }

@@ -2,7 +2,8 @@ export const synth = {
     osc: {
         type: {
             cc: 53,
-            values: [{
+            values: [
+                {
                     value: 0,
                     label: "Sawtooth"
                 },
@@ -198,7 +199,8 @@ export const synth = {
         mod: {
             type: {
                 cc: 88,
-                values: [{
+                values: [
+                    {
                         value: 0,
                         label: "Off"
                     },
