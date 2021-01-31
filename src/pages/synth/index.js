@@ -22,12 +22,17 @@ export function Synth() {
   const midiConfig = useSelector(state => state.midi).value;
   const synthValues = useSelector(state => state.synthesizer).value;
 
+  const getSelectorValues = (path, value) => {
+    const length = midiConfig.userprog[path.substring(0, path.indexOf('.'))];
+    const count = length ? length : path.split('.').reduce((o,i)=>o[i], synthValues);
+    return Math.round(value / Math.round(127/count));
+  }
+
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
   const setSequencer = () => history.push("/sequencer");
   const setControl = (midi) => {
-    console.log(midi.data)
-    // const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
-    // const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
+    const isSelector = cc[midi.data[1]].match( /(osc|arp|effects)\.[a-z]*\.?(type|scale)/i);
+    const value = isSelector ? getSelectorValues(cc[midi.data[1]],cc[midi.data[2]]) : midi.data[2];
     // dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
   }
   
