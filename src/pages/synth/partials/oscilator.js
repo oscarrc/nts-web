@@ -11,13 +11,17 @@ export function Oscilator(props) {
             <Divider className="text-gold">OSC</Divider>
             <Row justify="space-between" className="padded-row">
                 <Col span={6}>
+                    { props.max }
                     <Selector 
                         name="TYPE"
-                        max={ osc.type.values.length - 1 }
+                        max={ props.count }
+                        min={ 0 }
                         values={ osc.type.values }
                         cc={ osc.type.cc }
                         value={ oscValues.type }
-                        path="osc.type" 
+                        vstep={ Math.round(127/(props.count)) }
+                        path="osc.type"
+                        offset={ 1 }
                     />
                 </Col>
                 <Col span={6}>

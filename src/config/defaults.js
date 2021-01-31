@@ -74,9 +74,9 @@ const defaultSettings = {
     device: 87,
     userprog: {
         osc: 4,
-        mod: 6,
-        delay: 6,
-        reverb: 6
+        mod: 4,
+        delay: 5,
+        reverb: 5
     }
 }
 

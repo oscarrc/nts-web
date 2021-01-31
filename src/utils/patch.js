@@ -1,5 +1,6 @@
 import { synth } from '../config/midi';
 
+//TODO Adapt randomize to new selectors
 const randomPatch = () => {
     const patch = {
         osc: {
