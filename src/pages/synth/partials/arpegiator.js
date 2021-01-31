@@ -13,21 +13,25 @@ export function Arpegiator(props) {
                 <Col span={6}>
                     <Selector 
                         name="TYPE" 
-                        max={ arp.type.values.length - 1 }
+                        max={ arp.type.values.length }
                         values={ arp.type.values }
                         cc={ arp.type.cc }
                         value={ arpValues.type }
                         path="arp.type"
+                        vstep={ 14 }
+                        offset={ 1 }
                     />
                 </Col>
                 <Col span={6}>
                     <Selector 
                         name="SCALE"
-                        max={ arp.scale.values.length - 1 }
+                        max={ arp.scale.values.length }
                         values={ arp.scale.values }
                         cc={ arp.scale.cc }
                         value={ arpValues.scale }
                         path="arp.scale"
+                        vstep={ 25 }
+                        offset={ 1 }
                     />
                 </Col>
                 <Col span={6}>      

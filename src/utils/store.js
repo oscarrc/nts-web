@@ -3,8 +3,8 @@ const stringToPath = ( path ) => {
 
     let output = [];
 
-    path.split('.').forEach(function (item, index) {
-        item.split(/\[([^}]+)\]/g).forEach(function (key) {
+    path.split('.').forEach( (item, index) => {
+        item.split(/\[([^}]+)\]/g).forEach( (key) => {
             if (key.length > 0) {
                 output.push(key);
             }

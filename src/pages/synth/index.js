@@ -22,11 +22,17 @@ export function Synth() {
   const midiConfig = useSelector(state => state.midi).value;
   const synthValues = useSelector(state => state.synthesizer).value;
 
+  const getSelectorValues = (path, value) => {
+    const length = midiConfig.userprog[path.substring(0, path.indexOf('.'))];
+    const count = length ? length : path.split('.').reduce((o,i)=>o[i], synthValues);
+    return Math.round(value / Math.round(127/count));
+  }
+
   const setDisplay = (screen) => dispatch({type:'display/setDisplay', payload: { screen }});
   const setSequencer = () => history.push("/sequencer");
   const setControl = (midi) => {
-    // const values = cc[midi.data[1]].split('.').reduce((o,i)=>o[i], synthValues).values;
-    // const value = values ? values.findIndex( v => v.value === midi.data[2]) : midi.data[2];
+    const isSelector = cc[midi.data[1]].match( /(osc|arp|effects)\.[a-z]*\.?(type|scale)/i);
+    const value = isSelector ? getSelectorValues(cc[midi.data[1]],cc[midi.data[2]]) : midi.data[2];
     // dispatch({type:'synthesizer/setControl', payload: pathToStore({}, cc[midi.data[1]], value)});
   }
   
@@ -36,7 +42,7 @@ export function Synth() {
   }
 
   const randomize = () => {
-    const patch = randomPatch();  
+    const patch = randomPatch(midiConfig.userprog);  
     dispatch({type:'synthesizer/setControl', payload: patch})
   }
 
@@ -60,7 +66,7 @@ export function Synth() {
             <Display />
             <Row justify="space-between" align="top">
               <Col span={24} onMouseEnter={ () => setDisplay("osc")}>
-                <Oscilator spec={synth.osc} values={synthValues.osc} />
+                <Oscilator spec={synth.osc} values={synthValues.osc} count={midiConfig.userprog.osc} />
               </Col>
               <Col span={24} onMouseEnter={ () => setDisplay("arp")}>
                 <Arpegiator spec={synth.arp} values={synthValues.arp} />
@@ -71,7 +77,7 @@ export function Synth() {
             <Amplifier spec={synth.amp} values={synthValues.amp} />
           </Col>
           <Col span={24} md={12} lg={6} onMouseEnter={ () => setDisplay("effects")}>
-            <Effects spec={synth.effects} values={synthValues.effects} />
+            <Effects spec={synth.effects} values={synthValues.effects} count={ midiConfig.userprog } />
           </Col>          
           <Col span={24} md={10} lg={4} onMouseEnter={ () => setDisplay("vcf")}>
             <Vcfilter spec={synth.vcf} values={synthValues.vcf} />

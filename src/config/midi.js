@@ -3,26 +3,27 @@ export const synth = {
         type: {
             cc: 53,
             values: [
-                {
-                    value: 0,
-                    label: "Sawtooth"
-                },
-                {
-                    value: 31,
-                    label: "Triangle"
-                },
-                {
-                    value: 62,
-                    label: "Square"
-                },
-                {
-                    value: 93,
-                    label: "VPN"
-                },
-                {
-                    value: 127,
-                    label: "Alt"
-                }
+                "Sawtooth",
+                "Triangle",
+                "Square",
+                "VPN",
+                "Alt",
+                "User 1",
+                "User 2",
+                "User 3",
+                "User 4 ",
+                "User 5",
+                "User 6",
+                "User 7",
+                "User 8",
+                "User 9",
+                "User 10",
+                "User 11",
+                "User 12",
+                "User 13",
+                "User 14",
+                "User 15",
+                "User 16"
             ]
         },
         shape: {
@@ -43,74 +44,28 @@ export const synth = {
     arp: {
         type: {
             cc: 117,
-            values: [{
-                    value: 0,
-                    label: "Up"
-                },
-                {
-                    value: 14,
-                    label: "Down"
-                },
-                {
-                    value: 28,
-                    label: "Up-Down"
-                },
-                {
-                    value: 42,
-                    label: "Down-Up"
-                },
-                {
-                    value: 56,
-                    label: "Converge"
-                },
-                {
-                    value: 70,
-                    label: "Diverge"
-                },
-                {
-                    value: 84,
-                    label: "Conv.-Div."
-                },
-                {
-                    value: 98,
-                    label: "Div.-Conv."
-                },
-                {
-                    value: 112,
-                    label: "Random"
-                },
-                {
-                    value: 127,
-                    label: "Stchastic"
-                }
+            values: [
+                "Up",
+                "Down",
+                "Up-Down",
+                "Down-Up",
+                "Converge",
+                "Diverge",
+                "Conv.-Div.",
+                "Div.-Conv.",
+                "Random",
+                "Stchastic"
             ]
         },
         scale: {
             cc: 118,
-            values: [{
-                    value: 0,
-                    label: "Octave"
-                },
-                {
-                    value: 25,
-                    label: "Major Triad"
-                },
-                {
-                    value: 50,
-                    label: "Major Suspended"
-                },
-                {
-                    value: 75,
-                    label: "Major Augumented"
-                },
-                {
-                    value: 100,
-                    label: "Minor Triad"
-                },
-                {
-                    value: 127,
-                    label: "Minor Diminished"
-                }
+            values: [
+                "Octave",
+                "Major Triad",
+                "Major Suspended",
+                "Major Augumented",
+                "Minor Triad",
+                "Minor Diminished"
             ]
         },
         length: {
@@ -200,30 +155,28 @@ export const synth = {
             type: {
                 cc: 88,
                 values: [
-                    {
-                        value: 0,
-                        label: "Off"
-                    },
-                    {
-                        value: 25,
-                        label: "Chorus"
-                    },
-                    {
-                        value: 50,
-                        label: "Ensemble"
-                    },
-                    {
-                        value: 75,
-                        label: "Phaser"
-                    },
-                    {
-                        value: 100,
-                        label: "Flanger"
-                    },
-                    {
-                        value: 127,
-                        label: "Random"
-                    }
+                    "Off",
+                    "Chorus",
+                    "Ensemble",
+                    "Phaser",
+                    "Flanger",
+                    "Random",
+                    "User 1",
+                    "User 2",
+                    "User 3",
+                    "User 4 ",
+                    "User 5",
+                    "User 6",
+                    "User 7",
+                    "User 8",
+                    "User 9",
+                    "User 10",
+                    "User 11",
+                    "User 12",
+                    "User 13",
+                    "User 14",
+                    "User 15",
+                    "User 16"
                 ]
             },
             time: {
@@ -244,30 +197,21 @@ export const synth = {
         delay: {
             type: {
                 cc: 89,
-                values: [{
-                        value: 0,
-                        label: "Off"
-                    },
-                    {
-                        value: 25,
-                        label: "Stereo"
-                    },
-                    {
-                        value: 50,
-                        label: "Mono"
-                    },
-                    {
-                        value: 75,
-                        label: "Ping Pong"
-                    },
-                    {
-                        value: 100,
-                        label: "High Pass"
-                    },
-                    {
-                        value: 127,
-                        label: "Tape"
-                    }
+                values: [
+                    "Off",
+                    "Stereo",
+                    "Mono",
+                    "Ping Pong",
+                    "High Pass",
+                    "Tape",
+                    "User 1",
+                    "User 2",
+                    "User 3",
+                    "User 4 ",
+                    "User 5",
+                    "User 6",
+                    "User 7",
+                    "User 8"
                 ]
             },
             time: {
@@ -295,30 +239,21 @@ export const synth = {
         reverb: {
             type: {
                 cc: 90,
-                values: [{
-                        value: 0,
-                        label: "Off"
-                    },
-                    {
-                        value: 25,
-                        label: "Hall"
-                    },
-                    {
-                        value: 50,
-                        label: "Plate"
-                    },
-                    {
-                        value: 75,
-                        label: "Space"
-                    },
-                    {
-                        value: 100,
-                        label: "Riser"
-                    },
-                    {
-                        value: 127,
-                        label: "Submarine"
-                    }
+                values: [
+                    "Off",
+                    "Hall",
+                    "Plate",
+                    "Space",
+                    "Riser",
+                    "Submarine",
+                    "User 1",
+                    "User 2",
+                    "User 3",
+                    "User 4 ",
+                    "User 5",
+                    "User 6",
+                    "User 7",
+                    "User 8"
                 ]
             },
             time: {

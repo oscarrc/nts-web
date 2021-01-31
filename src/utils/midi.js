@@ -71,9 +71,9 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
     
     if(webmidi.enabled && input){
         if(input.hasListener("sysex", inputChannel, requestAll)){
-            input.removeListener("sysex", channel, requestAll);
+            input.removeListener("sysex", inputChannel, requestAll);
         }else{            
-            input.addListener("sysex", channel, requestAll);
+            input.addListener("sysex", inputChannel, requestAll);
         }
 
         output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank])
