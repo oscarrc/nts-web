@@ -1,10 +1,10 @@
 import { synth } from '../config/midi';
 
 //TODO Adapt randomize to new selectors
-const randomPatch = () => {
+const randomPatch = (userprogs) => {
     const patch = {
         osc: {
-            type: Math.floor(Math.random() * synth.osc.type.values.length),
+            type: Math.floor(Math.random() * userprogs.osc),
             shape: Math.floor(Math.random() * (synth.osc.shape.max + 1)),
             alt: Math.floor(Math.random() * (synth.osc.alt.max + 1)),
         },
@@ -43,20 +43,20 @@ const randomPatch = () => {
         effects: {
             mod: {
                 active: Math.random() < 0.5 ? 1 : 0,
-                type: Math.floor(Math.random() * (synth.effects.mod.type.values.length - 1) + 1),
+                type: Math.floor(Math.random() * (userprogs.mod) + 1),
                 time: Math.floor(Math.random() * (synth.effects.mod.time.max + 1)),
                 depth: Math.floor(Math.random() * (synth.effects.mod.depth.max + 1)),
             },
             delay: {
                 active: Math.random() < 0.5 ? 1 : 0,
-                type: Math.floor(Math.random() * (synth.effects.delay.type.values.length - 1) + 1),
+                type: Math.floor(Math.random() * (userprogs.delay) + 1),
                 time: Math.floor(Math.random() * (synth.effects.delay.time.max + 1)),
                 depth: Math.floor(Math.random() * (synth.effects.delay.depth.max + 1)),
                 mix: Math.floor(Math.random() * (synth.effects.delay.mix.max + 1)),
             },
             reverb:{
                 active: Math.random() < 0.5 ? 1 : 0,
-                type: Math.floor(Math.random() * (synth.effects.reverb.type.values.length - 1) + 1),
+                type: Math.floor(Math.random() * (userprogs.reverb) + 1),
                 time: Math.floor(Math.random() * (synth.effects.reverb.time.max + 1)),
                 depth: Math.floor(Math.random() * (synth.effects.reverb.depth.max + 1)),
                 mix: Math.floor(Math.random() * (synth.effects.reverb.mix.max + 1)),

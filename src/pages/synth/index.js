@@ -37,7 +37,7 @@ export function Synth() {
   }
 
   const randomize = () => {
-    const patch = randomPatch();  
+    const patch = randomPatch(midiConfig.userprog);  
     dispatch({type:'synthesizer/setControl', payload: patch})
   }
 
