@@ -1,6 +1,5 @@
 import { synth } from '../config/midi';
 
-//TODO Adapt randomize to new selectors
 const randomPatch = (userprogs) => {
     const patch = {
         osc: {
@@ -10,7 +9,7 @@ const randomPatch = (userprogs) => {
         },
         arp: {
             type: Math.floor(Math.random() * synth.arp.type.values.length),
-            scale: Math.floor(Math.random() * synth.arp.type.values.length),
+            scale: Math.floor(Math.random() * synth.arp.scale.values.length),
             length: Math.floor(Math.random() * (synth.arp.length.max + 1)),
         },
         amp: {
