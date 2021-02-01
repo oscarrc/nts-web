@@ -17,6 +17,7 @@ This is still a work in progress, so expect some bugs and issues.
 
 - [ ] React to control change inputs (in progress)
 - [ ] Retrieve user oscilators and effects vía Sysex (staging)
+- [ ] Implement midi passthrough (in progress, but [I need a controller for testing](https://ko-fi.com/oscarrc))
 - [ ] Implement the hability to switch patches on the fly vía patch banks
 - [ ] Implement the hability to switch patterns on the fly vía pattern or sequence banks
 - [ ] Export all patches from banks along with the sequence in a single file
