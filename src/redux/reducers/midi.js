@@ -20,6 +20,9 @@ export const midiSlice = createSlice({
     octaveDown: (state) => {
       const octave = state.value.octave;
       state.value.octave = octave !== 0 ? octave - 1 : 0;
+    },
+    setUserPrograms: (state, action) => {
+      state.value.userprog[action.payload.type] = state.value.userprog[action.payload.type] + 1;
     }
   }
 });

@@ -1,4 +1,4 @@
-const saveSequence = (seq) => {
+const saveSequenceFile = (seq) => {
     const filename = "sequence.ntsseq";
     const contentType = "text/plain;charset=utf-8;";
 
@@ -29,4 +29,4 @@ const loadSequenceFile = (file) => {
     })
 }
 
-export { saveSequence, loadSequenceFile  };
+export { saveSequenceFile, loadSequenceFile };

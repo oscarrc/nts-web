@@ -1,11 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Divider, Row, Col } from 'antd';
 import { Button, Knob, Dropdown } from '../../../components';
-import { vcf } from '../../../config/midi';
 
-export function Vcfilter() { 
-    const vcfValues = useSelector(state => state.synthesizer).value.vcf;
+export function Vcfilter(props) { 
+    const vcfValues = props.values;
+    const vcf = props.spec;
 
     const renderControls = (ctrls, span, values, path) => {
         let controls = [];

@@ -1,12 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+
 import { Divider, Row, Col } from 'antd';
 import { Button, Knob, Selector } from '../../../components';
-import { effects } from '../../../config/midi';
 
-export function Effects() { 
-    const effectValues = useSelector(state => state.synthesizer).value.effects;
-
+export function Effects(props) { 
+    const effectValues = props.values;
+    const effects = props.spec;
+    
     const renderControls = (ctrls, name, span, val, path) => {
         let controls = [];
 
@@ -16,13 +17,14 @@ export function Effects() {
                     <Col span={span} key={name + ctrls[control].cc}> 
                         <Selector 
                             name={ name }
-                            max={ ctrls[control].values.length - 1 }
                             values={ ctrls[control].values }
                             cc={ ctrls[control].cc }
                             min="1"
+                            max={ props.count[name.toLowerCase()] }
                             active={ val.active }
                             value={ val[control] }
-                            path={ path + "." + control}
+                            path={ path + "." + control}                            
+                            vstep={ Math.round(127/(props.count[name.toLowerCase()])) }
                         />
                     </Col>
                 );

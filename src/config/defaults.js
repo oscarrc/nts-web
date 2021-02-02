@@ -68,7 +68,16 @@ const defaultSettings = {
     inputDevice: "",
     inputChannel: "all",
     octave: 3,
-    settings: false
+    settings: false,
+    vendor: 66,
+    channel: 0,
+    device: 87,
+    userprog: {
+        osc: 4,
+        mod: 4,
+        delay: 5,
+        reverb: 5
+    }
 }
 
 export { defaultPatch, defaultSettings }

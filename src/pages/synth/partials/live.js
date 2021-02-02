@@ -1,18 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Row, Col } from 'antd';
 import { Keyboard, Pad, Octave } from '../../../components';
 
-export function Live() {       
-    const octave = useSelector(state => state.midi).value.octave;
-
+export function Live(props) {       
     return  (
         <Row justify="space-around" align="stretch">
             <Col span={2}>
                 <Octave />
             </Col>
             <Col span={18}>
-                <Keyboard octave={octave} />
+                <Keyboard octave={props.octave} />
             </Col>   
             <Col span={2}>
                 <Pad />

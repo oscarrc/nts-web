@@ -1,25 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-
 import { Divider, Row, Col } from 'antd';
 import { Knob, Selector } from '../../../components';
-import { osc } from '../../../config/midi';
 
-export function Oscilator() { 
-    const oscValues = useSelector(state => state.synthesizer).value.osc;
+export function Oscilator(props) { 
+    const oscValues = props.values;
+    const osc = props.spec;
 
     return  (        
         <div className="osc">
             <Divider className="text-gold">OSC</Divider>
             <Row justify="space-between" className="padded-row">
                 <Col span={6}>
+                    { props.max }
                     <Selector 
                         name="TYPE"
-                        max={ osc.type.values.length - 1 }
+                        max={ props.count }
+                        min={ 0 }
                         values={ osc.type.values }
                         cc={ osc.type.cc }
                         value={ oscValues.type }
-                        path="osc.type" 
+                        vstep={ Math.round(127/(props.count)) }
+                        path="osc.type"
+                        offset={ 1 }
                     />
                 </Col>
                 <Col span={6}>
