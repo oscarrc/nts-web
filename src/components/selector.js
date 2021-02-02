@@ -18,7 +18,7 @@ export function Selector(props) {
     }, [props.path, dispatch])
 
     useEffect( () => {
-      const val = props.value >= props.max ? 127 : props.vstep * (props.value);
+      const val = props.value >= props.max - props.offset ? 127 : props.vstep * (props.value);
       if( control.current.value !== props.value) control.current.value = props.value;  
       if( props.active ) midiControlChange(props.cc, val, midiConfig.outputDevice, midiConfig.outputChannel);
     }, [props.values, props.cc, props.active, props.value, props.vstep, props.absolute, midiConfig]);
