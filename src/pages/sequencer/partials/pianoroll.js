@@ -16,8 +16,8 @@ export function Pianoroll(props) {
     useEffect( () => {
         const current = pianoroll.current;
         if(props.sequence){            
-            const startingOctave = props.sequence.match(/o\d+\D/g)[1]
-            const offset = startingOctave.substring(1, startingOctave.length - 1) * 12;
+            const startingOctave = props.sequence.match(/o\d+\D/g)[1];
+            const offset = startingOctave ? startingOctave.substring(1, startingOctave.length - 1) * 12 : 36;
             current.yoffset = offset > 96 ? 96 : offset;            
             current.setMMLString(props.sequence);
         }
