@@ -15,7 +15,12 @@ export function Pianoroll(props) {
 
     useEffect( () => {
         const current = pianoroll.current;
-        if(props.sequence) current.setMMLString(props.sequence);
+        if(props.sequence){            
+            const startingOctave = props.sequence.match(/o\d+\D/g)[1]
+            const offset = startingOctave.substring(1, startingOctave.length - 1) * 12;
+            current.yoffset = offset > 96 ? 96 : offset;            
+            current.setMMLString(props.sequence);
+        }
     }, [props.sequence]);
 
     useEffect( () => {  
@@ -55,6 +60,7 @@ export function Pianoroll(props) {
                     loop={props.loop}
                     xscroll={props.xscroll}
                     yscroll={props.yscroll}
+                    yoffset={36}
                     snap={props.snap}
                     octadj={props.octadj}
                     tempo={props.tempo}
@@ -83,7 +89,7 @@ Pianoroll.defaultProps = {
     xscroll: 1,
     yscroll: 1,
     snap: 1,
-    octadj: -2,
+    octadj: 0,
     tempo: 120,
     play: false,
     sequence: "",
