@@ -1,4 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { controls, defaults } from '../../config/synth';
+
+const defaultPatch = defaults(controls);
 
 export const synthSlice = createSlice({
   name: 'synth',
@@ -6,7 +9,14 @@ export const synthSlice = createSlice({
     value: {
         bank: 0,
         octave: 3,
-        patches: []
+        patches: [
+          defaultPatch,
+          defaultPatch,
+          defaultPatch,
+          defaultPatch,
+          defaultPatch,
+          defaultPatch
+        ]
     }
   },
   reducers: {
