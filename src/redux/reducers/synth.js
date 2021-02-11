@@ -24,6 +24,12 @@ export const synthSlice = createSlice({
         state.value.patches[state.value.bank] = action.payload;
       },
       setControl: (state, action) => {
+        if(strings[action.payload.cc]){
+          let value = Math.round(action.payload.value.value / 127);
+          let index = value > state.value.patches[state.value.bank][action.payload.cc] - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
+          action.payload.value.svalue = strings[action.payload.cc][index];
+        }
+
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
           ...action.payload.value
@@ -48,7 +54,7 @@ export const synthSlice = createSlice({
           const max = state.value.patches[state.value.bank][k].max || 127;
           const min = state.value.patches[state.value.bank][k].min || 0;
           const step = state.value.patches[state.value.bank][k].step || 1;
-		      const value = Math.floor(Math.random() * (max - min + 1) + min)
+		      const value = Math.floor(Math.random() * (max - min + 1) + min);
 
           state.value.patches[state.value.bank][k].value = value < max  ? value * step : 127;
           if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
