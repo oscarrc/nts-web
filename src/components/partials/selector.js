@@ -17,7 +17,7 @@ export function Selector(props) {
             step={ 1 } 
             min={ props.min } 
             max={ props.max } 
-            value={props.value}>              
+            value={ Math.round(props.value / props.step) > props.max - 1 ? props.max : Math.round(props.value / props.step) }>              
           </webaudio-knob>
         </div>
     );
