@@ -6,29 +6,6 @@ const controls = {
                 label: "Type",
                 type: "selector",
                 cc: 53,
-                values: [
-                    "Sawtooth",
-                    "Triangle",
-                    "Square",
-                    "VPN",
-                    "Alt",
-                    "User 1",
-                    "User 2",
-                    "User 3",
-                    "User 4 ",
-                    "User 5",
-                    "User 6",
-                    "User 7",
-                    "User 8",
-                    "User 9",
-                    "User 10",
-                    "User 11",
-                    "User 12",
-                    "User 13",
-                    "User 14",
-                    "User 15",
-                    "User 16"
-                ],
                 min: 0,
                 max: 4,
                 step: 31
@@ -52,18 +29,6 @@ const controls = {
                 label: "Type",
                 type: "selector",
                 cc: 117,
-                values: [
-                    "Up",
-                    "Down",
-                    "Up-Down",
-                    "Down-Up",
-                    "Converge",
-                    "Diverge",
-                    "Conv.-Div.",
-                    "Div.-Conv.",
-                    "Random",
-                    "Stchastic"
-                ],
                 min: 0,
                 max: 9,
                 step: 14
@@ -72,14 +37,6 @@ const controls = {
                 label: "Scale",
                 type: "selector",
                 cc: 118,
-                values: [
-                    "Octave",
-                    "Major Triad",
-                    "Major Suspended",
-                    "Major Augumented",
-                    "Minor Triad",
-                    "Minor Diminished"
-                ],
                 min: 0,
                 max: 5,
                 step: 25
@@ -98,13 +55,6 @@ const controls = {
                 label: "Type",
                 type: "dropdown",
                 cc: 14,
-                values: [
-                    "ADSR",
-                    "AHR",
-                    "AR",
-                    "AR Loop",
-                    "Open"
-                ],
                 min: 0,
                 max: 4,
                 step: 31
@@ -188,30 +138,6 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 88,
-                        values: [
-                            "Off",
-                            "Chorus",
-                            "Ensemble",
-                            "Phaser",
-                            "Flanger",
-                            "Random",
-                            "User 1",
-                            "User 2",
-                            "User 3",
-                            "User 4 ",
-                            "User 5",
-                            "User 6",
-                            "User 7",
-                            "User 8",
-                            "User 9",
-                            "User 10",
-                            "User 11",
-                            "User 12",
-                            "User 13",
-                            "User 14",
-                            "User 15",
-                            "User 16"
-                        ],
                         min: 1,
                         max: 5,
                         step: 21
@@ -235,22 +161,6 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 89,
-                        values: [
-                            "Off",
-                            "Stereo",
-                            "Mono",
-                            "Ping Pong",
-                            "High Pass",
-                            "Tape",
-                            "User 1",
-                            "User 2",
-                            "User 3",
-                            "User 4 ",
-                            "User 5",
-                            "User 6",
-                            "User 7",
-                            "User 8"
-                        ],
                         min: 1,
                         max: 5,
                         step: 21
@@ -279,22 +189,6 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 90,
-                        values: [
-                            "Off",
-                            "Hall",
-                            "Plate",
-                            "Space",
-                            "Riser",
-                            "Submarine",
-                            "User 1",
-                            "User 2",
-                            "User 3",
-                            "User 4 ",
-                            "User 5",
-                            "User 6",
-                            "User 7",
-                            "User 8"
-                        ],
                         min: 1,
                         max: 5,
                         step: 21
@@ -326,15 +220,6 @@ const controls = {
                 type: "dropdown",
                 cc: 42,
                 switch: 127,
-                values: [
-                    "LowPass 2p",
-                    "LowPass 4p",
-                    "BandPass 2p",
-                    "BandPass 4p",
-                    "HighPass 2p",
-                    "HighPass 4p",
-                    "Off"
-                ],
                 min: 0,
                 max: 5,
                 step: 21
@@ -375,7 +260,125 @@ const controls = {
     }
 }
 
-const defaults = (config) => {
+const strings = {
+    53: [
+        "Sawtooth",
+        "Triangle",
+        "Square",
+        "VPN",
+        "Alt",
+        "User 1",
+        "User 2",
+        "User 3",
+        "User 4 ",
+        "User 5",
+        "User 6",
+        "User 7",
+        "User 8",
+        "User 9",
+        "User 10",
+        "User 11",
+        "User 12",
+        "User 13",
+        "User 14",
+        "User 15",
+        "User 16"
+    ],
+    117: [
+        "Up",
+        "Down",
+        "Up-Down",
+        "Down-Up",
+        "Converge",
+        "Diverge",
+        "Conv.-Div.",
+        "Div.-Conv.",
+        "Random",
+        "Stchastic"
+    ],
+    118: [
+        "Octave",
+        "Major Triad",
+        "Major Suspended",
+        "Major Augumented",
+        "Minor Triad",
+        "Minor Diminished"
+    ],
+    14: [
+        "ADSR",
+        "AHR",
+        "AR",
+        "AR Loop",
+        "Open"
+    ],
+    88: [
+        "Off",
+        "Chorus",
+        "Ensemble",
+        "Phaser",
+        "Flanger",
+        "Random",
+        "User 1",
+        "User 2",
+        "User 3",
+        "User 4 ",
+        "User 5",
+        "User 6",
+        "User 7",
+        "User 8",
+        "User 9",
+        "User 10",
+        "User 11",
+        "User 12",
+        "User 13",
+        "User 14",
+        "User 15",
+        "User 16"
+    ],
+    89: [
+        "Off",
+        "Stereo",
+        "Mono",
+        "Ping Pong",
+        "High Pass",
+        "Tape",
+        "User 1",
+        "User 2",
+        "User 3",
+        "User 4 ",
+        "User 5",
+        "User 6",
+        "User 7",
+        "User 8"
+    ],
+    90: [
+        "Off",
+        "Hall",
+        "Plate",
+        "Space",
+        "Riser",
+        "Submarine",
+        "User 1",
+        "User 2",
+        "User 3",
+        "User 4 ",
+        "User 5",
+        "User 6",
+        "User 7",
+        "User 8"
+    ],
+    42: [
+        "LowPass 2p",
+        "LowPass 4p",
+        "BandPass 2p",
+        "BandPass 4p",
+        "HighPass 2p",
+        "HighPass 4p",
+        "Off"
+    ]
+}
+
+const defaults = (config, strings) => {
     let defaultConfig = {};
 
     const values = (control) =>  {
@@ -383,7 +386,7 @@ const defaults = (config) => {
             value:  control.min ? control.min * control.step : 0,
         }
 
-        if(control.values) value.svalue = control.values = control.values ? control.values[control.min ? control.min : 0] : '';
+        if(strings[control.cc]) value.svalue = strings[control.cc][control.min || 0]
         if(control.max) value.max =  control.max;
         if(control.min) value.min =  control.min;
         if(control.step) value.step =  control.step;
@@ -415,4 +418,4 @@ const defaults = (config) => {
     return defaultConfig;
 }
 
-export { controls, defaults }
+export { controls, strings, defaults }

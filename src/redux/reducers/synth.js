@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { controls, defaults } from '../../config/synth';
+import { controls, strings, defaults } from '../../config/synth';
 
-const defaultPatch = defaults(controls);
+const defaultPatch = defaults(controls, strings);
 
 export const synthSlice = createSlice({
   name: 'synth',
@@ -46,11 +46,12 @@ export const synthSlice = createSlice({
       randomize: (state) => {
         Object.keys(state.value.patches[state.value.bank]).forEach( k => {          
           const max = state.value.patches[state.value.bank][k].max || 127;
-          const min = state.value.patches[state.value.bank][k].min;
+          const min = state.value.patches[state.value.bank][k].min || 0;
           const step = state.value.patches[state.value.bank][k].step || 1;
-		  const value = Math.floor(Math.random() * ((max ? max : 127) - (min ? min : 0) + 1) + (min ? min : 0)) * step
+		      const value = Math.floor(Math.random() * (max - min + 1) + min)
 
-          state.value.patches[state.value.bank][k].value = value < max * step ? value : 127;
+          state.value.patches[state.value.bank][k].value = value < max  ? value * step : 127;
+          if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
         })
       }
   }
