@@ -6,13 +6,15 @@ import { Bank } from '../partials/bank';
 export function Patches(props) {
     const dispatch = useDispatch();
 
+    const setPatch = (bank) => dispatch({ type:"synth/setBank", payload: bank });
+
     const renderButtons = () => {
         let buttons = [];
 
         for (let i = 0; i < 6; i++) {
             buttons.push(
                 <Col key={ "bank" + i } span={8}>
-                    <Bank label="Patch" bank={i} active={ props.active === i } />
+                    <Bank label="Patch" bank={i} active={ props.active === i } onClick={setPatch} />
                 </Col>
             )
         }
