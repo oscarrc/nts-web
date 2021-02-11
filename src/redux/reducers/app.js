@@ -10,7 +10,7 @@ export const appSlice = createSlice({
   },
   reducers: {
       toggleLoading: (state) => {
-          state.value.loading = !state.value.loading
+        state.value.loading = !state.value.loading
       },
       toggleSettings: (state) => {
         state.value.settings = !state.value.settings
