@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout, Row, Col, Collapse} from 'antd';
 import { midiPlayNote } from '../../utils/midi';
-import { Display, More, Patches, Section } from '../layout';
-import { controls, strings } from '../../config/synth';
+import { Display, Live, More, Patches, Section } from '../layout';
+import { controls } from '../../config/synth';
 
 export function Synth() {
     const { Panel } = Collapse;
@@ -37,6 +37,11 @@ export function Synth() {
                     <More />
                 </Col>
             </Row>
+            <Collapse className="transparent live"  bordered={false} >
+                <Panel showArrow={false} header={ <span className='text-gold'><strong >Live controls</strong></span> } key="1">
+                    <Live />
+                </Panel>
+            </Collapse>
         </Content>
     );
 };

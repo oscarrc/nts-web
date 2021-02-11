@@ -432,6 +432,10 @@ a.link:hover{
   width: 100%;
 }
 
+.live{
+  margin-top: 32px;
+}
+
 @media (max-width: 768px){
   [class^="ant-layout-"]{
     padding-left: 10px !important;
