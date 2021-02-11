@@ -151,6 +151,11 @@ const controls = {
                         label: "Depth",
                         type: "knob",
                         cc: 29
+                    },
+                    {
+                        label: "Depth",
+                        type: "dummy",
+                        cc: 0,
                     }
                 ]
             },

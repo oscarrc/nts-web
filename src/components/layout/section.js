@@ -12,14 +12,25 @@ export function Section(props) {
         midiControlChange(cc, value, props.midi.outputDevice, props.midi.outputChannel);
     }
 
-    const renderControl = (control, span ) => {
-        return <Col span={span}>{control.label}</Col>
+    const renderControl = (control, span) => {
+        switch(control.type){
+            case "knob":
+                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+            case "selector":
+                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+            case "dropdown":
+                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+            case "switch":
+                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>         
+            case "dummy":
+                return <Col key={control.label + control.cc} span={span}></Col>
+        }
     }
 
     const renderSection = (section, subsection = false) => {
         const span = Math.floor(24/section.controls.length);
         const rendered = [
-            <Divider className={ subsection ? "text-light" : "text-gold" }>{ section.label }</Divider>
+            <Divider key={section.label} className={ subsection ? "text-light" : "text-gold" }>{ section.label }</Divider>
         ];
         
         section.controls?.forEach( c => {

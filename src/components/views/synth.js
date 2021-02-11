@@ -23,7 +23,7 @@ export function Synth() {
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
                     <Section section={controls.osc} />
-                    <Section section={controls.arp} midi={midiState} synth={synthState} />
+                    <Section section={controls.arp} />
                 </Col>
                 <Col span={24} md={10} lg={4}>
                     <Section section={controls.amp} />
