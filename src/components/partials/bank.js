@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Dropdown, Menu, Upload } from 'antd';
+import { Button, Dropdown, Menu, Space, Upload } from 'antd';
 import { DownOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 
 export function Bank(props) {
@@ -17,10 +17,8 @@ export function Bank(props) {
     )
 
     return  (
-        <Dropdown key="menu" overlay={menu}>
-            <Button ghost className="btn-gold">
-                { props.label } { props.bank + 1 } <DownOutlined />
-            </Button>
-        </Dropdown>
+        <Dropdown.Button className={"btn-gold" + (props.active ? " active" : "")} overlay={menu} icon={<DownOutlined />}>
+            { props.label } { props.bank + 1 } 
+        </Dropdown.Button>
     );
 }

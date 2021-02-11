@@ -3,29 +3,26 @@ import { Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Bank } from '../partials/bank';
 
-export function Patches() {
+export function Patches(props) {
     const dispatch = useDispatch();
 
+    const renderButtons = () => {
+        let buttons = [];
+
+        for (let i = 0; i < 6; i++) {
+            buttons.push(
+                <Col key={ "bank" + i } span={8}>
+                    <Bank label="Patch" bank={i} active={ props.active === i } />
+                </Col>
+            )
+        }
+
+        return buttons;
+    }
+
     return  (
-        <Row className="patches-wrapper" justify="space-between" align="middle"     >
-            <Col span={8}>
-                <Bank label="Patch" bank={0} />
-            </Col>
-            <Col span={8}>
-                <Bank label="Patch" bank={1} />
-            </Col>
-            <Col span={8}>
-                <Bank label="Patch" bank={2} />
-            </Col>
-            <Col span={8}>
-                <Bank label="Patch" bank={3} />
-            </Col>
-            <Col span={8}>
-                <Bank label="Patch" bank={4} />
-            </Col>
-            <Col span={8}>
-                <Bank label="Patch" bank={5} />
-            </Col>
+        <Row className="patches-wrapper" justify="space-between" align="middle" gutter={[20,0]}>
+            { renderButtons() }
         </Row>
     );
 }

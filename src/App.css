@@ -71,17 +71,19 @@
 .text-left{
   text-align: left;
 }
-
+.btn-gold.ant-btn-group .ant-btn, .btn-gold.ant-btn-group .ant-btn:disabled, .btn-gold.ant-btn-group .ant-btn:disabled:hover, .btn-gold.ant-btn-group .ant-btn:focus,
 .btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover, .btn-gold.ant-btn:focus{
   color: #f3cc62;
+  background: transparent;
   border-color: #f3cc62;
 }
 
+.btn-gold.ant-btn-group .ant-btn:disabled, .btn-gold.ant-btn-group .ant-btn:disabled:hover,
 .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
   opacity: .75;
 }
-
-
+.btn-gold.ant-btn-group.active .ant-btn,
+.btn-gold.ant-btn-group .ant-btn:hover, .btn-gold.ant-btn-group .ant-btn:active,
 .btn-gold.ant-btn:hover, .btn-gold.ant-btn:active{
   color: #d32029;
   border-color: #d32029;
@@ -96,11 +98,11 @@
   background-color: #212122;
 }
 
-.menu-dark .ant-dropdown-menu-item, .menu-dark .ant-upload{
+.menu-dark .ant-dropdown-menu-item, .menu-dark .ant-dropdown-menu-item *{
   color: #f3cc62;
 }
 
-.menu-dark .ant-dropdown-menu-item:hover{
+.menu-dark .ant-dropdown-menu-item:hover, .menu-dark .ant-dropdown-menu-item:hover *{
   color: #d32029;
   background-color: transparent;
 }
