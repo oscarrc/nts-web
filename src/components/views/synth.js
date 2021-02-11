@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout, Row, Col, Collapse} from 'antd';
 import { midiPlayNote } from '../../utils/midi';
-import { Display, More, Section } from '../layout';
+import { Display, More, Patches, Section } from '../layout';
 import { controls, strings } from '../../config/synth';
 
 export function Synth() {
@@ -22,6 +22,7 @@ export function Synth() {
             <Row justify="space-between" align="top" gutter={[0,20]}>
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
+                    <Patches />
                     <Section section={controls.osc} state={ synthState } />
                     <Section section={controls.arp} state={ synthState } />
                 </Col>
