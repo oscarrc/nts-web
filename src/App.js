@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Header, Footer, Settings } from './components/layout';
-import { Synth } from './components/views';
+import { Synth, Sequencer } from './components/views';
 import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms } from './utils/midi';
 import { channels } from './config/midi';
 import "antd/dist/antd.css";
@@ -71,7 +71,7 @@ function App(){
 			<Header/>
 			<Switch>
 				<Route exact path="/" component={Synth} />
-				{/* <Route exact path="/sequencer" component={Sequencer} /> */}
+				<Route exact path="/sequencer" component={Sequencer} />
 			</Switch>
 			<Footer />
 			<Settings visible={ appState.settings } settings={ midiState } channels={channels} />
