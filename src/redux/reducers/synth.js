@@ -25,14 +25,14 @@ export const synthSlice = createSlice({
       },
       setControl: (state, action) => {
         if(strings[action.payload.cc]){
-          let value = Math.round(action.payload.value.value / 127);
+          let value = Math.round(action.payload.val.value / 127);
           let index = value > state.value.patches[state.value.bank][action.payload.cc] - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
-          action.payload.value.svalue = strings[action.payload.cc][index];
+          action.payload.val.svalue = strings[action.payload.cc][index];
         }
 
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
-          ...action.payload.value
+          ...action.payload.vaj
         };
       },
       setBank: (state, action) => {

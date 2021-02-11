@@ -48,7 +48,7 @@ function App(){
 	const initControlChange = (midi) => midiListenControlChange(midi.inputDevice, midi.inputChannel, (e) => {
 		dispatch({ type: "synth/setControl", payload: {
 			cc: e.data[1],
-			value: e.data[2]
+			val: { value: e.data[2] }
 		}});
 	});
 	
