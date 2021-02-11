@@ -22,17 +22,17 @@ export function Synth() {
             <Row justify="space-between" align="top" gutter={[0,20]}>
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
-                    <Section section={controls.osc} />
-                    <Section section={controls.arp} />
+                    <Section section={controls.osc} state={ synthState } />
+                    <Section section={controls.arp} state={ synthState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.amp} />
+                    <Section section={controls.amp} state={ synthState } />
                 </Col>
                 <Col span={24} md={12} lg={6}>
-                    <Section section={controls.effects} />
+                    <Section section={controls.effects} state={ synthState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.vcf} />
+                    <Section section={controls.vcf} state={ synthState } />
                     <More />
                 </Col>
             </Row>

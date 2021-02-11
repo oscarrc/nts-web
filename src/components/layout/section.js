@@ -2,7 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Divider } from 'antd';
 import { midiControlChange } from '../../utils/midi';
-// import { Knob, Selector, Dropdown, Switch } from '../partials';
+import { Dropdown, Knob, Selector, Switch } from '../partials';
+
+import { strings } from '../../config/synth';
 
 export function Section(props) {
     const dispatch = useDispatch();
@@ -15,15 +17,47 @@ export function Section(props) {
     const renderControl = (control, span) => {
         switch(control.type){
             case "knob":
-                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+                return <Col key={ control.label + control.cc } span={ span }>
+                    <Knob 
+                        label={ control.label } 
+                        cc={ control.cc } 
+                        state={ props.state.patches[props.state.bank][control.cc].value }
+                    />
+                </Col>
             case "selector":
-                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+                return <Col key={ control.label + control.cc } span={ span }>
+                    <Selector 
+                        label={ control.label } 
+                        cc={ control.cc } 
+                        value={ props.state.patches[props.state.bank][control.cc].value }
+                        active={ props.state.patches[props.state.bank][control.cc].active }
+                        min={ props.state.patches[props.state.bank][control.cc].min }
+                        max={ props.state.patches[props.state.bank][control.cc].max }
+                        step={ props.state.patches[props.state.bank][control.cc].step }
+                    />
+                </Col>
             case "dropdown":
-                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>
+                return <Col key={ control.label + control.cc } span={ span }>
+                    <Dropdown 
+                        label={ control.label }
+                        cc={control.cc}
+                        active={ isNaN(control.active) ? 1 : 0 }
+                        value={ props.state.patches[props.state.bank][control.cc].svalue }
+                        values={ strings[control.cc] }
+                    />
+                </Col>
             case "switch":
-                return <Col key={control.label + control.cc} span={span}>{control.label}</Col>         
+                return <Col key={ control.label + control.cc } span={ span }>
+                    <Switch 
+                        label={ control.label } 
+                        cc={ control.cc } 
+                        switch={ control.switch } 
+                        value={ props.state.patches[props.state.bank][control.cc].value } 
+                        active={ props.state.patches[props.state.bank][control.cc].active } tag={ true }
+                    />
+                </Col>         
             case "dummy":
-                return <Col key={control.label + control.cc} span={span}></Col>
+                return <Col key={ control.label + control.cc } span={ span }></Col>
         }
     }
 

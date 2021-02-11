@@ -32,7 +32,7 @@ function App(){
 		midiStart().then( devices => {
 			dispatch({ type: "midi/setOptions", payload: devices});
 			dispatch({ type: "app/toggleLoading" });
-			dispatch({ type: "synth/randomize" });
+			
 			if(devices.inputDevice && devices.outputDevice) dispatch({ type: "display/setMessage", payload: "welcome" });
 			else return Promise.reject("nodevice");
 			
