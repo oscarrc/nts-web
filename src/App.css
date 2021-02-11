@@ -41,6 +41,7 @@
 .divider-gold.ant-divider, .text-gold.ant-divider-horizontal.ant-divider-with-text::before, .text-gold.ant-divider-horizontal.ant-divider-with-text::after{
   border-top: 1px solid;
   border-top-color: #f3cc62;
+  top: 0;
 }
 
 .text-red{
@@ -59,6 +60,7 @@
 .text-light.ant-divider-horizontal.ant-divider-with-text::before, .text-light.ant-divider-horizontal.ant-divider-with-text::after{
   border-top: 1px solid;
   border-top-color: #434343;
+  top: 0;
 }
 
 .text-lcd, .text-lcd *{
@@ -220,6 +222,10 @@ a.link:hover{
   background-color: #2a1215;
   margin-bottom: 16px;
   padding: 5px;
+}
+
+.display p {
+  margin-bottom: 0;
 }
 
 .keyboard-wrapper, .pianoroll-wrapper{

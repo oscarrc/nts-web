@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout, Row, Col, Collapse} from 'antd';
 import { midiPlayNote } from '../../utils/midi';
-import { Display, Section } from '../layout';
+import { Display, More, Section } from '../layout';
 import { controls, strings } from '../../config/synth';
 
 export function Synth() {
@@ -19,20 +19,21 @@ export function Synth() {
 
     return (
         <Content className="main transparent">
-            <Row justify="space-between" align="top" gutter={[0,20]} onMouseLeave={ () => dispatch({ type: "display/setMessage", payload: "welcome" })}>
+            <Row justify="space-between" align="top" gutter={[0,20]}>
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
-                    <Section section={controls.osc} name="OSC" midi={midiState} synth={synthState} />
-                    <Section section={controls.arp} name="ARP" midi={midiState} synth={synthState} />
+                    <Section section={controls.osc} />
+                    <Section section={controls.arp} midi={midiState} synth={synthState} />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.amp} name="AMP" midi={midiState} synth={synthState} />
+                    <Section section={controls.amp} />
                 </Col>
                 <Col span={24} md={12} lg={6}>
-                    <Section section={controls.effects} name="EFFECTS" midi={midiState} synth={synthState} />
+                    <Section section={controls.effects} />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.vcf} name="VCF" midi={midiState} synth={synthState} />
+                    <Section section={controls.vcf} />
+                    <More />
                 </Col>
             </Row>
         </Content>

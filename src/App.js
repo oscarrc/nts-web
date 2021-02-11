@@ -34,7 +34,7 @@ function App(){
 			dispatch({ type: "app/toggleLoading" });
 			dispatch({ type: "synth/randomize" });
 			if(devices.inputDevice && devices.outputDevice) dispatch({ type: "display/setMessage", payload: "welcome" });
-			else return Promise.reject("nodevice")
+			else return Promise.reject("nodevice");
 			
 			return midiGetUserPrograms(midiState.inputDevice, midiState.outputDevice, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
 		}).then( count => {
