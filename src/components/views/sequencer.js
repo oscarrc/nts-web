@@ -9,7 +9,7 @@ export function Sequencer() {
 	const { Content } = Layout;
 	const seqState = useSelector(state => state.sequencer).value;  
 	const midiConfig = useSelector(state => state.midi).value; 
-	const playNote = (note, duration) => midiPlayNote(note, midiConfig.outputDevice, midiConfig.outputChannel, true, duration);
+	const playNote = (note, duration) => midiPlayNote(note, midiConfig.outputDevice, midiConfig.outputChannel, true, false, duration);
 	
 	return (
 		<Content className="main transparent">

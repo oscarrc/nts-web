@@ -38,6 +38,7 @@ export function Pianoroll(props) {
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
+        //eslint-disable-next-line
     }, [props.play]);
 
     useEffect( () => {        
