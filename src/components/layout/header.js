@@ -10,7 +10,7 @@ export function Header() {
     const dispatch = useDispatch();
     const synthState = useSelector(state => state.synth).value;
     const seqState = useSelector(state => state.sequencer).value;
-    
+    //TODO fix import/export
     const toggleSettings = () => dispatch({type: 'app/toggleSettings'});    
 	const loadData = async (file) => {
         const data = await importData(file);
