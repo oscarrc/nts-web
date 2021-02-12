@@ -81,7 +81,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
     let count = { 88: 0, 89: 0, 90: 0, 53: 0 };
 
     return new Promise((resolve, reject) => { 
-        if(!webmidi.enabled || !inputId) reject(false);
+        if(!webmidi.enabled || !inputId) reject(!inputId ? "nodevice" : "error");
         
         const input = webmidi.getInputById(inputId);
         const output = webmidi.getOutputById(outputId);
