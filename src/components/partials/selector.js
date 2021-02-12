@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import selector from '../../assets/selector.png';
-
+//TODO max change does not have effect on the selector
 export function Selector(props) {
     const control = useRef(null);
     const onChange = (event) => {

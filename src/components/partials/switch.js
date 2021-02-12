@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-
 import button from '../../assets/button.png';
 
+//TODO handle status change and send midi if active
 export function Switch(props) {
     const control = useRef(null);
     const onChange = (event) => props.onChange(props.cc, { active: event.target.value, value: event.target.value ? props.value : props.switch }, event.target.value);
