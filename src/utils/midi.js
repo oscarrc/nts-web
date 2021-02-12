@@ -79,32 +79,34 @@ const midiSendPitchBend = (value, id, channel) => {
 const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, channel) => {
     const index = [88, 89, 90, 53]
     let count = { 88: 0, 89: 0, 90: 0, 53: 0 };
-    let type = 0;
 
     return new Promise((resolve, reject) => { 
         if(!webmidi.enabled || !inputId) reject(false);
         
         const input = webmidi.getInputById(inputId);
         const output = webmidi.getOutputById(outputId);
+        let type = 1;
+        let bank = 0;
+
         const doCount = (e) => {
             if (e.data.length === 53)  count[index[type - 1]] = count[index[type - 1]] + 1
-        }
-        
-        input.addListener("sysex", inputChannel, doCount);
-
-        for(let t=1; t<5; t++){
-            type = t;
-            for(let b=0; b<16; b++){
-                output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, t, b]);
-
-                if(t === 4 && b === 15){
-                    setTimeout(()=> {
-                        input.removeListener("sysex", inputChannel, doCount);
-                        resolve(count)
-                    }, 250)
-                }
+            if(bank < 16){
+                bank++
+                output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
+            }else if(type < 5){
+                bank = 0;
+                type ++
+                output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
+            }else{
+                setTimeout(()=> {
+                    input.removeListener("sysex", inputChannel, doCount);
+                    resolve(count)
+                }, 250)
             }
         }
+        
+        input.addListener("sysex", inputChannel, doCount);        
+        output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
     })
 }
 
