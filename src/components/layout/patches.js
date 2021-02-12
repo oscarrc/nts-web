@@ -14,7 +14,7 @@ export function Patches(props) {
         for (let i = 0; i < 6; i++) {
             buttons.push(
                 <Col key={ "patch" + i } span={8}>
-                    <Bank label="Patch" accept=".ntspatch" bank={i} active={ props.active === i } onClick={setPatch} onInport="" onExport="" />
+                    <Bank label="Patch" accept=".ntspatch" bank={i} active={ props.bank === i } onClick={setPatch} onInport="" onExport="" />
                 </Col>
             )
         }

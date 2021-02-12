@@ -19,7 +19,7 @@ export function Synth() {
             <Row justify="space-between" align="top" gutter={[0,20]}>
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
-                    <Patches active={ synthState.bank } />
+                    <Patches bank={ synthState.bank } />
                     <Section section={controls.osc} state={ synthState } midi={ midiState } />
                     <Section section={controls.arp} state={ synthState } />
                 </Col>

@@ -235,6 +235,10 @@ a.link:hover{
   height: 100%;
 }
 
+.button-wrapper .btn-gold.ant-btn-group{
+  padding: 0 5px;
+}
+
 .knob-wrapper {
   width: 100%;
 }
