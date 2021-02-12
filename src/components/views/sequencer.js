@@ -1,7 +1,9 @@
 import React from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import { useHistory } from "react-router-dom";
-import { Pianoroll, Controls }  from '../partials';
+import { Pianoroll }  from '../partials';
+import { Controls } from '../layout';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 export function Sequencer() {
@@ -33,22 +35,12 @@ export function Sequencer() {
 
 	return (
 		<Content className="main transparent">
-			{/* <Controls 
-				play={seqValues.play}
-				loop={seqValues.loop}
-				tempo={seqValues.tempo}
-				onBack={goBack}
-				onTempo={setTempo}
-				onSave={saveSequence}
-				onLoad={loadSequence} 
-				onPlay={togglePlay} />
-			<Pianoroll 
-				play={seqValues.play} 
-				loop={seqValues.loop} 
-				tempo={seqValues.tempo} 
-				sequence={seqValues.sequence} 
-				outputDevice={midiConfig.outputDevice} 
-				outputChannel={midiConfig.outputChannel} /> */}
+			<Controls />
+			<Row>
+            	<Col className="pianoroll-wrapper">   
+					<Pianoroll />
+				</Col>
+			</Row>
 		</Content>
 	);
 }

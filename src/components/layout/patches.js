@@ -13,8 +13,8 @@ export function Patches(props) {
 
         for (let i = 0; i < 6; i++) {
             buttons.push(
-                <Col key={ "bank" + i } span={8}>
-                    <Bank label="Patch" bank={i} active={ props.active === i } onClick={setPatch} />
+                <Col key={ "patch" + i } span={8}>
+                    <Bank label="Patch" accept=".ntspatch" bank={i} active={ props.active === i } onClick={setPatch} onInport="" onExport="" />
                 </Col>
             )
         }

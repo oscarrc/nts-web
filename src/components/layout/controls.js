@@ -11,7 +11,7 @@ export function Controls(props) {
     }, [])
 
     return (
-        <Row className="controls">
+        <Row className="controls" justify="space-between">
             <Col className="text-left" span={12}>                
                 <Space>
                     <Button onClick={ props.onBack } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>

@@ -1,3 +1,4 @@
+export { Controls } from './controls';
 export { Display } from './display';
 export { Footer } from './footer';
 export { Header } from './header';

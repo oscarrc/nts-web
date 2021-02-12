@@ -6,7 +6,7 @@ export function Bank(props) {
     const menu = (
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />}>
-                <Upload accept=".ntspatch" showUploadList={false} customRequest={ () => false }>
+                <Upload accept={ props.accept } showUploadList={false} customRequest={ () => false }>
                     Import
                 </Upload>
             </Menu.Item>
