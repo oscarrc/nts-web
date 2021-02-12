@@ -84,7 +84,7 @@
 }
 .btn-gold.ant-btn-group.active .ant-btn,
 .btn-gold.ant-btn-group .ant-btn:hover, .btn-gold.ant-btn-group .ant-btn:active,
-.btn-gold.ant-btn:hover, .btn-gold.ant-btn:active{
+.btn-gold.ant-btn:hover, .btn-gold.ant-btn:active, .btn-gold.ant-btn.active{
   color: #d32029;
   border-color: #d32029;
 }

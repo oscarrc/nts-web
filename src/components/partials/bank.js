@@ -6,7 +6,7 @@ export function Bank(props) {
     const menu = (
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />}>
-                <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file) } customRequest={ () => false }>
+                <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
                     Import
                 </Upload>
             </Menu.Item>

@@ -21,7 +21,7 @@ export const synthSlice = createSlice({
   },
   reducers: {
       setPatch: (state, action) => {
-        state.value.patches[state.value.bank] = action.payload;
+        state.value.patches[action.payload.bank || state.value.bank] = action.payload.patch;
       },
       setControl: (state, action) => {
         if(strings[action.payload.cc]){

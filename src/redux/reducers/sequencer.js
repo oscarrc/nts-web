@@ -12,19 +12,28 @@ export const seqSlice = createSlice({
     }
   },
   reducers: {
-      setOptions: (state, action) => {
-          state.value = { ...state.value, ...action.payload}
-      },
       setSequence: (state, action) => {
-          state.value.sequences[state.value.seq] = action.payload;
+          state.value.sequences[action.payload.bank ? action.payload.bank : state.value.bank] = action.payload.sequence;
       },
       setBank: (state, action) => {
           state.value.bank = action.payload;
+      },
+      setTempo: (state, action) => {
+          state.value.tempo = action.payload;
+      },
+      togglePlay: (state) => {
+        state.value.play = !state.value.play;
+      },
+      toggleLoop: (state) => {
+        state.value.loop = state.value.loop ? 0 : 1;
+      },
+      stopPlay: (state) => {
+        state.value.play = false;
       }
   }
 });
 
-export const { setOptions, setSequence, setBank } = seqSlice.actions;
+export const { setOptions, setSequence, setBank, setTempo, toggleLoop } = seqSlice.actions;
 export const sequencer = state => state.sequencer.value;
 
 export default seqSlice.reducer;

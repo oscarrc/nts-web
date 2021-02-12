@@ -34,7 +34,7 @@ export function Pianoroll(props) {
         if(props.play){
             const actx = new AudioContext();
             actx.resume();
-            pianoroll.current.play(actx, (e) => props.playNote(e.n));
+            pianoroll.current.play(actx, (e) => props.onPlay(e.n, e.g - e.t));
         }else if(typeof pianoroll.current.stop === "function"){
             pianoroll.current.stop();
         }
