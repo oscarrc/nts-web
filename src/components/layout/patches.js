@@ -2,19 +2,29 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Bank } from '../partials/bank';
+import { savePatch, loadPatch } from '../../utils/files';
 
 export function Patches(props) {
     const dispatch = useDispatch();
 
     const setPatch = (bank) => dispatch({ type:"synth/setBank", payload: bank });
+    const exportPatch = (bank) => savePatch(props.patches[bank]);
+
+    const importPatch = async (file, bank) => {
+        const patch = await loadPatch(file);
+        dispatch({ type: "synth/setPatch", payload: {
+            patch: patch,
+            bank: bank
+        }});
+    }
 
     const renderButtons = () => {
         let buttons = [];
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < props.patches.length; i++) {
             buttons.push(
                 <Col key={ "patch" + i } span={8}>
-                    <Bank label="Patch" accept=".ntspatch" bank={i} active={ props.bank === i } onClick={setPatch} onInport="" onExport="" />
+                    <Bank label="Patch" accept=".ntspatch" bank={i} active={ props.bank === i } onClick={setPatch} onImport={importPatch} onExport={exportPatch} />
                 </Col>
             )
         }
