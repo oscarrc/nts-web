@@ -14,7 +14,9 @@ export function Controls(props) {
 
         for (let i = 0; i < 6; i++) {
             buttons.push(
-                <Bank label="Seq" accept=".ntsSeq" bank={i} active={ props.active === i } onClick={setPatch} onInport="" onExport="" />
+                <Col span={8} sm={4} lg={24} key={ "seq" + i } >
+                    <Bank label="Seq" accept=".ntsSeq" bank={i} active={ props.active === i } onClick={setPatch} onInport="" onExport="" />
+                </Col>
             )
         }
 
@@ -29,18 +31,18 @@ export function Controls(props) {
     }, [])
 
     return (
-        <Row className="controls" justify="space-between">
-            <Col className="text-left">                
-                <Space>
-                    <Button onClick={ props.onBack } ghost className="btn-gold" icon={<RollbackOutlined />}></Button>
-                </Space>
-            </Col>
-            <Col className="button-wrapper">
-                { renderButtons() }
-            </Col>
-            <Col className="text-right btn-group">
+        <Row className="controls-wrapper" align="space-between">
+            <Col span={12} order={1} lg={{ order: 1, span: 24 }} className="btn-group">
                 <Button onClick={ props.onPlay } ghost className="btn-gold" icon={<CaretRightOutlined />}></Button>
                 <InputNumber onChange={ props.onTempo } className="control-number text-lcd" min={1} max={100000} defaultValue={props.tempo} />
+            </Col>
+            <Col span={24} order={3} lg={{ order: 2, span: 24 }} className="bank-selector">
+                <Row justify="space-between" gutter={[0,10]}>
+                    { renderButtons() }
+                </Row>
+            </Col>
+            <Col span={12} order={2} lg={{ order: 3, span: 24 }} >
+                <Button onClick={ props.onBack } ghost className="btn-gold back" icon={<RollbackOutlined />}> Back</Button>
             </Col>
         </Row>
     )

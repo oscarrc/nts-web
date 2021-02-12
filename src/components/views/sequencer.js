@@ -35,10 +35,13 @@ export function Sequencer() {
 
 	return (
 		<Content className="main transparent">
-			<Controls />
-			<Row>
-            	<Col className="pianoroll-wrapper">   
+			<Row justify="space-between">
+            	<Col span={24} order={2} lg={{ order: 1, span: 20 }} className="pianoroll-wrapper">   
 					<Pianoroll />
+				</Col>
+
+				<Col span={24} order={1} lg={{ order: 2, span: 4 }} >					
+					<Controls />
 				</Col>
 			</Row>
 		</Content>

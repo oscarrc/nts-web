@@ -235,8 +235,45 @@ a.link:hover{
   height: 100%;
 }
 
-.button-wrapper .btn-gold.ant-btn-group{
-  padding: 0 5px;
+.controls-wrapper{
+  height: 100%;
+}
+
+.controls-wrapper .bank-selector{
+  align-self: center;
+}
+
+
+@media (min-width:992px){
+  .controls-wrapper .bank-selector .ant-row .ant-col .ant-btn-group > .ant-btn:first-child{
+    width: 88px;
+  }
+}
+
+@media (max-width:992px){
+  .controls-wrapper > .ant-col:first-child{
+    text-align: left;
+  }
+  
+  .controls-wrapper > .ant-col:last-child{
+    text-align: right
+  }
+  
+  .bank-selector{
+    margin: 10px 0;
+  }
+}
+
+.controls-wrapper .back{
+  width: 118px
+}
+
+.controls-wrapper > .ant-col:first-child{
+  align-self: flex-start;
+}
+
+.controls-wrapper > .ant-col:last-child{
+  align-self: flex-end;
 }
 
 .knob-wrapper {
