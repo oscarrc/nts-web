@@ -31,7 +31,7 @@ export const seqSlice = createSlice({
         state.value.play = false;
       },
       importSeq: (state, action) =>{
-        state.value = action.payload
+        state.value = { ...state.value, ...action.payload}
       }
   }
 });

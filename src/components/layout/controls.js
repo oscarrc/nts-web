@@ -12,7 +12,11 @@ export function Controls(props) {
     const history = useHistory();
 
     const setTempo = (tempo) => dispatch({type:"sequencer/setTempo", payload: tempo });
-    const togglePlay = () => dispatch({type: "sequencer/togglePlay"});    
+    const togglePlay = () => {
+        const pianoroll = document.getElementById(props.pianoroll);
+        if(props.play) dispatch({ type: 'sequencer/setSequence', payload: { sequence: pianoroll.getMMLString() }}); 
+        dispatch({type: "sequencer/togglePlay"});
+    }    
     const setBank = (bank) => {
         const pianoroll = document.getElementById(props.pianoroll);
         dispatch({ type: 'sequencer/setSequence', payload: { sequence: pianoroll.getMMLString() }}); 

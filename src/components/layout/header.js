@@ -10,11 +10,11 @@ export function Header() {
     const dispatch = useDispatch();
     const synthState = useSelector(state => state.synth).value;
     const seqState = useSelector(state => state.sequencer).value;
-    //TODO fix import/export
+    
     const toggleSettings = () => dispatch({type: 'app/toggleSettings'});    
 	const loadData = async (file) => {
         const data = await importData(file);
-        dispatch({ type: 'synt/importSynth', payload: data.synth });
+        dispatch({ type: 'synth/importSynth', payload: data.synth });
         dispatch({ type: 'sequencer/importSeq', payload: data.sequencer })
     }
 	const saveData = () => exportData({

@@ -64,7 +64,7 @@ export const synthSlice = createSlice({
         })
       },
       importSynth: (state, action) =>{
-        state.value = action.payload
+        state.value = { ...state.value, ...action.payload}
       }
   }
 });
