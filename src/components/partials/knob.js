@@ -11,7 +11,8 @@ export function Knob(props) {
       if( current.value !== props.value){
         current.value = props.value;
       }   
-      return () => current.removeEventListener("change", onChange);   
+      return () => current.removeEventListener("change", onChange);
+      // eslint-disable-next-line
     }, [props.value]);
 
     return  (

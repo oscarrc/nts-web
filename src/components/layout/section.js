@@ -84,6 +84,8 @@ export function Section(props) {
                 </Col>         
             case "dummy":
                 return <Col key={ control.label + control.cc } span={ span }></Col>
+            default:
+                break;
         }
     }
 

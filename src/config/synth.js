@@ -395,7 +395,7 @@ const defaults = (config, strings) => {
         if(control.max) value.max =  control.max;
         if(control.min) value.min =  control.min;
         if(control.step) value.step =  control.step;
-        if(control.switch || control.type == "switch") value.active = 0;
+        if(control.switch || control.type === "switch") value.active = 0;
 
         return value;
     }

@@ -15,7 +15,14 @@ export function Selector(props) {
         current.value = Math.round(props.value / props.step);
       }   
       return () => current.removeEventListener("change", onChange);   
+      // eslint-disable-next-line
     }, [props.value, props.step, props.active]);
+
+    useEffect(() => {
+      const current = control.current;
+      current.max = props.max;
+      current.step = props.step
+    }, [props.max, props.step])
         
     return  (
         <div className='selector-wrapper'>   
