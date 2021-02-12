@@ -6,11 +6,11 @@ export function Bank(props) {
     const menu = (
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />}>
-                <Upload accept={ props.accept } showUploadList={false} customRequest={ () => false }>
+                <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file) } customRequest={ () => false }>
                     Import
                 </Upload>
             </Menu.Item>
-            <Menu.Item key="save" icon={<DownloadOutlined />}>
+            <Menu.Item key="save" onClick={ () => props.onExport(props.bank) } icon={<DownloadOutlined />}>
                 Export
             </Menu.Item>
         </Menu>
