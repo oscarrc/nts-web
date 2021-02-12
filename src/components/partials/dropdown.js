@@ -13,9 +13,9 @@ export function Dropdown(props) {
     useEffect(() => {
         const current = control.current;
         const value = props.values.findIndex( v => v === current.props.value);
-        if(props.value !== value) onChange(value);
+        onChange(value);
         //eslint-disable-next-line
-    }, [props.value, props.values, props.svalue, props.step, props.active]);
+    }, [props.value, props.values]);
 
     const renderOptions = (opt) => {
         let options = [];
