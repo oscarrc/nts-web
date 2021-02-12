@@ -103,4 +103,4 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
     })
 }
 
-export { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms, midiControlChange, midiPlayNote }
+export { midiStart, midiListenPassthrough, midiListenControlChange, midiSendPitchBend, midiGetUserPrograms, midiControlChange, midiPlayNote }

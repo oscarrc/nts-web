@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Layout, Row, Col, Collapse} from 'antd';
-import { midiPlayNote } from '../../utils/midi';
 import { Display, Live, More, Patches, Section } from '../layout';
 import { controls } from '../../config/synth';
 
@@ -13,8 +12,6 @@ export function Synth() {
     const synthState = useSelector(state => state.synth).value;
     const displayState = useSelector(state => state.display).value;
 
-    const playNote = (note) => midiPlayNote(note[1], midiState.outputDevice, midiState.outputChannel, note[0]);
-    const setOctave = (octave) => dispatch({type:'synthesizer/setControl', payload: octave});
     const setDisplay = (title, text) => dispatch({type:'display/setDisplay', payload: { title, text }});
 
     return (
@@ -39,7 +36,7 @@ export function Synth() {
             </Row>
             <Collapse className="transparent live"  bordered={false} >
                 <Panel showArrow={false} header={ <span className='text-gold'><strong >Live controls</strong></span> } key="1">
-                    <Live />
+                    <Live midi={ midiState } octave={ synthState.octave } />
                 </Panel>
             </Collapse>
         </Content>

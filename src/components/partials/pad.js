@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
-export function Pad() {
+export function Pad(props) {
     const pad = useRef(null);
     const indicator = useRef(null);
-    const midiConfig = useSelector(state => state.midi).value;
 
     useEffect( () => {
         const currentPad = pad.current;
@@ -16,12 +14,12 @@ export function Pad() {
             const pitch = -(-1 + ( 0.02 * (position + 1) ));
             
             currentIndicator.style.top = position + "%";
-            // midiSendPitchBend(pitch, midiConfig.outputDevice, midiConfig.outputChannel);
+            props.onChange(pitch)
         }
 
         const restorePitch = () => {
-            // currentIndicator.style.top = "50%";
-            // midiSendPitchBend(0, midiConfig.outputDevice, midiConfig.outputChannel);
+            currentIndicator.style.top = "50%";
+            props.onChange(0)
         }
 
         currentPad.addEventListener("mousedown", (event) => sendPitchBend(event));
@@ -38,7 +36,7 @@ export function Pad() {
             currentPad.removeEventListener("mouseleave", restorePitch);            
             currentPad.removeEventListener("touchcancel", restorePitch);
         }
-    }, [midiConfig])
+    }, [])
 
     return  (
         <div className="pad-wrapper">

@@ -13,9 +13,7 @@ export function Keyboard(props) {
             }
         }
 
-        const playNote = (note) => {
-            // midiPlayNote(note[1], midiConfig.outputDevice, midiConfig.outputChannel, note[0]);
-        }
+        const playNote = (note) => props.onChange(note);
 
         handleResize();
 
