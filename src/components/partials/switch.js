@@ -4,7 +4,7 @@ import button from '../../assets/button.png';
 
 export function Switch(props) {
     const control = useRef(null);
-    const onChange = (event) => props.onChange(props.cc, { active: event.target.value, value: event.target.value ? props.value : props.switch });
+    const onChange = (event) => props.onChange(props.cc, { active: event.target.value, value: event.target.value ? props.value : props.switch }, event.target.value);
 
     useEffect(() => {
         const current = control.current;
