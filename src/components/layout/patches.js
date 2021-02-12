@@ -2,16 +2,16 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Bank } from '../partials/bank';
-import { savePatch, loadPatch } from '../../utils/files';
+import { exportData, importData } from '../../utils/files';
 
 export function Patches(props) {
     const dispatch = useDispatch();
 
     const setPatch = (bank) => dispatch({ type:"synth/setBank", payload: bank });
-    const exportPatch = (bank) => savePatch(props.patches[bank]);
+    const exportPatch = (bank) => exportData(props.patches[bank], "patch.ntspatch");
 
     const importPatch = async (file, bank) => {
-        const patch = await loadPatch(file);
+        const patch = await importData(file);
         dispatch({ type: "synth/setPatch", payload: {
             patch: patch,
             bank: bank

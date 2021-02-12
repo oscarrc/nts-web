@@ -5,7 +5,7 @@ import { Row, Col, Button, InputNumber  } from 'antd';
 import { CaretRightOutlined, RollbackOutlined } from '@ant-design/icons';
 import { Bank } from '../partials';
 
-import { loadSequence, saveSequence } from '../../utils/files';
+import { importData, exportData } from '../../utils/files';
 
 export function Controls(props) {  
     const dispatch = useDispatch();    
@@ -20,7 +20,7 @@ export function Controls(props) {
     }
 
 	const importSequence = async (file, bank) => {
-		const sequence = await loadSequence(file);
+		const sequence = await importData(file);
 		dispatch({ type: "sequencer/setSequence", payload: {
             sequence: sequence,
             bank: bank
@@ -32,7 +32,7 @@ export function Controls(props) {
         const pianoroll = document.getElementById(props.pianoroll);
         if(bank == props.bank) sequence = pianoroll.getMMLString()
         else sequence = props.sequences[bank]
-		saveSequence(sequence);
+		exportData(sequence, "sequence.ntsseq");
 	}
     
 	const goBack = () => {
