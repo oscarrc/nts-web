@@ -10,7 +10,7 @@ export function Section(props) {
     const dispatch = useDispatch();
 
     const controlChange = (cc, val, active = true) => {
-        if(active && val.value) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
+        if(active && !isNaN(val.value)) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
         dispatch({type:'synth/setControl', payload: { cc, val }});
     }
 
