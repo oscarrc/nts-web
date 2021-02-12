@@ -23,17 +23,17 @@ export function Synth() {
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
                     <Patches active={ synthState.bank } />
-                    <Section section={controls.osc} state={ synthState } />
+                    <Section section={controls.osc} state={ synthState } midi={ midiState } />
                     <Section section={controls.arp} state={ synthState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.amp} state={ synthState } />
+                    <Section section={controls.amp} state={ synthState } midi={ midiState } />
                 </Col>
                 <Col span={24} md={12} lg={6}>
-                    <Section section={controls.effects} state={ synthState } />
+                    <Section section={controls.effects} state={ synthState } midi={ midiState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.vcf} state={ synthState } />
+                    <Section section={controls.vcf} state={ synthState } midi={ midiState } />
                     <More />
                 </Col>
             </Row>

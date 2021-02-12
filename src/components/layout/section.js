@@ -11,7 +11,7 @@ export function Section(props) {
 
     const controlChange = (cc, val, active = true) => {
         if(active && val.value) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
-        dispatch({type:'synthesizer/setControl', payload: { cc, val }});
+        dispatch({type:'synth/setControl', payload: { cc, val }});
     }
 
     const renderControl = (control, span) => {
@@ -21,7 +21,7 @@ export function Section(props) {
                     <Knob 
                         label={ control.label } 
                         cc={ control.cc } 
-                        state={ props.state.patches[props.state.bank][control.cc].value }
+                        value={ props.state.patches[props.state.bank][control.cc].value }
                         onChange={ controlChange }
                     />
                 </Col>
@@ -43,7 +43,7 @@ export function Section(props) {
                 if(control.switch){
                     span = 18;
                     dropdown.push(
-                        <Col key={ control.label + control.cc } span={ 24 - span }>
+                        <Col key={ control.label + control.cc + 'switch' } span={ 24 - span }>
                             <Switch 
                                 cc={ control.cc } 
                                 switch={ control.switch } 
