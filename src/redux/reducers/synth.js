@@ -62,11 +62,14 @@ export const synthSlice = createSlice({
           if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
           if(!isNaN(active)) state.value.patches[state.value.bank][k].active = Math.random() < 0.5 ? 1 : 0;
         })
+      },
+      importSynth: (state, action) =>{
+        state.value = action.payload
       }
   }
 });
 
-export const { setPatch, setControl, setBank, setUserPrograms, randomize } = synthSlice.actions;
+export const { setPatch, setControl, setBank, setUserPrograms, randomize, importSynth } = synthSlice.actions;
 export const synth = state => state.synth.value;
 
 export default synthSlice.reducer;

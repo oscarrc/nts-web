@@ -29,11 +29,14 @@ export const seqSlice = createSlice({
       },
       stopPlay: (state) => {
         state.value.play = false;
+      },
+      importSeq: (state, action) =>{
+        state.value = action.payload
       }
   }
 });
 
-export const { setOptions, setSequence, setBank, setTempo, toggleLoop } = seqSlice.actions;
+export const { setOptions, setSequence, setBank, setTempo, toggleLoop, importSeq } = seqSlice.actions;
 export const sequencer = state => state.sequencer.value;
 
 export default seqSlice.reducer;
