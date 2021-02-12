@@ -9,9 +9,9 @@ import { strings } from '../../config/synth';
 export function Section(props) {
     const dispatch = useDispatch();
 
-    const controlChange = (cc, value, active = true) => {
-        if(active) dispatch({type:'synthesizer/setControl', payload: { cc, value }});
-        midiControlChange(cc, value, props.midi.outputDevice, props.midi.outputChannel);
+    const controlChange = (cc, val, active = true) => {
+        if(active && val.value) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
+        dispatch({type:'synthesizer/setControl', payload: { cc, val }});
     }
 
     const renderControl = (control, span) => {
@@ -22,6 +22,7 @@ export function Section(props) {
                         label={ control.label } 
                         cc={ control.cc } 
                         state={ props.state.patches[props.state.bank][control.cc].value }
+                        onChange={ controlChange }
                     />
                 </Col>
             case "selector":
@@ -34,18 +35,39 @@ export function Section(props) {
                         min={ props.state.patches[props.state.bank][control.cc].min }
                         max={ props.state.patches[props.state.bank][control.cc].max }
                         step={ props.state.patches[props.state.bank][control.cc].step }
+                        onChange={ controlChange }
                     />
                 </Col>
             case "dropdown":
-                return <Col key={ control.label + control.cc } span={ span }>
-                    <Dropdown 
-                        label={ control.label }
-                        cc={control.cc}
-                        active={ isNaN(control.active) ? 1 : 0 }
-                        value={ props.state.patches[props.state.bank][control.cc].svalue }
-                        values={ strings[control.cc] }
-                    />
-                </Col>
+                let dropdown = []
+                if(control.switch){
+                    span = 18;
+                    dropdown.push(
+                        <Col key={ control.label + control.cc } span={ 24 - span }>
+                            <Switch 
+                                cc={ control.cc } 
+                                switch={ control.switch } 
+                                value={ props.state.patches[props.state.bank][control.cc].value } 
+                                active={ props.state.patches[props.state.bank][control.cc].active }
+                                onChange={ controlChange }
+                            />
+                        </Col>
+                    )
+                }
+
+                dropdown.push(
+                    <Col key={ control.label + control.cc } span={ span }>
+                        <Dropdown 
+                            label={ control.label }
+                            cc={control.cc}
+                            active={ isNaN(control.active) ? 1 : 0 }
+                            value={ props.state.patches[props.state.bank][control.cc].svalue }
+                            values={ strings[control.cc] }
+                            onChange={ controlChange }
+                        />
+                    </Col>
+                )
+                return dropdown;
             case "switch":
                 return <Col key={ control.label + control.cc } span={ span }>
                     <Switch 
@@ -54,6 +76,7 @@ export function Section(props) {
                         switch={ control.switch } 
                         value={ props.state.patches[props.state.bank][control.cc].value } 
                         active={ props.state.patches[props.state.bank][control.cc].active } tag={ !!control.label }
+                        onChange={ controlChange }
                     />
                 </Col>         
             case "dummy":

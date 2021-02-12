@@ -32,7 +32,7 @@ export const synthSlice = createSlice({
 
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
-          ...action.payload.vaj
+          ...action.payload.val
         };
       },
       setBank: (state, action) => {
