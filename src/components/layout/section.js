@@ -61,8 +61,10 @@ export function Section(props) {
                             label={ control.label }
                             cc={control.cc}
                             active={ isNaN(control.active) ? 1 : 0 }
+                            svalue={ props.state.patches[props.state.bank][control.cc].svalue }
                             value={ props.state.patches[props.state.bank][control.cc].svalue }
                             values={ strings[control.cc] }
+                            step={ props.state.patches[props.state.bank][control.cc].step }
                             onChange={ controlChange }
                         />
                     </Col>

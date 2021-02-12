@@ -15,7 +15,7 @@ export function Selector(props) {
         current.value = props.value;
       }   
       return () => current.removeEventListener("change", onChange);   
-    }, [props.value, props.step]);
+    }, [props.value, props.step, props.active]);
         
     return  (
         <div className='selector-wrapper'>   

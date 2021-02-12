@@ -5,6 +5,17 @@ export function Dropdown(props) {
     const control = useRef(null);
     const { Option } = Select;
 
+    const onChange = (value) => {
+        value = value * props.step > (props.max * props.step) - 1 ? 127 : value * props.step;
+        props.onChange(props.cc, { value: value }, props.active);
+    }
+  
+    useEffect(() => {
+        const current = control.current;
+        const value = props.values.findIndex( v => v == current.props.value);
+        if(props.svalue !== current.props.value) onChange(value);
+    }, [props.value, props.svalue, props.step, props.active]);
+
     const renderOptions = (opt) => {
         let options = [];
         opt.forEach( (option, index) => {
@@ -15,13 +26,8 @@ export function Dropdown(props) {
         return options;
     }
 
-    const handleChange = useCallback((value) => {
-    },[]);
-
-    useEffect( () => handleChange(props.value), [props.value] );
-
     return  (
-        <Select ref={control} onChange={handleChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.value }>
+        <Select ref={control} onChange={onChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.svalue }>
             { renderOptions(props.values) }
         </Select>
     );
@@ -31,6 +37,7 @@ Dropdown.defaultProps = {
     label: null,
     cc: null,
     values: [],
-    value: "",
+    value: 0,
+    svalue: "",
     active: 1
 };
