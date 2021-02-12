@@ -3,6 +3,19 @@ import selector from '../../assets/selector.png';
 
 export function Selector(props) {
     const control = useRef(null);
+    const onChange = (event) => {
+      const value = event.target.value * props.step > (props.max * props.step) - 1 ? 127 : event.target.value * props.step;
+      props.onChange(props.cc, { value: value }, props.active);
+    }
+
+    useEffect(() => {
+      const current = control.current;
+      current.addEventListener("change", onChange);  
+      if( current.value * props.step !== props.value){
+        current.value = props.value;
+      }   
+      return () => current.removeEventListener("change", onChange);   
+    }, [props.value, props.step]);
         
     return  (
         <div className='selector-wrapper'>   

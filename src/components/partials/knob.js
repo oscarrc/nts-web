@@ -3,7 +3,6 @@ import knob from '../../assets/knob.png';
 
 export function Knob(props) {
     const control = useRef(null);
-
     const onChange = (event) => props.onChange(props.cc, { value: event.target.value });
 
     useEffect(() => {
