@@ -24,7 +24,8 @@ export function Pianoroll(props) {
     useEffect( () => {  
         const current = pianoroll.current;
         window.addEventListener("resize", () => handleResize(current));
-        setTimeout(() => handleResize(current), 100);
+        handleResize(current);
+        setTimeout(() => handleResize(current), 500);
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
