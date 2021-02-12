@@ -54,10 +54,13 @@ export const synthSlice = createSlice({
           const max = state.value.patches[state.value.bank][k].max || 127;
           const min = state.value.patches[state.value.bank][k].min || 0;
           const step = state.value.patches[state.value.bank][k].step || 1;
-		      const value = Math.floor(Math.random() * (max - min + 1) + min);
+          const value = Math.floor(Math.random() * (max - min + 1) + min);
+          const active = state.value.patches[state.value.bank][k].active;
+
 
           state.value.patches[state.value.bank][k].value = value < max  ? value * step : 127;
           if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
+          if(!isNaN(active)) state.value.patches[state.value.bank][k].active = Math.random() < 0.5 ? 1 : 0;
         })
       }
   }

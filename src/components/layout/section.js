@@ -77,7 +77,8 @@ export function Section(props) {
                         cc={ control.cc } 
                         switch={ control.switch } 
                         value={ props.state.patches[props.state.bank][control.cc].value } 
-                        active={ props.state.patches[props.state.bank][control.cc].active } tag={ !!control.label }
+                        active={ props.state.patches[props.state.bank][control.cc].active } 
+                        tag={ !!control.label }
                         onChange={ controlChange }
                     />
                 </Col>         
