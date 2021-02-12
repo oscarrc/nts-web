@@ -62,7 +62,7 @@ export function Section(props) {
                             cc={control.cc}
                             active={ isNaN(control.active) ? 1 : 0 }
                             svalue={ props.state.patches[props.state.bank][control.cc].svalue }
-                            value={ props.state.patches[props.state.bank][control.cc].svalue }
+                            value={ props.state.patches[props.state.bank][control.cc].value }
                             values={ strings[control.cc] }
                             step={ props.state.patches[props.state.bank][control.cc].step }
                             onChange={ controlChange }

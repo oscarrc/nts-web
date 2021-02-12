@@ -8,8 +8,9 @@ export function Knob(props) {
     useEffect(() => {
       const current = control.current;
       current.addEventListener("change", onChange);  
-      if( current.value !== props.value){
+      if( current.value !== props.value ){
         current.value = props.value;
+        props.onChange(props.cc, { value: props.value });
       }   
       return () => current.removeEventListener("change", onChange);
       // eslint-disable-next-line

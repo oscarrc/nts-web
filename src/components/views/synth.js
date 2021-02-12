@@ -21,7 +21,7 @@ export function Synth() {
                     <Display title={displayState.title} text={displayState.text} />
                     <Patches bank={ synthState.bank } patches={ synthState.patches } />
                     <Section section={controls.osc} state={ synthState } midi={ midiState } />
-                    <Section section={controls.arp} state={ synthState } />
+                    <Section section={controls.arp} state={ synthState } midi={ midiState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
                     <Section section={controls.amp} state={ synthState } midi={ midiState } />

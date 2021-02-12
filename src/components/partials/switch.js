@@ -11,9 +11,11 @@ export function Switch(props) {
         current.addEventListener("change", onChange);  
         if( current.value !== props.active){
             current.value = props.active;
+            props.onChange(props.cc, { active: props.value, value: props.active ? props.value : props.switch }, props.active);
         }   
-        return () => current.removeEventListener("change", onChange);   
-    }, [props.value]);
+        return () => current.removeEventListener("change", onChange);
+        //eslint-disable-next-line   
+    }, [props.value, props.active]);
 
     return  (
         <span className="text-light switch-button">
