@@ -11,7 +11,7 @@ export function Switch(props) {
         current.addEventListener("change", onChange);  
         if( current.value !== props.active){
             current.value = props.active;
-            props.onChange(props.cc, { active: props.value, value: props.active ? props.value : props.switch }, props.active);
+            props.onChange(props.cc, { active: props.active, value: props.active ? props.value : props.switch }, props.active);
         }   
         return () => current.removeEventListener("change", onChange);
         //eslint-disable-next-line   
