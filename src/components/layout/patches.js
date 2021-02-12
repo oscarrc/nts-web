@@ -16,6 +16,10 @@ export function Patches(props) {
             patch: patch,
             bank: bank
         }});
+        dispatch( {type: "display/setDisplay", payload: {
+            title: "Patch imported",
+            text: "Patch has been imported to bank " + (bank + 1)
+        }});
     }
 
     const renderButtons = () => {

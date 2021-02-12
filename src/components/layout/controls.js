@@ -25,6 +25,10 @@ export function Controls(props) {
             sequence: sequence,
             bank: bank
         }});
+        dispatch( {type: "display/setDisplay", payload: {
+            title: "Sequence imported",
+            text: "Sequence has been imported to bank " + (bank + 1)
+        }});
     }  
     
 	const exportSequence = (bank) => {
