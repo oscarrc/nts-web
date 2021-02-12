@@ -12,7 +12,7 @@ export function Selector(props) {
       const current = control.current;
       current.addEventListener("change", onChange);  
       if( current.value * props.step !== props.value){
-        current.value = props.value;
+        current.value = Math.round(props.value / props.step);
       }   
       return () => current.removeEventListener("change", onChange);   
     }, [props.value, props.step, props.active]);
