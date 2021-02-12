@@ -30,7 +30,7 @@ export function Controls(props) {
 	const exportSequence = (bank) => {
         let sequence;
         const pianoroll = document.getElementById(props.pianoroll);
-        if(bank == props.bank) sequence = pianoroll.getMMLString()
+        if(bank === props.bank) sequence = pianoroll.getMMLString()
         else sequence = props.sequences[bank]
 		exportData(sequence, "sequence.ntsseq");
 	}

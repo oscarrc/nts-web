@@ -36,8 +36,8 @@ function App(){
 			if(devices.inputDevice && devices.outputDevice) dispatch({ type: "display/setMessage", payload: "welcome" });
 			else return Promise.reject("nodevice");
 			
-			return midiGetUserPrograms(midiState.inputDevice, midiState.outputDevice, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
-		}).then( count => {
+			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
+		}).then( count => {			
 			dispatch({ type: "synth/setUserPrograms", payload: count});			
 		}).catch( err => {
 			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
@@ -55,6 +55,7 @@ function App(){
 	useEffect( () => {
 		initScripts(scripts);
 		initMidi();
+		// eslint-disable-next-line
 	}, [])
 
 	useEffect( () => {
@@ -64,6 +65,7 @@ function App(){
 			initPassthrough(midiState);
 			initControlChange(midiState);
 		}
+		// eslint-disable-next-line
 	}, [midiState])
 
 	return (

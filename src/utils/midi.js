@@ -25,7 +25,7 @@ const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChan
     if(!webmidi.enabled) return;
     const passthrough = webmidi.getInputById(passDevice);
 
-    const sendNote = (e) => midiPlayNote(e.value, outputDevice, outputChannel, e.type == "noteon" ? true : false, e.velocity);
+    const sendNote = (e) => midiPlayNote(e.value, outputDevice, outputChannel, e.type === "noteon" ? true : false, e.velocity);
     const sendPitchBend = (e) => midiSendPitchBend(e.value, outputDevice, outputChannel);
 
     if(passthrough){
@@ -87,19 +87,24 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
         const input = webmidi.getInputById(inputId);
         const output = webmidi.getOutputById(outputId);
         const doCount = (e) => {
-            if (e.data.length === 53)  count[index[type]]++
+            if (e.data.length === 53)  count[index[type - 1]] = count[index[type - 1]] + 1
         }
         
-        if(input.hasListener("sysex", inputChannel, doCount)) input.removeListener("sysex", inputChannel, doCount);
-        else input.addListener("sysex", inputChannel, doCount);
+        input.addListener("sysex", inputChannel, doCount);
 
         for(let t=1; t<5; t++){
             type = t;
-            for(let b=0; b<16; b++)
+            for(let b=0; b<16; b++){
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, t, b]);
+
+                if(t === 4 && b === 15){
+                    setTimeout(()=> {
+                        input.removeListener("sysex", inputChannel, doCount);
+                        resolve(count)
+                    }, 250)
+                }
+            }
         }
-        
-        resolve(count);
     })
 }
 
