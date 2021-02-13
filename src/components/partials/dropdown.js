@@ -13,8 +13,8 @@ export function Dropdown(props) {
     useEffect(() => {
         const current = control.current;
         const value = props.values.findIndex( v => v === current.props.value);
-        //TODO Fix double triggering
-        onChange(value);
+        
+        if(props.value !== value * props.step) onChange(value);
         //eslint-disable-next-line
     }, [props.value, props.values]);
 
