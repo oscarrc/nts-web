@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Layout, Row, Col, Collapse} from 'antd';
 import { Display, Live, More, Patches, Section } from '../layout';
 import { controls } from '../../config/synth';
@@ -7,12 +7,9 @@ import { controls } from '../../config/synth';
 export function Synth() {
     const { Panel } = Collapse;
     const { Content } = Layout;
-    const dispatch = useDispatch();
     const midiState = useSelector(state => state.midi).value;
     const synthState = useSelector(state => state.synth).value;
     const displayState = useSelector(state => state.display).value;
-
-    const setDisplay = (title, text) => dispatch({type:'display/setDisplay', payload: { title, text }});
 
     return (
         <Content className="main transparent">
