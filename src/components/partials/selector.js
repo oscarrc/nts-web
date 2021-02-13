@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import selector from '../../assets/selector.png';
-//TODO fix double triggering
+
 export function Selector(props) {
     const control = useRef(null);
     const onChange = (event) => {
