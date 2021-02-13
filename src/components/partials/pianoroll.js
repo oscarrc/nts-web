@@ -1,15 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 
 export function Pianoroll(props) {   
-    const pianoroll = useRef();    
-
-    const handleResize = (current) => {
-        const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
-        const actualHeight = document.getElementsByClassName('main')[0]?.clientHeight - 
-                             document.getElementsByClassName('footer')[0]?.clientHeight - 32;
-        current.width = actualWidth;
-        current.height = actualHeight;
-    }
+    const pianoroll = useRef(); 
 
     useEffect( () => {
         const current = pianoroll.current;
@@ -21,11 +13,19 @@ export function Pianoroll(props) {
         if (typeof current.setMMLString === "function") current.setMMLString(props.sequence);
     }, [props.sequence]);
 
-    useEffect( () => {  
-        const current = pianoroll.current;
-        window.addEventListener("resize", () => handleResize(current));
-        handleResize(current);
-        setTimeout(() => handleResize(current), 500);
+    useEffect( () => {
+        const handleResize = () => {  
+            const current = pianoroll.current;  
+            const actualWidth = document.getElementsByClassName('pianoroll-wrapper')[0]?.offsetWidth;
+            const actualHeight = document.getElementsByClassName('main')[0]?.clientHeight - 
+                                 document.getElementsByClassName('footer')[0]?.clientHeight - 32;
+            current.width = actualWidth;
+            current.height = actualHeight;
+        }
+
+        window.addEventListener("resize", () => handleResize);
+        handleResize();
+        setTimeout(() => handleResize(), 500);
 
         return () => window.removeEventListener("resize", handleResize);
     }, []);
