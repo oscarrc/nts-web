@@ -14,6 +14,11 @@ export function Section(props) {
         dispatch({type:'synth/setControl', payload: { cc, val }});
     }
 
+    const switchChange = (cc, active, value) => {
+        midiControlChange(cc, value, props.midi.outputDevice, props.midi.outputChannel);
+        dispatch({type:'synth/setControl', payload: { cc, val: {active} }});
+    }
+
     const renderControl = (control, span) => {
         switch(control.type){
             case "knob":
@@ -49,7 +54,7 @@ export function Section(props) {
                                 switch={ control.switch } 
                                 value={ props.state.patches[props.state.bank][control.cc].value } 
                                 active={ props.state.patches[props.state.bank][control.cc].active }
-                                onChange={ controlChange }
+                                onChange={ switchChange }
                             />
                         </Col>
                     )
@@ -79,7 +84,7 @@ export function Section(props) {
                         value={ props.state.patches[props.state.bank][control.cc].value } 
                         active={ props.state.patches[props.state.bank][control.cc].active } 
                         tag={ !!control.label }
-                        onChange={ controlChange }
+                        onChange={ switchChange }
                     />
                 </Col>         
             case "dummy":

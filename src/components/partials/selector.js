@@ -12,6 +12,7 @@ export function Selector(props) {
     useEffect(() => {
       const current = control.current;
       current.addEventListener("change", onChange);  
+      
       if( current.value * props.step !== props.value){
         current.value = Math.round(props.value / props.step);
         props.onChange(props.cc, { value: props.value }, props.active);

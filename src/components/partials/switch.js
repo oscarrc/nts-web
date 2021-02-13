@@ -1,18 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import button from '../../assets/button.png';
 
-//TODO handle status change and send midi if active
 export function Switch(props) {
     const control = useRef(null);
-    const onChange = (event) => props.onChange(props.cc, { active: event.target.value, value: event.target.value ? props.value : props.switch }, event.target.value);
+    const onChange = (event) => props.onChange(props.cc, event.target.value, event.target.value ? props.value : props.switch);
 
     useEffect(() => {
         const current = control.current;
         current.addEventListener("change", onChange);  
         if( current.value !== props.active){
             current.value = props.active;
-            props.onChange(props.cc, { active: props.active, value: props.active ? props.value : props.switch }, props.active);
-        }   
+            props.onChange(props.cc, props.active, props.active ? props.value : props.switch);
+        }
         return () => current.removeEventListener("change", onChange);
         //eslint-disable-next-line   
     }, [props.value, props.active]);
