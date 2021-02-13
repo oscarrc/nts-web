@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import selector from '../../assets/selector.png';
-//TODO max change does not have effect on the selector
 //TODO fix double triggering
 export function Selector(props) {
     const control = useRef(null);
@@ -13,7 +12,7 @@ export function Selector(props) {
       const current = control.current;
       current.addEventListener("change", onChange);  
       if( current.value * props.step !== props.value){
-        current.value = Math.round(props.value / props.step);
+        current.value = Math.floor(props.value / props.step);
         props.onChange(props.cc, { value: props.value }, props.active);
       }   
       return () => current.removeEventListener("change", onChange);   
