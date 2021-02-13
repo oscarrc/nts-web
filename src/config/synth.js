@@ -153,7 +153,7 @@ const controls = {
                         cc: 29
                     },
                     {
-                        label: "Depth",
+                        label: "Dummy",
                         type: "dummy",
                         cc: 0,
                     }

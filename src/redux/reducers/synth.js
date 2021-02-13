@@ -29,7 +29,7 @@ export const synthSlice = createSlice({
           let index = value > state.value.patches[state.value.bank][action.payload.cc].max - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
           action.payload.val.svalue = strings[action.payload.cc][index];
         }
-
+        
         if(action.payload.val.value < state.value.patches[state.value.bank][action.payload.cc].min){
           action.payload.val.active = 0;
           delete action.payload.val.value

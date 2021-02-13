@@ -1,18 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import selector from '../../assets/selector.png';
-//TODO max change does not have effect on the selector
+
 //TODO fix double triggering
 export function Selector(props) {
     const control = useRef(null);
     const onChange = (event) => {
-      const value = event.target.value * props.step > (props.max * props.step) - 1 ? 127 : event.target.value * props.step;
+      const value = event.target.value * props.step > (props.max * props.step) ? 127 : event.target.value * props.step;
       props.onChange(props.cc, { value: value }, props.active);
     }
 
     useEffect(() => {
       const current = control.current;
       current.addEventListener("change", onChange);  
-      
       if( current.value * props.step !== props.value){
         current.value = Math.round(props.value / props.step);
         props.onChange(props.cc, { value: props.value }, props.active);
@@ -24,8 +23,7 @@ export function Selector(props) {
     useEffect(() => {
       const current = control.current;
       current.max = props.max;
-      current.step = props.step
-    }, [props.max, props.step])
+    }, [props.max])
         
     return  (
         <div className='selector-wrapper'>   
