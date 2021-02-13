@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import selector from '../../assets/selector.png';
-
+//TODO max change does not have effect on the selector
 //TODO fix double triggering
 export function Selector(props) {
     const control = useRef(null);
     const onChange = (event) => {
-      const value = event.target.value * props.step > (props.max * props.step) ? 127 : event.target.value * props.step;
+      const value = event.target.value * props.step > (props.max * props.step) - 1 ? 127 : event.target.value * props.step;
       props.onChange(props.cc, { value: value }, props.active);
     }
 
@@ -22,8 +22,8 @@ export function Selector(props) {
 
     useEffect(() => {
       const current = control.current;
-      current.max = props.max;
-    }, [props.max])
+      current.max = props.max - props.min;
+    }, [props.max, props.min])
         
     return  (
         <div className='selector-wrapper'>   
@@ -37,7 +37,7 @@ export function Selector(props) {
             src={selector} 
             step={ 1 } 
             min={ props.min } 
-            max={ props.max } 
+            max={ props.max - props.min } 
             value={ Math.round(props.value / props.step) > props.max - 1 ? props.max : Math.round(props.value / props.step) }>              
           </webaudio-knob>
         </div>
