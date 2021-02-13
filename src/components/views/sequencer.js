@@ -8,8 +8,8 @@ import { midiPlayNote, } from '../../utils/midi';
 export function Sequencer() {
 	const { Content } = Layout;
 	const seqState = useSelector(state => state.sequencer).value;  
-	const midiConfig = useSelector(state => state.midi).value; 
-	const playNote = (note, duration) => midiPlayNote(note, midiConfig.outputDevice, midiConfig.outputChannel, true, false, duration);
+	const midiState = useSelector(state => state.midi).value; 
+	const playNote = (note, duration) => midiPlayNote(note, midiState.outputDevice, midiState.outputChannel, true, false, duration);
 	
 	return (
 		<Content className="main transparent">
