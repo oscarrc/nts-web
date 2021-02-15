@@ -17,17 +17,17 @@ export function Synth() {
                 <Col span={24} md={12} lg={6}>
                     <Display title={displayState.title} text={displayState.text} />
                     <Patches bank={ synthState.bank } patches={ synthState.patches } />
-                    <Section section={controls.osc} state={ synthState } midi={ midiState } />
-                    <Section section={controls.arp} state={ synthState } midi={ midiState } />
+                    <Section section={controls.osc} state={ synthState.patches[synthState.bank] } midi={ midiState } />
+                    <Section section={controls.arp} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.amp} state={ synthState } midi={ midiState } />
+                    <Section section={controls.amp} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
                 <Col span={24} md={12} lg={6}>
-                    <Section section={controls.effects} state={ synthState } midi={ midiState } />
+                    <Section section={controls.effects} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
                 <Col span={24} md={10} lg={4}>
-                    <Section section={controls.vcf} state={ synthState } midi={ midiState } />
+                    <Section section={controls.vcf} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                     <More />
                 </Col>
             </Row>
