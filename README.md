@@ -1,6 +1,6 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y43D7I3)
 
-## NTS-web (WIP)
+## NTS-web 2.0.0
 
 A web controller for the Korg NTS-1.
 
@@ -13,20 +13,34 @@ https://nts-web.oscarrc.me
 
 This is still a work in progress, so expect some bugs and issues. 
 
+#### TODOs
+
+- [ ] Implement midi passthrough (in progress, but [I need a controller for testing](https://ko-fi.com/oscarrc))
+
 If you miss any feature, please, request it.
+
+### How it works
+
+1. Connect your [NTS-1 device](https://amzn.to/3j3yu2Q) to the computer
+2. Go to the [NTS-web page](https://nts-web.oscarrc.me) (if you're already there just refresh the page)
+3. Start tweaking parameters
 
 ### Features
 
 * Installable, and works offline as a PWA
 * Control any parameter from within the app
-* Import and export your patches
+    * Changes made on the NTS-1 device reflect on the app
+* Six patch banks
+    * Import and export your patches per bank
 * Play with the on screen keyboard 
     * Change the starting octave
     * Send pitch bend
 * Sequence melodies with the built-in sequencer
     * Control the tempo of the sequencer
     * Play notes any octave
-* Save and load your sequences
+* Six sequence banks
+    * Import and export your sequences per bank
+* Save and load the whole app state including parameters, patches and sequences in one file
 
 ### Found a bug?
 
