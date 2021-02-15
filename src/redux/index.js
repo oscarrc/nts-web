@@ -12,5 +12,5 @@ export default configureStore({
     midi: midiReducer,
     display: displayReducer,
     app: appReducer,
-  },
+  }
 });
