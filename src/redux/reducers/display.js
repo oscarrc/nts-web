@@ -13,7 +13,7 @@ export const displaySlice = createSlice({
   },
   reducers: {
       setDisplay: (state, action) => {
-        state.value = { ...state.value, ...action.payload}
+        state.value = action.payload
       },
       setMessage: (state, action) => {
           state.value = messages[action.payload]

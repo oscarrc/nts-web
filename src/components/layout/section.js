@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Divider } from 'antd';
 import { midiControlChange } from '../../utils/midi';
@@ -19,23 +19,23 @@ export function Section(props) {
         dispatch({type:'synth/setControl', payload: { cc, val: {active} }});
     }
 
-    const setDisplay = useCallback((section, subsection = -1) => {
+    const setDisplay = (state, section, subsection = -1) => {
         const current = subsection < 0 ? section : section.sections[subsection];
-
+    
         let display = {
-            title: section.label + (subsection >= 0 ? " - " + current.label : ""),
+            title: section.label + (subsection >= 0 ? " | " + current.label : ""),
             text: []
         }
-
+    
         current.controls.forEach( c => {
            if(c.type !== "dummy") {
-                const value = c.type !== "knob" ? props.state.patches[props.state.bank][c.cc].svalue : props.state.patches[props.state.bank][c.cc].value
-                display.text.push(<Col>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
+                const value = c.type !== "knob" ? state.patches[state.bank][c.cc].svalue : state.patches[state.bank][c.cc].value
+                display.text.push(<Col key={c.cc + c.type}>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
             }
         })
-
+    
         dispatch({type: "display/setDisplay", payload: display})
-    }, [props.state])
+    };
 
     const renderControl = (control, span) => {
         switch(control.type){
@@ -124,7 +124,7 @@ export function Section(props) {
 
         section.sections?.forEach( (s, i) => {
             rendered.push(
-                <Row key={ "sub" + s.label } className="subsection" justify="space-between" onMouseEnter={ () => setDisplay(section, i) }>
+                <Row key={ "sub" + s.label } className="subsection" justify="space-between" onMouseEnter={ () => setDisplay(props.state, section, i) }>
                     {renderSection(s, true)}
                 </Row>
             );
@@ -134,7 +134,7 @@ export function Section(props) {
     }
        
     return (
-        <Row justify="space-between" onMouseEnter={ () => setDisplay(props.section) }>
+        <Row justify="space-between" onMouseEnter={ () => setDisplay(props.state, props.section) }>
             { renderSection(props.section) }       
         </Row>
     );
