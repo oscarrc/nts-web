@@ -7,8 +7,8 @@ const controls = {
                 type: "selector",
                 cc: 53,
                 min: 0,
-                max: 4,
-                step: 31
+                max: 3,
+                step: 42
             },
             {        
                 label: "Shape",
@@ -271,7 +271,6 @@ const strings = {
         "Triangle",
         "Square",
         "VPN",
-        "Alt",
         "User 1",
         "User 2",
         "User 3",
