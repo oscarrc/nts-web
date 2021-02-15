@@ -13,16 +13,15 @@ export function Dropdown(props) {
     useEffect(() => {
         const current = control.current;
         const value = props.values.findIndex( v => v === current.props.value);
-        if(props.value !== value * props.step) onChange(value);
+        
+        if(props.value !== value * props.step && value > 0) onChange(value);
         //eslint-disable-next-line
     }, [props.value, props.values]);
 
     const renderOptions = (opt) => {
         let options = [];
         opt.forEach( (option, index) => {
-            if(option !== "Off"){
-                options.push(<Option key={props.cc + option} value={index}>{option}</Option>)
-            }
+            if(option !== "Off") options.push(<Option key={props.cc + option} value={index}>{option}</Option>)
         })
         return options;
     }

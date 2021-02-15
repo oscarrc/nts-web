@@ -24,7 +24,7 @@ export const synthSlice = createSlice({
         state.value.patches[action.payload.bank ? action.payload.bank : state.value.bank] = action.payload.patch;
       },
       setControl: (state, action) => {
-        if(strings[action.payload.cc] && action.payload.val.value){
+        if(strings[action.payload.cc] && !isNaN(action.payload.val.value)){
           let value = Math.floor(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
           let index = value > state.value.patches[state.value.bank][action.payload.cc].max - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
           action.payload.val.svalue = strings[action.payload.cc][index];
