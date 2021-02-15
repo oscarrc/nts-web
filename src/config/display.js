@@ -9,7 +9,7 @@ const messages = {
     },
     error: {
         title: "MIDI error",
-        text: "Check the console for more info"
+        text: "MIDI not available or browser not compatible"
     },
     nodevice: {
         title: "No NTS-1 detected",
