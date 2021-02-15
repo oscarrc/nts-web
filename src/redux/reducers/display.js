@@ -1,10 +1,5 @@
-import { createSlice, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { messages } from '../../config/display';
-
-
-const middleware = getDefaultMiddleware({
-  serializableCheck: false
-})
 
 export const displaySlice = createSlice({
   name: 'display',
@@ -18,8 +13,7 @@ export const displaySlice = createSlice({
       setMessage: (state, action) => {
           state.value = messages[action.payload]
       }
-  },  
-  middleware: middleware
+  }
 });
 
 export const { setDisplay } = displaySlice.actions;
