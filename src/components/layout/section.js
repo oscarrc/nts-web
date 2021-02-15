@@ -104,12 +104,18 @@ export function Section(props) {
             rendered.push(renderControl(c, span))
         });
 
-        section.sections?.forEach( s => {
-            rendered.push(renderSection(s, true));
+        section.sections?.forEach( (s, i) => {
+            rendered.push(
+                <Row key={ "sub" + s.label } className="subsection" justify="space-between">
+                    {renderSection(s, true)}
+                </Row>
+            );
         });
 
         return rendered;
     }
+
+    const setDisplay = (section, subsection = -1) => dispatch({type:"display/setState", payload: { section, subsection }})
        
     return (
         <Row justify="space-between">

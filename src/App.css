@@ -492,3 +492,7 @@ a.link:hover{
     margin-bottom: 10px;
   }
 }
+
+.subsection.ant-row{
+  width: 100%;
+}
