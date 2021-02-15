@@ -6,7 +6,8 @@ export function Dropdown(props) {
     const { Option } = Select;
 
     const onChange = (value) => {
-        value = value * props.step > (props.max * props.step) - 1 ? 127 : value * props.step;
+        console.log(value)
+        value = value * props.step >= (props.max * props.step) ? 127 : value * props.step;
         props.onChange(props.cc, { value: value }, props.active);
     }
   

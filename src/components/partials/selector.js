@@ -4,7 +4,7 @@ import selector from '../../assets/selector.png';
 export function Selector(props) {
     const control = useRef(null);
     const onChange = (event) => {
-      const value = event.target.value * props.step > (props.max * props.step) - 1 ? 127 : event.target.value * props.step;
+      const value = event.target.value * props.step >= (props.max * props.step) ? 127 : event.target.value * props.step;
       props.onChange(props.cc, { value: value }, props.active);
     }
 
