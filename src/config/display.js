@@ -1,7 +1,7 @@
 const messages = {
     loading: {
         title: "Allow MIDI usage",
-        text: "Please, allow the app to use MIDI",
+        text: "Please, allow the app to use MIDI"
     },
     welcome: {
         title: "Welcome to NTS-web",

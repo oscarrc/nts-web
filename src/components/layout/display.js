@@ -11,7 +11,7 @@ export function Display(props) {
                 <Row className="text-lcd" align="middle">
                     <Col span={24}>
                         <h2>{props.title}</h2> 
-                        <Row justify="space-around">{props.text}</Row>
+                        { props.text !== "" ? <Row justify="space-around">{props.text}</Row> : ""}
                     </Col>  
                 </Row>
             </Space>
