@@ -6,15 +6,13 @@ export function Dropdown(props) {
     const { Option } = Select;
 
     const onChange = (value) => {
-        console.log(value)
         value = value * props.step >= (props.max * props.step) ? 127 : value * props.step;
-        props.onChange(props.cc, { value: value }, props.active);
+        if(props.value !== value * props.step) props.onChange(props.cc, { value: value }, props.active);
     }
   
     useEffect(() => {
         const current = control.current;
         const value = props.values.findIndex( v => v === current.props.value);
-        
         if(props.value !== value * props.step) onChange(value);
         //eslint-disable-next-line
     }, [props.value, props.values]);
