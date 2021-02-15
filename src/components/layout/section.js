@@ -8,7 +8,7 @@ import { strings } from '../../config/synth';
 
 export function Section(props) {
     const dispatch = useDispatch();
-    
+
     const controlChange = (cc, val, active = true) => {
         if(active && !isNaN(val.value)) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
         dispatch({type:'synth/setControl', payload: { cc, val }});
@@ -17,6 +17,24 @@ export function Section(props) {
     const switchChange = (cc, active, value) => {
         midiControlChange(cc, value, props.midi.outputDevice, props.midi.outputChannel);
         dispatch({type:'synth/setControl', payload: { cc, val: {active} }});
+    }
+
+    const setDisplay = (section, subsection = -1) => {
+        const current = subsection < 0 ? section : section.sections[subsection];
+    
+        let display = {
+            title: section.label + (subsection >= 0 ? " - " + current.label : ""),
+            text: []
+        }
+    
+        current.controls.forEach( c => {
+           if(c.type !== "dummy") {
+                const value = c.type !== "knob" ? props.state.patches[props.state.bank][c.cc].svalue : props.state.patches[props.state.bank][c.cc].value
+                display.text.push(<Col key={c.cc + c.type}>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
+            }
+        });
+        
+        dispatch({type: "display/setDisplay", payload: display});
     }
 
     const renderControl = (control, span) => {
@@ -106,8 +124,8 @@ export function Section(props) {
 
         section.sections?.forEach( (s, i) => {
             rendered.push(
-                <Row key={ "sub" + s.label } className="subsection" justify="space-between">
-                    {renderSection(s, true)}
+                <Row key={ "sub" + s.label } className="subsection" justify="space-between" onMouseEnter={ () => { setDisplay(section, i)} }>
+                    { renderSection(s, true) }
                 </Row>
             );
         });
@@ -116,7 +134,7 @@ export function Section(props) {
     }
        
     return (
-        <Row justify="space-between">
+        <Row justify="space-between" onMouseEnter={ () => { setDisplay(props.section) } }>
             { renderSection(props.section) }       
         </Row>
     );
