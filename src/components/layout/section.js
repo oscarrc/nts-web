@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Row, Col, Divider } from 'antd';
 import { midiControlChange } from '../../utils/midi';
@@ -8,6 +8,13 @@ import { strings } from '../../config/synth';
 
 export function Section(props) {
     const dispatch = useDispatch();
+    const [ hovered, setHovered ] = useState(false);
+    const [ subsection, setSubsection ] = useState(false);
+
+    const onHover = (h, s=-1) => {
+        setHovered(h)
+        setSubsection(s)
+    }
 
     const controlChange = (cc, val, active = true) => {
         if(active && !isNaN(val.value)) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
@@ -19,24 +26,6 @@ export function Section(props) {
         dispatch({type:'synth/setControl', payload: { cc, val: {active} }});
     }
 
-    const setDisplay = (section, subsection = -1) => {
-        const current = subsection < 0 ? section : section.sections[subsection];
-    
-        let display = {
-            title: section.label + (subsection >= 0 ? " - " + current.label : ""),
-            text: []
-        }
-    
-        current.controls.forEach( c => {
-           if(c.type !== "dummy") {
-                const value = c.type !== "knob" ? props.state.patches[props.state.bank][c.cc].svalue : props.state.patches[props.state.bank][c.cc].value
-                display.text.push(<Col key={c.cc + c.type}>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
-            }
-        });
-        
-        dispatch({type: "display/setDisplay", payload: display});
-    }
-
     const renderControl = (control, span) => {
         switch(control.type){
             case "knob":
@@ -44,7 +33,7 @@ export function Section(props) {
                     <Knob 
                         label={ control.label } 
                         cc={ control.cc } 
-                        value={ props.state.patches[props.state.bank][control.cc].value }
+                        value={ props.state[control.cc].value }
                         onChange={ controlChange }
                     />
                 </Col>
@@ -53,11 +42,11 @@ export function Section(props) {
                     <Selector 
                         label={ control.label } 
                         cc={ control.cc } 
-                        value={ props.state.patches[props.state.bank][control.cc].value }
-                        active={ props.state.patches[props.state.bank][control.cc].active }
-                        min={ props.state.patches[props.state.bank][control.cc].min }
-                        max={ props.state.patches[props.state.bank][control.cc].max }
-                        step={ props.state.patches[props.state.bank][control.cc].step }
+                        value={ props.state[control.cc].value }
+                        active={ props.state[control.cc].active }
+                        min={ props.state[control.cc].min }
+                        max={ props.state[control.cc].max }
+                        step={ props.state[control.cc].step }
                         onChange={ controlChange }
                     />
                 </Col>
@@ -70,8 +59,8 @@ export function Section(props) {
                             <Switch 
                                 cc={ control.cc } 
                                 switch={ control.switch } 
-                                value={ props.state.patches[props.state.bank][control.cc].value } 
-                                active={ props.state.patches[props.state.bank][control.cc].active }
+                                value={ props.state[control.cc].value } 
+                                active={ props.state[control.cc].active }
                                 onChange={ switchChange }
                             />
                         </Col>
@@ -84,10 +73,10 @@ export function Section(props) {
                             label={ control.label }
                             cc={control.cc}
                             active={ isNaN(control.active) ? 1 : 0 }
-                            svalue={ props.state.patches[props.state.bank][control.cc].svalue }
-                            value={ props.state.patches[props.state.bank][control.cc].value }
+                            svalue={ props.state[control.cc].svalue }
+                            value={ props.state[control.cc].value }
                             values={ strings[control.cc] }
-                            step={ props.state.patches[props.state.bank][control.cc].step }
+                            step={ props.state[control.cc].step }
                             onChange={ controlChange }
                         />
                     </Col>
@@ -99,8 +88,8 @@ export function Section(props) {
                         label={ control.label } 
                         cc={ control.cc } 
                         switch={ control.switch } 
-                        value={ props.state.patches[props.state.bank][control.cc].value } 
-                        active={ props.state.patches[props.state.bank][control.cc].active } 
+                        value={ props.state[control.cc].value } 
+                        active={ props.state[control.cc].active } 
                         tag={ !!control.label }
                         onChange={ switchChange }
                     />
@@ -124,7 +113,7 @@ export function Section(props) {
 
         section.sections?.forEach( (s, i) => {
             rendered.push(
-                <Row key={ "sub" + s.label } className="subsection" justify="space-between" onMouseEnter={ () => { setDisplay(section, i)} }>
+                <Row key={ "sub" + s.label } className="subsection" justify="space-between"  onMouseOver={ () => onHover(true, i) } onMouseOut={ () => onHover(false) }>
                     { renderSection(s, true) }
                 </Row>
             );
@@ -132,9 +121,29 @@ export function Section(props) {
 
         return rendered;
     }
+
+    useEffect(() => {
+        if(hovered){
+            const current = subsection < 0 ? props.section : props.section.sections[subsection];
+    
+            let display = {
+                title: props.section.label + (subsection >= 0 ? " - " + current.label : ""),
+                text: []
+            }
+        
+            current.controls.forEach( c => {
+            if(c.type !== "dummy") {
+                    const value = c.type !== "knob" ? props.state[c.cc].svalue : props.state[c.cc].value
+                    display.text.push(<Col key={c.cc + c.type}>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
+                }
+            });
+            
+            dispatch({type: "display/setDisplay", payload: display});
+        }
+     }, [dispatch, hovered, props.section, props.state, subsection])
        
     return (
-        <Row justify="space-between" onMouseEnter={ () => { setDisplay(props.section) } }>
+        <Row justify="space-between" onMouseOver={ () => onHover(true, -1) } onMouseOut={ () => onHover(false) }>
             { renderSection(props.section) }       
         </Row>
     );
