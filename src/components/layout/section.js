@@ -9,13 +9,11 @@ import { strings } from '../../config/synth';
 export function Section(props) {
     const dispatch = useDispatch();
     const [ hovered, setHovered ] = useState(false);
-    const [ subsection, setSubsection ] = useState(false);
+    const [ subsection, setSubsection ] = useState(-1);
 
-    const onHover = (h, s=-1) => {
-        setHovered(h)
-        setSubsection(s)
-    }
-
+    const onHover = h => setHovered(h);        
+    const onSubsection = s => setSubsection(s);
+    
     const controlChange = (cc, val, active = true) => {
         if(active && !isNaN(val.value)) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
         dispatch({type:'synth/setControl', payload: { cc, val }});
@@ -103,7 +101,7 @@ export function Section(props) {
 
     const renderSection = (section, subsection = false) => {
         const span = Math.floor(24/section.controls.length);
-        const rendered = [
+        let rendered = [
             <Divider key={section.label} className={ subsection ? "text-light" : "text-gold" }>{ section.label }</Divider>
         ];
         
@@ -113,7 +111,7 @@ export function Section(props) {
 
         section.sections?.forEach( (s, i) => {
             rendered.push(
-                <Row key={ "sub" + s.label } className="subsection" justify="space-between"  onMouseOver={ () => onHover(true, i) } onMouseOut={ () => onHover(false) }>
+                <Row key={ "sub" + s.label } className="subsection" justify="space-between"  onMouseOver={ () => onSubsection(i) } onMouseOut={ () => onSubsection(-1) }>
                     { renderSection(s, true) }
                 </Row>
             );
@@ -132,7 +130,7 @@ export function Section(props) {
             }
         
             current.controls.forEach( c => {
-            if(c.type !== "dummy") {
+                if(c.type !== "dummy") {
                     const value = c.type !== "knob" ? props.state[c.cc].svalue : props.state[c.cc].value
                     display.text.push(<Col key={c.cc + c.type}>{(c.type !== "selector" && c.type !== "dropdown" ? c.label + ": " : "") + value}</Col>)
                 }
@@ -143,7 +141,7 @@ export function Section(props) {
      }, [dispatch, hovered, props.section, props.state, subsection])
        
     return (
-        <Row justify="space-between" onMouseOver={ () => onHover(true, -1) } onMouseOut={ () => onHover(false) }>
+        <Row justify="space-between" onMouseOver={ () => onHover(true) } onMouseOut={ () => onHover(false) }>
             { renderSection(props.section) }       
         </Row>
     );
