@@ -7,7 +7,7 @@ export function Dropdown(props) {
 
     const onChange = (value) => {
         value = value * props.step >= (props.max * props.step) ? 127 : value * props.step;        
-        if(props.value !== value * props.step) props.onChange(props.cc, { value: value }, props.active);
+        props.onChange(props.cc, { value: value }, props.active);
     }
   
     useEffect(() => {
