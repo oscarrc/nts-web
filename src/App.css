@@ -89,6 +89,10 @@
   border-color: #d32029;
 }
 
+.ant-btn-group > .ant-btn:first-child:not(:last-child){
+  width: calc(100% - 34px)
+}
+
 .modal-dark .ant-modal-header, .modal-dark .ant-modal-content, .modal-dark .ant-modal-footer{
   background-color: #212122;
   border: none;
