@@ -23,7 +23,7 @@ export function Pianoroll(props) {
             current.height = actualHeight;
         }
 
-        window.addEventListener("resize", () => handleResize);
+        window.addEventListener("resize", handleResize);
         handleResize();
         setTimeout(() => handleResize(), 500);
 

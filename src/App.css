@@ -90,7 +90,15 @@
 }
 
 .ant-btn-group > .ant-btn:first-child:not(:last-child){
-  width: calc(100% - 34px)
+  width: calc(100% - 34px);
+  overflow: hidden;
+  text-align: center;
+  padding: 4px;
+}
+
+.ant-btn-group{
+  width: 100%;
+  max-width: 110px;
 }
 
 .modal-dark .ant-modal-header, .modal-dark .ant-modal-content, .modal-dark .ant-modal-footer{
