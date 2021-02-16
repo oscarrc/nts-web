@@ -14,11 +14,11 @@ export function Sequencer() {
 	return (
 		<Content className="main transparent">
 			<Row justify="space-between">
-            	<Col span={24} order={2} lg={{ order: 1, span: 20 }} className="pianoroll-wrapper">   
+            	<Col span={24} order={2} xl={{ order: 1, span: 20 }} className="pianoroll-wrapper">   
 					<Pianoroll onPlay={playNote} tempo={seqState.tempo} play={seqState.play} loop={seqState.loop} sequence={seqState.sequences[seqState.bank]}/>
 				</Col>
 
-				<Col span={24} order={1} lg={{ order: 2, span: 4 }} >					
+				<Col span={24} order={1} xl={{ order: 2, span: 4 }} >					
 					<Controls tempo={seqState.tempo} play={seqState.play} loop={seqState.loop} bank={seqState.bank} />
 				</Col>
 			</Row>

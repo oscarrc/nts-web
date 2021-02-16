@@ -256,13 +256,13 @@ a.link:hover{
 }
 
 
-@media (min-width:992px){
+@media (min-width:1200px){
   .controls-wrapper .bank-selector .ant-row .ant-col .ant-btn-group > .ant-btn:first-child{
     width: 88px;
   }
 }
 
-@media (max-width:992px){
+@media (max-width:1200px){
   .controls-wrapper > .ant-col:first-child{
     text-align: left;
   }
@@ -272,7 +272,7 @@ a.link:hover{
   }
   
   .bank-selector{
-    margin: 10px 0;
+    margin: 20px 0;
   }
 }
 

@@ -14,19 +14,19 @@ export function Synth() {
     return (
         <Content className="main transparent">
             <Row justify="space-between" align="top" gutter={[0,20]}>
-                <Col span={24} md={12} lg={6}>
+                <Col span={24} lg={12} xl={6}>
                     <Display title={displayState.title} text={displayState.text} />
                     <Patches bank={ synthState.bank } patches={ synthState.patches } />
                     <Section section={controls.osc} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                     <Section section={controls.arp} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
-                <Col span={24} md={10} lg={4}>
+                <Col span={24} lg={10} xl={4}>
                     <Section section={controls.amp} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
-                <Col span={24} md={12} lg={6}>
+                <Col span={24} lg={12} xl={6}>
                     <Section section={controls.effects} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                 </Col>
-                <Col span={24} md={10} lg={4}>
+                <Col span={24} lg={10} xl={4}>
                     <Section section={controls.vcf} state={ synthState.patches[synthState.bank] } midi={ midiState } />
                     <More />
                 </Col>

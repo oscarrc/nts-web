@@ -59,7 +59,7 @@ export function Controls(props) {
 
         for (let i = 0; i < 6; i++) {
             buttons.push(
-                <Col span={8} sm={4} lg={24} key={ "seq" + i } >
+                <Col span={8} lg={4} xl={24} key={ "seq" + i } >
                     <Bank label="Seq" accept=".ntsSeq" bank={i} active={ props.bank === i } onClick={setBank} onImport={importSequence} onExport={exportSequence} />
                 </Col>
             )
@@ -77,16 +77,16 @@ export function Controls(props) {
 
     return (
         <Row className="controls-wrapper" align="space-between">
-            <Col span={12} order={1} lg={{ order: 1, span: 24 }} className="btn-group">
+            <Col span={12} order={1} xl={{ order: 1, span: 24 }} className="btn-group">
                 <Button onClick={ togglePlay } ghost className={ "btn-gold " + (props.play ? "active" : "")} icon={<CaretRightOutlined />}></Button>
                 <InputNumber onChange={ setTempo } className="control-number text-lcd" min={1} max={100000} defaultValue={props.tempo} />
             </Col>
-            <Col span={24} order={3} lg={{ order: 2, span: 24 }} className="bank-selector">
+            <Col span={24} order={3} xl={{ order: 2, span: 24 }} className="bank-selector">
                 <Row justify="space-between" gutter={[0,10]}>
                     { renderButtons() }
                 </Row>
             </Col>
-            <Col span={12} order={2} lg={{ order: 3, span: 24 }} >
+            <Col span={12} order={2} xl={{ order: 3, span: 24 }} >
                 <Button onClick={ goBack } ghost className="btn-gold back" icon={<RollbackOutlined />}> Back</Button>
             </Col>
         </Row>
