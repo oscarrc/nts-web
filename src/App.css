@@ -41,6 +41,7 @@
 .divider-gold.ant-divider, .text-gold.ant-divider-horizontal.ant-divider-with-text::before, .text-gold.ant-divider-horizontal.ant-divider-with-text::after{
   border-top: 1px solid;
   border-top-color: #f3cc62;
+  top: 0;
 }
 
 .text-red{
@@ -59,6 +60,7 @@
 .text-light.ant-divider-horizontal.ant-divider-with-text::before, .text-light.ant-divider-horizontal.ant-divider-with-text::after{
   border-top: 1px solid;
   border-top-color: #434343;
+  top: 0;
 }
 
 .text-lcd, .text-lcd *{
@@ -69,18 +71,20 @@
 .text-left{
   text-align: left;
 }
-
+.btn-gold.ant-btn-group .ant-btn, .btn-gold.ant-btn-group .ant-btn:disabled, .btn-gold.ant-btn-group .ant-btn:disabled:hover, .btn-gold.ant-btn-group .ant-btn:focus,
 .btn-gold.ant-btn, .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover, .btn-gold.ant-btn:focus{
   color: #f3cc62;
+  background: transparent;
   border-color: #f3cc62;
 }
 
+.btn-gold.ant-btn-group .ant-btn:disabled, .btn-gold.ant-btn-group .ant-btn:disabled:hover,
 .btn-gold.ant-btn:disabled, .btn-gold.ant-btn:disabled:hover{
   opacity: .75;
 }
-
-
-.btn-gold.ant-btn:hover, .btn-gold.ant-btn:active{
+.btn-gold.ant-btn-group.active .ant-btn,
+.btn-gold.ant-btn-group .ant-btn:hover, .btn-gold.ant-btn-group .ant-btn:active,
+.btn-gold.ant-btn:hover, .btn-gold.ant-btn:active, .btn-gold.ant-btn.active{
   color: #d32029;
   border-color: #d32029;
 }
@@ -94,11 +98,11 @@
   background-color: #212122;
 }
 
-.menu-dark .ant-dropdown-menu-item{
+.menu-dark .ant-dropdown-menu-item, .menu-dark .ant-dropdown-menu-item *{
   color: #f3cc62;
 }
 
-.menu-dark .ant-dropdown-menu-item:hover{
+.menu-dark .ant-dropdown-menu-item:hover, .menu-dark .ant-dropdown-menu-item:hover *{
   color: #d32029;
   background-color: transparent;
 }
@@ -214,7 +218,7 @@ a.link:hover{
   border: 2px solid #434343;
   border-radius: .5rem;
   box-shadow: 0px 0px 0px 4px #262626 inset;
-  height: 210px;
+  height: 105px;
   width: 100%;
   overflow: hidden;
   background-color: #2a1215;
@@ -222,9 +226,54 @@ a.link:hover{
   padding: 5px;
 }
 
+.display p {
+  margin-bottom: 0;
+}
+
 .keyboard-wrapper, .pianoroll-wrapper{
   width: 100%;
   height: 100%;
+}
+
+.controls-wrapper{
+  height: 100%;
+}
+
+.controls-wrapper .bank-selector{
+  align-self: center;
+}
+
+
+@media (min-width:992px){
+  .controls-wrapper .bank-selector .ant-row .ant-col .ant-btn-group > .ant-btn:first-child{
+    width: 88px;
+  }
+}
+
+@media (max-width:992px){
+  .controls-wrapper > .ant-col:first-child{
+    text-align: left;
+  }
+  
+  .controls-wrapper > .ant-col:last-child{
+    text-align: right
+  }
+  
+  .bank-selector{
+    margin: 10px 0;
+  }
+}
+
+.controls-wrapper .back{
+  width: 118px
+}
+
+.controls-wrapper > .ant-col:first-child{
+  align-self: flex-start;
+}
+
+.controls-wrapper > .ant-col:last-child{
+  align-self: flex-end;
 }
 
 .knob-wrapper {
@@ -234,6 +283,10 @@ a.link:hover{
 .knob-wrapper .knob{
   display: block;
   margin-top: 5px;
+}
+
+.patches-wrapper {
+  min-height: 130px;
 }
 
 .error {
@@ -420,6 +473,10 @@ a.link:hover{
   width: 100%;
 }
 
+.live{
+  margin-top: 32px;
+}
+
 @media (max-width: 768px){
   [class^="ant-layout-"]{
     padding-left: 10px !important;
@@ -434,4 +491,8 @@ a.link:hover{
   .credits p{
     margin-bottom: 10px;
   }
+}
+
+.subsection.ant-row{
+  width: 100%;
 }
