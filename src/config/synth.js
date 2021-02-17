@@ -139,8 +139,8 @@ const controls = {
                         type: "selector",
                         cc: 88,
                         min: 1,
-                        max: 4,
-                        step: 32
+                        max: 5,
+                        step: 25
                     },
                     {
                         label: "Time",
@@ -167,7 +167,7 @@ const controls = {
                         type: "selector",
                         cc: 89,
                         min: 1,
-                        max: 5,
+                        max: 6,
                         step: 21
                     },
                     {
@@ -195,7 +195,7 @@ const controls = {
                         type: "selector",
                         cc: 90,
                         min: 1,
-                        max: 5,
+                        max: 6,
                         step: 21
                     },
                     {
