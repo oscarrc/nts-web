@@ -47,7 +47,7 @@ export const synthSlice = createSlice({
         Object.keys(action.payload).forEach( k => {
           state.value.patches.forEach( p => {
             p[k].max = p[k].max + action.payload[k];
-            p[k].step =  Math.round(127/p[k].max); //TODO recalculate steps
+            p[k].step =  Math.round(127/p[k].max); //TODO recalculate steps and programs
           })
         })
       },

@@ -5,7 +5,7 @@ export function Dropdown(props) {
     const control = useRef(null);
     const { Option } = Select;
 
-    const onChange = (value) => {
+    const onChange = (value) => { //TODO check active prop not being updated
         value = value * props.step >= (props.max * props.step) ? 127 : value * props.step;        
         props.onChange(props.cc, { value: value }, props.active);
     }

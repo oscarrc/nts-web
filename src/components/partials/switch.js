@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import button from '../../assets/button.png';
 
-export function Switch(props) {
+export function Switch(props) { //TODO check active incorrect value
     const control = useRef(null);
     const onChange = (event) => props.onChange(props.cc, event.target.value, event.target.value ? props.value : props.switch);
 

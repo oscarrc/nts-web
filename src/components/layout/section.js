@@ -14,14 +14,14 @@ export function Section(props) {
     const onHover = h => setHovered(h);        
     const onSubsection = s => setSubsection(s);
     
-    const controlChange = (cc, val, active = true) => {
+    const controlChange = (cc, val, active = 1) => {
         if(active && !isNaN(val.value)) midiControlChange(cc, val.value, props.midi.outputDevice, props.midi.outputChannel);
         dispatch({type:'synth/setControl', payload: { cc, val }});
     }
 
     const switchChange = (cc, active, value) => {
         midiControlChange(cc, value, props.midi.outputDevice, props.midi.outputChannel);
-        dispatch({type:'synth/setControl', payload: { cc, val: {active} }});
+        dispatch({type:'synth/setControl', payload: { cc, val: { active } }});
     }
 
     const renderControl = (control, span) => {
