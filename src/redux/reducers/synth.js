@@ -48,7 +48,7 @@ export const synthSlice = createSlice({
         state.value.octave = action.payload;
       },
       setUserPrograms: (state, action) => {
-        Object.keys(action.payload).forEach( k => {
+        Object.keys(action.payload).forEach( k => { //TODO fix count and values
           state.value.patches.forEach( p => {
             let value = Math.round(p[k].value / p[k].step);
             p[k].max = p[k].max + action.payload[k];
