@@ -4,10 +4,10 @@ import { Select } from 'antd';
 export function Dropdown(props) {
     const control = useRef(null);
     const { Option } = Select;
-
-    const onChange = (value) => { //TODO check active prop not being updated
+    
+    const onChange = (value) => {
         value = value * props.step >= (props.max * props.step) ? 127 : value * props.step;        
-        props.onChange(props.cc, { value: value }, props.active);
+        props.onChange(props.cc, { value }, props.active);
     }
   
     useEffect(() => {
@@ -26,9 +26,12 @@ export function Dropdown(props) {
     }
 
     return  (
-        <Select ref={control} onChange={onChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.svalue }>
-            { renderOptions(props.values) }
-        </Select>
+        <div>
+            { props.active }
+            <Select ref={control} onChange={onChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.svalue }>
+                { renderOptions(props.values) }
+            </Select>
+        </div>
     );
 }
 

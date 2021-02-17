@@ -10,7 +10,7 @@ export function Section(props) {
     const dispatch = useDispatch();
     const [ hovered, setHovered ] = useState(false);
     const [ subsection, setSubsection ] = useState(-1);
-
+    
     const onHover = h => setHovered(h);        
     const onSubsection = s => setSubsection(s);
     
@@ -70,7 +70,7 @@ export function Section(props) {
                         <Dropdown 
                             label={ control.label }
                             cc={control.cc}
-                            active={ isNaN(control.active) ? 1 : 0 }
+                            active={ isNaN(props.state[control.cc].active) ? 1 : props.state[control.cc].active } //TEST check active prop not being updated
                             svalue={ props.state[control.cc].svalue }
                             value={ props.state[control.cc].value }
                             values={ strings[control.cc] }
