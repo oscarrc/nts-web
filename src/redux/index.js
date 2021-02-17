@@ -5,7 +5,7 @@ import midiReducer from './reducers/midi';
 import displayReducer from './reducers/display';
 import appReducer from './reducers/app';
 
-const middleware = getDefaultMiddleware({ serializableCheck: false })
+const middleware = getDefaultMiddleware({ serializableCheck: false, immutableCheck: false })
 
 export default configureStore({
   reducer: {
