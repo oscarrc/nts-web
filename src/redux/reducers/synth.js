@@ -62,8 +62,8 @@ export const synthSlice = createSlice({
           const value = Math.floor(Math.random() * (max - min + 1) + min);
           const active = state.value.patches[state.value.bank][k].active;
 
-
           state.value.patches[state.value.bank][k].value = value < max  ? value * step : 127;
+          
           if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
           if(!isNaN(active)) state.value.patches[state.value.bank][k].active = Math.random() < 0.5 ? 1 : 0;
         })
