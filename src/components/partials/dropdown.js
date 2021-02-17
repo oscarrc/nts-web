@@ -26,12 +26,9 @@ export function Dropdown(props) {
     }
 
     return  (
-        <div>
-            { props.active }
-            <Select ref={control} onChange={onChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.svalue }>
-                { renderOptions(props.values) }
-            </Select>
-        </div>
+        <Select ref={control} onChange={onChange} className="control-select text-lcd" size="medium" id= { props.label + props.cc } name={ props.label } placeholder={ props.label } value={ props.svalue }>
+            { renderOptions(props.values) }
+        </Select>
     );
 }
 
