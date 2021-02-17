@@ -87,8 +87,18 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
         let type = 1;
         let bank = 0;
 
+        const decodeName = (data) => {
+            let name = data.slice(30, data.length -1 );
+            let decoded = "";
+            name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
+            return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
+        }
+
         const doCount = (e) => {
-            if (e.data.length === 53)  count[index[type - 1]] = count[index[type - 1]] + 1
+            if (e.data.length === 53) {
+                count[index[type - 1]] = count[index[type - 1]] + 1
+                console.log(decodeName(e.data))
+            }
             if(bank < 16){
                 bank++
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
