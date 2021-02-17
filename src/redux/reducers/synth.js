@@ -25,15 +25,12 @@ export const synthSlice = createSlice({
       },
       setControl: (state, action) => {
         if(strings[action.payload.cc] && !isNaN(action.payload.val.value)){
-          let value = Math.floor(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
+          let value = Math.round(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
           let index = value > state.value.patches[state.value.bank][action.payload.cc].max - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
           action.payload.val.svalue = strings[action.payload.cc][index];
         }
-        
-        if((action.payload.val.value < state.value.patches[state.value.bank][action.payload.cc].min || action.payload.val.value > state.value.patches[state.value.bank][action.payload.cc].max) && !isNaN(action.payload.val.active)){
-          action.payload.val.active = 0;
-          delete action.payload.val.value
-        }
+
+        //TODO Switch off
 
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
@@ -50,7 +47,7 @@ export const synthSlice = createSlice({
         Object.keys(action.payload).forEach( k => {
           state.value.patches.forEach( p => {
             p[k].max = p[k].max + action.payload[k];
-            p[k].step =  Math.round(127/p[k].max);
+            p[k].step =  Math.round(127/p[k].max); //TODO recalculate steps
           })
         })
       },
