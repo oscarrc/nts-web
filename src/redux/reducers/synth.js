@@ -28,9 +28,12 @@ export const synthSlice = createSlice({
           let value = Math.round(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
           let index = value > state.value.patches[state.value.bank][action.payload.cc].max - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
           action.payload.val.svalue = strings[action.payload.cc][index];
-        }
 
-        //TODO Switch off
+          if( strings[action.payload.cc][index] === "Off" ){ //TEST switch off
+            action.payload.val.active = 0;
+            delete action.payload.val.value;
+          }
+        }
 
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
@@ -47,7 +50,7 @@ export const synthSlice = createSlice({
         Object.keys(action.payload).forEach( k => {
           state.value.patches.forEach( p => {
             p[k].max = p[k].max + action.payload[k];
-            p[k].step =  Math.round(127/p[k].max); //TODO recalculate steps and programs
+            p[k].step =  Math.round(127/p[k].max); //TEST recalculate steps and programs
           })
         })
       },
