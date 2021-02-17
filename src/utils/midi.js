@@ -78,6 +78,7 @@ const midiSendPitchBend = (value, id, channel) => {
 const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, channel) => {
     const index = [88, 89, 90, 53]
     let count = { 88: 0, 89: 0, 90: 0, 53: 0 };
+    let strings = { 88: [], 89: [], 90: [], 53: [] }
 
     return new Promise((resolve, reject) => { 
         if(!webmidi.enabled || !inputId) reject(!inputId ? "nodevice" : "error");
@@ -97,7 +98,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
         const doCount = (e) => {
             if (e.data.length === 53) {
                 count[index[type - 1]] = count[index[type - 1]] + 1
-                console.log(decodeName(e.data))
+                strings[index[type - 1]].push(decodeName(e.data))
             }
             if(bank < 16){
                 bank++
@@ -108,14 +109,14 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
             }else{
                 setTimeout(()=> {
-                    input.removeListener("sysex", inputChannel, doCount);
+                    input.removeListener("sysex", inputChannel, doCount);        
+                    console.log(strings)
                     resolve(count)
                 }, 250)
             }
         }
         
-        input.addListener("sysex", inputChannel, doCount);        
-        
+        input.addListener("sysex", inputChannel, doCount);
         output.sendSysex(vendor, [80, 0, 2]);
     })
 }
