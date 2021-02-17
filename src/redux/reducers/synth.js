@@ -26,15 +26,16 @@ export const synthSlice = createSlice({
       setControl: (state, action) => {
         if(strings[action.payload.cc] && !isNaN(action.payload.val.value)){
           let value = Math.round(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
-          let index = value > state.value.patches[state.value.bank][action.payload.cc].max - 1 ? state.value.patches[state.value.bank][action.payload.cc].max : value;
+          let index = value >= state.value.patches[state.value.bank][action.payload.cc].max ? state.value.patches[state.value.bank][action.payload.cc].max : value;
           action.payload.val.svalue = strings[action.payload.cc][index];
 
           if( strings[action.payload.cc][index] === "Off" ){
             action.payload.val.active = 0;
             delete action.payload.val.value;
+            delete action.payload.val.svalue;
           }
         }
-
+        
         state.value.patches[state.value.bank][action.payload.cc] = {
           ...state.value.patches[state.value.bank][action.payload.cc],
           ...action.payload.val
@@ -49,8 +50,10 @@ export const synthSlice = createSlice({
       setUserPrograms: (state, action) => {
         Object.keys(action.payload).forEach( k => {
           state.value.patches.forEach( p => {
+            let value = Math.round(p[k].value / p[k].step);
             p[k].max = p[k].max + action.payload[k];
-            p[k].step =  Math.round(127/(p[k].max)); //TEST recalculate steps and programs
+            p[k].step =  Math.round(127/(p[k].max));
+            p[k].value = value * p[k].step
           })
         })
       },
