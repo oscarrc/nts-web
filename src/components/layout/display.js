@@ -6,7 +6,7 @@ export function Display(props) {
     const screens = useBreakpoint();
 
     return  (
-        <Affix offsetTop={screens.xxl || screens.xl || screens.md ? -999999 : 12 }>
+        <Affix offsetTop={screens.xxl || screens.xl ? -999999 : 12 }>
             <Space className="display bg-grid">
                 <Row className="text-lcd" align="middle">
                     <Col span={24}>
