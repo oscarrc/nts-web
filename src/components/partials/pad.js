@@ -36,6 +36,7 @@ export function Pad(props) {
             currentPad.removeEventListener("mouseleave", restorePitch);            
             currentPad.removeEventListener("touchcancel", restorePitch);
         }
+        //eslint-disable-next-line
     }, [])
 
     return  (
