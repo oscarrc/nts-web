@@ -105,7 +105,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
         }
         
         input.addListener("sysex", inputChannel, doCount);        
-        // output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
+        
         output.sendSysex(vendor, [80, 0, 2]);
     })
 }
