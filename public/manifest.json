@@ -9,7 +9,7 @@
       "sizes": "1600x1045"
     }
   ],
-  "categories": "Music",
+  "categories": ["Music"],
   "dir": "ltr",
   "lang": "en",
   "icons": [
