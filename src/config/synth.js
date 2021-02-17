@@ -139,8 +139,8 @@ const controls = {
                         type: "selector",
                         cc: 88,
                         min: 1,
-                        max: 5,
-                        step: 21
+                        max: 4,
+                        step: 32
                     },
                     {
                         label: "Time",
@@ -321,7 +321,6 @@ const strings = {
         "Ensemble",
         "Phaser",
         "Flanger",
-        "Random",
         "User 1",
         "User 2",
         "User 3",
