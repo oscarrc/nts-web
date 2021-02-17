@@ -71,7 +71,6 @@ const midiControlChange = (cc, value, id, channel) => {
 
 const midiSendPitchBend = (value, id, channel) => {
     if(!webmidi.enabled) return;
-
     const output = webmidi.getOutputById(id);        
     if(output) output.sendPitchBend(value, channel);
 }
