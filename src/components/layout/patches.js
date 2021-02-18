@@ -22,9 +22,11 @@ export function Patches(props) {
    
     const setPatch = (bank) => {
         dispatch({ type:"synth/setBank", payload: bank })
-        dispatch( {type: "display/setDisplay", payload: {
-            title: "Bank " + (bank + 1) + " selected"
-        }});
+        if(!props.loading){
+            dispatch( {type: "display/setDisplay", payload: {
+                title: "Bank " + (bank + 1) + " selected"
+            }});
+        }
     };
 
     const renderButtons = () => {

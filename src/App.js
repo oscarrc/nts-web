@@ -31,10 +31,11 @@ function App(){
 	const initMidi = () => {
 		midiStart().then( devices => {
 			dispatch({ type: "midi/setOptions", payload: devices});
-			dispatch({ type: "app/toggleLoading" });
 			
-			if(devices.inputDevice && devices.outputDevice) dispatch({ type: "display/setMessage", payload: "welcome" });
-			else return Promise.reject("nodevice");
+			if(devices.inputDevice && devices.outputDevice) {
+				dispatch({ type: "display/setMessage", payload: "welcome" });
+				dispatch({ type: "app/toggleLoading" });
+			} else return Promise.reject("nodevice");
 			
 			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
 		}).then( count => {			

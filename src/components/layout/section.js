@@ -121,7 +121,7 @@ export function Section(props) {
     }
 
     useEffect(() => {
-        if(hovered){
+        if(hovered && !props.loading){
             const current = subsection < 0 ? props.section : props.section.sections[subsection];
     
             let display = {
@@ -138,7 +138,7 @@ export function Section(props) {
             
             dispatch({type: "display/setDisplay", payload: display});
         }
-     }, [dispatch, hovered, props.section, props.state, subsection])
+     }, [dispatch, hovered, props.loading, props.section, props.state, subsection])
        
     return (
         <Row justify="space-between" onMouseOver={ () => onHover(true) } onMouseOut={ () => onHover(false) }>
