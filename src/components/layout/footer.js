@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Space, Button, Layout } from 'antd';
 import { HeartFilled, CoffeeOutlined, BugOutlined, CloudDownloadOutlined } from '@ant-design/icons';
 
 export function Footer() {
     const { Footer } = Layout;
-    let install;
+    let install = useRef(null);
 
     useEffect(() => {
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
-            install = e;
+            install.current = e;
         })
     }, []);
 
@@ -20,7 +20,7 @@ export function Footer() {
                 <p className="text-light"><i>This page is not affiliated or endorsed by Korg</i></p>
                 <Space>
                     <Button ghost size="small" className="btn-gold" href="https://ko-fi.com/oscarrc" target="_BLANK"><CoffeeOutlined /> Buy me a coffee</Button>
-                    { install ? <Button onClick={ install.prompt } ghost size="small" className="btn-gold"><CloudDownloadOutlined /></Button> : ""}
+                    { install.current ? <Button onClick={ install.current.prompt } ghost size="small" className="btn-gold"><CloudDownloadOutlined /></Button> : ""}
                     <Button ghost size="small" className="btn-gold" href="https://github.com/oscarrc/nts-web/issues" target="_BLANK"><BugOutlined /></Button>
                 </Space>
             </Space>
