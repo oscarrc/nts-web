@@ -70,7 +70,7 @@ export function Section(props) {
                         <Dropdown 
                             label={ control.label }
                             cc={control.cc}
-                            active={ isNaN(props.state[control.cc].active) ? 1 : props.state[control.cc].active } //TEST check active prop not being updated
+                            active={ isNaN(props.state[control.cc].active) ? 1 : props.state[control.cc].active }
                             svalue={ props.state[control.cc].svalue }
                             value={ props.state[control.cc].value }
                             values={ strings[control.cc] }
