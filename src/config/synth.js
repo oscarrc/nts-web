@@ -140,7 +140,7 @@ const controls = {
                         cc: 88,
                         min: 1,
                         max: 4,
-                        step: 25
+                        step: 42
                     },
                     {
                         label: "Time",
@@ -168,7 +168,7 @@ const controls = {
                         cc: 89,
                         min: 1,
                         max: 5,
-                        step: 21
+                        step: 31
                     },
                     {
                         label: "Time",
@@ -196,7 +196,7 @@ const controls = {
                         cc: 90,
                         min: 1,
                         max: 5,
-                        step: 21
+                        step: 31
                     },
                     {
                         label: "Time",
