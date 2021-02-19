@@ -1,64 +1,85 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
-
-import { Synth, Sequencer } from './pages'
-import { Header, Footer, Settings } from './components';
-
-import { midiStart } from './utils/midi';
-import { loadPatchLink } from './utils/patch';
-
-import './App.css';
+import { Header, Footer, Settings } from './components/layout';
+import { Synth, Sequencer } from './components/views';
+import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms } from './utils/midi';
+import { channels } from './config/midi';
 import "antd/dist/antd.css";
+import './App.css';
 
-function App() {
-  const dispatch = useDispatch();
-  const query = new URLSearchParams(useLocation().search);
-  
-  const initMidiDevices = (devices) => { 
-      devices.inputDevice = devices.inputDevices.length > 0 ? devices.inputDevices[0].id : ""
-      devices.outputDevice = devices.inputDevices.length > 0 ? devices.outputDevices[0].id : ""
-      dispatch({ type: "midi/setOptions", payload: devices});
-  }
+const scripts = ["assets/js/webaudio-controls.js",  "assets/js/webaudio-pianoroll.js"]
 
-  useEffect( () => {
-    const controls = document.createElement('script');
-    const pianoroll = document.createElement('script');
-    const patch = query.get('patch');
-    
-    controls.src= "assets/js/webaudio-controls.js";
-    controls.async= true;
-    controls.type="text/javascript";
-    pianoroll.src= "assets/js/webaudio-pianoroll.js";
-    pianoroll.async= true;
-    
-    document.body.appendChild(controls);
-    document.body.appendChild(pianoroll);
-    
-    midiStart().then(
-      devices => {
-          dispatch({ type: "loader/loadEnd" });
-          initMidiDevices(devices);
-      }
-    ).catch( (err) => dispatch({type: "display/setDisplay", payload: { screen: "nomidi" }}) );
-    
-    if(patch) dispatch({type:'synthesizer/setControl', payload: loadPatchLink(patch)});
-    // eslint-disable-next-line
-  }, []);
+function App(){  
+	const dispatch = useDispatch();
+	const appState = useSelector(state => state.app).value;
+	const midiState = useSelector(state => state.midi).value;
 
-  return (
-    <Layout id="app">
-      <Header/>
-      <Switch>
-          <Route exact path="/" component={Synth} />
-          <Route exact path="/sequencer" component={Sequencer} />
-      </Switch>
-      <Footer />
-      <Settings />
-    </Layout>
-  );
+	const initScripts = (scripts) => {
+		scripts.forEach( s => {
+			if(!document.querySelector(`script[src="${s}"`)){
+				const current = document.createElement('script');
+				current.src= s;
+				current.async= true;
+				current.type="text/javascript";
+				document.body.appendChild(current);
+			}
+		})
+	}
+
+	const initMidi = () => {
+		midiStart().then( devices => {
+			dispatch({ type: "midi/setOptions", payload: devices});
+			
+			if(devices.inputDevice && devices.outputDevice) {
+				dispatch({ type: "display/setMessage", payload: "welcome" });
+				dispatch({ type: "app/toggleLoading" });
+			} else return Promise.reject("nodevice");
+			
+			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
+		}).then( count => {			
+			dispatch({ type: "synth/setUserPrograms", payload: count});			
+		}).catch( err => {
+			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
+		});
+	}
+
+	// const initPassthrough = (midi) => midiListenPassthrough(midi.passthorughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
+	const initControlChange = (midi) => midiListenControlChange(midi.inputDevice, midi.inputChannel, (e) => {
+		dispatch({ type: "synth/setControl", payload: {
+			cc: e.data[1],
+			val: { value: e.data[2] }
+		}});
+	});
+	
+	useEffect( () => {
+		initScripts(scripts);
+		initMidi();
+		// eslint-disable-next-line
+	}, [])
+
+	useEffect( () => {
+		// initPassthrough(midiState);
+		initControlChange(midiState);
+		return () => { 
+			// initPassthrough(midiState);
+			initControlChange(midiState);
+		}
+		// eslint-disable-next-line
+	}, [midiState])
+
+	return (
+		<Layout id="app">
+			<Header/>
+			<Switch>
+				<Route exact path="/" component={Synth} />
+				<Route exact path="/sequencer" component={Sequencer} />
+			</Switch>
+			<Footer />
+			<Settings visible={ appState.settings } settings={ midiState } channels={channels} />
+		</Layout>
+	);
 }
 
 export default App;

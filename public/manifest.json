@@ -1,6 +1,17 @@
 {
   "short_name": "NTS-web",
   "name": "NTS-1 web controller",
+  "description": "An NTS-1 web controller, editor and sequencer",
+  "screenshots": [
+    {
+      "src": "assets/img/screenshot.png",
+      "type": "image/png",
+      "sizes": "1600x1045"
+    }
+  ],
+  "categories": ["Music"],
+  "dir": "ltr",
+  "lang": "en",
   "icons": [
     {
       "src": "favicon.ico",
@@ -16,8 +27,15 @@
       "src": "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "logoMaskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
+  "scope": "/",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#f3cc62",
