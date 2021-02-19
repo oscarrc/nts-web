@@ -9,6 +9,7 @@ export const synthSlice = createSlice({
     value: {
         bank: 0,
         octave: 3,
+        conifg:{},
         patches: [
           defaultPatch,
           defaultPatch,

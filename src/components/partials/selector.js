@@ -21,7 +21,7 @@ export function Selector(props) {
 
     useEffect(() => {
       const current = control.current;
-      current.max = props.max - props.min;
+      current.max = props.max;
     }, [props.max, props.min])
         
     return  (
@@ -36,8 +36,8 @@ export function Selector(props) {
             src={selector} 
             step={ 1 } 
             min={ props.min } 
-            max={ props.max - props.min } 
-            value={ Math.round(props.value / props.step) > props.max - 1 ? props.max : Math.round(props.value / props.step) }>              
+            max={ props.max } 
+            value={ Math.round(props.value / props.step) >= props.max ? props.max : Math.round(props.value / props.step) }>              
           </webaudio-knob>
         </div>
     );
