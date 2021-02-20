@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { controls, strings, defaults } from '../../config/synth';
 
 const defaultPatch = defaults(controls, strings);
-
+console.log(defaultPatch)
 export const synthSlice = createSlice({
   name: 'synth',
   initialState: {
@@ -23,6 +23,15 @@ export const synthSlice = createSlice({
   reducers: {
       setPatch: (state, action) => {
         state.value.patches[action.payload.bank ? action.payload.bank : state.value.bank] = action.payload.patch;
+      },
+      setLegacyPatch:(state, action) => {
+        Object.keys(action.payload.patch).forEach(k => {
+          state.value.patches[action.payload.bank ? action.payload.bank : state.value.bank][k] = {
+            ...state.value.patches[action.payload.bank ? action.payload.bank : state.value.bank][k],
+            ...action.payload.patch[k],
+            value: action.payload.patch[k].value * (state.value.patches[action.payload.bank ? action.payload.bank : state.value.bank][k].step || 1 )
+          }
+        })
       },
       setControl: (state, action) => {
         if(strings[action.payload.cc] && !isNaN(action.payload.val.value)){
