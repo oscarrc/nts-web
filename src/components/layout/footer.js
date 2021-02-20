@@ -1,16 +1,27 @@
-import React, { useEffect, useRef } from 'react';
-import { Space, Button, Layout } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Space, Button, Layout, Tooltip } from 'antd';
 import { HeartFilled, CoffeeOutlined, BugOutlined, CloudDownloadOutlined } from '@ant-design/icons';
 
 export function Footer() {
     const { Footer } = Layout;
-    let install = useRef(null);
+    const [supportsPWA, setSupportsPWA] = useState(false);
+    const [promptInstall, setPromptInstall] = useState(null);
+
+    const install = evt => {
+        evt.preventDefault();
+        if(promptInstall) promptInstall.prompt();
+        promptInstall.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') setSupportsPWA(false);
+        });
+    };
 
     useEffect(() => {
-        window.addEventListener('beforeinstallprompt', (e) => {
+        const handler = e => {
             e.preventDefault();
-            install.current = e;
-        })
+            setSupportsPWA(true);
+            setPromptInstall(e);
+          };
+          window.addEventListener("beforeinstallprompt", handler);
     }, []);
 
     return  (
@@ -20,8 +31,13 @@ export function Footer() {
                 <p className="text-light"><i>This page is not affiliated or endorsed by Korg</i></p>
                 <Space>
                     <Button ghost size="small" className="btn-gold" href="https://ko-fi.com/oscarrc" target="_BLANK"><CoffeeOutlined /> Buy me a coffee</Button>
-                    { install.current ? <Button onClick={ install.current.prompt } ghost size="small" className="btn-gold"><CloudDownloadOutlined /></Button> : ""}
-                    <Button ghost size="small" className="btn-gold" href="https://github.com/oscarrc/nts-web/issues" target="_BLANK"><BugOutlined /></Button>
+                    { supportsPWA ? <Tooltip title="Install the app">
+                                        <Button onClick={ install } ghost size="small" className="btn-gold"><CloudDownloadOutlined /></Button> 
+                                    </Tooltip>
+                                  : ""}
+                    <Tooltip title="Report a bug">
+                        <Button ghost size="small" className="btn-gold" href="https://github.com/oscarrc/nts-web/issues" target="_BLANK"><BugOutlined /></Button>
+                    </Tooltip>                    
                 </Space>
             </Space>
         </Footer>
