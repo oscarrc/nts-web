@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Bank } from '../partials/bank';
-import { exportData, importData } from '../../utils/files';
+import { exportData, importData, convertPatch } from '../../utils/files';
 
 export function Patches(props) {
     const dispatch = useDispatch();
@@ -10,10 +10,20 @@ export function Patches(props) {
     const exportPatch = (bank) => exportData(props.patches[bank], "patch.ntspatch");
     const importPatch = async (file, bank) => {
         const patch = await importData(file);
-        dispatch({ type: "synth/setPatch", payload: {
-            patch: patch,
-            bank: bank
-        }});
+
+        if(patch.osc){
+            const converted = convertPatch(patch);
+            dispatch({ type: "synth/setLegacyPatch", payload: {
+                patch: converted,
+                bank: bank
+            }});
+        }else{
+            dispatch({ type: "synth/setPatch", payload: {
+                patch: patch,
+                bank: bank
+            }});
+        }
+
         dispatch( {type: "display/setDisplay", payload: {
             title: "Patch imported",
             text: "Patch has been imported to bank " + (bank + 1)
