@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { controls, strings, defaults } from '../../config/synth';
 
 const defaultPatch = defaults(controls, strings);
-console.log(defaultPatch)
+
 export const synthSlice = createSlice({
   name: 'synth',
   initialState: {
