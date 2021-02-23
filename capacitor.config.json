@@ -2,7 +2,6 @@
   "appId": "me.oscarrc.ntsweb",
   "appName": "nts-web",
   "bundledWebRuntime": false,
-  "windowsAndroidStudioPath": "/mnt/c/Program Files/Android/Android Studio/binstudio64.exe",
   "backgroundColor": "#212122",
   "npmClient": "npm",
   "webDir": "build",
