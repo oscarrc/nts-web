@@ -22,13 +22,13 @@ export function Synth() {
                     <Section section={controls.arp} state={ synthState.patches[synthState.bank] } midi={ midiState } loading={ loading } />
                 </Col>
                 <Col span={24} lg={10} xl={4}>
-                    <Section section={controls.amp} state={ synthState.patches[synthState.bank] } midi={ midiState } loading={ loading } />
+                    <Section section={controls.amp} state={ synthState.patches[synthState.bank] } strings={synthState.strings} midi={ midiState } loading={ loading } />
                 </Col>
                 <Col span={24} lg={12} xl={6}>
                     <Section section={controls.effects} state={ synthState.patches[synthState.bank] } midi={ midiState } loading={ loading } />
                 </Col>
                 <Col span={24} lg={10} xl={4}>
-                    <Section section={controls.vcf} state={ synthState.patches[synthState.bank] } midi={ midiState } loading={ loading } />
+                    <Section section={controls.vcf} state={ synthState.patches[synthState.bank] } strings={synthState.strings} midi={ midiState } loading={ loading } />
                     <More />
                 </Col>
             </Row>

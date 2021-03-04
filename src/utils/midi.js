@@ -109,9 +109,8 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
             }else{
                 setTimeout(()=> {
-                    input.removeListener("sysex", inputChannel, doCount);        
-                    console.log(strings)
-                    resolve(count)
+                    input.removeListener("sysex", inputChannel, doCount);
+                    resolve({count, strings})
                 }, 250)
             }
         }
