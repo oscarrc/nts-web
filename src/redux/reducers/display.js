@@ -11,7 +11,10 @@ export const displaySlice = createSlice({
         state.value = action.payload
       },
       setMessage: (state, action) => {
-          state.value = messages[action.payload]
+          state.value = messages[action.payload] ? messages[action.payload] : {
+            title: "error",
+            text: JSON.stringify(action.payload)
+          }
       }
   }
 });
