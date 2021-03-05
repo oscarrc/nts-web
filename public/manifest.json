@@ -9,7 +9,7 @@
       "sizes": "1600x1045"
     }
   ],
-  "categories": ["Music"],
+  "categories": ["Music", "Midi", "Synthesizer"],
   "dir": "ltr",
   "lang": "en",
   "icons": [
@@ -39,5 +39,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#f3cc62",
-  "background_color": "#212122"
+  "background_color": "#212122",
+  "orientation": "any"
 }
