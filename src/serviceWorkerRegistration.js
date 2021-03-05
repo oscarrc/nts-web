@@ -130,23 +130,22 @@ function checkValidServiceWorker(swUrl, config) {
 function registerPeriodicSync(sw){
   if ('periodicSync' in sw) {
     // Request permission
-    const status = await navigator.permissions.query({
+    navigator.permissions.query({
       name: 'periodic-background-sync',
-    });
+    }).then( status => {      
 
-    if (status.state === 'granted') {
-      try {
-        // Register new sync every 24 hours
-        await sw.periodicSync.register('news', {
-          minInterval: 30 * 24 * 60 * 60 * 1000, // 1 month
-        });
-        console.log('Periodic background sync registered!');
-      } catch(e) {
-        console.error(`Periodic background sync failed:\nx${e}`);
+      if (status.state === 'granted') {
+          sw.periodicSync.register('news', {
+            minInterval: 30 * 24 * 60 * 60 * 1000, // 1 month
+          }).then( () => {            
+            console.log('Periodic background sync registered!');
+          }).catch( e => {
+            console.error(`Periodic background sync failed:\nx${e}`);
+        });;
+      } else {
+        console.info('Periodic background sync is not granted.');
       }
-    } else {
-      console.info('Periodic background sync is not granted.');
-    }
+    })
   } else {
     console.log('Periodic background sync is not supported.');
   }
