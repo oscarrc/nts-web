@@ -2,6 +2,7 @@
   "name": "nts-web",
   "description": "NTS-1 web based editor and controller",
   "version": "2.0.0",
+  "author": "Oscar R.C.",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
@@ -37,12 +38,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "npx cap copy android && npx cap copy @capacitor-community/electron",
+    "postbuild": "npx cap sync android && npx cap sync @capacitor-community/electron",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
-    "postdeploy": "electron-packager electron/ nts-web --platform=win32 --platform=linux --arch=arm64 --arch=ia32 --arch=x64 --overwrite --out=dist"
+    "package": "electron-packager electron/ nts-web --platform=win32 --platform=linux --arch=arm64 --arch=ia32 --arch=x64 --overwrite --out=dist",
+    "postpackage": "electron-installer-windows --src dist/nts-web-win32-x64 --dest dist/installers/nts-web-win-32-x64 && electron-installer-windows --src dist/nts-web-win32-ia32 --dest dist/installers/nts-web-win-32-ia32 && electron-installer-windows --src dist/nts-web-win32-arm64 --dest dist/installers/nts-web-win-32-arm64"
   },
   "eslintConfig": {
     "extends": [
