@@ -38,11 +38,14 @@ export function register(config) {
 
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
-        navigator.serviceWorker.ready.then(() => {
+        navigator.serviceWorker.ready.then((sw) => {
           console.log(
             'This web app is being served cache-first by a service ' +
               'worker. To learn more, visit https://cra.link/PWA'
           );
+
+          //Enable background sync
+          registerPeriodicSync(sw);
         });
       } else {
         // Is not localhost. Just register service worker
@@ -122,6 +125,30 @@ function checkValidServiceWorker(swUrl, config) {
     .catch(() => {
       console.log('No internet connection found. App is running in offline mode.');
     });
+}
+
+function registerPeriodicSync(sw){
+  if ('periodicSync' in sw) {
+    // Request permission
+    navigator.permissions.query({
+      name: 'periodic-background-sync',
+    }).then( status => {      
+
+      if (status.state === 'granted') {
+          sw.periodicSync.register('news', {
+            minInterval: 30 * 24 * 60 * 60 * 1000, // 1 month
+          }).then( () => {            
+            console.log('Periodic background sync registered!');
+          }).catch( e => {
+            console.error(`Periodic background sync failed:\nx${e}`);
+        });;
+      } else {
+        console.info('Periodic background sync is not granted.');
+      }
+    })
+  } else {
+    console.log('Periodic background sync is not supported.');
+  }
 }
 
 export function unregister() {

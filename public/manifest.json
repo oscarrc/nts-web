@@ -9,7 +9,7 @@
       "sizes": "1600x1045"
     }
   ],
-  "categories": ["Music"],
+  "categories": ["Music", "Midi", "Synthesizer"],
   "dir": "ltr",
   "lang": "en",
   "icons": [
@@ -19,17 +19,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "logoMaskable.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
@@ -39,5 +39,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#f3cc62",
-  "background_color": "#212122"
+  "background_color": "#212122",
+  "orientation": "any"
 }

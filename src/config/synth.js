@@ -270,23 +270,7 @@ const strings = {
         "Sawtooth",
         "Triangle",
         "Square",
-        "VPN",
-        "User 1",
-        "User 2",
-        "User 3",
-        "User 4 ",
-        "User 5",
-        "User 6",
-        "User 7",
-        "User 8",
-        "User 9",
-        "User 10",
-        "User 11",
-        "User 12",
-        "User 13",
-        "User 14",
-        "User 15",
-        "User 16"
+        "VPN"
     ],
     117: [
         "Up",
@@ -320,23 +304,7 @@ const strings = {
         "Chorus",
         "Ensemble",
         "Phaser",
-        "Flanger",
-        "User 1",
-        "User 2",
-        "User 3",
-        "User 4 ",
-        "User 5",
-        "User 6",
-        "User 7",
-        "User 8",
-        "User 9",
-        "User 10",
-        "User 11",
-        "User 12",
-        "User 13",
-        "User 14",
-        "User 15",
-        "User 16"
+        "Flanger"
     ],
     89: [
         "Off",
@@ -344,15 +312,7 @@ const strings = {
         "Mono",
         "Ping Pong",
         "High Pass",
-        "Tape",
-        "User 1",
-        "User 2",
-        "User 3",
-        "User 4 ",
-        "User 5",
-        "User 6",
-        "User 7",
-        "User 8"
+        "Tape"
     ],
     90: [
         "Off",
@@ -360,15 +320,7 @@ const strings = {
         "Plate",
         "Space",
         "Riser",
-        "Submarine",
-        "User 1",
-        "User 2",
-        "User 3",
-        "User 4 ",
-        "User 5",
-        "User 6",
-        "User 7",
-        "User 8"
+        "Submarine"
     ],
     42: [
         "LowPass 2p",

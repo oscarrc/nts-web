@@ -4,8 +4,6 @@ import { Row, Col, Divider } from 'antd';
 import { midiControlChange } from '../../utils/midi';
 import { Dropdown, Knob, Selector, Switch } from '../partials';
 
-import { strings } from '../../config/synth';
-
 export function Section(props) {
     const dispatch = useDispatch();
     const [ hovered, setHovered ] = useState(false);
@@ -73,7 +71,7 @@ export function Section(props) {
                             active={ isNaN(props.state[control.cc].active) ? 1 : props.state[control.cc].active }
                             svalue={ props.state[control.cc].svalue }
                             value={ props.state[control.cc].value }
-                            values={ strings[control.cc] }
+                            values={ props.strings[control.cc] }
                             step={ props.state[control.cc].step }
                             onChange={ controlChange }
                         />

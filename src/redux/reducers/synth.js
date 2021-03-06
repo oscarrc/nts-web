@@ -9,7 +9,7 @@ export const synthSlice = createSlice({
     value: {
         bank: 0,
         octave: 3,
-        conifg:{},
+        strings: strings,
         patches: [
           defaultPatch,
           defaultPatch,
@@ -34,11 +34,11 @@ export const synthSlice = createSlice({
         })
       },
       setControl: (state, action) => {
-        if(strings[action.payload.cc] && !isNaN(action.payload.val.value)){
-          let value = Math.round(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
+        if(state.value.strings[action.payload.cc] && !isNaN(action.payload.val.value)){
+          let value = Math.floor(action.payload.val.value / state.value.patches[state.value.bank][action.payload.cc].step);
           let index = value >= state.value.patches[state.value.bank][action.payload.cc].max ? state.value.patches[state.value.bank][action.payload.cc].max : value;
-          action.payload.val.svalue = strings[action.payload.cc][index];
-          if( strings[action.payload.cc][index] === "Off" ){
+          action.payload.val.svalue = state.value.strings[action.payload.cc][index];
+          if( state.value.strings[action.payload.cc][index] === "Off" ){
             action.payload.val.active = 0;
             delete action.payload.val.value;
             delete action.payload.val.svalue;
@@ -57,10 +57,11 @@ export const synthSlice = createSlice({
         state.value.octave = action.payload;
       },
       setUserPrograms: (state, action) => {
-        Object.keys(action.payload).forEach( k => { //TODO fix count and values has something to do with min
+        Object.keys(action.payload.count).forEach( k => {
+          state.value.strings[k] = strings[k].concat(action.payload.strings[k]);
           state.value.patches.forEach( p => {
             let value = Math.round(p[k].value / p[k].step);
-            p[k].max = p[k].max + action.payload[k];
+            p[k].max = p[k].max + action.payload.count[k];
             p[k].step =  Math.round(127/(p[k].max + 1));
             p[k].value = value * p[k].step
           })
@@ -76,7 +77,7 @@ export const synthSlice = createSlice({
 
           state.value.patches[state.value.bank][k].value = value < max  ? value * step : 127;
           
-          if(strings[k]) state.value.patches[state.value.bank][k].svalue = strings[k][value];
+          if(state.value.strings[k]) state.value.patches[state.value.bank][k].svalue = state.value.strings[k][value];
           if(!isNaN(active)) state.value.patches[state.value.bank][k].active = Math.random() < 0.5 ? 1 : 0;
         })
       },

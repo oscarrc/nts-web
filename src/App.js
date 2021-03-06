@@ -38,9 +38,10 @@ function App(){
 			} else return Promise.reject("nodevice");
 			
 			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
-		}).then( count => {			
-			dispatch({ type: "synth/setUserPrograms", payload: count});			
+		}).then( userProgs => {			
+			dispatch({ type: "synth/setUserPrograms", payload: userProgs});			
 		}).catch( err => {
+			console.log(err)
 			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
 		});
 	}

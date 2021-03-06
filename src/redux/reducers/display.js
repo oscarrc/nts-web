@@ -11,7 +11,10 @@ export const displaySlice = createSlice({
         state.value = action.payload
       },
       setMessage: (state, action) => {
-          state.value = messages[action.payload]
+          state.value = messages[action.payload] ? messages[action.payload] : {
+            title: "Error",
+            text: "Check the console for more info"
+          }
       }
   }
 });
