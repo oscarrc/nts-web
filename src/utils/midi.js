@@ -92,7 +92,6 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
             let name = data.slice(30, data.length -1 );
             let decoded = "";
             name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
-            console.log(decoded)
             return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
         }
 
