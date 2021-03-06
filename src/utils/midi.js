@@ -92,6 +92,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
             let name = data.slice(30, data.length -1 );
             let decoded = "";
             name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
+            console.log(decoded)
             return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
         }
 
@@ -117,6 +118,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
         
         input.addListener("sysex", inputChannel, doCount);
         output.sendSysex(vendor, [80, 0, 2]);
+        output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, 1, 0]);
     })
 }
 
