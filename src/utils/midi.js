@@ -4,28 +4,29 @@ const midiStart = () => {
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {
             if (err) reject(err);
-
             const devices = {
                 inputDevices: webmidi.inputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
                 outputDevices: webmidi.outputs.filter(d => d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
-                passthroughDevices: webmidi.outputs.filter(d => !d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
+                passthroughDevices: webmidi.inputs.filter(d => !d.name.includes("NTS")).map( d => { return {id: d.id, name: d.name } }),
             }
-
+            
             resolve({
                 ...devices,
                 inputDevice: devices.inputDevices?.length > 0 ? devices.inputDevices[0].id : "",
                 outputDevice: devices.outputDevices?.length > 0 ? devices.outputDevices[0].id : "",
-                passthorughDevice: devices.passthorughDevices?.length > 0 ? devices.outputDevices[0].id : ""
+                passthroughDevice: devices.passthroughDevices?.length > 0 ? devices.passthroughDevices[0].id : ""
             })
         }, true);
     })
 }
 
-const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChannel) => {
+const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChannel) => { 
     if(!webmidi.enabled) return;
     const passthrough = webmidi.getInputById(passDevice);
-
-    const sendNote = (e) => midiPlayNote(e.value, outputDevice, outputChannel, e.type === "noteon" ? true : false, e.velocity);
+    
+    const sendNote = (e) => {
+        midiPlayNote(e.note.number, outputDevice, outputChannel, e.type === "noteon" ? true : false, e.velocity);
+    }
     const sendPitchBend = (e) => midiSendPitchBend(e.value, outputDevice, outputChannel);
 
     if(passthrough){

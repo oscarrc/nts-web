@@ -21,7 +21,7 @@ export function Settings(props) {
       opt.forEach( (option) => {
         options.push(<Option key={ obj ? option.id : option } value={ obj ? option.id : option }>{ obj ? option.name : option }</Option>)
       })
-
+      
       return options;
   }
     
@@ -45,8 +45,8 @@ export function Settings(props) {
           inputChannel: props.settings.inputChannel,
           outputDevice: props.settings.outputDevice,
           outputChannel: props.settings.outputChannel,          
-          // passthroughDevice: props.settings.passthroughDevice,
-          // passthroughChannel: props.settings.passthroughChannel
+          passthroughDevice: props.settings.passthroughDevice,
+          passthroughChannel: props.settings.passthroughChannel
         }} >
           <Divider className="text-light">Input</Divider>
           <Item label="Device" name="inputDevice">
@@ -70,7 +70,7 @@ export function Settings(props) {
               { renderOptions(props.channels) }
             </Select>
           </Item>
-          {/* <Divider className="text-light">Passthrough</Divider>
+          <Divider className="text-light">Passthrough</Divider>
           <Item label="Device" name="passthroughDevice">
             <Select className="control-select text-lcd">
               { renderOptions(props.settings.passthroughDevices, true) }
@@ -80,7 +80,7 @@ export function Settings(props) {
             <Select className="control-select text-lcd">
               { renderOptions(props.channels) }
             </Select>
-          </Item> */}
+          </Item>
         </Form>
       </Modal>
     );

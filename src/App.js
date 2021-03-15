@@ -8,6 +8,7 @@ import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserP
 import { channels } from './config/midi';
 import "antd/dist/antd.css";
 import './App.css';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 const scripts = ["assets/js/webaudio-controls.js",  "assets/js/webaudio-pianoroll.js"]
 
@@ -46,7 +47,7 @@ function App(){
 		});
 	}
 
-	// const initPassthrough = (midi) => midiListenPassthrough(midi.passthorughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
+	const initPassthrough = (midi) => midiListenPassthrough(midi.passthroughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
 	const initControlChange = (midi) => midiListenControlChange(midi.inputDevice, midi.inputChannel, (e) => {
 		dispatch({ type: "synth/setControl", payload: {
 			cc: e.data[1],
@@ -61,10 +62,10 @@ function App(){
 	}, [])
 
 	useEffect( () => {
-		// initPassthrough(midiState);
+		initPassthrough(midiState);
 		initControlChange(midiState);
 		return () => { 
-			// initPassthrough(midiState);
+			initPassthrough(midiState);
 			initControlChange(midiState);
 		}
 		// eslint-disable-next-line
