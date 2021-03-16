@@ -24,9 +24,7 @@ const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChan
     if(!webmidi.enabled) return;
     const passthrough = webmidi.getInputById(passDevice);
     
-    const sendNote = (e) => {
-        midiPlayNote(e.note.number, outputDevice, outputChannel, e.type === "noteon" ? true : false, e.velocity);
-    }
+    const sendNote = (e) => midiPlayNote(e.note.number, outputDevice, outputChannel, e.type === "noteon" ? true : false, e.velocity);
     const sendPitchBend = (e) => midiSendPitchBend(e.value, outputDevice, outputChannel);
 
     if(passthrough){
