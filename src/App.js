@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Header, Footer, Settings } from './components/layout';
 import { Synth, Sequencer } from './components/views';
-import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms } from './utils/midi';
+import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms, midiDeviceDetection } from './utils/midi';
 import { channels } from './config/midi';
 import "antd/dist/antd.css";
 import './App.css';
@@ -43,7 +43,7 @@ function App(){
 		}).catch( err => {
 			console.log(err)
 			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
-		});
+		}).finally(() => midiDeviceDetection((e) => setNewDevice(e)))
 	}
 
 	const initPassthrough = (midi) => midiListenPassthrough(midi.passthroughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
@@ -53,6 +53,18 @@ function App(){
 			val: { value: e.data[2] }
 		}});
 	});
+
+	const setNewDevice = (e) => {
+		const isNTS = e.port.name.includes("NTS");
+		const isPass = !isNTS && e.port.id.includes("input");
+		
+		if(isNTS || isPass)
+			dispatch({ type: `midi/${e.type === "connected" ? "add" : "remove"}Device`, payload: {
+				id: e.port.id,
+				name: e.port.name,
+				type: isNTS ? (e.port.id.includes("input") ? "input" : "output" ) : "passthrough"
+			}});
+	}
 	
 	useEffect( () => {
 		initScripts(scripts);
