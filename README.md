@@ -17,6 +17,7 @@ This is still a work in progress, so expect some bugs and issues.
 
 - [x] Implement midi passthrough (done, but [I need a controller for testing](https://ko-fi.com/oscarrc))
 - [x] Get names of user oscilators and effects
+- [ ] Detect changes on plugged devices and act accordingly
 - [ ] Compile standalone apps
 
 If you miss any feature, please, request it.
