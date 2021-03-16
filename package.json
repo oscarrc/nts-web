@@ -1,7 +1,7 @@
 {
   "name": "nts-web",
   "description": "NTS-1 web based editor and controller",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "author": "Oscar R.C.",
   "private": true,
   "dependencies": {
