@@ -20,6 +20,16 @@ const midiStart = () => {
     })
 }
 
+const midiDeviceDetection = (cb) => {
+    if(!webmidi.enabled) return;
+    
+    if(webmidi.hasListener('connected', cb)) webmidi.removeListener('connected', cb)
+    else webmidi.addListener('connected', cb)
+
+    if(webmidi.hasListener('disconnected', cb)) webmidi.removeListener('disconnected', cb)
+    else webmidi.addListener('disconnected', cb)
+}
+
 const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChannel) => { 
     if(!webmidi.enabled) return;
     const passthrough = webmidi.getInputById(passDevice);
@@ -120,4 +130,4 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
     })
 }
 
-export { midiStart, midiListenPassthrough, midiListenControlChange, midiSendPitchBend, midiGetUserPrograms, midiControlChange, midiPlayNote }
+export { midiStart, midiDeviceDetection, midiListenPassthrough, midiListenControlChange, midiSendPitchBend, midiGetUserPrograms, midiControlChange, midiPlayNote }
