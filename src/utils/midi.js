@@ -22,12 +22,8 @@ const midiStart = () => {
 
 const midiDeviceDetection = (cb) => {
     if(!webmidi.enabled) return;
-    
-    if(webmidi.hasListener('connected', cb)) webmidi.removeListener('connected', cb)
-    else webmidi.addListener('connected', cb)
-
-    if(webmidi.hasListener('disconnected', cb)) webmidi.removeListener('disconnected', cb)
-    else webmidi.addListener('disconnected', cb)
+    webmidi.addListener('connected', cb);
+    webmidi.addListener('disconnected', cb);
 }
 
 const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChannel) => { 
