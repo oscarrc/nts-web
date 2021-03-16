@@ -15,9 +15,14 @@ This is still a work in progress, so expect some bugs and issues.
 
 #### TODOs
 
+<<<<<<< HEAD
 - [x] Implement midi passthrough (done, but [I need a controller for testing](https://ko-fi.com/oscarrc))
 - [x] Get names of user oscilators and effects
 - [ ] Compile standalone apps
+=======
+- [ ] Implement midi passthrough (in progress, but [I need a controller for testing](https://ko-fi.com/oscarrc))
+- [x] Get names of user oscilators and effects (I already how to do it, I just need to implement it)
+>>>>>>> 3ae2895... Update README.md
 
 If you miss any feature, please, request it.
 

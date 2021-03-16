@@ -1,6 +1,7 @@
 import webmidi from 'webmidi';
 
 const midiStart = () => {
+    webmidi.disable();
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {
             if (err) reject(err);
