@@ -8,7 +8,6 @@ import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserP
 import { channels } from './config/midi';
 import "antd/dist/antd.css";
 import './App.css';
-import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 const scripts = ["assets/js/webaudio-controls.js",  "assets/js/webaudio-pianoroll.js"]
 
