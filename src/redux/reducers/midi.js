@@ -16,7 +16,7 @@ export const midiSlice = createSlice({
         if(state.value[action.payload.type + "Device"] === "") state.value[action.payload.type + "Device"] = action.payload.id;
       },
       removeDevice: (state, action) => {
-        const index = state.value[action.payload.type + "Devices"].findIndex( d => d.id === action.payload.id && d.name === action.payload.name );        
+        const index = state.value[action.payload.type + "Devices"].findIndex( d => d.id === action.payload.id && d.name === action.payload.name );
         if(index >= 0) state.value[action.payload.type + "Devices"].splice(index, 1);
         if(state.value[action.payload.type + "Device"] === action.payload.id) state.value[action.payload.type + "Device"] = state.value[action.payload.type + "Devices"][0]?.id || "";
       }

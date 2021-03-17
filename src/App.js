@@ -57,16 +57,21 @@ function App(){
 	const setNewDevice = (e) => {
 		const isNTS = e.port.name.includes("NTS");
 		const isPass = !isNTS && e.port.id.includes("input");
+		const connected = e.type === "connected";
 
 		if(isNTS || isPass)
-			dispatch({ type: `midi/${e.type === "connected" ? "add" : "remove"}Device`, payload: {
+			dispatch({ type: `midi/${connected ? "add" : "remove"}Device`, payload: {
 				id: e.port.id,
 				name: e.port.name,
 				type: isNTS ? (e.port.id.includes("input") ? "input" : "output" ) : "passthrough"
 			}});
 		
-		if(isNTS && e.type == "connected") dispatch({ type: "display/setMessage", payload: "welcome" });
-		if(isPass) dispatch({ type: "display/setMessage", payload: "newdevice" });
+		if(isNTS && connected) {
+			dispatch({ type: "display/setMessage", payload: "welcome" });
+			if(appState.loading) dispatch({ type: "app/toggleLoading" });
+		}
+
+		if(isPass && connected) dispatch({ type: "display/setMessage", payload: "newdevice" });
 	}
 	
 	useEffect( () => {
