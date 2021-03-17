@@ -34,7 +34,7 @@ function App(){
 			
 			if(devices.inputDevice && devices.outputDevice) {
 				dispatch({ type: "display/setMessage", payload: "welcome" });
-				dispatch({ type: "app/toggleLoading" });
+				dispatch({ type: "app/stopLoading" });
 			} else return Promise.reject("nodevice");
 			
 			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
@@ -66,9 +66,9 @@ function App(){
 				type: isNTS ? (e.port.id.includes("input") ? "input" : "output" ) : "passthrough"
 			}});
 		
-		if(isNTS && connected) {
-			dispatch({ type: "display/setMessage", payload: "welcome" });
-			if(appState.loading) dispatch({ type: "app/toggleLoading" });
+		if(isNTS) {
+			dispatch({ type: "display/setMessage", payload: connected ? "welcome" : "nodevice" });
+			dispatch({ type: `app/${connected ? "stop" : "start"}Loading` });
 		}
 
 		if(isPass && connected) dispatch({ type: "display/setMessage", payload: "newdevice" });
