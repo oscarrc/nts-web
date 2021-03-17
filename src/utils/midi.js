@@ -38,11 +38,11 @@ const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChan
 
     if(passthrough){
         if(passthrough.hasListener('noteon', passChannel, sendNote)) passthrough.removeListener('noteon', passChannel, sendNote)
-        else passthrough.addListener('noteon', passChannel, sendNote);
+        passthrough.addListener('noteon', passChannel, sendNote);
         if(passthrough.hasListener('noteoff', passChannel, sendNote)) passthrough.removeListener('noteoff', passChannel, sendNote)
-        else passthrough.addListener('noteoff', passChannel, sendNote);
+        passthrough.addListener('noteoff', passChannel, sendNote);
         if(passthrough.hasListener('pitchbend', passChannel, sendPitchBend)) passthrough.removeListener('pitchbend', passChannel, sendPitchBend)
-        else passthrough.addListener('pitchbend', passChannel, sendPitchBend);
+        passthrough.addListener('pitchbend', passChannel, sendPitchBend);
     }
 }
 
@@ -52,7 +52,7 @@ const midiListenControlChange = (inputDevice, inputChannel, cb) => {
     
     if(input){
         if(input.hasListener('controlchange', inputChannel, cb)) input.removeListener('controlchange', inputChannel, cb)
-        else input.addListener('controlchange', inputChannel, cb);
+        input.addListener('controlchange', inputChannel, cb);
     }
 }
 
