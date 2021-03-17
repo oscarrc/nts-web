@@ -23,7 +23,7 @@ export const midiSlice = createSlice({
   }
 });
 
-export const { setOptions } = midiSlice.actions;
+export const { setOptions, addDevice, removeDevice } = midiSlice.actions;
 export const midi = state => state.midi.value;
 
 export default midiSlice.reducer;
