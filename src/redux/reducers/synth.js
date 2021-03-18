@@ -61,7 +61,7 @@ export const synthSlice = createSlice({
           state.value.strings[k] = strings[k].concat(action.payload.strings[k]);
           state.value.patches.forEach( p => {
             let value = Math.round(p[k].value / p[k].step);
-            p[k].max = p[k].max + action.payload.count[k];
+            p[k].max = defaultPatch[k].max + action.payload.count[k];
             p[k].step =  Math.round(127/(p[k].max + 1));
             p[k].value = value * p[k].step
           })
