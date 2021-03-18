@@ -43,17 +43,19 @@ function App(){
 		}).catch( err => {
 			console.log(err)
 			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
-		}).finally(() => midiDeviceDetection((e) => setNewDevice(e)))
+		}).finally(() => midiDeviceDetection((e) => {
+			setNewDevice(e)
+		}))
 	}
 
-	const initUserProgs = (midi) => {
-		midiGetUserPrograms(midi.inputDevice, midi.outputDevice, midi.inputChannel, midi.sysexVendor, midi.sysexDevice, midi.sysexChannel).then( userProgs => {			
-			dispatch({ type: "synth/setUserPrograms", payload: userProgs});			
-		}).catch( err => {
-			console.log(err)
-			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
-		})
-	}
+	// const initUserProgs = (midi) => {
+	// 	midiGetUserPrograms(midi.inputDevice, midi.outputDevice, midi.inputChannel, midi.sysexVendor, midi.sysexDevice, midi.sysexChannel).then( userProgs => {			
+	// 		dispatch({ type: "synth/setUserPrograms", payload: userProgs});			
+	// 	}).catch( err => {
+	// 		console.log(err)
+	// 		dispatch({ type: "display/setMessage", payload: err ? err : "error" });
+	// 	})
+	// }
 
 	const initPassthrough = (midi) => midiListenPassthrough(midi.passthroughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
 	const initControlChange = (midi) => midiListenControlChange(midi.inputDevice, midi.inputChannel, (e) => {
@@ -92,7 +94,7 @@ function App(){
 	useEffect( () => {
 		initPassthrough(midiState);
 		initControlChange(midiState);
-		initUserProgs(midiState);
+		// initUserProgs(midiState);
 		return () => { 
 			initPassthrough(midiState);
 			initControlChange(midiState);
