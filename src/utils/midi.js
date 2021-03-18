@@ -38,11 +38,11 @@ const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChan
 
     if(passthrough){
         if(passthrough.hasListener('noteon', passChannel, sendNote)) passthrough.removeListener('noteon', passChannel, sendNote)
-        passthrough.addListener('noteon', passChannel, sendNote);
+        else passthrough.addListener('noteon', passChannel, sendNote);
         if(passthrough.hasListener('noteoff', passChannel, sendNote)) passthrough.removeListener('noteoff', passChannel, sendNote)
-        passthrough.addListener('noteoff', passChannel, sendNote);
+        else passthrough.addListener('noteoff', passChannel, sendNote);
         if(passthrough.hasListener('pitchbend', passChannel, sendPitchBend)) passthrough.removeListener('pitchbend', passChannel, sendPitchBend)
-        passthrough.addListener('pitchbend', passChannel, sendPitchBend);
+        else passthrough.addListener('pitchbend', passChannel, sendPitchBend);
     }
 }
 
@@ -52,7 +52,7 @@ const midiListenControlChange = (inputDevice, inputChannel, cb) => {
     
     if(input){
         if(input.hasListener('controlchange', inputChannel, cb)) input.removeListener('controlchange', inputChannel, cb)
-        input.addListener('controlchange', inputChannel, cb);
+        else input.addListener('controlchange', inputChannel, cb);
     }
 }
 
@@ -108,6 +108,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 count[index[type - 1]] = count[index[type - 1]] + 1
                 strings[index[type - 1]].push(decodeName(e.data))
             }
+            
             if(bank < 16){
                 bank++
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
@@ -122,7 +123,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 }, 250)
             }
         }
-        
+
         input.addListener("sysex", inputChannel, doCount);
         output.sendSysex(vendor, [80, 0, 2]);
         output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, 1, 0]);
