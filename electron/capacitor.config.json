@@ -1,6 +1,6 @@
 {
   "appId": "me.oscarrc.ntsweb",
-  "appName": "nts-web",
+  "appName": "NTS-web",
   "bundledWebRuntime": false,
   "backgroundColor": "#212122",
   "npmClient": "npm",
