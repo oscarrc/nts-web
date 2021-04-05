@@ -11,9 +11,6 @@
     "@capacitor/cli": "^2.4.6",
     "@capacitor/core": "^2.4.6",
     "@reduxjs/toolkit": "^1.5.0",
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.7.0",
     "antd": "^4.12.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -39,12 +36,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "npx cap sync android && npx cap sync @capacitor-community/electron",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "package": "npx electron-packager electron/ nts-web --platform=win32 --platform=linux --arch=arm64 --arch=ia32 --arch=x64 --overwrite --out=dist",
+    "postpackage": "npx electron-installer-windows --src dist/nts-web-win32-x64 --dest dist/installers/nts-web-win-32-x64 && electron-installer-windows --src dist/nts-web-win32-ia32 --dest dist/installers/nts-web-win-32-ia32 && electron-installer-windows --src dist/nts-web-win32-arm64 --dest dist/installers/nts-web-win-32-arm64",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
-    "package": "electron-packager electron/ nts-web --platform=win32 --platform=linux --arch=arm64 --arch=ia32 --arch=x64 --overwrite --out=dist",
-    "postpackage": "electron-installer-windows --src dist/nts-web-win32-x64 --dest dist/installers/nts-web-win-32-x64 && electron-installer-windows --src dist/nts-web-win32-ia32 --dest dist/installers/nts-web-win-32-ia32 && electron-installer-windows --src dist/nts-web-win32-arm64 --dest dist/installers/nts-web-win-32-arm64"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "electron-packager": "^15.2.0",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.7.0"
   },
   "eslintConfig": {
     "extends": [
