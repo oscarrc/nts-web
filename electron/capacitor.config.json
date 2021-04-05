@@ -1,0 +1,14 @@
+{
+  "appId": "me.oscarrc.ntsweb",
+  "appName": "nts-web",
+  "bundledWebRuntime": false,
+  "backgroundColor": "#212122",
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
