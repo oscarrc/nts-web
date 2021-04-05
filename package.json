@@ -2,7 +2,10 @@
   "name": "nts-web",
   "description": "NTS-1 web based editor and controller",
   "version": "2.0.4",
-  "author": "Oscar R.C.",
+  "author": {
+    "name": "Oscar R.C.",
+    "email": "oscarrc.web@gmail.com"
+  },
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
