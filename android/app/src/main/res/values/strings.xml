@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">nts-web</string>
+    <string name="title_activity_main">nts-web</string>
+    <string name="package_name">me.oscarrc.ntsweb</string>
+    <string name="custom_url_scheme">me.oscarrc.ntsweb</string>
+</resources>
