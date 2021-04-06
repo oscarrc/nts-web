@@ -9,10 +9,10 @@ import korg from '../../assets/korg.svg';
 
 export function Header() {
     const { Header } = Layout;
-    const { CapacitorFileChooser } = Plugins;
-    const dispatch = useDispatch();
+    const { CapacitorFileChooser } = Plugins;    
     const synthState = useSelector(state => state.synth).value;
     const seqState = useSelector(state => state.sequencer).value;
+    const dispatch = useDispatch();
     const pickFile = async () => {
         if (Capacitor.isNative){            
             let file = await CapacitorFileChooser.picker();
