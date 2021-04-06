@@ -1,7 +1,6 @@
 {
   "name": "nts-web",
   "description": "NTS-1 web based editor and controller",
-  "homepage": "nts-web.oscarrc.me",
   "version": "2.0.4",
   "author": {
     "name": "Oscar R.C.",
@@ -44,8 +43,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "npx cap sync android && npx cap sync @capacitor-community/electron",
-    "package": "npx electron-packager electron/ nts-web --platform=win32 --platform=linux --arch=arm64 --arch=ia32 --arch=x64 --overwrite --out=dist --icon='./public/icon' --app-version=2.0.4 --asar",
-    "postpackage": "",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",

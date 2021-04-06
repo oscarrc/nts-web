@@ -2,7 +2,6 @@
   "name": "nts-web",
   "version": "2.0.4",
   "description": "NTS1 web based editor and controller",
-  "homepage": "nts-web.oscarrc.me",
   "main": "./build/index.js",
   "scripts": {
     "build": "tsc",
