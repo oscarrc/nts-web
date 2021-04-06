@@ -1,6 +1,7 @@
 import webmidi from 'webmidi';
 
 const midiStart = () => {
+    webmidi.disable();
     return new Promise((resolve, reject) => {
         webmidi.enable( (err) => {
             if (err) reject(err);
@@ -22,8 +23,10 @@ const midiStart = () => {
 
 const midiDeviceDetection = (cb) => {
     if(!webmidi.enabled) return;
-    webmidi.addListener('connected', cb);
-    webmidi.addListener('disconnected', cb);
+    if(webmidi.hasListener("connected", cb)) webmidi.removeListener("connected", cb);
+    if(webmidi.hasListener("disconnected", cb)) webmidi.removeListener("disconnected", cb);
+    webmidi.addListener("connected", cb);
+    webmidi.addListener("disconnected", cb);
 }
 
 const midiListenPassthrough = (passDevice, passChannel, outputDevice, outputChannel) => { 
@@ -105,6 +108,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 count[index[type - 1]] = count[index[type - 1]] + 1
                 strings[index[type - 1]].push(decodeName(e.data))
             }
+            
             if(bank < 16){
                 bank++
                 output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, type, bank]);
@@ -119,7 +123,7 @@ const midiGetUserPrograms = (inputId, outputId, inputChannel, vendor, device, ch
                 }, 250)
             }
         }
-        
+
         input.addListener("sysex", inputChannel, doCount);
         output.sendSysex(vendor, [80, 0, 2]);
         output.sendSysex(vendor, [48 + channel, 0, 1, device, 25, 1, 0]);

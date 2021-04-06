@@ -1,6 +1,6 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y43D7I3)
 
-## NTS-web 2.0.0
+## NTS-web 2.0.4
 
 A web controller for the Korg NTS-1.
 

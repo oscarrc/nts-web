@@ -10,8 +10,6 @@
 
 # production
 /build
-/android
-/electron
 /dist
 
 # misc

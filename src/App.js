@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Header, Footer, Settings } from './components/layout';
 import { Synth, Sequencer } from './components/views';
-import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms } from './utils/midi';
+import { midiStart, midiListenPassthrough, midiListenControlChange, midiGetUserPrograms, midiDeviceDetection } from './utils/midi';
 import { channels } from './config/midi';
 import "antd/dist/antd.css";
 import './App.css';
@@ -34,7 +34,7 @@ function App(){
 			
 			if(devices.inputDevice && devices.outputDevice) {
 				dispatch({ type: "display/setMessage", payload: "welcome" });
-				dispatch({ type: "app/toggleLoading" });
+				dispatch({ type: "app/stopLoading" });
 			} else return Promise.reject("nodevice");
 			
 			return midiGetUserPrograms(devices.inputDevice, devices.outputDevice, midiState.inputChannel, midiState.sysexVendor, midiState.sysexDevice, midiState.sysexChannel);
@@ -43,8 +43,19 @@ function App(){
 		}).catch( err => {
 			console.log(err)
 			dispatch({ type: "display/setMessage", payload: err ? err : "error" });
-		});
+		}).finally(() => midiDeviceDetection((e) => {
+			setNewDevice(e)
+		}))
 	}
+
+	// const initUserProgs = (midi) => {
+	// 	midiGetUserPrograms(midi.inputDevice, midi.outputDevice, midi.inputChannel, midi.sysexVendor, midi.sysexDevice, midi.sysexChannel).then( userProgs => {			
+	// 		dispatch({ type: "synth/setUserPrograms", payload: userProgs});			
+	// 	}).catch( err => {
+	// 		console.log(err)
+	// 		dispatch({ type: "display/setMessage", payload: err ? err : "error" });
+	// 	})
+	// }
 
 	const initPassthrough = (midi) => midiListenPassthrough(midi.passthroughDevice, midi.pasthroughChannel, midi.outputDevice, midi.outputChannel);
 	const initControlChange = (midi) => midiListenControlChange(midi.inputDevice, midi.inputChannel, (e) => {
@@ -53,6 +64,26 @@ function App(){
 			val: { value: e.data[2] }
 		}});
 	});
+
+	const setNewDevice = (e) => {
+		const isNTS = e.port.name.includes("NTS");
+		const isPass = !isNTS && e.port.id.includes("input");
+		const connected = e.type === "connected";
+
+		if(isNTS || isPass)
+			dispatch({ type: `midi/${connected ? "add" : "remove"}Device`, payload: {
+				id: e.port.id,
+				name: e.port.name,
+				type: isNTS ? (e.port.id.includes("input") ? "input" : "output" ) : "passthrough"
+			}});
+		
+		if(isNTS) {
+			dispatch({ type: "display/setMessage", payload: connected ? "welcome" : "nodevice" });
+			dispatch({ type: `app/${connected ? "stop" : "start"}Loading` });
+		}
+
+		if(isPass && connected) dispatch({ type: "display/setMessage", payload: "newdevice" });
+	}
 	
 	useEffect( () => {
 		initScripts(scripts);
@@ -63,6 +94,7 @@ function App(){
 	useEffect( () => {
 		initPassthrough(midiState);
 		initControlChange(midiState);
+		// initUserProgs(midiState);
 		return () => { 
 			initPassthrough(midiState);
 			initControlChange(midiState);
