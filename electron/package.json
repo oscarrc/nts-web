@@ -8,8 +8,8 @@
     "build": "tsc",
     "electron:start": "npm run build && electron ./",
     "electron:pack": "electron-builder build -wl --x64 --ia32 --armv7l --arm64",
-    "electron:build-windows": "npm run build && electron-builder build --windows",
-    "electron:build-linux": "npm run build && electron-builder build --linux"
+    "electron:build-windows": "electron-builder build --windows",
+    "electron:build-linux": "electron-builder build --linux"
   },
   "dependencies": {
     "@capacitor-community/electron": "^1.3.1"
