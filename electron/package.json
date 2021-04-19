@@ -52,12 +52,13 @@
         "deb",
         "rpm",
         "tar.gz"
-      ]
+      ],
+      "icon": "assets/appIcon.icns"
     },
     "mac": {
       "category": "public.app-category.developer-tools",
       "target": "dmg",
-      "icon": "assets/appIcon.png"
+      "icon": "assets/appIcon.icns"
     },
     "win": {
       "target": [
