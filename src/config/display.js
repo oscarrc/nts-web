@@ -13,7 +13,7 @@ const messages = {
     },
     nodevice: {
         title: "No NTS-1 detected",
-        text: "Connect the NTS-1 and refresh the page"
+        text: "Connect the NTS-1 and reload the app"
     },
     newdevice: {
         title: "New device detected",
