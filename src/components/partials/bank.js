@@ -7,7 +7,7 @@ export function Bank(props) {
     const { FileSelector } = Plugins;
 
     const pickFile = async () => {  
-        if(Capacitor.platform !== 'web'){
+        if(Capacitor.platform == 'android'){
             let selectedFile = await FileSelector.fileSelector({
                 multiple_selection: false,
                 ext: [props.accept.substring(1)]
@@ -23,7 +23,7 @@ export function Bank(props) {
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />} onClick={ pickFile } >
                 {
-                    Capacitor.platform == 'web' ? 
+                    Capacitor.platform !== 'android' ? 
                         <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
                             Import
                         </Upload>
