@@ -9,7 +9,7 @@ export function Pad(props) {
         const currentIndicator = indicator.current;
         
         const sendPitchBend = (event) => {
-            const offsetY = event.type == 'touchstart' ? event.targetTouches[0].clientY -  event.target.getBoundingClientRect().top : event.offsetY;
+            const offsetY = event.type === 'touchstart' ? event.targetTouches[0].clientY -  event.target.getBoundingClientRect().top : event.offsetY;
             const position = (offsetY * 100) / currentPad.clientHeight;
             const pitch = -(-1 + ( 0.02 * (position + 1) ));
             

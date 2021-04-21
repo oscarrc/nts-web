@@ -10,12 +10,12 @@ export function More() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const randomize = () => dispatch({ type:"synth/randomize"});
-    const sequencer = () => history.push("/sequencer");
-
     useEffect( () => {
         const randomizeCurrent = randomSwitch.current;
         const sequencerCurrent = seqSwitch.current;
+
+        const randomize = () => dispatch({ type:"synth/randomize"});
+        const sequencer = () => history.push("/sequencer");
         
         randomizeCurrent.addEventListener("click", randomize);
         sequencerCurrent.addEventListener("click", sequencer);
@@ -24,7 +24,7 @@ export function More() {
             randomizeCurrent.removeEventListener("click", randomize);
             sequencerCurrent.removeEventListener("click", sequencer);
         }
-    }, [])
+    }, [dispatch, history])
 
     return  (
         <div className="more">
