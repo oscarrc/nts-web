@@ -7,7 +7,7 @@ export function Bank(props) {
     const { FileSelector } = Plugins;
 
     const pickFile = async () => {  
-        if(Capacitor.platform == 'android'){
+        if(Capacitor.platform === 'android'){
             let selectedFile = await FileSelector.fileSelector({
                 multiple_selection: false,
                 ext: [props.accept.substring(1)]
