@@ -45,11 +45,10 @@ export function Bank(props) {
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />} onClick={ pickFile } >
                 {
-                    platform !== 'android' ? 
-                        <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
-                            Import
-                        </Upload>
-                    : 'Import'
+                    platform === 'android' ? 'Import' :
+                    <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
+                        Import
+                    </Upload>
                 }
             </Menu.Item>
             <Menu.Item key="save" onClick={ saveFile } icon={<DownloadOutlined />}>

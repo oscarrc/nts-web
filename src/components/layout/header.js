@@ -67,11 +67,10 @@ export function Header() {
                 extra={[
                     <Space key="headeractions">
                         {
-                            platform !== 'android' ? 
+                            platform === 'android' ? <Button onClick={ pickFile } ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button> :
                                 <Upload accept=".ntsweb"  beforeUpload={ file => loadData(file) } showUploadList={false} customRequest={ () => false }>
                                     <Button ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
-                                </Upload> :
-                                <Button onClick={ pickFile } ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
+                                </Upload>                                
                         }
                         <Button onClick={ saveData } ghost className="btn-gold" icon={<DownloadOutlined />}>Export</Button>
                         <Button ghost onClick={toggleSettings} className="btn-gold" icon={<SettingOutlined />}></Button>
