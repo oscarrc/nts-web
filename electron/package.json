@@ -3,18 +3,19 @@
   "version": "2.0.4",
   "description": "NTS1 web based editor and controller",
   "main": "./build/index.js",
+  "homepage": "https://nts-web.oscarrc.me",
   "scripts": {
     "build": "tsc",
     "electron:start": "npm run build && electron ./",
-    "electron:pack": "electron-builder build -wl --x64 --ia32 --armv7l --arm64",
-    "electron:build-windows": "electron-builder build --windows",
-    "electron:build-linux": "electron-builder build --linux"
+    "electron:pack": "electron-builder build -wl --x64 --ia32",
+    "electron:build-windows": "electron-builder build --windows --x64 --ia32",
+    "electron:build-linux": "electron-builder build --linux --x64 --ia32"
   },
   "dependencies": {
     "@capacitor-community/electron": "^1.3.1"
   },
   "devDependencies": {
-    "electron": "~10.3.1",
+    "electron": "^10.3.2",
     "electron-builder": "^22.9.1",
     "typescript": "~4.0.5"
   },
@@ -34,8 +35,8 @@
     "appId": "me.oscarrc.nts-web",
     "productName": "NTS-web",
     "asar": true,
-    "directories": {    
-      "output": "dist/${os}/${arch}"
+    "directories": {
+      "output": "dist/${os}"
     },
     "files": [
       "assets/*",
@@ -50,18 +51,17 @@
         "AppImage",
         "deb",
         "rpm",
-        "snap",
         "tar.gz"
-      ]
+      ],
+      "icon": "assets/appIcon.icns"
     },
     "mac": {
       "category": "public.app-category.developer-tools",
       "target": "dmg",
-      "icon": "assets/appIcon.png"
+      "icon": "assets/appIcon.icns"
     },
     "win": {
       "target": [
-        "appx",
         "nsis",
         "portable",
         "zip"
