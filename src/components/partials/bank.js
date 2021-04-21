@@ -6,17 +6,17 @@ import { Capacitor, Plugins } from '@capacitor/core';
 export function Bank(props) {
     const { FileSelector } = Plugins;
 
-    const pickFile = async () => {
-        if (Capacitor.platform !== 'web'){    
+    const pickFile = async () => {  
+        if(Capacitor.platform !== 'web'){
             let selectedFile = await FileSelector.fileSelector({
                 multiple_selection: false,
-                ext: props.accept
+                ext: [props.accept.substring(1)]
             });
-
-            let paths = JSON.parse(selectedFile.paths);
-
-            props.onImport(paths[0], props.bank)
-        }
+    
+            const path = JSON.parse(selectedFile.paths);            
+            const file = await fetch(path).then((r) => r.blob());
+            props.onImport(file, props.bank);
+        }        
     }
 
     const menu = (
@@ -27,7 +27,7 @@ export function Bank(props) {
                         <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
                             Import
                         </Upload>
-                    : ''
+                    : 'Import'
                 }
             </Menu.Item>
             <Menu.Item key="save" onClick={ () => props.onExport(props.bank) } icon={<DownloadOutlined />}>
