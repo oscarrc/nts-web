@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
+import com.bkon.capacitor.fileselector.FileSelector;
 
 import java.util.ArrayList;
 
