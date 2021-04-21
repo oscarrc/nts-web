@@ -42,6 +42,7 @@ export function Header() {
         if(platform === 'android'){
             const { value, cancelled } = await Modals.prompt({
                 title: 'Data name',
+                message: 'Enter file name',
                 inputPlaceholder: 'data'
             });
 
@@ -49,7 +50,7 @@ export function Header() {
                 await Filesystem.writeFile({
                     path: `nts-web/${value}.ntsweb`,
                     data: decodeURIComponent(encodeURI(JSON.stringify(data))),
-                    directory: FilesystemDirectory,
+                    directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true
                 });

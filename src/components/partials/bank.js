@@ -24,14 +24,15 @@ export function Bank(props) {
         if(platform === 'android'){
             const { value, cancelled } = await Modals.prompt({
                 title: 'Patch name',
+                message: 'Enter patch name',
                 inputPlaceholder: 'patch'
             });
-
+            
             if(!cancelled){
-                await Filesystem.writeFile({
+                Filesystem.writeFile({
                     path: `nts-web/${value}${props.accept}`,
                     data: decodeURIComponent(encodeURI(JSON.stringify(props.bank))),
-                    directory: FilesystemDirectory,
+                    directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true
                 });
