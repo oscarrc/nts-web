@@ -5,9 +5,10 @@ import { Capacitor, Plugins } from '@capacitor/core';
 
 export function Bank(props) {
     const { FileSelector } = Plugins;
+    const platform = Capacitor.platform;
 
     const pickFile = async () => {  
-        if(Capacitor.platform == 'android'){
+        if(platform === 'android'){
             let selectedFile = await FileSelector.fileSelector({
                 multiple_selection: false,
                 ext: [props.accept.substring(1)]
@@ -19,18 +20,26 @@ export function Bank(props) {
         }        
     }
 
+    const saveFile = () => {
+        if(platform === 'android'){
+
+        }else{
+            props.onExport(props.bank);
+        }
+    }
+
     const menu = (
         <Menu className="menu-dark">
             <Menu.Item key="import" icon={<UploadOutlined />} onClick={ pickFile } >
                 {
-                    Capacitor.platform !== 'android' ? 
+                    platform !== 'android' ? 
                         <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
                             Import
                         </Upload>
                     : 'Import'
                 }
             </Menu.Item>
-            <Menu.Item key="save" onClick={ () => props.onExport(props.bank) } icon={<DownloadOutlined />}>
+            <Menu.Item key="save" onClick={ saveFile } icon={<DownloadOutlined />}>
                 Export
             </Menu.Item>
         </Menu>

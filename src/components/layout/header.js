@@ -9,6 +9,7 @@ import korg from '../../assets/korg.svg';
 export function Header() {
     const { Header } = Layout;
     const { FileSelector } = Plugins;  
+    const platform = Capacitor.platform
     const synthState = useSelector(state => state.synth).value;
     const seqState = useSelector(state => state.sequencer).value;
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export function Header() {
     const toggleSettings = () => dispatch({type: 'app/toggleSettings'});   
 
     const pickFile = async () => {  
-        if(Capacitor.platform == 'android'){
+        if(platform == 'android'){
             let selectedFile = await FileSelector.fileSelector({
                 multiple_selection: false,
                 ext: ['ntsweb']
@@ -32,10 +33,16 @@ export function Header() {
         dispatch({ type: 'synth/importSynth', payload: data.synth });
         dispatch({ type: 'sequencer/importSeq', payload: data.sequencer })
     }
-	const saveData = () => exportData({
-        synth: synthState,
-        sequencer: seqState
-    }, "data.ntsweb");
+	const saveData = () => {
+        if(platform === 'android'){
+
+        }else{
+            exportData({
+                synth: synthState,
+                sequencer: seqState
+            }, "data.ntsweb");
+        }
+    }
 
     return  (
         <Header className="header transparent">
@@ -45,7 +52,7 @@ export function Header() {
                 extra={[
                     <Space key="headeractions">
                         {
-                            Capacitor.platform !== 'android' ? 
+                            platform !== 'android' ? 
                                 <Upload accept=".ntsweb"  beforeUpload={ file => loadData(file) } showUploadList={false} customRequest={ () => false }>
                                     <Button ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
                                 </Upload> :
