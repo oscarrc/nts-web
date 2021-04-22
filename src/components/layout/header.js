@@ -48,7 +48,7 @@ export function Header() {
 
             if(!cancelled){
                 await Filesystem.writeFile({
-                    path: `nts-web/${value}.ntsweb`,
+                    path: `nts-web/${value || 'data'}.ntsweb`,
                     data: decodeURIComponent(encodeURI(JSON.stringify(data))),
                     directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,

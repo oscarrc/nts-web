@@ -1,10 +1,10 @@
 import React from 'react';
 import {  Dropdown, Menu, Upload } from 'antd';
 import { DownOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { Capacitor, Plugins, Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import { Capacitor, Plugins } from '@capacitor/core';
 
 export function Bank(props) {
-    const { FileSelector, Modals } = Plugins;
+    const { FileSelector } = Plugins;
     const platform = Capacitor.platform;
 
     const pickFile = async () => {  
@@ -20,27 +20,7 @@ export function Bank(props) {
         }        
     }
 
-    const saveFile = async () => {
-        if(platform === 'android'){
-            const { value, cancelled } = await Modals.prompt({
-                title: 'Patch name',
-                message: 'Enter patch name',
-                inputPlaceholder: 'patch'
-            });
-            
-            if(!cancelled){
-                Filesystem.writeFile({
-                    path: `nts-web/${value}${props.accept}`,
-                    data: decodeURIComponent(encodeURI(JSON.stringify(props.bank))),
-                    directory: FilesystemDirectory.Documents,
-                    encoding: FilesystemEncoding.UTF8,
-                    recursive: true
-                });
-            }
-        }else{
-            props.onExport(props.bank);
-        }
-    }
+    const saveFile = async () => props.onExport(props.bank);
 
     const menu = (
         <Menu className="menu-dark">
