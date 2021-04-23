@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { Row, Col, Button, InputNumber  } from 'antd';
 import { CaretRightOutlined, RollbackOutlined } from '@ant-design/icons';
+import { Capacitor, Plugins, Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 import { Bank } from '../partials';
 
 import { importData, exportData } from '../../utils/files';
@@ -10,6 +11,7 @@ import { importData, exportData } from '../../utils/files';
 export function Controls(props) {  
     const dispatch = useDispatch();    
     const history = useHistory();
+    const { Modals } = Plugins;
 
     const setTempo = (tempo) => dispatch({type:"sequencer/setTempo", payload: tempo });
     const togglePlay = () => {
@@ -39,8 +41,26 @@ export function Controls(props) {
         let sequence;
         const pianoroll = document.getElementById(props.pianoroll);
         if(bank === props.bank) sequence = pianoroll.getMMLString()
-        else sequence = props.sequences[bank]
-		exportData(sequence, "sequence.ntsseq");
+        else sequence = props.sequences[bank];
+
+        if(Capacitor.platform === 'android'){
+            const { value, cancelled } = await Modals.prompt({
+                title: `Sequence name`,
+                message: `Enter sequence name`
+            });
+            
+            if(!cancelled){
+                await Filesystem.writeFile({
+                    path: `nts-web/${value || 'sequence' + new Date() }.ntsseq`,
+                    data: decodeURIComponent(encodeURI(JSON.stringify(sequence))),
+                    directory: FilesystemDirectory.Documents,
+                    encoding: FilesystemEncoding.UTF8,
+                    recursive: true
+                });
+            }
+        }else{ 
+		    exportData(sequence, "sequence.ntsseq");
+        }
 	}
     
 	const goBack = () => {
