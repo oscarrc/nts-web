@@ -49,7 +49,7 @@ export function Header() {
             if(!cancelled){
                 await Filesystem.writeFile({
                     path: `nts-web/${value || 'data'}.ntsweb`,
-                    data: decodeURIComponent(encodeURI(JSON.stringify(data))),
+                    data: new Blob([decodeURIComponent(encodeURI(data))], { type: "application/json;charset=utf-8;"}),
                     directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true

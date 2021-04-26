@@ -19,7 +19,7 @@ export function Patches(props) {
             if(!cancelled){
                 await Filesystem.writeFile({
                     path: `nts-web/${value || 'patch' + new Date() }.ntspatch`,
-                    data: decodeURIComponent(encodeURI(JSON.stringify(props.patches[bank]))),
+                    data: new Blob([decodeURIComponent(encodeURI(JSON.stringify(props.patches[bank])))], { type: "application/json;charset=utf-8;"}),
                     directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true

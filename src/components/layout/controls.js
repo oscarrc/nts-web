@@ -52,7 +52,7 @@ export function Controls(props) {
             if(!cancelled){
                 await Filesystem.writeFile({
                     path: `nts-web/${value || 'sequence' + new Date() }.ntsseq`,
-                    data: decodeURIComponent(encodeURI(JSON.stringify(sequence))),
+                    data: new Blob([decodeURIComponent(encodeURI(JSON.stringify(sequence)))], { type: "application/json;charset=utf-8;"}),
                     directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true
