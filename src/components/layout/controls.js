@@ -37,7 +37,7 @@ export function Controls(props) {
         }});
     }  
     
-	const exportSequence = (bank) => {
+	const exportSequence = async (bank) => {
         let sequence;
         const pianoroll = document.getElementById(props.pianoroll);
         if(bank === props.bank) sequence = pianoroll.getMMLString()
@@ -52,7 +52,7 @@ export function Controls(props) {
             if(!cancelled){
                 await Filesystem.writeFile({
                     path: `nts-web/${value || 'sequence' + new Date() }.ntsseq`,
-                    data: new Blob([decodeURIComponent(encodeURI(JSON.stringify(sequence)))], { type: "application/json;charset=utf-8;"}),
+                    data: decodeURIComponent(encodeURI(JSON.stringify(sequence))),
                     directory: FilesystemDirectory.Documents,
                     encoding: FilesystemEncoding.UTF8,
                     recursive: true
