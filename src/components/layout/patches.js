@@ -16,10 +16,11 @@ export function Patches(props) {
                 message: `Enter patch name`
             });
             
-            let permission = await Filesystem.checkPermissions();            
-            if(!permission) permission = await Filesystem.requestPermissions();
-
-            if(!cancelled && permission){
+            // To be implemented in Capacitor v3
+            // let permission = await Filesystem.checkPermissions();            
+            // if(!permission) permission = await Filesystem.requestPermissions();
+            
+            if(!cancelled){
                 await Filesystem.appendFile({
                     path: `nts-web/${value || 'patch' + new Date() }.ntspatch`,
                     data: decodeURIComponent(encodeURI(JSON.stringify(props.patches[bank]))),
