@@ -1,14 +1,14 @@
 import { strings } from '../config/synth';
 
-const exportData = (data, filename) => {
-  const contentType = "application/json;charset=utf-8;";
+const exportData = (data, filename, type) => {
+  const contentType = `application/${type}+json;charset=utf-8;`;
 
   if (window.navigator && window.navigator.msSaveOrOpenBlob) {
     let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], { type: contentType });
-    navigator.msSaveOrOpenBlob(blob, filename);
+    navigator.msSaveOrOpenBlob(blob, `${filename}.${type}`);
   } else {
     let a = document.createElement('a');
-    a.download = filename;
+    a.download = `${filename}.${type}`;
     a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(data));
     a.target = '_blank';
     document.body.appendChild(a);

@@ -25,7 +25,7 @@ export function Header() {
             sequencer: seqState
         };
 
-        exportData(data, "data.ntsweb");
+        exportData(data, "data", "ntsweb");
     }
 
     return  (
