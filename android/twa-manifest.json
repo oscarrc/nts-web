@@ -16,7 +16,7 @@
   "maskableIconUrl": "https://nts-web.oscarrc.me/icon.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
-    "path": "/mnt/c/",
+    "path": "/mnt/d/Web/android.keystore",
     "alias": "android"
   },
   "appVersionName": "1",
