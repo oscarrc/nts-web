@@ -6,21 +6,27 @@ import { importData, exportData } from '../../utils/files';
 import korg from '../../assets/korg.svg';
 
 export function Header() {
-    const { Header } = Layout;
-    const dispatch = useDispatch();
+    const { Header } = Layout;    
     const synthState = useSelector(state => state.synth).value;
     const seqState = useSelector(state => state.sequencer).value;
+    const dispatch = useDispatch();
     
-    const toggleSettings = () => dispatch({type: 'app/toggleSettings'});    
+    const toggleSettings = () => dispatch({type: 'app/toggleSettings'});   
+
 	const loadData = async (file) => {
         const data = await importData(file);
         dispatch({ type: 'synth/importSynth', payload: data.synth });
         dispatch({ type: 'sequencer/importSeq', payload: data.sequencer })
     }
-	const saveData = () => exportData({
-        synth: synthState,
-        sequencer: seqState
-    }, "data.ntsweb");
+
+	const saveData = async () => {
+        const data = {
+            synth: synthState,
+            sequencer: seqState
+        };
+
+        exportData(data, "data", "ntsweb");
+    }
 
     return  (
         <Header className="header transparent">
@@ -31,7 +37,7 @@ export function Header() {
                     <Space key="headeractions">
                         <Upload accept=".ntsweb"  beforeUpload={ file => loadData(file) } showUploadList={false} customRequest={ () => false }>
                             <Button ghost className="btn-gold" icon={<UploadOutlined />}>Import</Button>
-                        </Upload>
+                        </Upload> 
                         <Button onClick={ saveData } ghost className="btn-gold" icon={<DownloadOutlined />}>Export</Button>
                         <Button ghost onClick={toggleSettings} className="btn-gold" icon={<SettingOutlined />}></Button>
                     </Space>

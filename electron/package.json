@@ -50,8 +50,7 @@
       "target": [
         "AppImage",
         "deb",
-        "rpm",
-        "tar.gz"
+        "rpm"
       ],
       "icon": "assets/appIcon.icns"
     },
@@ -63,8 +62,7 @@
     "win": {
       "target": [
         "nsis",
-        "portable",
-        "zip"
+        "portable"
       ],
       "icon": "assets/appIcon.ico"
     }

@@ -7,7 +7,10 @@ import { exportData, importData, convertPatch } from '../../utils/files';
 export function Patches(props) {
     const dispatch = useDispatch();
 
-    const exportPatch = (bank) => exportData(props.patches[bank], "patch.ntspatch");
+    const exportPatch = async (bank) => {
+        exportData(props.patches[bank], "patch", "ntspatch")
+    };
+
     const importPatch = async (file, bank) => {
         const patch = await importData(file);
 
