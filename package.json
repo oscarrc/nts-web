@@ -10,7 +10,6 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@capacitor-community/electron": "^1.4.0",
-    "@capacitor/android": "^2.4.7",
     "@capacitor/cli": "^2.4.7",
     "@capacitor/core": "^2.4.7",
     "@reduxjs/toolkit": "^1.5.1",
@@ -18,8 +17,6 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.5",
     "antd": "^4.15.2",
-    "capacitor-file-selector": "^0.0.5",
-    "electron-packager": "^15.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.3",
@@ -43,7 +40,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "npx cap sync android && npx cap sync @capacitor-community/electron",
+    "postbuild": "npx cap sync @capacitor-community/electron",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",

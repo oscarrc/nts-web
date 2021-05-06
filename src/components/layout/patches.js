@@ -3,35 +3,12 @@ import { Row, Col } from 'antd';
 import { useDispatch } from 'react-redux';
 import { Bank } from '../partials/bank';
 import { exportData, importData, convertPatch } from '../../utils/files';
-import { Capacitor, Plugins, Filesystem, FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
 
 export function Patches(props) {
     const dispatch = useDispatch();
-    const { Modals } = Plugins;
 
     const exportPatch = async (bank) => {
-        if(Capacitor.platform === 'android'){
-            const { value, cancelled } = await Modals.prompt({
-                title: `Patch name`,
-                message: `Enter patch name`
-            });
-            
-            // To be implemented in Capacitor v3
-            // let permission = await Filesystem.checkPermissions();            
-            // if(!permission) permission = await Filesystem.requestPermissions();
-            
-            if(!cancelled){
-                await Filesystem.appendFile({
-                    path: `nts-web/${value || 'patch' + new Date() }.ntspatch`,
-                    data: decodeURIComponent(encodeURI(JSON.stringify(props.patches[bank]))),
-                    directory: FilesystemDirectory.Documents,
-                    encoding: FilesystemEncoding.UTF8,
-                    recursive: true
-                });
-            }
-        }else{ 
-            exportData(props.patches[bank], "patch.ntspatch")
-        }
+        exportData(props.patches[bank], "patch.ntspatch")
     };
 
     const importPatch = async (file, bank) => {

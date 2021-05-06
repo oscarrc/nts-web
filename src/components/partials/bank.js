@@ -1,36 +1,16 @@
 import React from 'react';
 import {  Dropdown, Menu, Upload } from 'antd';
 import { DownOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { Capacitor, Plugins } from '@capacitor/core';
 
 export function Bank(props) {
-    const { FileSelector } = Plugins;
-    const platform = Capacitor.platform;
-
-    const pickFile = async () => {  
-        if(platform === 'android'){
-            let selectedFile = await FileSelector.fileSelector({
-                multiple_selection: false,
-                ext: [props.accept.substring(1)]
-            });
-    
-            const path = JSON.parse(selectedFile.paths);            
-            const file = await fetch(path).then((r) => r.blob());
-            props.onImport(file, props.bank);
-        }        
-    }
-
     const saveFile = async () => props.onExport(props.bank);
 
     const menu = (
         <Menu className="menu-dark">
-            <Menu.Item key="import" icon={<UploadOutlined />} onClick={ pickFile } >
-                {
-                    platform === 'android' ? 'Import' :
-                    <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
-                        Import
-                    </Upload>
-                }
+            <Menu.Item key="import" icon={<UploadOutlined />} >
+                <Upload accept={ props.accept } showUploadList={false} beforeUpload={ file => props.onImport(file, props.bank) } customRequest={ () => false }>
+                    Import
+                </Upload>
             </Menu.Item>
             <Menu.Item key="save" onClick={ saveFile } icon={<DownloadOutlined />}>
                 Export
