@@ -1,10 +1,22 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "me.oscarrc.nts_web.twa",
-    "sha256_cert_fingerprints": [
-      "C6:CB:8A:EA:2A:4E:18:05:A9:B8:00:F1:CB:56:18:10:0D:77:EC:11:2A:49:0F:9A:90:40:2B:D0:64:24:FE:BE"
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "me.oscarrc.nts_web.twa",
+      "sha256_cert_fingerprints": [
+        "C6:CB:8A:EA:2A:4E:18:05:A9:B8:00:F1:CB:56:18:10:0D:77:EC:11:2A:49:0F:9A:90:40:2B:D0:64:24:FE:BE"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "me.oscarrc.nts_web.twa",
+      "sha256_cert_fingerprints": [
+        "4A:43:AB:D5:30:0C:DD:8A:A4:6C:4A:74:4D:73:B5:CA:A1:1D:4A:0B:A6:7B:BC:AD:1F:3B:2C:9B:1F:AF:76:53"
+      ]
+    }
   }
-}]
+]
