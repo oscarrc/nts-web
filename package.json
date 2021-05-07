@@ -1,7 +1,7 @@
 {
   "name": "nts-web",
   "description": "NTS-1 web based editor and controller",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "author": {
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com"

@@ -1,6 +1,6 @@
 {
   "name": "nts-web",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "NTS1 web based editor and controller",
   "main": "./build/index.js",
   "homepage": "https://nts-web.oscarrc.me",
