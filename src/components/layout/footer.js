@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Button, Layout, Tooltip } from 'antd';
-import { HeartFilled, CoffeeOutlined, BugOutlined, CloudDownloadOutlined } from '@ant-design/icons';
+import { HeartFilled, CoffeeOutlined, BugOutlined, CloudDownloadOutlined, AndroidFilled } from '@ant-design/icons';
 
 export function Footer() {
     const { Footer } = Layout;
@@ -35,6 +35,9 @@ export function Footer() {
                                         <Button onClick={ install } ghost size="small" className="btn-gold"><CloudDownloadOutlined /></Button> 
                                     </Tooltip>
                                   : ""}
+                    <Tooltip title="Android App">
+                        <Button ghost size="small" className="btn-gold" href="https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa" target="_BLANK"><AndroidFilled /></Button>
+                    </Tooltip>   
                     <Tooltip title="Report a bug">
                         <Button ghost size="small" className="btn-gold" href="https://github.com/oscarrc/nts-web/issues" target="_BLANK"><BugOutlined /></Button>
                     </Tooltip>                    
