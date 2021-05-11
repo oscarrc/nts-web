@@ -40,5 +40,14 @@
   "display": "standalone",
   "theme_color": "#f3cc62",
   "background_color": "#212122",
-  "orientation": "any"
+  "orientation": "any",
+  "related_applications": [
+    {
+      "platform": "web"
+    }, 
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa"
+    }
+  ]
 }
