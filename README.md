@@ -7,6 +7,9 @@ A web controller for the Korg NTS-1.
 ![NTS-web](https://github.com/oscarrc/nts-web/blob/master/public/assets/img/screenshot.png?raw=true "NTS-web Korg NTS-1 web controller")
 
 https://nts-web.oscarrc.me
+
+[![ko-fi](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa)
+
 ---
 
 ### THIS IS A WORK IN PROGRESS
@@ -55,3 +58,4 @@ Open an [issue](https://github.com/oscarrc/nts-web/issues) and let me know.
 ### License
 
 This work is license under the [MIT License](https://github.com/oscarrc/nts-web/blob/master/LICENSE)
+Google Play and the Google Play logo are trademarks of Google LLC.
