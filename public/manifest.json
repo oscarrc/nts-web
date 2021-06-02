@@ -43,7 +43,8 @@
   "orientation": "any",
   "related_applications": [
     {
-      "platform": "web"
+      "platform": "web",
+      "url": "https://nts-web.oscarrc.me"
     }, 
     {
       "platform": "play",
