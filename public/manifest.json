@@ -48,7 +48,8 @@
     }, 
     {
       "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa"
+      "url": "https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa",
+      "id": "me.oscarrc.nts_web.twa"
     }
   ]
 }
