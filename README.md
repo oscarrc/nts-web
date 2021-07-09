@@ -9,7 +9,7 @@ A web controller for the Korg NTS-1.
 <table>
   <tr>
     <td align="center">
-      <a href="https://sudoku.oscarrc.me" target="_BLANK">
+      <a href="https://nts-web.oscarrc.me" target="_BLANK">
       <img width="175" src="https://user-images.githubusercontent.com/9122190/28998409-c5bf7362-7a00-11e7-9b63-db56694522e7.png" alt="PWA"></a>
     </td>
     <td align="center">
