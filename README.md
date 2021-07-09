@@ -6,11 +6,17 @@ A web controller for the Korg NTS-1.
 
 ![NTS-web](https://github.com/oscarrc/nts-web/blob/master/public/assets/img/screenshot.png?raw=true "NTS-web Korg NTS-1 web controller")
 
-   ## Acces the [Web app](https://nts-web.oscarrc.me)
-   
-   <a href="https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa">
-      <img width="200" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Play Store"/>
-   </a>
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://sudoku.oscarrc.me" target="_BLANK">
+      <img width="175" src="https://user-images.githubusercontent.com/9122190/28998409-c5bf7362-7a00-11e7-9b63-db56694522e7.png" alt="PWA"></a>
+    </td>
+    <td align="center">
+       <a href="https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa" target="_BLANK"><img width="200" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Play Store"/></a>
+    </td>
+  </tr>
+</table>
 
 ---
 
