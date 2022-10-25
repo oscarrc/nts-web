@@ -1,13 +1,13 @@
 import { FaCog, FaFileExport, FaFileImport } from "react-icons/fa"
 
-import korg from '../assets/korg.svg';
+import korg from '../../assets/korg.svg';
 import { lazy } from "react";
-import { useModal } from "../hooks/useModal";
+import { useModal } from "../../hooks/useModal";
 
 const Header = () => {
     const { handleModal } = useModal();
     const openSettings = () => {
-        const Settings = lazy(() => import('./Settings'));
+        const Settings = lazy(() => import('../../views/Settings'));
         handleModal(<Settings />);
     }
 
