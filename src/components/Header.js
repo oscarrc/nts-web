@@ -16,7 +16,7 @@ const Header = () => {
             <div className="flex-1">
                 <a href="/" className="flex items-end">
                     <img className="h-16 max-h-32 min-h-8 max-w-[10rem] w-full" src={korg} alt="Korg NTS-web" />
-                    <strong>NTS-web</strong>
+                    <strong className="-mb-1">NTS-Web</strong>
                 </a>
             </div>
             <div className="flex-none">
