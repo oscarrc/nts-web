@@ -27,4 +27,8 @@
                         linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
     }
+
+    .btn-outline.btn-primary {
+        @apply hover:bg-transparent hover:border-accent hover:text-accent
+    }
 }
