@@ -5,6 +5,7 @@ module.exports = {
     theme: {
       extend: {
         fontFamily: {
+            sans: ["Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue"],
             dotMatrix: ["Dot Matrix", "monospace"]
         }
       },
@@ -17,6 +18,7 @@ module.exports = {
                     "secondary": "#b4b4b4",                             
                     "accent": "#d32029",                             
                     "neutral": "#212122", 
+                    "--rounded-btn": "0.2rem"
                 }
             }
         ]

@@ -8,8 +8,8 @@
 }
 
 @layer base {
-    body { @apply bg-primary }
-    header, footer { @apply bg-transparent }
+    body { @apply bg-neutral min-h-screen text-primary}
+    header, footer { @apply bg-transparent text-primary}
 }
 
 @layer utilities {
