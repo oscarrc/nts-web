@@ -31,11 +31,11 @@ const Footer = () => {
             <div className="flex gap-2">
                 <a href="https://ko-fi.com/oscarrc" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><SiKofi className="h-3 w-3 mr-2" /> Buy me a coffee</a>
                 { supportsPWA && 
-                    <div class="tooltip" data-tip="Install the app">
+                    <div className="tooltip" data-tip="Install the app">
                         <button onClick={ install } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
                     </div> 
                 }
-                <div class="tooltip" data-tip="Report a bug"><a href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
+                <div className="tooltip" data-tip="Report a bug"><a href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
             </div>
         </footer>
     )

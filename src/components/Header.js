@@ -1,8 +1,16 @@
 import { FaCog, FaFileExport, FaFileImport } from "react-icons/fa"
 
 import korg from '../assets/korg.svg';
+import { lazy } from "react";
+import { useModal } from "../hooks/useModal";
 
 const Header = () => {
+    const { handleModal } = useModal();
+    const openSettings = () => {
+        const Settings = lazy(() => import('./Settings'));
+        handleModal(<Settings />);
+    }
+
     return (
         <header className="navbar">
             <div className="flex-1">
@@ -20,7 +28,7 @@ const Header = () => {
                         <button className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> Export</button>
                     </li>
                     <li>
-                        <button className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
+                        <button onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>
             </div>
