@@ -8,7 +8,7 @@ const ModalProvider = ({children}) => {
     const [ isFullWidth, setIsFullWidth ] = useState(false);
     const [ modalContent, setModalContent ] = useState(false);
     
-    const modalOpen = "fixed top-0 left-0 right-0 bottom-0 min-w-screen min-h-screen bg-base-100 bg-opacity-75 z-50 opacity-100 visible";
+    const modalOpen = "fixed top-0 left-0 right-0 bottom-0 min-w-screen min-h-screen bg-neutral bg-opacity-75 z-50 opacity-100 visible";
 
     const handleModal = (content = false, fullWidth = false ) => {
         setModal(content ? true : false);
