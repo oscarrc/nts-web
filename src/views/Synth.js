@@ -1,3 +1,4 @@
+import Dropdown from "../components/controls/Dropdown";
 import Knob from "../components/controls/Knob";
 import Selector from "../components/controls/Selector";
 import Switch from "../components/controls/Switch";
@@ -10,6 +11,7 @@ const Synth = () => {
             <Knob label="test" />
             <Switch label="test" isMomentary={true} />
             <Wheel autoReturn={true} />
+            <Dropdown label="test" />
         </div>
     )
 }

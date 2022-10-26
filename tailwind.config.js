@@ -18,7 +18,8 @@ module.exports = {
                     "secondary": "#b4b4b4",                             
                     "accent": "#d32029",                             
                     "neutral": "#212122", 
-                    "--rounded-btn": "0.2rem"
+                    "base-100": "#434343",
+                    "--rounded-btn": "0.25rem"
                 }
             }
         ]
