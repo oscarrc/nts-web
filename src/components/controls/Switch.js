@@ -35,18 +35,20 @@ const Switch = ({ isActive = false, isMomentary = false, label, onChange }) => {
     }, [isMomentary])
 
     return (
-        <span className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
-            <input 
-                ref={switchRef}
-                type="checkbox"
-                className="input-switch"
-                data-diameter="60"
-                data-src={ switchButton }
-                checked={ active }
-                onChange={ handleValue }
-            />
-        </span>
+            <div className="flex-1">
+                <input 
+                    ref={switchRef}
+                    type="checkbox"
+                    className="input-switch"
+                    data-diameter="60"
+                    data-src={ switchButton }
+                    checked={ active }
+                    onChange={ handleValue }
+                />
+            </div>
+        </div>
     )
 }
 

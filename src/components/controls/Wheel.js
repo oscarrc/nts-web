@@ -55,7 +55,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
                 className="input-slider rotate-180"
                 data-src={ wheel }
                 data-width="60"
-                data-height="120"
+                data-height="100"
                 data-sprites="127"
                 value={ value }
                 min={minValue}

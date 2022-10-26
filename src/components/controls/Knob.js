@@ -24,23 +24,26 @@ const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, 
     }, [])
 
     return (
-        <span className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
-            <input 
-                ref={knobRef}
-                type="range"
-                name={label}
-                className="input-knob focus-visible:ring-offset-0"
-                data-src={ knob }
-                data-sprites="100"
-                diameter="60" 
-                value={ value }
-                min={ minValue }
-                max={ maxValue }
-                step={ step }
-                onChange={ handleValue }
-            />
-        </span>
+            <div className="flex-1">
+                <input 
+                    ref={knobRef}
+                    type="range"
+                    name={label}
+                    className="input-knob focus-visible:ring-offset-0"
+                    data-src={ knob }
+                    data-sprites="100"
+                    diameter="90" 
+                    value={ value }
+                    min={ minValue }
+                    max={ maxValue }
+                    step={ step }
+                    onChange={ handleValue }
+                />
+            </div>
+            <div className="bg-neutral bg-grid text-dotMatrix h-4 w-8 text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1">{ value }</div>
+        </div>
     )
 }
 
