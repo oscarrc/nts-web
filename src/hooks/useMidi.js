@@ -5,11 +5,13 @@ import { WebMidi } from 'webmidi';
 const MidiContext = createContext();
 
 const MidiProvider = ({ children }) => {    
-    const [ input, setInput ] = useState({ id: null, channel: "all" });
-    const [ output, setOutput ] = useState({ id: null, channel: "all" });
-    const [ passthrough, setPassthrough ] = useState({ id: null, channel: "all" });
+    const [ input, setInput ] = useState({ id: null, channel: "all", device: null });
+    const [ output, setOutput ] = useState({ id: null, channel: "all", device: null });
+    const [ passthrough, setPassthrough ] = useState({ id: null, channel: "all", device: null });
     
-    const init = async () => await WebMidi.enable({ sysex: true });
+    const init = async () => { 
+        await WebMidi.enable({ sysex: true });
+    };
 
     useEffect(() => { init() }, []);
     
