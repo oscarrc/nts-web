@@ -6,13 +6,13 @@ import Wheel from "../components/controls/Wheel";
 
 const Synth = () => {
     return (
-        <div className="flex">
+        <section className="flex">
             <Selector label="test" />
             <Knob label="test" />
             <Switch label="test" isMomentary={true} />
             <Wheel autoReturn={true} />
             <Dropdown label="test" defaultSelection={0} options={[ {label: "Test1" }, {label: "Test2" } ]} />
-        </div>
+        </section>
     )
 }
 
