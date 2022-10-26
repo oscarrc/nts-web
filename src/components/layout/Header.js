@@ -21,13 +21,13 @@ const Header = () => {
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0 gap-4">
-                    <li>
+                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Import">
                         <button className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/> <span className="hidden sm:inline">Import</span></button>
                     </li>
-                    <li>
+                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Export">
                         <button className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> <span className="hidden sm:inline">Export</span></button>
                     </li>
-                    <li>
+                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Settings">
                         <button onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>
