@@ -1,10 +1,8 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { WebMidi } from 'webmidi';
 
-const MidiContext = createContext();
-
-const MidiProvider = ({ children }) => {    
+const useMidi = () => {    
     const [ input, setInput ] = useState({ id: null, channel: "all", device: null });
     const [ output, setOutput ] = useState({ id: null, channel: "all", device: null });
     const [ passthrough, setPassthrough ] = useState({ id: null, channel: "all", device: null });
@@ -15,8 +13,7 @@ const MidiProvider = ({ children }) => {
 
     useEffect(() => { init() }, []);
     
-    return (
-        <MidiContext.Provider value={{ 
+    return ({ 
             enabled: WebMidi.enabled,
             input,
             inputs: WebMidi.inputs,
@@ -26,16 +23,7 @@ const MidiProvider = ({ children }) => {
             setInput,
             setOutput,
             setPassthrough
-         }}>
-            { children }
-        </MidiContext.Provider>
-    )
+         })
 }
 
-const useMidi = () => {
-    const context = useContext(MidiContext);
-    if(context === undefined) throw new Error("useMidi must be used within a MidiProvider")
-    return context;
-}
-
-export { MidiProvider, useMidi }
+export { useMidi }
