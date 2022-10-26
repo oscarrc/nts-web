@@ -12,6 +12,29 @@
     header, footer { @apply bg-transparent text-primary}
 }
 
+@layer components { 
+    .divider-primary:before,.divider-primary:after{
+        @apply bg-primary;
+    }
+
+    .btn-outline.btn-primary {
+        @apply hover:bg-transparent hover:border-accent hover:text-accent
+    }
+    
+
+    .input-switch {
+        @apply cursor-pointer bg-transparent checked:focus:bg-transparent hover:text-transparent focus:ring-0 focus:ring-offset-0
+    }
+
+    .input-knob, .input-slider {
+        @apply cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0;
+    }
+
+    .input-knob:focus-visible, .input-slider:focus-visible {
+        --tw-ring-offset-shadow: 0 0 #000 !important;
+    }
+}
+
 @layer utilities {
     .bg-grid{
         background-size: 25px 25px, 25px 25px, 5px 5px, 5px 5px;
@@ -26,13 +49,5 @@
                         linear-gradient(90deg, transparent 2px, transparent 2px),
                         linear-gradient(rgba(211,32,41,.1) 1px, transparent 1px),
                         linear-gradient(90deg, rgba(211,32,41,.1) 1px, transparent 1px);
-    }
-
-    .divider-primary:before,.divider-primary:after{
-        @apply bg-primary;
-    }
-
-    .btn-outline.btn-primary {
-        @apply hover:bg-transparent hover:border-accent hover:text-accent
     }
 }

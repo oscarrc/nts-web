@@ -1,20 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 
-import selector from "../../assets/selector.png";
+import knob from "../../assets/knob.png";
 
-const Selector = ({defaultValue = 0, minValue = 0, maxValue = 10, label, onChange}) => {
+const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, onChange}) => {
     const [ value, setValue ] = useState(defaultValue ? defaultValue : minValue);
-    const selectorRef = useRef(null);
-    
+    const knobRef = useRef(null);
+
     const handleValue = (e) => {
-        const val = Math.ceil(e.target.value);
-        setValue(val);
-        selectorRef.current.value = val;
-        // onChange(val);
+        setValue(e.target.value);
+        // onChange(e.value);
     }
 
     useEffect(() => {
-        const currentKnob = selectorRef.current;
+        const currentKnob = knobRef.current;
 
         currentKnob.addEventListener("change", handleValue)        
         currentKnob.addEventListener("input", handleValue)
@@ -29,21 +27,21 @@ const Selector = ({defaultValue = 0, minValue = 0, maxValue = 10, label, onChang
         <span className="flex flex-col items-center justify-center">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <input 
-                ref={selectorRef}
+                ref={knobRef}
                 type="range"
                 name={label}
                 className="input-knob focus-visible:ring-offset-0"
-                data-src={ selector }
-                data-sprites="23"
-                diameter="90" 
+                data-src={ knob }
+                data-sprites="100"
+                diameter="60" 
                 value={ value }
                 min={ minValue }
                 max={ maxValue }
-                step={ 0.2 }
+                step={ step }
                 onChange={ handleValue }
             />
         </span>
     )
 }
 
-export default Selector;
+export default Knob;
