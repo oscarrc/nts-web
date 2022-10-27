@@ -23,13 +23,13 @@ const Section = ({ section }) => {
     return (
         section &&
             <section>
-                <h2 key={ section.label } className="divider divider-primary font-semibold">{ section.label }</h2>
+                <h2 key={ section.label } className="divider divider-primary font-semibold my-4">{ section.label }</h2>
                 <div className="flex justify-around gap-8 py-2">
                     { section.controls?.map(control => renderControl(control)) }
                 </div>
                 { section?.sections?.map(section => (
                     <div key={ section.label }>
-                        <h3 key={ section.label } className="divider text-secondary font-semibold my-2">{ section.label }</h3>
+                        <h3 key={ section.label } className="divider text-secondary font-semibold my-4">{ section.label }</h3>
                         <div className="flex justify-around gap-8 py-2">
                             { section.controls.map(control => renderControl(control)) }
                         </div>
