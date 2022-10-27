@@ -6,6 +6,7 @@ const More = () => {
             <h2 className="divider divider-primary font-semibold">MORE</h2>
             <div className="flex justify-around gap-8 py-2">
                 <Switch label="Randomize" isMomentary={true} />
+                <Switch label="Keyboard" />
                 <Switch label="Sequencer" isMomentary={true} />
             </div>
         </section>

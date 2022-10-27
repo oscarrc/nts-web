@@ -25,7 +25,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="footer items-center justify-items-center	 md:justify-between px-2 py-4 gap-y-4">
+        <footer className="footer items-center justify-items-center	 md:justify-between p-2 gap-y-4">
             <p className="inline text-center">Made with <FaHeart className="text-accent h-3 w-3 inline" /> by <a className="hover:text-accent transition-all transition-200" href="https://oscarrc.me" rel="noreferrer" target="_BLANK">Oscar R.C.</a></p>
             <p className="text-secondary text-center italic">This page is not affiliated or endorsed by Korg</p>
             <div className="flex flex-col items-center sm:flex-row gap-2">
