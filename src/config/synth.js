@@ -333,6 +333,15 @@ const strings = {
     ]
 }
 
+const octaveLimits = {
+    'xs': 1,
+    'sm': 1,
+    'md': 1,
+    'lg': 2,
+    'xl': 3,
+    '2xl': 3
+}
+
 const defaults = (config, strings) => {
     let defaultConfig = {};
 
@@ -373,4 +382,4 @@ const defaults = (config, strings) => {
     return defaultConfig;
 }
 
-export { controls, strings, defaults }
+export { controls, strings, octaveLimits, defaults }

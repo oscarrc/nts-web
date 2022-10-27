@@ -8,7 +8,7 @@ const Live = () => {
     const { bottomDrawer, setBottomDrawer } = useLayout();
 
     return (
-        <aside className={`${ bottomDrawer ? 'translate-y-0' : 'translate-y-full'} transition-transform transition-200 bottom-drawer bg-neutral flex flex-row justify-center items-center gap-16 py-8 px-4 text-secondary`}>
+        <aside className={`${ bottomDrawer ? 'translate-y-0' : 'translate-y-full'} transition-transform transition-200 bottom-drawer bg-neutral flex flex-row justify-center items-center gap-16 py-6 xl:px-12 md:px-8 sm:px-4 px-2 text-secondary`}>
             <button onClick={ () => setBottomDrawer( d => !d) } className="btn btn-circle btn-sm absolute top-2 right-2 text-secondary">
                 <MdClose className="h-5 w-5" />
             </button>

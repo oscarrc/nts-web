@@ -1,8 +1,18 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 
-const Keyboard = ({ octave = 1, octaves = 3 }) => {
+import { octaveLimits } from "../../config/synth";
+import { useLayout } from "../../hooks/useLayout"
+
+const Keyboard = ({ octave = 1 }) => {
+    const { breakpoint } = useLayout();
+    const [ octaves, setOctaves ] = useState( octaveLimits[breakpoint] );
+
+    useEffect(() => {
+        setOctaves(octaveLimits[breakpoint])
+    }, [breakpoint]);
+
     return (
-        <div className="grid relative overflow-hidden auto-cols-auto grid-rows-none gap-x-1 grid-flow-col h-56 -mt-20"> 
+        <div className="flex-1 grid relative overflow-hidden auto-cols-auto grid-rows-none gap-x-1 grid-flow-col h-56 -mt-20"> 
             {
                 [...Array(octaves).keys()].map((o) => {
                     return [...Array(7).keys()].map((n) => {

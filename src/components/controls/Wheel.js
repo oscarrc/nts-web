@@ -47,7 +47,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
 
 
     return (
-        <span className="flex flex-col items-center justify-center -mr-8 -mt-6">
+        <span className="flex flex-col items-center justify-center -mr-8 -mt-4">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <input 
                 ref={wheelRef} 
