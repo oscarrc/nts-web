@@ -47,7 +47,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
 
 
     return (
-        <span className="flex flex-col items-center justify-center">
+        <span className="flex flex-col items-center justify-center -mr-8 -mt-6">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <input 
                 ref={wheelRef} 
@@ -55,7 +55,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
                 className="input-slider rotate-180"
                 data-src={ wheel }
                 data-width="60"
-                data-height="100"
+                data-height="120"
                 data-sprites="127"
                 value={ value }
                 min={minValue}
