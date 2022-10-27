@@ -5,15 +5,41 @@ const getWindowDimensions = () => {
     return { width, height };
 }
 
+const getCurrentBreakpoint = () => {
+  let currentBreakpoint = "xs";
+  let biggestBreakpointValue = 0;
+
+  const screens = {
+    'sm': '640px',
+    'md': '768px',
+    'lg': '1024px',
+    'xl': '1280px',
+    '2xl': '1536px'
+  }
+
+  Object.keys(screens).forEach( breakpoint => {
+    const breakpointValue = parseInt(screens[breakpoint].slice(0, -2));
+    
+    if (breakpointValue > biggestBreakpointValue && window.innerWidth >= breakpointValue ) {
+      biggestBreakpointValue = breakpointValue;
+      currentBreakpoint = breakpoint;
+    }
+  })
+  
+  return currentBreakpoint;
+}
+
 const LayoutContext = createContext();
 
 const LayoutProvider = ({children}) => {
-    const [windowDimensions, setLayout] = useState(getWindowDimensions());
+    const [ windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+    const [ breakpoint, setBreakpoint ] = useState(getCurrentBreakpoint());
     const [ bottomDrawer, setBottomDrawer ] = useState(false);
 
     useEffect(() => {
       function handleResize() {
-        setLayout(getWindowDimensions());
+        setWindowDimensions(getWindowDimensions());
+        setBreakpoint(getCurrentBreakpoint());
       }
   
       window.addEventListener('resize', handleResize);
@@ -21,7 +47,7 @@ const LayoutProvider = ({children}) => {
     }, []);
 
     return (
-      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer }}>
+      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint }}>
         {
               windowDimensions.width < 380 ?
                 <div className="flex flex-1 flex-col gap-8 items-center justify-center">
