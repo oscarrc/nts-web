@@ -9,6 +9,7 @@ const Keyboard = ({ octave = 1 }) => {
 
     useEffect(() => {
         setOctaves(octaveLimits[breakpoint])
+        console.log(Array(0))
     }, [breakpoint]);
 
     return (
@@ -25,7 +26,7 @@ const Keyboard = ({ octave = 1 }) => {
                     })
                 })
             }
-            <button className="btn btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black"></button>
+            { octaves && <button className="btn btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black"></button> }
         </div>
     )
 }
