@@ -1,18 +1,23 @@
-import Dropdown from "../components/controls/Dropdown";
-import Knob from "../components/controls/Knob";
-import Selector from "../components/controls/Selector";
-import Switch from "../components/controls/Switch";
-import Wheel from "../components/controls/Wheel";
+import Section from "../components/layout/Section"
+import { controls } from '../config/synth';
 
 const Synth = () => {
-    return (
-        <section className="flex">
-            <Selector label="test" />
-            <Knob label="test" />
-            <Switch label="test" isMomentary={true} />
-            <Wheel autoReturn={true} />
-            <Dropdown label="test" defaultSelection={0} options={[ {label: "Test1" }, {label: "Test2" } ]} />
-        </section>
+    return (        
+        <div className="grid overflow-hidden xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 grid-rows-auto gap-8 grid-flow-row">
+            <div className="flex flex-col">
+                <Section section={controls.osc} />
+                <Section section={controls.arp} />
+            </div>
+            <div className="flex flex-col">
+                <Section section={controls.amp} />
+            </div>
+            <div className="flex flex-col">
+                <Section section={controls.effects} />
+            </div>
+            <div className="flex flex-col">
+                <Section section={controls.vcf} />
+            </div>
+        </div>
     )
 }
 

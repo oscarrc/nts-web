@@ -16,7 +16,7 @@ const App = () => {
         <main className="flex flex-col flex-1 min-h-full justify-between py-8">
           <NTSProvider>              
             <Synth />
-            <Keyboard />
+            {/* <Keyboard /> */}
           </NTSProvider>
         </main>
         <Footer />

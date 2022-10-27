@@ -26,7 +26,7 @@ const Selector = ({defaultValue = 0, minValue = 0, maxValue = 10, label, onChang
     }, [])
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center self-start">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <div className="flex-1">
                 <input 
