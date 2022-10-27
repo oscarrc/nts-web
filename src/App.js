@@ -5,11 +5,9 @@ import Live from "./views/Live";
 import { ModalProvider } from "./hooks/useModal";
 import { NTSProvider } from "./hooks/useNTS";
 import Synth from "./views/Synth";
-import { useMidi } from "./hooks/useMidi";
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
-  const { enabled } = useMidi();
     
   return (
     <div className="flex flex-col min-h-screen max-w-screen overflow-x-hidden xl:px-8 sm:px-4 px-2">
