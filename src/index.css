@@ -33,6 +33,15 @@
     .input-knob:focus-visible, .input-slider:focus-visible {
         --tw-ring-offset-shadow: 0 0 #000 !important;
     }
+
+    .bottom-drawer{
+        --tw-shadow: 0 -20px 25px -5px rgb(0 0 0 / 0.1), 0 -8px 10px -6px rgb(0 0 0 / 0.1) !important;
+        @apply absolute bottom-0 z-50 w-full shadow-xl shadow-white;
+    }
+
+    .btn-pushable {
+        @apply btn-ghost btn-active text-secondary active:outline-base-200 outline-base-100 outline-2 outline;
+    }
 }
 
 @layer utilities {
