@@ -10,6 +10,45 @@
 @layer base {
     body { @apply bg-neutral min-h-screen text-primary}
     header, footer { @apply bg-transparent text-primary}
+
+    :root {
+        --scrollbarTrack: hsla(var(--n));
+        --scrollbarThumb: hsla(var(--b2));
+        --scrollbarThumbHover: hsla(var(--p));
+   }
+    
+    ::-webkit-scrollbar {
+        width: 5px;
+        border-radius: var(--rounded);
+    }
+      
+          
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--scrollbarTrack);
+    }
+        
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--scrollbarThumb);
+        border-radius: var(--rounded-btn);
+    }
+        
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbarThumbHover);
+    }
+    
+    ::-webkit-scrollbar:hover ::-webkit-scrollbar-thumb{      
+        background: var(--scrollbarThumbHover);
+    }
+    
+    /* width */
+    @screen sm {
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+    }
 }
 
 @layer components { 
@@ -36,7 +75,7 @@
 
     .bottom-drawer{
         --tw-shadow: 0 -20px 25px -5px rgb(0 0 0 / 0.1), 0 -8px 10px -6px rgb(0 0 0 / 0.1) !important;
-        @apply absolute bottom-0 z-50 w-full shadow-xl shadow-white;
+        @apply fixed bottom-0 z-50 w-full shadow-xl shadow-white;
     }
 
     .btn-pushable {
