@@ -3,12 +3,16 @@ import Header from "./components/layout/Header";
 import Live from "./views/Live";
 import { ModalProvider } from "./hooks/useModal";
 import { NTSProvider } from "./hooks/useNTS";
+import Small from "./views/Small";
 import Synth from "./views/Synth";
 import { useMidi } from "./hooks/useMidi";
 import { useState } from "react";
+import { useWindowDimensions } from "./hooks/useWindowDimensions";
 
 const App = () => {
   const { enabled } = useMidi();
+  const { width } = useWindowDimensions();
+
   const [ liveControls, setLiveControls ] = useState(true);
   
   return (
@@ -17,8 +21,14 @@ const App = () => {
         <Header />
         <main className="flex flex-col flex-1 min-h-full justify-between items-center py-8">
           <NTSProvider>              
-            <Synth />
-            <Live isOpen={ liveControls } toggle={ () => setLiveControls(l => !l) } />
+            {
+              width < 380 ?
+                <Small /> :
+                <>
+                  <Synth />
+                  <Live isOpen={ liveControls } toggle={ () => setLiveControls(l => !l) } />
+                </>
+            }
           </NTSProvider>
         </main>
         <Footer />
