@@ -14,7 +14,7 @@ const Section = ({ section }) => {
             case "selector":                
                 return <Selector key={control.cc} label={control.label} />
             case "switch":
-                return <Switch key={control.cc} label={control.label} inline={true} />
+                return <Switch key={control.cc} switchValue={control?.switch} label={control.label} inline={true} />
             default:
                 return <div key={control.cc} className="w-16"></div>
         }
