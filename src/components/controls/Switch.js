@@ -1,22 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 import switchButton from "../../assets/switch.png";
 
 const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange }) => {
-    const [ active, setActive ] = useState(isActive || false);
-    
+   
     const switchRef = useRef(null);
-    const toggle = (e) => {
-        setActive(a => !a);
-    };
 
-    const handleValue = (e) => {        
-        !isMomentary && setActive(e.value);
+    const toggle = useCallback(() => {
+        switchRef.current.checked = !switchRef.current.checked;
+        onChange && onChange(!isActive);
+    }, [isActive, onChange])
+
+    const handleValue = (e) => {
+        !isMomentary && onChange(e.target.checked);
     }
-
-    useEffect(() => {
-        // onChange(active)
-    }, [active, onChange])
 
     useEffect(() => {
         if(!isMomentary) return;
@@ -32,7 +29,7 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
             currentSwitch.removeEventListener("touchstart", toggle);        
             currentSwitch.removeEventListener("touchend", toggle);
         }
-    }, [isMomentary])
+    }, [isMomentary, toggle])
 
     return (
         <div className={`flex items-center justify-center ${inline ? 'flex-row' : "flex-col-reverse"}`}>
@@ -44,7 +41,7 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
                     className="input-switch"
                     data-diameter="60"
                     data-src={ switchButton }
-                    checked={ active }
+                    checked={ isActive }
                     onChange={ handleValue }
                 />
             </div>
