@@ -8,15 +8,15 @@ const Section = ({ section }) => {
     const renderControl = (control) => {
         switch( control.type ){
             case "knob":
-                return <Knob label={control.label} />
+                return <Knob key={control.cc} label={control.label} />
             case "dropdown":
-                return <Dropdown switchValue={control?.switch} defaultSelection={0} options={[ {label: "Test1" }, {label: "Test2" } ]} />;
+                return <Dropdown key={control.cc} switchValue={control?.switch} defaultSelection={0} options={[ {label: "Test1" }, {label: "Test2" } ]} />;
             case "selector":                
-                return <Selector label={control.label} />
+                return <Selector key={control.cc} label={control.label} />
             case "switch":
-                return <Switch label={control.label} inline={true} />
+                return <Switch key={control.cc} label={control.label} inline={true} />
             default:
-                return <div className="w-16"></div>
+                return <div key={control.cc} className="w-16"></div>
         }
     }
 
@@ -28,7 +28,7 @@ const Section = ({ section }) => {
                     { section.controls?.map(control => renderControl(control)) }
                 </div>
                 { section?.sections?.map(section => (
-                    <div>
+                    <div key={ section.label }>
                         <h3 key={ section.label } className="divider text-secondary font-semibold my-2">{ section.label }</h3>
                         <div className="flex justify-around gap-8 py-2">
                             { section.controls.map(control => renderControl(control)) }
