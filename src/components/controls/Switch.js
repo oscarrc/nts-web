@@ -35,7 +35,7 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
     }, [isMomentary])
 
     return (
-        <div className={`flex items-center justify-center ${inline ? 'flex-row' : "flex-col"}`}>
+        <div className={`flex items-center justify-center ${inline ? 'flex-row' : "flex-col-reverse"}`}>
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <div className="flex-1">
                 <input 

@@ -10,7 +10,7 @@ const App = () => {
   const { enabled } = useMidi();
   
   return (
-    <div className="flex flex-col min-h-screen px-8">
+    <div className="flex flex-col min-h-screen max-w-screen overflow-x-hidden xl:px-8 sm:px-4 px-2">
       <ModalProvider>
         <Header />
         <main className="flex flex-col flex-1 min-h-full justify-between py-8">

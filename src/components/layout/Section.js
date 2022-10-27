@@ -16,7 +16,7 @@ const Section = ({ section }) => {
             case "switch":
                 return <Switch label={control.label} inline={true} />
             default:
-                break;
+                return <div className="w-16"></div>
         }
     }
 
