@@ -14,7 +14,7 @@
     :root {
         --scrollbarTrack: hsla(var(--n));
         --scrollbarThumb: hsla(var(--b2));
-        --scrollbarThumbHover: hsla(var(--p));
+        --scrollbarThumbHover: hsla(var(--s));
    }
     
     ::-webkit-scrollbar {
