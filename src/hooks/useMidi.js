@@ -5,7 +5,7 @@ import { WebMidi } from 'webmidi';
 
 const DeviceReducer = (state, action) => {
     switch (action.type) {
-        case "Available": 
+        case "All": 
             return {
                 ...state,
                 inputDevices: action.payload.inputDevices,
@@ -65,7 +65,7 @@ const useMidi = () => {
         if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
         if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
 
-        setDevices({type:"Available", payload: currentDevices});
+        setDevices({type:"All", payload: currentDevices});
     }
 
     useEffect(() => { init() }, [init]);
