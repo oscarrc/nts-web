@@ -8,6 +8,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
 
     const handleValue = (e) => {
         setValue(e.target.value);
+        onChange(e.target.value);
     }
 
     const resetValue = useCallback( () => {        

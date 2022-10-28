@@ -86,6 +86,13 @@
         animation: none;
         transform: scale(var(--btn-focus-scale, 0.95));
     }
+
+    .shadow-glow {
+        background:  radial-gradient(circle, var(--tw-shadow-color); 0%, var(--tw-shadow-color) 100%);
+        -webkit-box-shadow: 0px 0px 8px 1px var(--tw-shadow-color);
+        -moz-box-shadow: 0px 0px 8px 1px var(--tw-shadow-color);
+        box-shadow: 0px 0px 8px 1px var(--tw-shadow-color);
+    }
 }
 
 @layer utilities {

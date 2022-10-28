@@ -62,10 +62,11 @@ const MidiProvider = ({ children }) => {
             outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")),
             passthroughDevices : WebMidi._inputs.filter(d => !d._midiInput.name.includes("NTS"))
         }
-
+        
         if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
         if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
         if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
+        
         setDevices({type:"All", payload: currentDevices});
     }
 
@@ -85,11 +86,11 @@ const MidiProvider = ({ children }) => {
     }
     
     const controlChange = (cc, value) => {
-        if(output) output.sendControlChange(cc, value, channelList[channels.output]);
+        if(output) output.sendControlChange(cc, value, { channels: channelList[channels.output] } );
     }
     
     const pitchBend = (value) => {      
-        if(output) output.sendPitchBend(value, channelList[channels.output]);
+        if(output) output.sendPitchBend(value, { channels: channelList[channels.output] });
     }
 
     useEffect(() => { init() }, [init]);

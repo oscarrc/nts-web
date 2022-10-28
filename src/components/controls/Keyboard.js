@@ -34,7 +34,8 @@ const Keyboard = () => {
         onTouchEnd: onPlayEnd,
         onMouseDown: onPlayStart,
         onMouseUp: onPlayEnd,
-        onMouseLeave: onPlayEnd
+        onMouseLeave: onPlayEnd,
+        onTouchCancel: onPlayEnd
     }
 
     useEffect(() => {
