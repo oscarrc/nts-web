@@ -1,7 +1,7 @@
 import Keyboard from "../components/controls/Keyboard";
 import { MdClose } from "react-icons/md";
 import Octave from "../components/controls/Octave";
-import Pitch from "../components/controls/Pitch";
+import Slider from "../components/controls/Slider";
 import Wheel from "../components/controls/Wheel";
 import { useLayout } from "../hooks/useLayout";
 import { useMidi } from "../hooks/useMidi";
@@ -23,7 +23,14 @@ const Live = () => {
                 step="0.01"
                 onChange={ pitchBend }
             /> */}
-            <Pitch />
+            <Slider
+                defaultValue={0}
+                minValue={-1}
+                maxValue={1} 
+                step={0.01} 
+                autoReturn={true} 
+                onChange={ pitchBend } 
+            />
             <Keyboard />
             <Octave octave={octave} setOctave={setOctave} />
         </aside>
