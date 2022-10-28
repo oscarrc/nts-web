@@ -12,6 +12,14 @@ const Keyboard = ({ octave = 1 }) => {
         console.log(Array(0))
     }, [breakpoint]);
 
+    const onPlayStart = () => {
+        if (window.navigator.vibrate) window.navigator.vibrate(100);
+    }
+
+    const onPlayEnd = () => {
+        if (window.navigator.vibrate) window.navigator.vibrate(100);
+    }
+
     return (
         <div className="flex-1 grid relative overflow-hidden auto-cols-auto grid-rows-none gap-x-1 grid-flow-col h-56 -mt-20"> 
             {
