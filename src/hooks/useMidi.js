@@ -59,25 +59,28 @@ const MidiProvider = ({ children }) => {
     const parseDevices = () => {
         const currentDevices = {
             inputDevices : WebMidi._inputs.filter(d => d._midiInput.name.includes("NTS")).map( i => i._midiInput),
-            outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")).map( o => o._midiOutput),
+            outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")),
             passthroughDevices : WebMidi._inputs.filter(d => !d._midiInput.name.includes("NTS")).map( p => p.midiInput)
         }
 
         if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
         if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
         if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
-
         setDevices({type:"All", payload: currentDevices});
     }
 
-    const playNote = (note, play = false, velocity = false, duration = false) => {
-        let options = {}
+    const playNote = (note, play = true, velocity = false, duration = false) => {
+        let options = {
+            channels: channelList[channels.output],
+            ...( velocity && { velocity } ),
+            ...( duration && { duration } )
+        }
         if(velocity) options.velocity = velocity;
         if(duration) options.duration = duration*1000;
     
         if(output){
-            if(play) output.playNote(note, channelList[channels.output], options);
-            else output.stopNote(note, channelList[channels.output], options);
+            if(play) output.playNote(note, options);
+            else output.stopNote(note, options);
         }
     }
     
