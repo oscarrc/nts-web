@@ -81,6 +81,11 @@
     .btn-pushable {
         @apply btn-ghost btn-active text-secondary active:outline-base-200 outline-base-100 outline-2 outline;
     }
+
+    .btn-pushed {
+        animation: none;
+        transform: scale(var(--btn-focus-scale, 0.95));
+    }
 }
 
 @layer utilities {

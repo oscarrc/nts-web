@@ -58,9 +58,9 @@ const MidiProvider = ({ children }) => {
 
     const parseDevices = () => {
         const currentDevices = {
-            inputDevices : WebMidi._inputs.filter(d => d._midiInput.name.includes("NTS")).map( i => i._midiInput),
+            inputDevices : WebMidi._inputs.filter(d => d._midiInput.name.includes("NTS")),
             outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")),
-            passthroughDevices : WebMidi._inputs.filter(d => !d._midiInput.name.includes("NTS")).map( p => p.midiInput)
+            passthroughDevices : WebMidi._inputs.filter(d => !d._midiInput.name.includes("NTS"))
         }
 
         if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
@@ -124,7 +124,8 @@ const MidiProvider = ({ children }) => {
             setOctave, 
             playNote, 
             controlChange, 
-            pitchBend 
+            pitchBend,
+            input
         }}>
             { children }
         </MidiContext.Provider>
