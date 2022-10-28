@@ -3,11 +3,11 @@ import { MdClose } from "react-icons/md";
 import Octave from "../components/controls/Octave";
 import Wheel from "../components/controls/Wheel";
 import { useLayout } from "../hooks/useLayout";
-import { useState } from "react";
+import { useMidi } from "../hooks/useMidi";
 
 const Live = () => {
     const { bottomDrawer, setBottomDrawer } = useLayout();
-    const [ octave, setOctave ] = useState(1)
+    const { octave, setOctave } = useMidi()
 
     return (
         <aside className={`${ bottomDrawer ? 'translate-y-0' : 'translate-y-full'} transition-transform transition-200 bottom-drawer bg-neutral flex flex-row justify-center items-center gap-16 py-6 xl:px-12 md:px-8 sm:px-4 px-2 text-secondary`}>

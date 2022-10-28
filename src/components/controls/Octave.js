@@ -2,8 +2,8 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 const Octave = ({ octave, setOctave }) => {
     const handleClick = (q) => {
-        if(q < 0 && octave > 1) setOctave(o => o - 1)
-        if(q > 0 && octave <= 10) setOctave(o => o + 1)
+        if(q < 0 && octave > 0) setOctave(o => o - 1)
+        if(q > 0 && octave < 6) setOctave(o => o + 1)
     }
 
     return (

@@ -42,6 +42,7 @@ const useMidi = () => {
     const [devices, setDevices] = useReducer(DeviceReducer, defaultDevices );
     const [channels, setChannels] = useReducer(ChannelReducer, defaultChannels);
     const [enabled, setEnabled] = useState(WebMidi.enabled);
+    const [octave, setOctave] = useState(3);
     
     const input = () => devices.inputDevices[devices.input];
     const output = () => devices.outputDevices[devices.output];
@@ -79,7 +80,7 @@ const useMidi = () => {
         }
     }, []);
     
-    return ({ enabled, devices, setDevices, channels, setChannels })
+    return ({ enabled, devices, setDevices, channels, setChannels, octave, setOctave })
 }
 
 export { useMidi }
