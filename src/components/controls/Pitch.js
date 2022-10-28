@@ -12,24 +12,23 @@ const Pitch = ({ onChange }) => {
     };
     
     const bend = (event) => {
+        console.log(event)
         const currentPad = padRef.current;
         const currentIndicator = indicatorRef.current;
 
-        const offsetY = event.type === 'touchstart' ? event.targetTouches[0].clientY -  event.target.getBoundingClientRect().top : event.offsetY;
-        const position = (offsetY * 100) / currentPad.clientHeight;
+        const offsetY = event.type === 'touchstart' ? event.targetTouches[0].clientY -  event.target.getBoundingClientRect().top : event.clientY  -  event.target.getBoundingClientRect().top;
+        const position = (offsetY * 100) / currentPad.clientHeight + currentIndicator.clientHeight;
         const pitch = -(-1 + ( 0.02 * (position + 1) ));
-        
         currentIndicator.style.top = position + "%";
-
-        console.log(pitch)
+        console.log(offsetY, position, pitch)
     }
 
     const events = {
         onMouseDown: bend,
-        onMouseUp: restore,
         onTouchStart: bend,
+        onMouseUp: restore,
         onTouchEnd: restore,
-        onMouseLeave: bend,
+        onMouseLeave: restore,
         onTouchCancel: restore
     }
 
