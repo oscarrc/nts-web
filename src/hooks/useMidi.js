@@ -1,5 +1,5 @@
 import { defaultChannels, defaultDevices } from "../config/midi";
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 
 import { WebMidi } from 'webmidi';
 
@@ -44,9 +44,9 @@ const useMidi = () => {
     const [enabled, setEnabled] = useState(WebMidi.enabled);
     const [octave, setOctave] = useState(3);
     
-    const input = () => devices.inputDevices[devices.input];
-    const output = () => devices.outputDevices[devices.output];
-    const passthrough = () => devices.passthroughDevices[devices.passthrough];
+    const input = useMemo(() => devices.inputDevices[devices.input], [devices]);
+    const output = useMemo(() => devices.outputDevices[devices.output], [devices]);
+    const passthrough = useMemo(() => devices.passthroughDevices[devices.passthrough], [devices]);
 
     const init = useCallback(async () => { 
         await WebMidi.enable({ sysex: true });
@@ -71,14 +71,23 @@ const useMidi = () => {
     useEffect(() => { init() }, [init]);
 
     useEffect(() => {
-        WebMidi.addListener("connected", parseDevices)
-        WebMidi.addListener("disconnected", parseDevices)
+        !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("connected", parseDevices)
+        !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("disconnected", parseDevices)
 
         return () => {
-            WebMidi.removeListener("connected", parseDevices)
-            WebMidi.removeListener("disconnected", parseDevices)
+            WebMidi.hasListener("connected", parseDevices) && WebMidi.removeListener("connected", parseDevices)
+            WebMidi.hasListener("connected", parseDevices) && WebMidi.removeListener("disconnected", parseDevices)
         }
     }, []);
+
+    useEffect(() => {
+        if(!passthrough) return;
+        !passthrough.hasForwarder(output) && passthrough.addForwarder(output)
+
+        return () => {
+            passthrough.hasForwarder(output) && passthrough.removeForwarder(output);
+        }
+    }, [passthrough, output])
     
     return ({ enabled, devices, setDevices, channels, setChannels, octave, setOctave })
 }
