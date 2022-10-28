@@ -4,7 +4,8 @@ const Slider = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, auto
     const [ value, setValue ] = useState(defaultValue ? defaultValue : (maxValue - minValue) / 2 );
     const SliderRef = useRef(null);
 
-    const handleValue = useCallback((e) => {
+    const handleValue = useCallback((e) => {        
+        if (window.navigator.vibrate) window.navigator.vibrate(100);
         setValue(e.target.value);
         onChange && onChange(e.target.value);
     },[onChange])
