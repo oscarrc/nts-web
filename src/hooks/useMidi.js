@@ -1,9 +1,9 @@
+import { defaultChannels, defaultDevices } from "../config/midi";
 import { useCallback, useEffect, useReducer, useState } from "react";
 
 import { WebMidi } from 'webmidi';
-import { defaults } from "../config/midi";
 
-const MidiReducer = (state, action) => {
+const DeviceReducer = (state, action) => {
     switch (action.type) {
         case "Available": 
             return {
@@ -13,23 +13,40 @@ const MidiReducer = (state, action) => {
                 passthroughDevices: action.payload.passthroughDevices
             }
         case "Input":
-            state.input = action.payload;
-            return state;
+            return { ...state, input: action.payload }
         case "Output":
-            state.output = action.payload;
-            return state;
+            return { ...state, output: action.payload }
         case "Passthrough":
-            state.passthrough = action.payload;
-            return state;
+            return { ...state, passthrough: action.payload }
+        default:
+            break;
+    }
+}
+
+const ChannelReducer = (state, action) => {
+    switch (action.type) {
+        case "All":
+            return action.payload;
+        case "Input":
+            return { ...state, input: action.payload }
+        case "Output":
+            return { ...state, output: action.payload }
+        case "Passthrough":
+            return { ...state, passthrough: action.payload }
         default:
             break;
     }
 }
 
 const useMidi = () => {    
-    const [devices, setDevices] = useReducer(MidiReducer, defaults);
+    const [devices, setDevices] = useReducer(DeviceReducer, defaultDevices );
+    const [channels, setChannels] = useReducer(ChannelReducer, defaultChannels);
     const [enabled, setEnabled] = useState(WebMidi.enabled);
     
+    const input = () => devices.inputDevices[devices.input];
+    const output = () => devices.outputDevices[devices.output];
+    const passthrough = () => devices.passthroughDevices[devices.passthrough];
+
     const init = useCallback(async () => { 
         await WebMidi.enable({ sysex: true });
         setEnabled(WebMidi.enabled);
@@ -42,6 +59,10 @@ const useMidi = () => {
             outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")).map( o => o._midiOutput),
             passthroughDevices : WebMidi._inputs.filter(d => !d._midiInput.name.includes("NTS")).map( p => p.midiInput)
         }
+
+        if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
+        if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
+        if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
 
         setDevices({type:"Available", payload: currentDevices});
     }
@@ -58,7 +79,7 @@ const useMidi = () => {
         }
     }, []);
     
-    return ({ enabled, devices, setDevices })
+    return ({ enabled, devices, setDevices, channels, setChannels })
 }
 
 export { useMidi }

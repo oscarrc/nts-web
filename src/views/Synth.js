@@ -2,15 +2,10 @@ import Display from "../components/layout/Display";
 import More from "../components/layout/More";
 import Section from "../components/layout/Section"
 import { controls } from '../config/synth';
-import { useEffect } from "react";
 import { useMidi } from "../hooks/useMidi";
 
 const Synth = () => {
-    const { enabled, devices } = useMidi();
-
-    useEffect(() => {
-        console.log(devices)
-    }, [devices])
+    const { enabled } = useMidi();
 
     return (        
         <div className="grid w-full overflow-hidden xl:grid-cols-4 md:grid-cols-2 grid-cols-1 grid-rows-auto gap-8 grid-flow-row">
