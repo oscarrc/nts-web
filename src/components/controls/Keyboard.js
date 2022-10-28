@@ -6,7 +6,7 @@ import { useMidi } from "../../hooks/useMidi";
 
 const Keyboard = () => {
     const { breakpoint } = useLayout();
-    const { playNote, octave, input } = useMidi();
+    const { playNote, octave, input, passthrough } = useMidi();
     const [ octaves, setOctaves ] = useState( octaveLimits[breakpoint] );
     const [ activeNote, setActiveNote ] = useState(null);
 
@@ -44,12 +44,16 @@ const Keyboard = () => {
     useEffect(() => {
         !input?.hasListener("noteon", setNote) && input?.addListener("noteon", setNote)
         !input?.hasListener("noteoff", setNote) && input?.addListener("noteoff", setNote)
+        !passthrough?.hasListener("noteon", setNote) && passthrough?.addListener("noteon", setNote)
+        !passthrough?.hasListener("noteoff", setNote) && passthrough?.addListener("noteoff", setNote)
 
         return () => {
             input?.hasListener("noteon", setNote) && input?.removeListener("noteon", setNote)
-            input?.hasListener("noteoff", setNote) && input?.removeListener("noteoff", setNote)
+            input?.hasListener("noteoff", setNote) && input?.removeListener("noteoff", setNote)            
+            passthrough?.hasListener("noteon", setNote) && passthrough?.removeListener("noteon", setNote)
+            passthrough?.hasListener("noteoff", setNote) && passthrough?.removeListener("noteoff", setNote)
         }
-    }, [input])
+    }, [input, passthrough])
 
     return (
         <div ref={keyboardRef} className="flex-1 grid relative overflow-hidden auto-cols-auto grid-rows-none gap-x-1 grid-flow-col h-56 -mt-20"> 

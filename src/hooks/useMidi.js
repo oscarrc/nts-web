@@ -116,6 +116,9 @@ const MidiProvider = ({ children }) => {
     return (
         <MidiContext.Provider value={{
             enabled, 
+            input,
+            output,
+            passthrough,
             devices, 
             setDevices, 
             channels, 
@@ -125,7 +128,6 @@ const MidiProvider = ({ children }) => {
             playNote, 
             controlChange, 
             pitchBend,
-            input
         }}>
             { children }
         </MidiContext.Provider>
