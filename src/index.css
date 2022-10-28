@@ -5,6 +5,11 @@
 @font-face {
     font-family: 'Dot Matrix';
     src: url('assets/Square-Dot-Matrix.ttf') format('truetype');
+
+
+}@font-face {
+    font-family: 'Seven Segment';
+    src: url('assets/Seven-Segment.ttf') format('truetype');
 }
 
 @layer base {
@@ -79,7 +84,7 @@
     }
 
     .btn-pushable {
-        @apply btn-ghost btn-active text-secondary active:outline-base-200 outline-base-100 outline-2 outline;
+        @apply focus:shadow-inner shadow btn-active
     }
 
     .btn-pushed {

@@ -42,7 +42,7 @@ const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, 
                     onChange={ handleValue }
                 />
             </div>
-            <div className="bg-neutral bg-grid text-dotMatrix h-4 w-8 text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1">{ value }</div>
+            <div className="bg-neutral bg-grid font-sevenSegment h-4 w-8 text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1">{ value }</div>
         </div>
     )
 }

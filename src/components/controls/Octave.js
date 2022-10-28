@@ -8,11 +8,11 @@ const Octave = ({ octave, setOctave }) => {
 
     return (
         <div className="flex flex-col gap-1 h-28 w-10">            
-            <button onClick={ () => handleClick(1)} className="btn btn-pushable btn-xs rounded-b-none"> <FaCaretUp className="h-4 w-4" /></button>
-            <div className="bg-neutral w-full flex flex-1 bg-grid text-dotMatrix items-center justify-center font-semibold text-accent outline outline-base-100 outline-offset-1 outline-1">
+            <button onClick={ () => handleClick(1)} className="btn btn-ghost btn-pushable outline-neutral border-secondary text-secondary btn-xs rounded-b-none"> <FaCaretUp className="h-4 w-4" /></button>
+            <div className="bg-neutral w-full flex flex-1 bg-grid font-sevenSegment text-2xl items-center justify-center text-accent outline outline-base-100 outline-offset-1 outline-1">
                 <span>{ octave }</span>
             </div>            
-            <button onClick={ () => handleClick(-1) } className="btn btn-pushable btn-xs rounded-t-none"> <FaCaretDown className="h-4 w-4" /></button>
+            <button onClick={ () => handleClick(-1) } className="btn btn-ghost btn-pushable outline-neutral border-secondary text-secondary btn-xs rounded-t-none"> <FaCaretDown className="h-4 w-4" /></button>
         </div>
     )
 }

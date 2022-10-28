@@ -70,7 +70,7 @@ const Keyboard = () => {
                     })
                 })
             }
-            { octaves && <button {...events } data-note={ `C${octave + octaves}` } className="btn btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black"></button> }
+            { octaves && <button {...events } data-note={ `C${octave + octaves}` } className="btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black"></button> }
         </div>
     )
 }
