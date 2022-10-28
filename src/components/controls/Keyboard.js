@@ -27,6 +27,7 @@ const Keyboard = () => {
         const note = `${e.note._name}${!!e.note._accidental ? e.note._accidental : ""}${e.note._octave}`
         if(e.type === "noteon") setActiveNote(note)
         else setActiveNote(false)
+        console.log(note)
     }
 
     const events = {
@@ -70,7 +71,7 @@ const Keyboard = () => {
                     })
                 })
             }
-            { octaves && <button {...events } data-note={ `C${octave + octaves}` } className="btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black"></button> }
+            { octaves && <button {...events } data-note={ `C${octave + octaves}` } className={`key btn btn-active btn-ghost h-36 row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black ${ activeNote === `C${octave + octaves}` && 'btn-pushed'}`}></button> }
         </div>
     )
 }

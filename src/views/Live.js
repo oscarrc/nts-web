@@ -2,7 +2,6 @@ import Keyboard from "../components/controls/Keyboard";
 import { MdClose } from "react-icons/md";
 import Octave from "../components/controls/Octave";
 import Slider from "../components/controls/Slider";
-import Wheel from "../components/controls/Wheel";
 import { useLayout } from "../hooks/useLayout";
 import { useMidi } from "../hooks/useMidi";
 
@@ -15,14 +14,6 @@ const Live = () => {
             <button onClick={ () => setBottomDrawer( d => !d) } className="btn btn-circle btn-sm absolute top-2 right-2 text-secondary">
                 <MdClose className="h-5 w-5" />
             </button>
-            {/* <Wheel 
-                autoReturn={true}
-                defaultValue="0"
-                minValue="-1"
-                maxValue="1"
-                step="0.01"
-                onChange={ pitchBend }
-            /> */}
             <Slider
                 defaultValue={0}
                 minValue={-1}
