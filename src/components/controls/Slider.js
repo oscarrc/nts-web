@@ -15,10 +15,7 @@ const Slider = ({value = 50, min = 0, max = 100, step = 1, defaultValue = 0, aut
         onChange && onChange(defaultValue);
     }, [defaultValue, onChange]);
 
-    useEffect(() => {
-        setValue(value);
-        onChange(value);
-    }, [value, onChange])
+    useEffect(() => { setValue(value) }, [value]);
 
     useEffect(() => {
         if(!autoReturn) return;
