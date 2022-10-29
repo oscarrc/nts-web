@@ -8,7 +8,13 @@ const controls = {
                 cc: 53,
                 min: 0,
                 max: 3,
-                step: 42
+                step: 42,
+                options: [
+                    { label: "Sawtooth", value: 0 },
+                    { label: "Triangle", value: 0 },
+                    { label: "Square", value: 0 },
+                    { label: "VPN", value: 0 }
+                ]
             },
             {        
                 label: "Shape",
@@ -31,7 +37,19 @@ const controls = {
                 cc: 117,
                 min: 0,
                 max: 9,
-                step: 14
+                step: 14,
+                options: [
+                    { label: "Up", value: 0 },
+                    { label: "Down", value: 0 },
+                    { label: "Up-Down", value: 0 },
+                    { label: "Down-Up", value: 0 },
+                    { label: "Converge", value: 0 },
+                    { label: "Diverge", value: 0 },
+                    { label: "Conv.-Div.", value: 0 },
+                    { label: "Div.-Conv.", value: 0 },
+                    { label: "Random", value: 0 },
+                    { label: "Stchastic", value: 0 }
+                ]
             },
             {
                 label: "Scale",
@@ -39,7 +57,15 @@ const controls = {
                 cc: 118,
                 min: 0,
                 max: 5,
-                step: 25
+                step: 25,
+                options: [
+                    { label: "Octave", value: 0 },
+                    { label: "Major Triad", value: 0 },
+                    { label: "Major Suspended", value: 0 },
+                    { label: "Major Augumented", value: 0 },
+                    { label: "Minor Triad", value: 0 },
+                    { label: "Minor Diminished", value: 0 }
+                ]
             },
             {
                 label: "Length",            
@@ -57,7 +83,14 @@ const controls = {
                 cc: 14,
                 min: 0,
                 max: 4,
-                step: 31
+                step: 31,
+                options: [
+                    { label: "ADSR", value: 0 },
+                    { label: "AHR", value: 0 },
+                    { label: "AR", value: 0 },
+                    { label: "AR Loop", value: 0 },
+                    { label: "Open", value: 0 }
+                ]
             }
         ],
         sections: [
@@ -140,7 +173,14 @@ const controls = {
                         cc: 88,
                         min: 1,
                         max: 4,
-                        step: 42
+                        step: 42,
+                        options: [
+                            { label: "Off", value: 0 },
+                            { label: "Chorus", value: 0 },
+                            { label: "Ensemble", value: 0 },
+                            { label: "Phaser", value: 0 },
+                            { label: "Flanger", value: 0 }
+                        ]
                     },
                     {
                         label: "Time",
@@ -168,7 +208,15 @@ const controls = {
                         cc: 89,
                         min: 1,
                         max: 5,
-                        step: 31
+                        step: 31,
+                        options: [
+                            { label: "Off", value: 0 },
+                            { label: "Stereo", value: 0 },
+                            { label: "Mono", value: 0 },
+                            { label: "Ping Pong", value: 0 },
+                            { label: "High Pass", value: 0 },
+                            { label: "Tape", value: 0 }
+                        ]
                     },
                     {
                         label: "Time",
@@ -196,7 +244,15 @@ const controls = {
                         cc: 90,
                         min: 1,
                         max: 5,
-                        step: 31
+                        step: 31,
+                        options: [
+                            { label: "Off", value: 0 },
+                            { label: "Hall", value: 0 },
+                            { label: "Plate", value: 0 },
+                            { label: "Space", value: 0 },
+                            { label: "Riser", value: 0 },
+                            { label: "Submarine", value: 0 }
+                        ]
                     },
                     {
                         label: "Time",
@@ -227,7 +283,16 @@ const controls = {
                 switch: 127,
                 min: 0,
                 max: 5,
-                step: 21
+                step: 21,
+                options: [
+                    { label: "LowPass 2p", values: 0 },
+                    { label: "LowPass 4p", values: 0 },
+                    { label: "BandPass 2p", values: 0 },
+                    { label: "BandPass 4p", values: 0 },
+                    { label: "HighPass 2p", values: 0 },
+                    { label: "HighPass 4p", values: 0 },
+                    { label: "Off", values: 0 }
+                ]
             }
         ],
         sections: [
@@ -265,73 +330,6 @@ const controls = {
     }
 }
 
-const strings = {
-    53: [
-        "Sawtooth",
-        "Triangle",
-        "Square",
-        "VPN"
-    ],
-    117: [
-        "Up",
-        "Down",
-        "Up-Down",
-        "Down-Up",
-        "Converge",
-        "Diverge",
-        "Conv.-Div.",
-        "Div.-Conv.",
-        "Random",
-        "Stchastic"
-    ],
-    118: [
-        "Octave",
-        "Major Triad",
-        "Major Suspended",
-        "Major Augumented",
-        "Minor Triad",
-        "Minor Diminished"
-    ],
-    14: [
-        "ADSR",
-        "AHR",
-        "AR",
-        "AR Loop",
-        "Open"
-    ],
-    88: [
-        "Off",
-        "Chorus",
-        "Ensemble",
-        "Phaser",
-        "Flanger"
-    ],
-    89: [
-        "Off",
-        "Stereo",
-        "Mono",
-        "Ping Pong",
-        "High Pass",
-        "Tape"
-    ],
-    90: [
-        "Off",
-        "Hall",
-        "Plate",
-        "Space",
-        "Riser",
-        "Submarine"
-    ],
-    42: [
-        "LowPass 2p",
-        "LowPass 4p",
-        "BandPass 2p",
-        "BandPass 4p",
-        "HighPass 2p",
-        "HighPass 4p",
-        "Off"
-    ]
-}
 
 const octaveLimits = {
     'xs': 1,
@@ -342,44 +340,11 @@ const octaveLimits = {
     '2xl': 3
 }
 
-const defaults = (config, strings) => {
-    let defaultConfig = {};
 
-    const values = (control) =>  {
-        let value = {
-            value:  control.min ? control.min * control.step : 0,
-        }
-
-        if(strings[control.cc]) value.svalue = strings[control.cc][control.min || 0]
-        if(control.max) value.max =  control.max;
-        if(control.min) value.min =  control.min;
-        if(control.step) value.step =  control.step;
-        if(control.switch || control.type === "switch") value.active = 0;
-
-        return value;
-    }
-
-    Object.keys(config).forEach( k => {
-        if(config[k].controls)
-            config[k].controls.forEach( c => {
-                defaultConfig[c.cc] = {
-                    ...defaultConfig[c.cc],
-                    ...values(c)
-                }
-            })
-        
-        if(config[k].sections)
-            config[k].sections.forEach( s => {
-                s.controls.forEach( c => {
-                    defaultConfig[c.cc] = {
-                        ...defaultConfig[c.cc],
-                        ...values(c)
-                    }
-                })
-            })
-    })
-
-    return defaultConfig;
+const sysex = {
+    vendor: 66,
+    channel: 0,
+    device: 87
 }
 
-export { controls, strings, octaveLimits, defaults }
+export { controls, octaveLimits, sysex }

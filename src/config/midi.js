@@ -33,10 +33,4 @@ const defaultChannels = {
     passthrough: 0
 }
 
-const sysex = {
-    sysexVendor: 66,
-    sysexChannel: 0,
-    sysexDevice: 87
-}
-
-export { channelList, defaultChannels, defaultDevices, sysex }
+export { channelList, defaultChannels, defaultDevices }
