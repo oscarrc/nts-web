@@ -79,7 +79,7 @@ const NTSProvider = ({ children }) => {
     useEffect(() => { getUserPrograms() }, [getUserPrograms])
     
     return (
-        <NTSContext.Provider value={{ state, setState }}>{ children }</ NTSContext.Provider>
+        <NTSContext.Provider value={{ state, setState, controls: currentControls }}>{ children }</ NTSContext.Provider>
     )
 }
 

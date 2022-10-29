@@ -2,16 +2,16 @@ import { useEffect, useRef, useState } from "react";
 
 import selector from "../../assets/selector.png";
 
-const Selector = ({defaultValue = 0, minValue = 0, maxValue = 10, label, onChange}) => {
-    const [ value, setValue ] = useState(defaultValue ? defaultValue : minValue);
+const Selector = ({value = 0, options, label, onChange}) => {
+    const [ currentValue, setValue ] = useState(value ? value : 0);
     const selectorRef = useRef(null);
     
     const handleValue = (e) => {
-        const val = Math.ceil(e.target.value);
-        setValue(val);
-        selectorRef.current.value = val;
-        // onChange(val);
+        setValue(e.target.value);
+        onChange && onChange(e.target.value);
     }
+
+    useEffect(() => setValue(value), [value]);
 
     useEffect(() => {
         const currentKnob = selectorRef.current;
@@ -37,10 +37,10 @@ const Selector = ({defaultValue = 0, minValue = 0, maxValue = 10, label, onChang
                     data-src={ selector }
                     data-sprites="23"
                     diameter="90" 
-                    value={ value }
-                    min={ minValue }
-                    max={ maxValue }
-                    step={ 0.2 }
+                    value={ currentValue }
+                    min="0"
+                    max={ options?.length - 1 || 0}
+                    step="1"
                     onChange={ handleValue }
                 />
             </div>

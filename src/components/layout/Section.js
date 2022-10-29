@@ -10,9 +10,9 @@ const Section = ({ section }) => {
             case "knob":
                 return <Knob key={control.cc} label={control.label} />
             case "dropdown":
-                return <Dropdown key={control.cc} switchValue={control?.switch} defaultSelection={0} options={[ {label: "Test1" }, {label: "Test2" } ]} />;
+                return <Dropdown key={control.cc} switchValue={control?.switch} defaultSelection={0} options={control.options} />;
             case "selector":                
-                return <Selector key={control.cc} label={control.label} />
+                return <Selector key={control.cc} label={control.label} options={control.options} />
             case "switch":
                 return <Switch key={control.cc} switchValue={control?.switch} label={control.label} inline={true} />
             default:

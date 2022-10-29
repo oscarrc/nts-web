@@ -19,6 +19,7 @@ const Dropdown = ({ label, selection = 0, options, switchValue, onChange }) => {
                 <ul tabIndex="0" className="mt-2 dropdown-content menu shadow-lg bg-neutral text-secondary rounded w-full max-h-[8rem] flex-row overflow-y-scroll">
                     {   
                         options?.map((option, index) => {
+                            if (option.value === switchValue) return null;
                             return <li key={ index } onClick={ () => handleSelection(index) } className="px-2 py-1 cursor-pointer hover:bg-base-100 w-full">{ option?.label }</li>
                         })
                     }
