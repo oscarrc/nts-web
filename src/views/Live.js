@@ -15,9 +15,10 @@ const Live = () => {
                 <MdClose className="h-5 w-5" />
             </button>
             <Slider
+                value={0}
+                min={-1}
+                max={1} 
                 defaultValue={0}
-                minValue={-1}
-                maxValue={1} 
                 step={0.01} 
                 autoReturn={true} 
                 onChange={ pitchBend } 

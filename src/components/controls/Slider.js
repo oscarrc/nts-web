@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Slider = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoReturn = false, label, onChange}) => {
-    const [ value, setValue ] = useState(defaultValue ? defaultValue : (maxValue - minValue) / 2 );
-    const SliderRef = useRef(null);
+const Slider = ({value = 50, min = 0, max = 100, step = 1, defaultValue = 0, autoReturn = false, label, onChange}) => {
+    const [ currentValue, setValue ] = useState(value ? value : (max - min) / 2 );
+    const sliderRef = useRef(null);
 
     const handleValue = useCallback((e) => {        
         if (window.navigator.vibrate) window.navigator.vibrate(100);
@@ -16,9 +16,14 @@ const Slider = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, auto
     }, [defaultValue, onChange]);
 
     useEffect(() => {
+        setValue(value);
+        onChange(value);
+    }, [value, onChange])
+
+    useEffect(() => {
         if(!autoReturn) return;
         
-        const currentSlider = SliderRef.current;
+        const currentSlider = sliderRef.current;
         currentSlider.addEventListener("mouseup", resetValue);        
         currentSlider.addEventListener("mouseleave", resetValue);     
         currentSlider.addEventListener("touchend", resetValue);     
@@ -33,7 +38,7 @@ const Slider = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, auto
     }, [autoReturn, resetValue])
 
     useEffect(() => {
-        const currentSlider = SliderRef.current;
+        const currentSlider = sliderRef.current;
 
         currentSlider.addEventListener("change", handleValue)        
         currentSlider.addEventListener("input", handleValue)
@@ -49,13 +54,13 @@ const Slider = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, auto
         <span className="slider-wrapper flex flex-col items-center justify-center">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <input 
-                ref={SliderRef} 
+                ref={sliderRef} 
                 orientation="vertical"
                 type="range"
                 className="slider rounded bg-neutral bg-grid outline outline-base-100 outline-offset-1 outline-1"
-                value={ value }
-                min={minValue}
-                max={maxValue}
+                value={currentValue}
+                min={min}
+                max={max}
                 step={step}
                 onChange={handleValue}
             />
