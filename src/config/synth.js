@@ -347,4 +347,31 @@ const sysex = {
     device: 87
 }
 
-export { controls, octaveLimits, sysex }
+const defaults = (controls, random = false) => {
+    const values = {};
+
+    const getRandom = (control) => {
+        if(control.min && control.max) return Math.floor(Math.random() * (control.max - control.min + 1) + control.min);
+        if(control.options) return Math.floor(Math.random() * (control.options.length + 1));
+        if(control.type === "switch") return Math.round(Math.random());
+        else return Math.floor(Math.random() * 255);
+    }
+
+    Object.keys(controls).forEach(key => {
+        const current = controls[key];
+
+        current.controls.forEach( control => {            
+            values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
+        })
+    
+        current.sections && current.sections.forEach( section => {
+            section.controls.forEach( control => {            
+                values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
+            })
+        })
+    });
+
+    return values;
+}
+
+export { controls, octaveLimits, sysex, defaults }

@@ -1,4 +1,4 @@
-import { controls, sysex } from "../config/synth";
+import { controls, defaults, sysex } from "../config/synth";
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
 
 import { useMidi } from './useMidi';
@@ -13,7 +13,7 @@ const NTSReducer = (state, action) => {
 }
 
 const NTSProvider = ({ children }) => {
-    const [state, setState] = useReducer(NTSReducer);
+    const [state, setState] = useReducer(NTSReducer, defaults(controls, true));
     const [currentControls, setControls] = useState(controls);
     const { input, output, channels } = useMidi();
 
