@@ -13,11 +13,11 @@ const NTSReducer = (state, action) => {
 
 const NTSProvider = ({ children }) => {
     const { input, output, channels } = useMidi();
-    const [state, dispatch] = useReducer(NTSReducer, defaults(controls, true));
-    const [currentControls, setControls] = useState(controls);
-    const [bank, setBank] = useState(0)
+    const [ bank, setBank ] = useState(localStorage.getItem("bank") || 0);
+    const [ currentControls, setControls ] = useState(controls);
+    const [ state, dispatch ] = useReducer(NTSReducer, JSON.parse(localStorage.getItem(`bank${bank}`)) || defaults(currentControls, true));
     const randomize = () => dispatch({ type: "bank", payload: defaults(controls, true) });
-    
+
     // TODO: debug get user programs and why selectors don't update
     const getUserPrograms = useCallback(() => {
         let type = 0;
@@ -53,7 +53,7 @@ const NTSProvider = ({ children }) => {
         }  
 
         const get = async (e) => {
-            if (e.data.length === 53) setControls( c => set(c, index[type], { label: decode(e.data), value: 0 } ));
+            if (e.data.length === 53) setControls( c => set(c, index[type - 1], { label: decode(e.data), value: 0 } ));
 
             if(bank < 16){
                 bank++
@@ -62,8 +62,8 @@ const NTSProvider = ({ children }) => {
                 bank = 0;
                 type ++
                 output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
-            }else{
-                input.removeListener("sysex", channels.input, get);
+            }else{ 
+                setTimeout(()=> input.removeListener("sysex", channels.input, get), 200);
             }
         }
         
@@ -77,6 +77,7 @@ const NTSProvider = ({ children }) => {
 
     const controlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
+        
         const control = getControlByCC(number, currentControls);
         let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
        
@@ -86,7 +87,12 @@ const NTSProvider = ({ children }) => {
     }, [currentControls, state])
 
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input])
-    useEffect(() => { localStorage.setItem(`bank${bank}`, JSON.stringify(state)) }, [bank, state])
+    ;
+    useEffect(() => { 
+        localStorage.setItem(`bank${bank}`, JSON.stringify(state))
+        localStorage.setItem("bank", bank);
+    }, [bank, state]);
+
     useEffect(() => {
         if(!input) return;
         !input.hasListener("controlchange", controlChange ) && input.addListener("controlchange", controlChange )
