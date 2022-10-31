@@ -69,7 +69,7 @@ const NTSProvider = ({ children }) => {
         
         setControls(controls);
         
-        if(!input || !output) return;
+        if(!input || !output) return setControls(controls);
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
@@ -79,7 +79,7 @@ const NTSProvider = ({ children }) => {
     const controlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         const control = getControlByCC(number, currentControls);
-        let parsed = control?.options ? Math.round(value * (control.options.length - 1)) : rawValue;
+        let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
        
         if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
         

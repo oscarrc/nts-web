@@ -4,15 +4,17 @@ import selector from "../../assets/selector.png";
 
 const Selector = ({value = 0, options, label, onChange, display}) => {
     const [ currentValue, setValue ] = useState(value ? value : 0);
+    const [ maxValue, setMaxValue ] = useState(options?.length - 1 || 0);
     const selectorRef = useRef(null);
     
     const handleValue = useCallback((e) => {
-        // if (window.navigator.vibrate) window.navigator.vibrate(200);
+        if (window.navigator.vibrate) window.navigator.vibrate(200);
         setValue(e.target.value);
         onChange && onChange(parseInt(e.target.value));
     }, [onChange])
 
     useEffect(() => setValue(value), [value]);
+    useEffect(() => setMaxValue(options?.length - 1 || 0), [options]);
 
     useEffect(() => {
         const currentKnob = selectorRef.current;
@@ -40,7 +42,7 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
                     diameter="90" 
                     value={ currentValue }
                     min={ 0 }
-                    max={ options?.length - 1 || 0}
+                    max={ maxValue }
                     step="1"
                     onChange={ handleValue }
                 />

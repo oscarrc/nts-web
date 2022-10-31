@@ -66,7 +66,7 @@ const MidiProvider = ({ children }) => {
         if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
         if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
         if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
-        
+        console.log(currentDevices)
         setDevices({type:"All", payload: currentDevices});
     }
 
