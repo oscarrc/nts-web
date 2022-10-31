@@ -6,8 +6,6 @@ const controls = {
                 label: "Type",
                 type: "selector",
                 cc: 53,
-                min: 0,
-                max: 3,
                 step: 42,
                 options: [
                     { label: "Sawtooth", value: 0 },
@@ -35,8 +33,6 @@ const controls = {
                 label: "Type",
                 type: "selector",
                 cc: 117,
-                min: 0,
-                max: 9,
                 step: 14,
                 options: [
                     { label: "Up", value: 0 },
@@ -55,8 +51,6 @@ const controls = {
                 label: "Scale",
                 type: "selector",
                 cc: 118,
-                min: 0,
-                max: 5,
                 step: 25,
                 options: [
                     { label: "Octave", value: 0 },
@@ -81,8 +75,6 @@ const controls = {
                 label: "Type",
                 type: "dropdown",
                 cc: 14,
-                min: 0,
-                max: 4,
                 step: 31,
                 options: [
                     { label: "ADSR", value: 0 },
@@ -171,12 +163,10 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 88,
-                        min: 1,
-                        max: 4,
                         step: 42,
                         switch: 0,
                         options: [
-                            { label: "Off", value: 0 },
+                            // { label: "Off", value: 0 },
                             { label: "Chorus", value: 0 },
                             { label: "Ensemble", value: 0 },
                             { label: "Phaser", value: 0 },
@@ -207,12 +197,10 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 89,
-                        min: 1,
-                        max: 5,
                         step: 31,
                         switch: 0,
                         options: [
-                            { label: "Off", value: 0 },
+                            // { label: "Off", value: 0 },
                             { label: "Stereo", value: 0 },
                             { label: "Mono", value: 0 },
                             { label: "Ping Pong", value: 0 },
@@ -244,12 +232,10 @@ const controls = {
                         label: "Type",
                         type: "selector",
                         cc: 90,
-                        min: 1,
-                        max: 5,
                         step: 31,
                         switch: 0,
                         options: [
-                            { label: "Off", value: 0 },
+                            // { label: "Off", value: 0 },
                             { label: "Hall", value: 0 },
                             { label: "Plate", value: 0 },
                             { label: "Space", value: 0 },
@@ -284,8 +270,6 @@ const controls = {
                 type: "dropdown",
                 cc: 42,
                 switch: 127,
-                min: 0,
-                max: 5,
                 step: 21,
                 options: [
                     { label: "LowPass 2p", values: 0 },
@@ -294,7 +278,7 @@ const controls = {
                     { label: "BandPass 4p", values: 0 },
                     { label: "HighPass 2p", values: 0 },
                     { label: "HighPass 4p", values: 0 },
-                    { label: "Off", values: 0 }
+                    // { label: "Off", values: 0 }
                 ]
             }
         ],
@@ -355,22 +339,34 @@ const defaults = (controls, random = false) => {
 
     const getRandom = (control) => {
         if(control.min && control.max) return Math.floor(Math.random() * (control.max - control.min + 1) + control.min);
-        if(control.options) return Math.floor(Math.random() * (control.options.length + 1));
-        if(control.type === "switch") return Math.round(Math.random());
+        if(control.options) return Math.floor(Math.random() * (control.options.length));
+        if(control.type === "switch") return Math.random() < .5;
         else return Math.floor(Math.random() * 255);
+    }
+
+    const setValue = (control) => {
+        if( control.type === "switch" ){
+            values[control.cc] = {
+                ...(values[control.cc] || {}), 
+                active: random ? getRandom(control) : false
+            }
+        }else if (control.switch !== undefined ){
+            values[control.cc] = {
+                ...(values[control.cc] || {}), 
+                value: random ? getRandom(control) : control.min ? control.min : 0
+            }
+        }else{
+            values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
+        }
     }
 
     Object.keys(controls).forEach(key => {
         const current = controls[key];
 
-        current.controls.forEach( control => {  
-            values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
-        })
+        current.controls.forEach( control => setValue(control))
     
         current.sections && current.sections.forEach( section => {
-            section.controls.forEach( control => {            
-                values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
-            })
+            section.controls.forEach( control => setValue(control) )
         })
     });
 

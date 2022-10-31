@@ -8,7 +8,7 @@ const Knob = ({value = 0, minValue = 0, maxValue = 100, step = 1, label, onChang
 
     const handleValue = useCallback((e) => {
         setValue(e.target.value);
-        onChange && onChange(e.target.value);
+        onChange && onChange(parseInt(e.target.value));
     }, [onChange])
 
     useEffect(() => setValue(value), [value]);

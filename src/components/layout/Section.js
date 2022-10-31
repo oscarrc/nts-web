@@ -8,15 +8,43 @@ const Section = ({ section }) => {
     const { state, setState } = useNTS();
 
     const renderControl = (control) => {
+        const currentValue = isNaN(control?.switch) || control.type === "switch" ? state[control.cc] : state[control.cc].value;
+
         switch( control.type ){
             case "knob":
-                return <Knob key={control.cc} label={control.label} value={ state[control.cc] } onChange={ (value) => { setState({type: control.cc, payload: value}) }} />
+                return <Knob 
+                    key={control.cc}
+                    label={control.label}
+                    value={ currentValue }
+                    onChange={ (value) => { setState({type: control.cc, payload: value}) }} 
+                />
             case "dropdown":
-                return <Dropdown key={control.cc} switchValue={control?.switch} selection={state[control.cc]} options={control.options} onChange={ (value) => { setState({type: control.cc, payload: value}) }} />;
+                return <Dropdown 
+                    key={control.cc}
+                    switchValue={ control?.switch }
+                    isActive={ currentValue.active }
+                    selection={ currentValue } 
+                    options={control.options} 
+                    onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
+                />;
             case "selector":                
-                return <Selector key={control.cc} label={control.label} options={control.options}  value={ state[control.cc] } display={ control.options[state[control.cc]]?.label }  onChange={ (value) => { setState({type: control.cc, payload: value }) }} />
+                return <Selector 
+                    key={control.cc}
+                    label={control.label}
+                    options={control.options}
+                    value={ currentValue } 
+                    display={ control.options[currentValue]?.label }
+                    onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }}
+                />
             case "switch":
-                return <Switch key={control.cc} switchValue={control?.switch} label={control.label} inline={true} isActive={ state[control.cc] } onChange={ (value) => { setState({type: control.cc, payload: value}) }} />
+                return <Switch 
+                    key={control.cc}
+                    switchValue={control?.switch}
+                    label={control.label}
+                    inline={true}
+                    isActive={ currentValue.active }
+                    onChange={ (value) => { setState({type: control.cc, payload: { ...state[control.cc], active: value } }) }} 
+                />
             default:
                 return <div key={control.cc} className="w-16"></div>
         }

@@ -8,7 +8,7 @@ const NTSContext = createContext();
 const NTSReducer = (state, action) => {
     if(action.type === "bank") return action.payload;
     else if(!state[action.type]) return state;
-    else return { ...state, [action.type]: parseInt(action.payload) }
+    else return { ...state, [action.type]: action.payload }
 }
 
 const NTSProvider = ({ children }) => {
