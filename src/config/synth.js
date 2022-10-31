@@ -272,13 +272,13 @@ const controls = {
                 switch: 127,
                 step: 21,
                 options: [
-                    { label: "LowPass 2p", values: 0 },
-                    { label: "LowPass 4p", values: 0 },
-                    { label: "BandPass 2p", values: 0 },
-                    { label: "BandPass 4p", values: 0 },
-                    { label: "HighPass 2p", values: 0 },
-                    { label: "HighPass 4p", values: 0 },
-                    // { label: "Off", values: 0 }
+                    { label: "LowPass 2p", value: 0 },
+                    { label: "LowPass 4p", value: 0 },
+                    { label: "BandPass 2p", value: 0 },
+                    { label: "BandPass 4p", value: 0 },
+                    { label: "HighPass 2p", value: 0 },
+                    { label: "HighPass 4p", value: 0 },
+                    // { label: "Off", value: 0 }
                 ]
             }
         ],
@@ -373,4 +373,24 @@ const defaults = (controls, random = false) => {
     return values;
 }
 
-export { controls, octaveLimits, sysex, defaults }
+const getControlByCC = (cc, controls) => {
+    const synth = Object.keys(controls);
+    let found;
+
+    synth.forEach( key => {
+        controls[key].controls.forEach( c => {
+            if( c.cc === cc && c.type !== "switch") found = c;
+            else if( c.sections?.length ){
+                c.sections.forEach( s => {
+                    s.controls.forEach( c => {
+                        if(c.cc === cc ) found = c;
+                    })
+                })
+            }
+        })
+    })
+
+    return found;
+}
+
+export { controls, octaveLimits, sysex, defaults, getControlByCC }
