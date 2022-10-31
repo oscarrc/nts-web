@@ -1,16 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import knob from "../../assets/knob.png";
 
-const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, onChange}) => {
-    const [ value, setValue ] = useState(defaultValue ? defaultValue : minValue);
+const Knob = ({value = 0, minValue = 0, maxValue = 100, step = 1, label, onChange}) => {
+    const [ currentValue, setValue ] = useState(value ? value : minValue);
     const knobRef = useRef(null);
 
-    const handleValue = (e) => {
+    const handleValue = useCallback((e) => {
         setValue(e.target.value);
-        // onChange(e.value);
-    }
+        onChange && onChange(e.target.value);
+    }, [onChange])
 
+    useEffect(() => setValue(value), [value]);
+    
     useEffect(() => {
         const currentKnob = knobRef.current;
 
@@ -21,7 +23,7 @@ const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, 
             currentKnob.removeEventListener("change", handleValue)        
             currentKnob.removeEventListener("input", handleValue)
         }
-    }, [])
+    }, [handleValue])
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -35,7 +37,7 @@ const Knob = ({defaultValue = 0, minValue = 0, maxValue = 100, step = 1, label, 
                     data-src={ knob }
                     data-sprites="100"
                     diameter="90" 
-                    value={ value }
+                    value={ currentValue }
                     min={ minValue }
                     max={ maxValue }
                     step={ step }

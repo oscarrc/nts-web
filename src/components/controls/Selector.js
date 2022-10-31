@@ -2,12 +2,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import selector from "../../assets/selector.png";
 
-const Selector = ({value = 0, options, label, onChange}) => {
+const Selector = ({value = 0, options, label, onChange, display}) => {
     const [ currentValue, setValue ] = useState(value ? value : 0);
     const selectorRef = useRef(null);
     
     const handleValue = useCallback((e) => {
-        if (window.navigator.vibrate) window.navigator.vibrate(200);
+        // if (window.navigator.vibrate) window.navigator.vibrate(200);
         setValue(e.target.value);
         onChange && onChange(e.target.value);
     }, [onChange])
@@ -45,6 +45,7 @@ const Selector = ({value = 0, options, label, onChange}) => {
                     onChange={ handleValue }
                 />
             </div>
+            { display && <div className="bg-neutral bg-grid font-sevenSegment h-4 w-16 overflow-hidden text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1">{ display }</div>}
         </div>
     )
 }

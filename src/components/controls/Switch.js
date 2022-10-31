@@ -8,8 +8,8 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
 
     const toggle = useCallback(() => {
         switchRef.current.checked = !switchRef.current.checked;
-        onChange && onChange(!isActive);
-    }, [isActive, onChange])
+        onChange && onChange(switchRef.current.checked);
+    }, [onChange])
 
     const handleValue = (e) => {
         !isMomentary && onChange(e.target.checked);

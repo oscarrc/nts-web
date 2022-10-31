@@ -174,6 +174,7 @@ const controls = {
                         min: 1,
                         max: 4,
                         step: 42,
+                        switch: 0,
                         options: [
                             { label: "Off", value: 0 },
                             { label: "Chorus", value: 0 },
@@ -209,6 +210,7 @@ const controls = {
                         min: 1,
                         max: 5,
                         step: 31,
+                        switch: 0,
                         options: [
                             { label: "Off", value: 0 },
                             { label: "Stereo", value: 0 },
@@ -245,6 +247,7 @@ const controls = {
                         min: 1,
                         max: 5,
                         step: 31,
+                        switch: 0,
                         options: [
                             { label: "Off", value: 0 },
                             { label: "Hall", value: 0 },
@@ -360,7 +363,7 @@ const defaults = (controls, random = false) => {
     Object.keys(controls).forEach(key => {
         const current = controls[key];
 
-        current.controls.forEach( control => {            
+        current.controls.forEach( control => {  
             values[control.cc] = random ? getRandom(control) : control.min ? control.min : 0;
         })
     

@@ -6,20 +6,22 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
+    if(!state[action.type]) return state;
+    if(action.type === "bank") return action.payload;
+    else return { ...state, [action.type]: parseInt(action.payload) }
 }
 
 const NTSProvider = ({ children }) => {
     const [state, setState] = useReducer(NTSReducer, defaults(controls, true));
     const [currentControls, setControls] = useState(controls);
+    const [bank, setBank] = useState(0)
     const { input, output, channels } = useMidi();
 
-    const getState = () => {}
-    const saveSatate = () => {}
-
+    const randomize = () => {
+        console.log(defaults(controls, true))
+        setState({ type: "bank", payload: defaults(controls, true) })
+    }
+    
     const getUserPrograms = useCallback(() => {
         let type = 0;
         let bank = 0;
@@ -67,7 +69,6 @@ const NTSProvider = ({ children }) => {
                 input.removeListener("sysex", channels.input, get);
             }
         }
-
         
         if(!input) return setControls(controls);
 
@@ -77,9 +78,21 @@ const NTSProvider = ({ children }) => {
     }, [channels.input, input, output])
 
     useEffect(() => { getUserPrograms() }, [getUserPrograms])
+    useEffect(() => { localStorage.setItem(`bank${bank}`, JSON.stringify(state)) }, [bank, state])
     
     return (
-        <NTSContext.Provider value={{ state, setState, controls: currentControls }}>{ children }</ NTSContext.Provider>
+        <NTSContext.Provider 
+            value={{
+                bank, 
+                controls: currentControls,
+                randomize,
+                setBank, 
+                state, 
+                setState
+            }}
+        >
+            { children }
+        </ NTSContext.Provider>
     )
 }
 
