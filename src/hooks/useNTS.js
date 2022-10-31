@@ -19,6 +19,7 @@ const NTSProvider = ({ children }) => {
     const [bank, setBank] = useState(0)
     const randomize = () => dispatch({ type: "bank", payload: defaults(controls, true) });
     
+    // TODO: debug get user programs and why selectors don't update
     const getUserPrograms = useCallback(() => {
         let type = 0;
         let bank = 0;
@@ -75,7 +76,6 @@ const NTSProvider = ({ children }) => {
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
     }, [channels.input, input, output])
 
-    //TODO Debug this
     const controlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         const control = getControlByCC(number, currentControls);

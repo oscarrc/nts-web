@@ -8,21 +8,21 @@ const Section = ({ section }) => {
     const { state, setState } = useNTS();
 
     const renderControl = (control) => {
-        const currentValue = isNaN(control?.switch) || control.type === "switch" ? state[control.cc] : state[control.cc].value;
+        const currentValue = isNaN(control.switch) ? state[control.cc] : state[control.cc].value
 
         switch( control.type ){
             case "knob":
                 return <Knob 
                     key={control.cc}
                     label={control.label}
-                    value={ currentValue }
+                    value={ state[control.cc] }
                     onChange={ (value) => { setState({type: control.cc, payload: value}) }} 
                 />
             case "dropdown":
                 return <Dropdown 
                     key={control.cc}
                     switchValue={ control?.switch }
-                    isActive={ currentValue?.active }
+                    isActive={ state[control.cc]?.active }
                     value={ currentValue } 
                     options={control.options} 
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
@@ -33,7 +33,7 @@ const Section = ({ section }) => {
                     key={control.cc}
                     label={control.label}
                     options={control.options}
-                    value={ currentValue } 
+                    value={ currentValue  } 
                     display={ control.options[currentValue]?.label }
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }}
                 />
@@ -43,7 +43,7 @@ const Section = ({ section }) => {
                     switchValue={control?.switch}
                     label={control.label}
                     inline={true}
-                    isActive={ currentValue.active }
+                    isActive={ state[control.cc].active }
                     onChange={ (value) => { setState({type: control.cc, payload: { ...state[control.cc], active: value } }) }} 
                 />
             default:

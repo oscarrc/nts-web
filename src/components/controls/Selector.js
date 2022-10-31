@@ -8,7 +8,7 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
     const selectorRef = useRef(null);
     
     const handleValue = useCallback((e) => {
-        if (window.navigator.vibrate) window.navigator.vibrate(200);
+        // if (window.navigator.vibrate) window.navigator.vibrate(200);
         setValue(e.target.value);
         onChange && onChange(parseInt(e.target.value));
     }, [onChange])
