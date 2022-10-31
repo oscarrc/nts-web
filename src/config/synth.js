@@ -353,6 +353,7 @@ const defaults = (controls, random = false) => {
         }else if (control.switch !== undefined ){
             values[control.cc] = {
                 ...(values[control.cc] || {}), 
+                ...(control.type === "dropdown" && { active: Math.random() < .5 }),
                 value: random ? getRandom(control) : control.min ? control.min : 0
             }
         }else{
