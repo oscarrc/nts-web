@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import knob from "../../assets/knob.png";
 
-const Knob = ({value = 0, minValue = 0, maxValue = 100, step = 1, label, onChange}) => {
+const Knob = ({value = 0, minValue = 0, maxValue = 127, step = 1, label, onChange}) => {
     const [ currentValue, setValue ] = useState(value ? value : minValue);
     const knobRef = useRef(null);
 
