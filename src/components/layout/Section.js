@@ -23,11 +23,11 @@ const Section = ({ section }) => {
                     key={control.cc}
                     switchValue={ control?.switch }
                     isActive={ currentValue.active }
-                    selection={ currentValue } 
+                    value={ currentValue } 
                     options={control.options} 
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
                 />;
-            case "selector":                
+            case "selector":               
                 return <Selector 
                     key={control.cc}
                     label={control.label}
