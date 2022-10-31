@@ -6,8 +6,9 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
+    console.log(action)
     if(action.type === "bank") return action.payload;
-    else if(!state[action.type]) return state;
+    else if(state[action.type] === undefined) return state;
     else return { ...state, [action.type]: action.payload }
 }
 
