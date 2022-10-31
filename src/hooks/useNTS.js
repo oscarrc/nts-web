@@ -6,21 +6,17 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
-    if(!state[action.type]) return state;
     if(action.type === "bank") return action.payload;
+    else if(!state[action.type]) return state;
     else return { ...state, [action.type]: parseInt(action.payload) }
 }
 
 const NTSProvider = ({ children }) => {
-    const [state, setState] = useReducer(NTSReducer, defaults(controls, true));
+    const { input, output, channels } = useMidi();
+    const [state, dispatch] = useReducer(NTSReducer, defaults(controls, true));
     const [currentControls, setControls] = useState(controls);
     const [bank, setBank] = useState(0)
-    const { input, output, channels } = useMidi();
-
-    const randomize = () => {
-        console.log(defaults(controls, true))
-        setState({ type: "bank", payload: defaults(controls, true) })
-    }
+    const randomize = () => dispatch({ type: "bank", payload: defaults(controls, true) });
     
     const getUserPrograms = useCallback(() => {
         let type = 0;
@@ -88,7 +84,7 @@ const NTSProvider = ({ children }) => {
                 randomize,
                 setBank, 
                 state, 
-                setState
+                setState: dispatch
             }}
         >
             { children }
