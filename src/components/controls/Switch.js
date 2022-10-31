@@ -6,13 +6,13 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
    
     const switchRef = useRef(null);
 
-    const toggle = useCallback(() => {
+    const toggle = useCallback((e) => {
         switchRef.current.checked = !switchRef.current.checked;
-        onChange && onChange(switchRef.current.checked);
+        onChange && ["mouseup","touchend"].includes(e.type) && onChange(switchRef.current.checked);
     }, [onChange])
 
     const handleValue = (e) => {
-        !isMomentary && onChange(e.target.checked);
+           onChange(e.target.checked);
     }
 
     useEffect(() => {
