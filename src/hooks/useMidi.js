@@ -57,7 +57,6 @@ const MidiProvider = ({ children }) => {
     }, [])
 
     const parseDevices = () => {
-        console.log(WebMidi._inputs)
         const currentDevices = {
             inputDevices : WebMidi._inputs.filter(d => d._midiInput.name.includes("NTS")),
             outputDevices : WebMidi._outputs.filter(d => d._midiOutput.name.includes("NTS")),
