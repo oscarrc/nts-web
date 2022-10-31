@@ -7,6 +7,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
     const wheelRef = useRef(null);
 
     const handleValue = (e) => {
+        if (window.navigator.vibrate) window.navigator.vibrate(100);
         setValue(e.target.value);
         onChange(e.target.value);
     }

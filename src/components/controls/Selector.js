@@ -7,6 +7,7 @@ const Selector = ({value = 0, options, label, onChange}) => {
     const selectorRef = useRef(null);
     
     const handleValue = (e) => {
+        if (window.navigator.vibrate) window.navigator.vibrate(200);
         setValue(e.target.value);
         onChange && onChange(e.target.value);
     }
