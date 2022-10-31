@@ -6,11 +6,11 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
     const [ value, setValue ] = useState(defaultValue ? defaultValue : (maxValue - minValue) / 2 );
     const wheelRef = useRef(null);
 
-    const handleValue = (e) => {
+    const handleValue = useCallback((e) => {
         if (window.navigator.vibrate) window.navigator.vibrate(100);
         setValue(e.target.value);
         onChange(e.target.value);
-    }
+    }, [onChange])
 
     const resetValue = useCallback( () => {        
         setValue(defaultValue);
@@ -45,7 +45,7 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
             currentWheel.removeEventListener("change", handleValue)        
             currentWheel.removeEventListener("input", handleValue)
         }
-    }, [])
+    }, [handleValue])
 
 
     return (

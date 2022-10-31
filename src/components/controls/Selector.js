@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import selector from "../../assets/selector.png";
 
@@ -6,11 +6,11 @@ const Selector = ({value = 0, options, label, onChange}) => {
     const [ currentValue, setValue ] = useState(value ? value : 0);
     const selectorRef = useRef(null);
     
-    const handleValue = (e) => {
+    const handleValue = useCallback((e) => {
         if (window.navigator.vibrate) window.navigator.vibrate(200);
         setValue(e.target.value);
         onChange && onChange(e.target.value);
-    }
+    }, [onChange])
 
     useEffect(() => setValue(value), [value]);
 
@@ -24,7 +24,7 @@ const Selector = ({value = 0, options, label, onChange}) => {
             currentKnob.removeEventListener("change", handleValue)        
             currentKnob.removeEventListener("input", handleValue)
         }
-    }, [])
+    }, [handleValue])
 
     return (
         <div className="flex flex-col items-center justify-center self-start">
