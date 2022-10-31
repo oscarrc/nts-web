@@ -39,7 +39,7 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
                     data-sprites="23"
                     diameter="90" 
                     value={ currentValue }
-                    min="0"
+                    min={ 0 }
                     max={ options?.length - 1 || 0}
                     step="1"
                     onChange={ handleValue }
