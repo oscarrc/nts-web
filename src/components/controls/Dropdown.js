@@ -1,7 +1,7 @@
 import { SlArrowDown } from "react-icons/sl";
 import switchButton from "../../assets/switch.png";
 
-const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange }) => {
+const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange, onSwitch }) => {
     const handleSelection = (i) => {
         document.activeElement.blur()
         onChange && onChange(i)
@@ -10,7 +10,15 @@ const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange }
     return (
         <div className={`input-select flex flex-1 px-4 items-center gap-4 ${!switchValue && 'py-1.5'}`}>
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
-            { switchValue && <input type="checkbox" value={ isActive } className="input-switch" data-diameter="60" data-src={ switchButton } /> }
+            { switchValue && 
+                <input type="checkbox" 
+                    onChange={ (e) => onSwitch(e.target.checked) } 
+                    value={ isActive } 
+                    className="input-switch" 
+                    data-diameter="60" 
+                    data-src={ switchButton } 
+                /> 
+            }
             <div className="group dropdown flex-1 my-2">                
                 <button type="button" tabIndex="0" className={`relative text-left cursor-pointer bg-grid px-2 py-1 w-full font-sevenSegment  rounded text-accent outline outline-base-100 outline-offset-2 outline-1 hover:outline-accent focus:outline-accent`}>
                     { options?.length ? options?.[value]?.label : "No option" }

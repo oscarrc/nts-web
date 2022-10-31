@@ -26,6 +26,7 @@ const Section = ({ section }) => {
                     value={ currentValue } 
                     options={control.options} 
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
+                    onSwitch={ (value) => { setState({type: control.cc, payload: { ...state[control.cc], active: value } }) }}
                 />;
             case "selector":               
                 return <Selector 
