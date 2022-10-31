@@ -1,4 +1,4 @@
-import { controls, defaults, sysex } from "../config/synth";
+import { controls, defaults, getControlByCC, sysex } from "../config/synth";
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
 
 import { useMidi } from './useMidi';
@@ -6,6 +6,7 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
+    console.log(action)
     if(action.type === "bank") return action.payload;
     else if(state[action.type] === undefined) return state;
     else return { ...state, [action.type]: action.payload }
@@ -66,29 +67,31 @@ const NTSProvider = ({ children }) => {
             }
         }
         
-        if(!input) return setControls(controls);
-
+        setControls(controls);
+        
+        if(!input || !output) return;
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
     }, [channels.input, input, output])
 
+    //TODO Debug this
     const controlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
-        const currentValue = state[number];
-        const switchValue = currentControls[number]?.switch;
+        const control = getControlByCC(number, currentControls);
+        let parsed = control?.options ? Math.round(value * (control.options.length - 1)) : rawValue;
+       
+        if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
         
-        if(rawValue === switchValue) dispatch({ type: number, payload: { ...currentValue, active: false } });
-        else if( switchValue !== undefined) dispatch({ type: number, payload: { ...currentValue, value } });
-        else dispatch({ type: number, payload: rawValue });        
-    }, [state, currentControls])
+        dispatch({ type:number, payload: parsed })
+    }, [currentControls, state])
 
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input])
     useEffect(() => { localStorage.setItem(`bank${bank}`, JSON.stringify(state)) }, [bank, state])
-    useEffect(() => { 
+    useEffect(() => {
         if(!input) return;
-        input.addListener("controlchange", controlChange )
-        return () => input.removeListener("controlchange", controlChange )
+        !input.hasListener("controlchange", controlChange ) && input.addListener("controlchange", controlChange )
+        return () => input.hasListener("controlchange", controlChange ) && input.removeListener("controlchange", controlChange )
     }, [controlChange, input]);
     
     return (
