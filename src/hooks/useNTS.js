@@ -6,7 +6,6 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
-    console.log(action)
     if(action.type === "bank") return action.payload;
     else if(state[action.type] === undefined) return state;
     else return { ...state, [action.type]: action.payload }
@@ -74,14 +73,29 @@ const NTSProvider = ({ children }) => {
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
     }, [channels.input, input, output])
 
-    useEffect(() => { getUserPrograms() }, [getUserPrograms])
+    const controlChange = useCallback(( event ) => {
+        const { rawValue, value, controller: { number }} = event;
+        const currentValue = state[number];
+        const switchValue = currentControls[number]?.switch;
+        
+        if(rawValue === switchValue) dispatch({ type: number, payload: { ...currentValue, active: false } });
+        else if( switchValue !== undefined) dispatch({ type: number, payload: { ...currentValue, value } });
+        else dispatch({ type: number, payload: rawValue });        
+    }, [state, currentControls])
+
+    useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input])
     useEffect(() => { localStorage.setItem(`bank${bank}`, JSON.stringify(state)) }, [bank, state])
+    useEffect(() => { 
+        if(!input) return;
+        input.addListener("controlchange", controlChange )
+        return () => input.removeListener("controlchange", controlChange )
+    }, [controlChange, input]);
     
     return (
         <NTSContext.Provider 
             value={{
                 bank, 
-                controls: currentControls,
+                currentControls,
                 randomize,
                 setBank, 
                 state, 
