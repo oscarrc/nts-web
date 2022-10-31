@@ -22,7 +22,7 @@ const Section = ({ section }) => {
                 return <Dropdown 
                     key={control.cc}
                     switchValue={ control?.switch }
-                    isActive={ currentValue.active }
+                    isActive={ currentValue?.active }
                     value={ currentValue } 
                     options={control.options} 
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
