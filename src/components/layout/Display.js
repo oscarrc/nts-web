@@ -8,9 +8,9 @@ const Display = ({ children }) => {
             <div  className="relative flex-1 bg-neutral bg-grid font-sevenSegment text-xl rounded text-accent outline outline-base-100 outline-offset-2 outline-2">
                 { children }
                 <nav className="grid grid-cols-4 gap-4 absolute bottom-0 left-0 w-full bg-transparent font-sevenSegment text-xl text-sm px-2">
-                    <span className="text-center">Testamento</span>
                     <span className="text-center">Test</span>
-                    <span className="text-center">adfgads</span>
+                    <span className="text-center">Test</span>
+                    <span className="text-center">Test</span>
                     <span className="text-center">Test</span>
                 </nav>
             </div>
