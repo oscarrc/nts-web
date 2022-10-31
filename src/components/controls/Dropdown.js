@@ -8,9 +8,9 @@ const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange, 
     }
 
     return (
-        <div className={`input-select flex flex-1 px-4 items-center gap-4 ${!switchValue && 'py-1.5'}`}>
+        <div className={`input-select flex flex-1 px-4 items-center gap-4 ${isNaN(switchValue) && 'py-1.5'}`}>
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
-            { switchValue && 
+            { !isNaN(switchValue) && 
                 <input type="checkbox" 
                     onChange={ (e) => onSwitch(e.target.checked) } 
                     value={ isActive } 
