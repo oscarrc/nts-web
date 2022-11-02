@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
-import { defaultControls, defaultValues, getControlByCC, sysex } from "../config/synth";
+import { defaultControls, defaultValues, sysex } from "../config/synth";
 
 import { useMidi } from './useMidi';
 
@@ -30,29 +30,11 @@ const NTSProvider = ({ children }) => {
             return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
         }
 
-        const set = (object, cc, value) => {
-            switch(cc){
-                case 53:
-                    object.osc.controls[0].options.push(value);
-                    break;
-                case 88:
-                    object.effects.sections[0].controls[0].options.push(value);
-                    break;
-                case 89:
-                    object.effects.sections[1].controls[0].options.push(value);
-                    break;
-                case 90:
-                    object.effects.sections[2].controls[0].options.push(value);
-                    break;
-                default:
-                    break;
-            }
-            
-            return object
-        }  
-
         const get = async (e) => {
-            if (e.data.length === 53) setControls( c => set(c, index[type - 1], { label: decode(e.data), value: 0 } ));
+            if (e.data.length === 53) setControls( c => {
+                c[index[type-1]].options.push(decode(e.data));
+                return c;
+            })
 
             if(bank < 16){
                 bank++
@@ -77,7 +59,8 @@ const NTSProvider = ({ children }) => {
     const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         
-        const control = getControlByCC(number, controls);
+        const control = controls[number];
+        
         let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
         
         if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
