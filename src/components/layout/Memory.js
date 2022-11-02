@@ -1,8 +1,6 @@
-import {useLayout} from "../../hooks/useLayout";
 import { useNTS } from "../../hooks/useNTS";
 
 const Memory = () => {      
-    const { bottomDrawer, setBottomDrawer } = useLayout();
     const { randomize } = useNTS();
 
     return (
