@@ -4,7 +4,6 @@ import selector from "../../assets/selector.png";
 
 const Selector = ({value = 0, options, label, onChange, display}) => {
     const [ currentValue, setValue ] = useState(value ? value : 0);
-    const [ maxValue, setMaxValue ] = useState(options?.length - 1 || 0);
     const selectorRef = useRef(null);
     
     const handleValue = useCallback((e) => {
@@ -14,7 +13,11 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
     }, [onChange])
 
     useEffect(() => setValue(value), [value]);
-    useEffect(() => setMaxValue(options?.length - 1 || 0), [options]);
+    useEffect(() => { // TODO: debug selector not being updated en realtime
+        if(selectorRef.current) selectorRef.current.max = options.length - 1;
+        typeof selectorRef.current?.refresh === "function" && selectorRef.current?.refresh()
+        typeof selectorRef.current?.redraw === "function" && selectorRef.current?.redraw();
+    }, [options.length, selectorRef.current?.max]);
 
     useEffect(() => {
         const currentKnob = selectorRef.current;
@@ -42,7 +45,7 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
                     diameter="90" 
                     value={ currentValue }
                     min={ 0 }
-                    max={ maxValue }
+                    max={ options?.length - 1 || 0 }
                     step="1"
                     onChange={ handleValue }
                 />

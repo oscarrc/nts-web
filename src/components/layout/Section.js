@@ -24,16 +24,16 @@ const Section = ({ section }) => {
                     switchValue={ control?.switch }
                     isActive={ state[control.cc]?.active }
                     value={ currentValue } 
-                    options={control.options} 
+                    options={ control.options } 
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }} 
                     onSwitch={ (value) => { setState({type: control.cc, payload: { ...state[control.cc], active: value } }) }}
                 />;
             case "selector":               
                 return <Selector 
-                    key={control.cc}
-                    label={control.label}
-                    options={control.options}
-                    value={ currentValue  } 
+                    key={ control.cc }
+                    label={ control.label }
+                    options={ control.options }
+                    value={ currentValue } 
                     display={ control.options[currentValue]?.label }
                     onChange={ (value) => { setState({type: control.cc, payload: isNaN(control.switch) ? value : { ...state[control.cc], value } }) }}
                 />
