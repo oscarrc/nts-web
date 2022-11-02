@@ -6,7 +6,6 @@ const defaultControls = {
                 label: "Type",
                 type: "selector",
                 cc: 53,
-                step: 42,
                 options: [
                     "Sawtooth",
                     "Triangle",
@@ -50,7 +49,6 @@ const defaultControls = {
                 label: "Scale",
                 type: "selector",
                 cc: 118,
-                step: 25,
                 options: [
                     "Octave",
                     "Major Triad",
@@ -74,7 +72,6 @@ const defaultControls = {
                 label: "Type",
                 type: "dropdown",
                 cc: 14,
-                step: 31,
                 options: [
                     "ADSR",
                     "AHR",
@@ -162,7 +159,6 @@ const defaultControls = {
                         label: "Type",
                         type: "selector",
                         cc: 88,
-                        step: 42,
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
@@ -196,7 +192,6 @@ const defaultControls = {
                         label: "Type",
                         type: "selector",
                         cc: 89,
-                        step: 31,
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
@@ -231,7 +226,6 @@ const defaultControls = {
                         label: "Type",
                         type: "selector",
                         cc: 90,
-                        step: 31,
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
@@ -269,7 +263,6 @@ const defaultControls = {
                 type: "dropdown",
                 cc: 42,
                 switch: 127,
-                step: 21,
                 options: [
                     "LowPass 2p",
                     "LowPass 4p",
