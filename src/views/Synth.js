@@ -1,5 +1,5 @@
 import Display from "../components/layout/Display";
-import Memory from "../components/layout/Memory";
+import More from "../components/layout/More";
 import Section from "../components/layout/Section"
 import { defaultLayout } from "../config/layout";
 
@@ -19,7 +19,7 @@ const Synth = () => {
             </div>
             <div className="flex flex-col">
                 <Section section={defaultLayout.vcf} />
-                <Memory />
+                <More />
             </div>
         </div>
     )

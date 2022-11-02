@@ -14,6 +14,7 @@ const NTSReducer = (state, action) => {
 const NTSProvider = ({ children }) => {
     const { input, output, channels } = useMidi();
     const [ controls, setControls ] = useState(defaultControls);
+    const [ bank, setBank ] = useState(0);
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
     const randomize = () => dispatch({ type: "bank", payload: defaultValues(defaultControls, true) });
 
@@ -95,7 +96,9 @@ const NTSProvider = ({ children }) => {
                 controls,
                 randomize,
                 state, 
-                setState: sendControlChange
+                setState: sendControlChange,
+                bank,
+                setBank
             }}
         >
             { children }
