@@ -21,14 +21,13 @@ const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange, 
             }
             <div className="group dropdown flex-1 my-2">                
                 <button type="button" tabIndex="0" className={`relative text-left cursor-pointer bg-grid px-2 py-1 w-full font-sevenSegment  rounded text-accent outline outline-base-100 outline-offset-2 outline-1 hover:outline-accent focus:outline-accent`}>
-                    { options?.length ? options?.[value]?.label : "No option" }
+                    { options?.length ? options?.[value] : "No option" }
                     <SlArrowDown className="text-accent absolute top-2 right-2 h-4 w-4" />
                 </button>
                 <ul tabIndex="0" className="mt-2 dropdown-content menu shadow-lg bg-neutral text-secondary rounded w-full max-h-[8rem] flex-row overflow-y-scroll">
                     {   
                         options?.map((option, index) => {
-                            if (option.value === switchValue) return null;
-                            return <li key={ index } onClick={ () => handleSelection(index) } className="px-2 py-1 cursor-pointer hover:bg-base-100 w-full">{ option?.label }</li>
+                            return <li key={ index } onClick={ () => handleSelection(index) } className="px-2 py-1 cursor-pointer hover:bg-base-100 w-full">{ option }</li>
                         })
                     }
                 </ul>

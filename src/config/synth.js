@@ -8,10 +8,10 @@ const defaultControls = {
                 cc: 53,
                 step: 42,
                 options: [
-                    { label: "Sawtooth", value: 0 },
-                    { label: "Triangle", value: 0 },
-                    { label: "Square", value: 0 },
-                    { label: "VPN", value: 0 }
+                    "Sawtooth",
+                    "Triangle",
+                    "Square",
+                    "VPN"
                 ]
             },
             {        
@@ -33,18 +33,17 @@ const defaultControls = {
                 label: "Type",
                 type: "selector",
                 cc: 117,
-                step: 14,
                 options: [
-                    { label: "Up", value: 0 },
-                    { label: "Down", value: 0 },
-                    { label: "Up-Down", value: 0 },
-                    { label: "Down-Up", value: 0 },
-                    { label: "Converge", value: 0 },
-                    { label: "Diverge", value: 0 },
-                    { label: "Conv.-Div.", value: 0 },
-                    { label: "Div.-Conv.", value: 0 },
-                    { label: "Random", value: 0 },
-                    { label: "Stchastic", value: 0 }
+                    "Up",
+                    "Down",
+                    "Up-Down",
+                    "Down-Up",
+                    "Converge",
+                    "Diverge",
+                    "Conv.-Div.",
+                    "Div.-Conv.",
+                    "Random",
+                    "Stchastic"
                 ]
             },
             {
@@ -53,12 +52,12 @@ const defaultControls = {
                 cc: 118,
                 step: 25,
                 options: [
-                    { label: "Octave", value: 0 },
-                    { label: "Major Triad", value: 0 },
-                    { label: "Major Suspended", value: 0 },
-                    { label: "Major Augumented", value: 0 },
-                    { label: "Minor Triad", value: 0 },
-                    { label: "Minor Diminished", value: 0 }
+                    "Octave",
+                    "Major Triad",
+                    "Major Suspended",
+                    "Major Augumented",
+                    "Minor Triad",
+                    "Minor Diminished"
                 ]
             },
             {
@@ -77,11 +76,11 @@ const defaultControls = {
                 cc: 14,
                 step: 31,
                 options: [
-                    { label: "ADSR", value: 0 },
-                    { label: "AHR", value: 0 },
-                    { label: "AR", value: 0 },
-                    { label: "AR Loop", value: 0 },
-                    { label: "Open", value: 0 }
+                    "ADSR",
+                    "AHR",
+                    "AR",
+                    "AR Loop",
+                    "Open"
                 ]
             }
         ],
@@ -167,10 +166,10 @@ const defaultControls = {
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
-                            { label: "Chorus", value: 0 },
-                            { label: "Ensemble", value: 0 },
-                            { label: "Phaser", value: 0 },
-                            { label: "Flanger", value: 0 }
+                            "Chorus",
+                            "Ensemble",
+                            "Phaser",
+                            "Flanger"
                         ]
                     },
                     {
@@ -201,11 +200,11 @@ const defaultControls = {
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
-                            { label: "Stereo", value: 0 },
-                            { label: "Mono", value: 0 },
-                            { label: "Ping Pong", value: 0 },
-                            { label: "High Pass", value: 0 },
-                            { label: "Tape", value: 0 }
+                            "Stereo",
+                            "Mono",
+                            "Ping Pong",
+                            "High Pass",
+                            "Tape"
                         ]
                     },
                     {
@@ -236,11 +235,11 @@ const defaultControls = {
                         switch: 0,
                         options: [
                             // { label: "Off", value: 0 },
-                            { label: "Hall", value: 0 },
-                            { label: "Plate", value: 0 },
-                            { label: "Space", value: 0 },
-                            { label: "Riser", value: 0 },
-                            { label: "Submarine", value: 0 }
+                            "Hall",
+                            "Plate",
+                            "Space",
+                            "Riser",
+                            "Submarine"
                         ]
                     },
                     {
@@ -272,12 +271,12 @@ const defaultControls = {
                 switch: 127,
                 step: 21,
                 options: [
-                    { label: "LowPass 2p", value: 0 },
-                    { label: "LowPass 4p", value: 0 },
-                    { label: "BandPass 2p", value: 0 },
-                    { label: "BandPass 4p", value: 0 },
-                    { label: "HighPass 2p", value: 0 },
-                    { label: "HighPass 4p", value: 0 },
+                    "LowPass 2p",
+                    "LowPass 4p",
+                    "BandPass 2p",
+                    "BandPass 4p",
+                    "HighPass 2p",
+                    "HighPass 4p"
                     // { label: "Off", value: 0 }
                 ]
             }
