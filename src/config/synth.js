@@ -90,7 +90,7 @@ const defaultControls = {
         type: "knob"
     },
     88: {
-        label: "Type",
+        label: "Mod",
         type: "selector",
         switch: 0,
         options: [
@@ -110,7 +110,7 @@ const defaultControls = {
         type: "knob"
     },
     89: {
-        label: "Type",
+        label: "Delay",
         type: "selector",
         switch: 0,
         options: [
@@ -135,7 +135,7 @@ const defaultControls = {
         type: "knob"
     },
     90: {
-        label: "Type",
+        label: "Reverb",
         type: "selector",
         switch: 0,
         options: [
