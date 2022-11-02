@@ -1,3 +1,258 @@
+const controls = {    
+    0: {
+        label: "Dummy",
+        type: "dummy"
+    },
+    53: {
+        label: "Type",
+        type: "selector",
+        options: [
+            "Sawtooth",
+            "Triangle",
+            "Square",
+            "VPN"
+        ]
+    },
+    54: {        
+        label: "Shape",
+        type: "knob"
+    },
+    55: {
+        label: "Alt",
+        type: "knob"
+    },
+    117: {
+        label: "Type",
+        type: "selector",
+        options: [
+            "Up",
+            "Down",
+            "Up-Down",
+            "Down-Up",
+            "Converge",
+            "Diverge",
+            "Conv.-Div.",
+            "Div.-Conv.",
+            "Random",
+            "Stchastic"
+        ]
+    },
+    118: {
+        label: "Scale",
+        type: "selector",
+        options: [
+            "Octave",
+            "Major Triad",
+            "Major Suspended",
+            "Major Augumented",
+            "Minor Triad",
+            "Minor Diminished"
+        ]
+    },
+    119: {
+        label: "Length",            
+        type: "knob",
+        cc: 119
+    },
+    14:{
+        label: "Type",
+        type: "dropdown",
+        options: [
+            "ADSR",
+            "AHR",
+            "AR",
+            "AR Loop",
+            "Open"
+        ]
+    },
+    16: {
+        label: "Attack",
+        type: "knob"
+    },
+    19: {
+        label: "Release",
+        type: "knob"
+    },
+    20: {
+        label: "Depth",
+        type: "knob"
+    },
+    21: {
+        label: "Rate",
+        type: "knob"
+    },
+    24: {
+        label: "Rate",
+        type: "knob"
+    },
+    26: {
+        label: "Depth",
+        type: "knob"
+    },
+    88: {
+        label: "Type",
+        type: "selector",
+        switch: 0,
+        options: [
+            // { label: "Off", value: 0 },
+            "Chorus",
+            "Ensemble",
+            "Phaser",
+            "Flanger"
+        ]
+    },
+    28: {
+        label: "Time",
+        type: "knob"
+    },
+    29: {
+        label: "Depth",
+        type: "knob"
+    },
+    89: {
+        label: "Type",
+        type: "selector",
+        switch: 0,
+        options: [
+            // { label: "Off", value: 0 },
+            "Stereo",
+            "Mono",
+            "Ping Pong",
+            "High Pass",
+            "Tape"
+        ]
+    },
+    30: {
+        label: "Time",
+        type: "knob"
+    },
+    31: {
+        label: "Depth",
+        type: "knob"
+    },
+    33: {
+        label: "Mix",
+        type: "knob"
+    },
+    90: {
+        label: "Type",
+        type: "selector",
+        switch: 0,
+        options: [
+            // { label: "Off", value: 0 },
+            "Hall",
+            "Plate",
+            "Space",
+            "Riser",
+            "Submarine"
+        ]
+    },
+    34: {
+        label: "Time",
+        type: "knob"
+    },
+    35: {
+        label: "Depth",
+        type: "knob"
+    },
+    36: {
+        label: "Mix",
+        type: "knob"
+    },
+    42:  {
+        label: "Type",
+        type: "dropdown",
+        switch: 127,
+        options: [
+            "LowPass 2p",
+            "LowPass 4p",
+            "BandPass 2p",
+            "BandPass 4p",
+            "HighPass 2p",
+            "HighPass 4p"
+            // { label: "Off", value: 0 }
+        ]
+    },    
+    43: {
+        label: "Cutoff",
+        type: "knob"
+    },
+    44: {
+        label: "Resonance",
+        type: "knob"
+    },    
+    45: {
+        label: "Depth",
+        type: "knob"
+    },
+    46: {
+        label: "Rate",
+        type: "knob"
+    }
+}
+
+const layout = {
+    osc: {
+        label: "OSC",
+        controls: [53, 54, 55]
+    },
+    arp: {
+        label: "ARP",
+        controls: [117, 118, 119]
+    },
+    amp: {
+        label: "AMP",
+        controls: [14],
+        sections: [
+            {
+                label: "EG",
+                controls: [16, 19]
+            },
+            {
+                label: "Tremolo",
+                controls: [20, 21]
+            },
+            {
+                label: "LFO",
+                controls: [24, 26]
+            }
+        ]
+    },
+    effects: {
+        label: "EFFECTS",
+        controls: [88, 89, 90],
+        sections: [
+            {
+                label: "Mod",
+                controls: [88, 28, 29, 0]
+            },
+            {
+                label: "Delay",
+                controls: [89, 30, 31, 33]
+            },
+            {
+                label: "Reverb",
+                controls: [90, 34, 35, 36]
+            }
+        ]
+    },
+    vcf: {
+        label: "VCF",
+        controls: [42],
+        sections:  [
+            {
+                label: "Filter",
+                controls: [43, 44]
+            },
+            {
+                label: "Sweep",
+                controls: [45, 46]
+            }
+        ]
+    }
+}
+
+
 const defaultControls = {
     osc: {
         label: "OSC",
