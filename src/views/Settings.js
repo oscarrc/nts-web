@@ -18,7 +18,7 @@ const Settings = () => {
                 <h2 className="card-title divider divider-primary">MIDI Settings</h2>
                     <form className="flex flex-col">
                     <div>
-                        <h3 className="divider text-secondary">Input</h3>
+                        <h3 className="divider text-secondary">NTS Input</h3>
                         <Dropdown label="Device" 
                             options={ devices.inputDevices.map( (d, i) => { return { label: d.name, value: i } }) }
                             value={ devices.input }
@@ -32,7 +32,7 @@ const Settings = () => {
                         />
                     </div>
                     <div>
-                        <h3 className="divider text-secondary">Output</h3>  
+                        <h3 className="divider text-secondary">NTS Output</h3>  
                         <Dropdown label="Device" 
                             options={ devices.outputDevices.map( (d, i) => { return { label: d.name, value: i } }) }
                             value={ devices.output }
