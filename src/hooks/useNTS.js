@@ -32,7 +32,7 @@ const NTSProvider = ({ children }) => {
 
         const get = async (e) => {
             if (e.data.length === 53) setControls( c => {
-                c[index[type-1]].options.push(decode(e.data));
+                c[index[type-1]]?.options.push(decode(e.data));
                 return c;
             })
 
@@ -60,17 +60,32 @@ const NTSProvider = ({ children }) => {
         const { rawValue, value, controller: { number }} = event;
         
         const control = controls[number];
+        const hasSwitch = !isNaN(control.switch);
+
+        let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
         
-        let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
-        
-        if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
-        
+        if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
+        console.log(number, parsed)
         dispatch({ type:number, payload: parsed })
     }, [controls, state]);
 
+    const sendControlChange = (cc, value) => {
+        // TODO: parse  value
+        const control = controls[cc];
+        const hasSwitch = !isNaN(control.switch)
+        let parsed = value;
+
+        if(hasSwitch) parsed = value.active === false ? control.switch : 127/( control.options.length  + (hasSwitch ? 0 : -1 ) )
+        
+        console.log(parsed);
+
+        output.sendControlChange(cc, parsed, { channels: channels.output })
+        dispatch({type: cc, payload: value })
+    }
+
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
 
-    useEffect(() => {
+    useEffect(() => { //TODO: Listen passthrough control changes
         if(!input) return;
         !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
         return () => input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange )
