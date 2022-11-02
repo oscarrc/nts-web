@@ -8,8 +8,8 @@ const Section = ({ section }) => {
     const { state, setState, controls } = useNTS();
 
     const renderControl = (cc, type = false) => {
-        const control = controls[cc]
-        const currentValue = isNaN(control.switch) ? state[cc] : state[cc].value
+        const control = controls[cc];
+        const currentValue = isNaN(control.switch) ? state[cc] : state[cc].value;
 
         switch( type || control.type ){
             case "knob":

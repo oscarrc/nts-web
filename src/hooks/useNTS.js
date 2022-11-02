@@ -65,20 +65,18 @@ const NTSProvider = ({ children }) => {
         let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
         
         if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
-        console.log(number, parsed)
+        
         dispatch({ type:number, payload: parsed })
     }, [controls, state]);
 
     const sendControlChange = (cc, value) => {
         // TODO: parse  value
         const control = controls[cc];
-        const hasSwitch = !isNaN(control.switch)
+        const hasSwitch = !isNaN(control?.switch)
         let parsed = value;
 
-        if(hasSwitch) parsed = value.active === false ? control.switch : 127/( control.options.length  + (hasSwitch ? 0 : -1 ) )
+        if(hasSwitch) parsed = value.active === false ? control.switch : Math.round(127/( control.options.length  + (hasSwitch ? 0 : -1 )) )
         
-        console.log(parsed);
-
         output.sendControlChange(cc, parsed, { channels: channels.output })
         dispatch({type: cc, payload: value })
     }
@@ -97,7 +95,7 @@ const NTSProvider = ({ children }) => {
                 controls,
                 randomize,
                 state, 
-                setState: dispatch
+                setState: sendControlChange
             }}
         >
             { children }
