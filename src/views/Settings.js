@@ -20,13 +20,13 @@ const Settings = () => {
                     <div>
                         <h3 className="divider text-secondary">NTS Input</h3>
                         <Dropdown label="Device" 
-                            options={ devices.inputDevices.map( (d, i) => { return { label: d.name, value: i } }) }
+                            options={ devices.inputDevices.map( d => d.name ) }
                             value={ devices.input }
                             onChange={ (value) => setDevices({ type: "Input", payload: value }) } 
                         />
                         <Dropdown 
                             label="Channel" 
-                            options={ channelList.map( (c, i) => { return { label: c, value: i } }) } 
+                            options={ channelList } 
                             value={ channels.input } 
                             onChange={ (value) => setChannels({ type:"Input", payload: value }) } 
                         />
@@ -34,13 +34,13 @@ const Settings = () => {
                     <div>
                         <h3 className="divider text-secondary">NTS Output</h3>  
                         <Dropdown label="Device" 
-                            options={ devices.outputDevices.map( (d, i) => { return { label: d.name, value: i } }) }
+                            options={ devices.outputDevices.map( d => d.name ) }
                             value={ devices.output }
                             onChange={ (value) => setDevices({ type: "Output", payload: value }) }
                         />
                         <Dropdown 
                             label="Channel" 
-                            options={ channelList.map( (c, i) => { return { label: c, value: i } }) } 
+                            options={ channelList } 
                             value={ channels.output } 
                             onChange={ (value) => setChannels({ type:"Output", payload: value }) } 
                         />                     
@@ -48,13 +48,13 @@ const Settings = () => {
                     <div>
                         <h3 className="divider text-secondary">Passthrough</h3>  
                         <Dropdown label="Device" 
-                            options={ devices.passthroughDevices.map( (d, i) => { return { label: d.name, value: i } }) }
+                            options={ devices.passthroughDevices.map( d => d.name ) }
                             value={ devices.passthrough }
                             onChange={ (value) => setDevices({ type: "Passthrough", payload: value }) }
                          />
                         <Dropdown 
                             label="Channel" 
-                            options={ channelList.map( (c, i) => { return { label: c, value: i } }) } 
+                            options={ channelList } 
                             value={ channels.passthrough } 
                             onChange={ (value) => setChannels({ type:"Passthrough", payload: value }) } 
                         />                        

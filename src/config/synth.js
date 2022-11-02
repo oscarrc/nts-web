@@ -51,8 +51,7 @@ const defaultControls = {
     },
     119: {
         label: "Length",            
-        type: "knob",
-        cc: 119
+        type: "knob"
     },
     14:{
         label: "Type",

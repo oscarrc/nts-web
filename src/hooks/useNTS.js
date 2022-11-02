@@ -96,7 +96,7 @@ const NTSProvider = ({ children }) => {
                 controls,
                 randomize,
                 state, 
-                setState: sendControlChange,
+                setState: dispatch,
                 bank,
                 setBank
             }}
