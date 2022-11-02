@@ -66,7 +66,7 @@ const MidiProvider = ({ children }) => {
         if(currentDevices.inputDevices.length) setDevices({ type: "Input", payload: 0 });
         if(currentDevices.outputDevices.length) setDevices({ type: "Output", payload: 0 });
         if(currentDevices.passthroughDevices.length) setDevices({ type: "Passthrough", payload: 0 });
-        console.log(currentDevices)
+        
         setDevices({type:"All", payload: currentDevices});
     }
 
@@ -107,11 +107,9 @@ const MidiProvider = ({ children }) => {
 
     useEffect(() => {
         if(!passthrough) return;
-        !passthrough.hasForwarder(output) && passthrough.addForwarder(output)
+        !passthrough.hasForwarder(output) && passthrough.addForwarder(output);
 
-        return () => {
-            passthrough.hasForwarder(output) && passthrough.removeForwarder(output);
-        }
+        return () => passthrough.hasForwarder(output) && passthrough.removeForwarder(output);
     }, [passthrough, output])
     
     return (
