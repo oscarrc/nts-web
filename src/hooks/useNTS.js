@@ -73,31 +73,42 @@ const NTSProvider = ({ children }) => {
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
-    }, [channels.input, input, output])
+    }, [channels.input, input, output]);
 
-    const controlChange = useCallback(( event ) => {
+    const sendControlChange = (cc, value) => {        
+        dispatch({type: cc, payload: value});
+        
+        if(!output) return;
+
+        const control = getControlByCC(cc, currentControls);
+        const parsed = control?.options ? Math.round(value * 127 / (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  )) : value;
+
+        output.sendControlChange(cc, parsed, channels.output);
+    }
+
+    const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         
         const control = getControlByCC(number, currentControls);
         let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
-       
+        
         if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
         
         dispatch({ type:number, payload: parsed })
-    }, [currentControls, state])
+    }, [currentControls, state]);
 
-    useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input])
-    ;
+    useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
+
     useEffect(() => { 
-        localStorage.setItem(`bank${bank}`, JSON.stringify(state))
         localStorage.setItem("bank", bank);
+        localStorage.setItem(`bank${bank}`, JSON.stringify(state))
     }, [bank, state]);
 
     useEffect(() => {
         if(!input) return;
-        !input.hasListener("controlchange", controlChange ) && input.addListener("controlchange", controlChange )
-        return () => input.hasListener("controlchange", controlChange ) && input.removeListener("controlchange", controlChange )
-    }, [controlChange, input]);
+        !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
+        return () => input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange )
+    }, [receiveControlChange, input]);
     
     return (
         <NTSContext.Provider 
@@ -107,7 +118,7 @@ const NTSProvider = ({ children }) => {
                 randomize,
                 setBank, 
                 state, 
-                setState: dispatch
+                setState: sendControlChange
             }}
         >
             { children }
