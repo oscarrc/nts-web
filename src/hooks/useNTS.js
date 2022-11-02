@@ -1,5 +1,5 @@
-import { controls, defaults, getControlByCC, sysex } from "../config/synth";
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
+import { defaultControls, defaultValues, getControlByCC, sysex } from "../config/synth";
 
 import { useMidi } from './useMidi';
 
@@ -13,10 +13,9 @@ const NTSReducer = (state, action) => {
 
 const NTSProvider = ({ children }) => {
     const { input, output, channels } = useMidi();
-    const [ bank, setBank ] = useState(localStorage.getItem("bank") || 0);
-    const [ currentControls, setControls ] = useState(controls);
-    const [ state, dispatch ] = useReducer(NTSReducer, JSON.parse(localStorage.getItem(`bank${bank}`)) || defaults(currentControls, true));
-    const randomize = () => dispatch({ type: "bank", payload: defaults(controls, true) });
+    const [ controls, setControls ] = useState(defaultControls);
+    const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
+    const randomize = () => dispatch({ type: "bank", payload: defaultValues(defaultControls, true) });
 
     // TODO: debug get user programs and why selectors don't update
     const getUserPrograms = useCallback(() => {
@@ -67,42 +66,26 @@ const NTSProvider = ({ children }) => {
             }
         }
         
-        setControls(controls);
+        setControls(defaultControls);
         
-        if(!input || !output) return setControls(controls);
+        if(!input || !output) return setControls(defaultControls);
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
     }, [channels.input, input, output]);
-
-    const sendControlChange = (cc, value) => {        
-        dispatch({type: cc, payload: value});
-        
-        if(!output) return;
-
-        const control = getControlByCC(cc, currentControls);
-        const parsed = control?.options ? Math.round(value * 127 / (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  )) : value;
-
-        output.sendControlChange(cc, parsed, channels.output);
-    }
-
+  
     const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         
-        const control = getControlByCC(number, currentControls);
+        const control = getControlByCC(number, controls);
         let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
         
         if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
         
         dispatch({ type:number, payload: parsed })
-    }, [currentControls, state]);
+    }, [controls, state]);
 
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
-
-    useEffect(() => { 
-        localStorage.setItem("bank", bank);
-        localStorage.setItem(`bank${bank}`, JSON.stringify(state))
-    }, [bank, state]);
 
     useEffect(() => {
         if(!input) return;
@@ -113,12 +96,10 @@ const NTSProvider = ({ children }) => {
     return (
         <NTSContext.Provider 
             value={{
-                bank, 
-                currentControls,
+                controls,
                 randomize,
-                setBank, 
                 state, 
-                setState: sendControlChange
+                setState: dispatch
             }}
         >
             { children }

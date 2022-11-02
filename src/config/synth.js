@@ -1,4 +1,4 @@
-const controls = {
+const defaultControls = {
     osc: {
         label: "OSC",
         controls: [
@@ -334,7 +334,7 @@ const sysex = {
     device: 87
 }
 
-const defaults = (controls, random = false) => {
+const defaultValues = (controls, random = false) => {
     const values = {};
 
     const getRandom = (control) => {
@@ -394,4 +394,4 @@ const getControlByCC = (cc, controls) => {
     return found;
 }
 
-export { controls, octaveLimits, sysex, defaults, getControlByCC }
+export { defaultControls, octaveLimits, sysex, defaultValues, getControlByCC }
