@@ -9,7 +9,7 @@ const More = () => {
     return (
         <section>
             <h2 className="divider divider-primary font-semibold">MORE</h2>
-            <div className="flex justify-around gap-8 py-2">
+            <div className="flex justify-between gap-4 py-2 px-4">
                 <Switch label="Randomize" isMomentary={true} onChange={ (v) => {v && randomize()} } />
                 <Switch label="Keyboard" isActive={bottomDrawer} onChange={setBottomDrawer}  />
                 <Switch label="Sequencer" isMomentary={true} />

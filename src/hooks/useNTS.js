@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
-import { defaultControls, defaultValues, getControlByCC, sysex } from "../config/synth";
+import { defaultControls, defaultValues, sysex } from "../config/synth";
 
 import { useMidi } from './useMidi';
 
@@ -12,10 +12,18 @@ const NTSReducer = (state, action) => {
 }
 
 const NTSProvider = ({ children }) => {
-    const { input, output, channels } = useMidi();
+    const { input, output, passthrough, channels } = useMidi();
     const [ controls, setControls ] = useState(defaultControls);
+    const [ bank, setBank ] = useState(0);
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
-    const randomize = () => dispatch({ type: "bank", payload: defaultValues(defaultControls, true) });
+
+    const randomize = () => {
+        const random = defaultValues(defaultControls, true);        
+        Object.keys(random).forEach( key =>  sendControlChange(key, random[key]) );
+        dispatch({ type: "bank", payload: defaultValues(defaultControls, true) })
+
+        return random;
+    };
 
     // TODO: debug get user programs and why selectors don't update
     const getUserPrograms = useCallback(() => {
@@ -30,29 +38,11 @@ const NTSProvider = ({ children }) => {
             return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
         }
 
-        const set = (object, cc, value) => {
-            switch(cc){
-                case 53:
-                    object.osc.controls[0].options.push(value);
-                    break;
-                case 88:
-                    object.effects.sections[0].controls[0].options.push(value);
-                    break;
-                case 89:
-                    object.effects.sections[1].controls[0].options.push(value);
-                    break;
-                case 90:
-                    object.effects.sections[2].controls[0].options.push(value);
-                    break;
-                default:
-                    break;
-            }
-            
-            return object
-        }  
-
         const get = async (e) => {
-            if (e.data.length === 53) setControls( c => set(c, index[type - 1], { label: decode(e.data), value: 0 } ));
+            if (e.data.length === 53) setControls( c => {
+                c[index[type-1]]?.options.push(decode(e.data));
+                return c;
+            })
 
             if(bank < 16){
                 bank++
@@ -76,22 +66,53 @@ const NTSProvider = ({ children }) => {
   
     const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
+        const control = controls[number];
+        const hasSwitch = !isNaN(control.switch);
+
+        let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
         
-        const control = getControlByCC(number, controls);
-        let parsed = control?.options ? Math.round(value * (control.options.length + (!isNaN(control.switch) ? 0 : -1 )  ) ) : rawValue;
-        
-        if(control?.switch !== undefined) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed })}
+        if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
         
         dispatch({ type:number, payload: parsed })
     }, [controls, state]);
 
+    const sendControlChange = (cc, value) => {
+        const control = controls[cc];
+        const hasSwitch = !isNaN(control?.switch);
+        const isActive = value?.active === undefined ? true : value?.active;
+        const val = hasSwitch ? (value.value >= control.switch ? value.value + 1 : value.value) : value;
+        const options = control.options ? control.options.length  + (hasSwitch ? 0 : -1 ) : 1;
+        const step = control.options ? Math.floor( 127 / options ) : 1;
+        const parsed = control.options ? (val === options ? 127 : val * step) : val;
+        
+        output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
+        dispatch({type: cc, payload: value })
+    }
+
+    const switchBank = (b) => {
+        let bank = JSON.parse(localStorage.getItem(`bank${b}`));
+
+        if(!bank){
+            bank = defaultValues(controls, true);
+            localStorage.setItem(`bank${b}`, JSON.stringify(bank));
+        }
+
+        Object.keys(bank).forEach( key =>  sendControlChange(key, bank[key]) );
+
+        setBank(b);
+        dispatch({ type: "bank", payload: bank})
+    }
+
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
 
     useEffect(() => {
-        if(!input) return;
-        !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
-        return () => input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange )
-    }, [receiveControlChange, input]);
+        input && !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
+        passthrough && !passthrough.hasListener("controlchange", receiveControlChange ) && passthrough.addListener("controlchange", receiveControlChange )
+        return () => {
+            input && input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange );
+            passthrough && passthrough.hasListener("controlchange", receiveControlChange ) && passthrough.removeListener("controlchange", receiveControlChange )
+        }
+    }, [receiveControlChange, input, passthrough]);
     
     return (
         <NTSContext.Provider 
@@ -99,7 +120,10 @@ const NTSProvider = ({ children }) => {
                 controls,
                 randomize,
                 state, 
-                setState: dispatch
+                setState: dispatch,
+                bank,
+                switchBank,
+                sendControlChange
             }}
         >
             { children }

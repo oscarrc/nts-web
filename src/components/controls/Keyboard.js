@@ -1,13 +1,13 @@
 import { Fragment, useEffect, useRef, useState } from "react"
 
-import { octaveLimits } from "../../config/synth";
+import { octaveLayout } from "../../config/layout";
 import { useLayout } from "../../hooks/useLayout"
 import { useMidi } from "../../hooks/useMidi";
 
 const Keyboard = () => {
     const { breakpoint } = useLayout();
     const { playNote, octave, input, passthrough } = useMidi();
-    const [ octaves, setOctaves ] = useState( octaveLimits[breakpoint] );
+    const [ octaves, setOctaves ] = useState( octaveLayout[breakpoint] );
     const [ activeNote, setActiveNote ] = useState(null);
 
     const keyboardRef = useRef(null);
@@ -40,7 +40,7 @@ const Keyboard = () => {
     }
 
     useEffect(() => {
-        setOctaves(octaveLimits[breakpoint])
+        setOctaves(octaveLayout[breakpoint])
     }, [breakpoint]);
 
     useEffect(() => {
