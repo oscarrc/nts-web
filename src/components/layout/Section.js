@@ -5,7 +5,7 @@ import Switch from "../controls/Switch";
 import { useNTS } from "../../hooks/useNTS";
 
 const Section = ({ section }) => {
-    const { state, setState, controls } = useNTS();
+    const { state, setState, controls, sendControlChange } = useNTS();
 
     const renderControl = (cc, type = false) => {
         const control = controls[cc]
@@ -36,7 +36,10 @@ const Section = ({ section }) => {
                     options={ control.options }
                     value={ currentValue } 
                     display={ control.options[currentValue] }
-                    onChange={ (value) => { setState({ type: cc, payload: isNaN(control.switch) ? value : { ...state[cc], value } }) }}
+                    onChange={ (value) => { 
+                        // setState({ type: cc, payload: isNaN(control.switch) ? value : { ...state[cc], value } }) 
+                        sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value } )
+                    }}
                 />
             case "switch":
                 return <Switch 
