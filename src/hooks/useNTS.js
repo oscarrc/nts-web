@@ -14,13 +14,13 @@ const NTSReducer = (state, action) => {
 const NTSProvider = ({ children }) => {
     const { input, output, passthrough, channels } = useMidi();
     const [ controls, setControls ] = useState(defaultControls);
-    const [ bank, setBank ] = useState(0);
+    const [ bank, setBank ] = useState(localStorage.getItem("bank") || 0);
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
 
     const randomize = () => {
         const random = defaultValues(defaultControls, true);        
-        Object.keys(random).forEach( key =>  sendControlChange(key, random[key]) );
-        dispatch({ type: "bank", payload: defaultValues(defaultControls, true) })
+        Object.keys(random).forEach( key =>  sendControlChange(parseInt(key), random[key]) );
+        dispatch({ type: "bank", payload: random })
 
         return random;
     };
@@ -97,7 +97,9 @@ const NTSProvider = ({ children }) => {
             localStorage.setItem(`bank${b}`, JSON.stringify(bank));
         }
 
-        Object.keys(bank).forEach( key =>  sendControlChange(key, bank[key]) );
+        localStorage.setItem("bank", b);
+
+        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) );
 
         setBank(b);
         dispatch({ type: "bank", payload: bank})
@@ -120,10 +122,9 @@ const NTSProvider = ({ children }) => {
                 controls,
                 randomize,
                 state, 
-                setState: dispatch,
+                setState: sendControlChange,
                 bank,
-                switchBank,
-                sendControlChange
+                switchBank
             }}
         >
             { children }
