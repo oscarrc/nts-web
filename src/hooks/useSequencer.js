@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const useSequencer = () => {
     const [clock, setClock] = useState(null);
     const [tempo, setTempo] = useState(60);
@@ -12,4 +14,4 @@ const useSequencer = () => {
     }
 }
 
-export default useQuencer;
+export default useSequencer;
