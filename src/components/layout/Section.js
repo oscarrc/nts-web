@@ -5,7 +5,7 @@ import Switch from "../controls/Switch";
 import { useNTS } from "../../hooks/useNTS";
 
 const Section = ({ section }) => {
-    const { state, setState, controls, sendControlChange } = useNTS();
+    const { state, setState, controls } = useNTS();
 
     const renderControl = (cc, type = false) => {
         const control = controls[cc]
@@ -17,7 +17,7 @@ const Section = ({ section }) => {
                     key={cc}
                     label={ control.label }
                     value={ state[cc] }
-                    onChange={ value => sendControlChange(cc, value) } 
+                    onChange={ value => setState(cc, value) } 
                 />
             case "dropdown":
                 return <Dropdown 
@@ -26,8 +26,8 @@ const Section = ({ section }) => {
                     isActive={ state[cc]?.active }
                     value={ currentValue } 
                     options={ control.options } 
-                    onChange={ value => sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value }) } 
-                    onSwitch={ value =>  sendControlChange(cc, { ...state[cc], active: value }) } 
+                    onChange={ value => setState(cc, isNaN(control.switch) ? value : { ...state[cc], value }) } 
+                    onSwitch={ value =>  setState(cc, { ...state[cc], active: value }) } 
                 />;
             case "selector":               
                 return <Selector 
@@ -36,7 +36,7 @@ const Section = ({ section }) => {
                     options={ control.options }
                     value={ currentValue } 
                     display={ control.options[currentValue] }
-                    onChange={ value => sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value } ) }
+                    onChange={ value => setState(cc, isNaN(control.switch) ? value : { ...state[cc], value } ) }
                 />
             case "switch":
                 return <Switch 
@@ -45,7 +45,7 @@ const Section = ({ section }) => {
                     label={control.label}
                     inline={true}
                     isActive={ state[cc]?.active }
-                    onChange={ value =>  sendControlChange(cc, { ...state[cc], active: value }) } 
+                    onChange={ value =>  setState(cc, { ...state[cc], active: value }) } 
                 />
             default:
                 return <div key={cc} className="w-16"></div>
