@@ -29,10 +29,11 @@ const NTSProvider = ({ children }) => {
     // input && input.addListener("clock", (e) => console.log(e) )
     // According to the standard, there are 24 MIDI clocks for every quarter note
 
-    // TODO: debug get user programs and why selectors don't update
+    // TODO: test get user programs to check if they're repeated and why selectors don't update
     const getUserPrograms = useCallback(() => {
         let type = 0;
         let bank = 0;
+        let controls = defaultControls;
         const index = [88, 89, 90, 53];     
 
         const decode = (data) => {
@@ -43,10 +44,7 @@ const NTSProvider = ({ children }) => {
         }
 
         const get = async (e) => {
-            if (e.data.length === 53) setControls( c => {
-                c[index[type-1]]?.options.push(decode(e.data));
-                return c;
-            })
+            if (e.data.length === 53) controls[index[type-1]]?.options.push(decode(e.data));
 
             if(bank < 16){
                 bank++
@@ -56,13 +54,14 @@ const NTSProvider = ({ children }) => {
                 type ++
                 output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
             }else{ 
-                setTimeout(()=> input.removeListener("sysex", channels.input, get), 200);
+                setTimeout(()=> {
+                    input.removeListener("sysex", channels.input, get);
+                    setControls(controls)
+                }, 200);
             }
         }
-        
-        setControls(defaultControls);
-        
-        if(!input || !output) return setControls(defaultControls);
+                
+        if(!input || !output) return setControls(controls);
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
