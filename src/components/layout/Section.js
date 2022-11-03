@@ -17,7 +17,7 @@ const Section = ({ section }) => {
                     key={cc}
                     label={ control.label }
                     value={ state[cc] }
-                    onChange={ (value) => { setState({type: cc, payload: value}) }} 
+                    onChange={ value => sendControlChange(cc, value) } 
                 />
             case "dropdown":
                 return <Dropdown 
@@ -26,8 +26,8 @@ const Section = ({ section }) => {
                     isActive={ state[cc]?.active }
                     value={ currentValue } 
                     options={ control.options } 
-                    onChange={ (value) => { setState({type: cc, payload: isNaN(control.switch) ? value : { ...state[cc], value } }) }} 
-                    onSwitch={ (value) => { setState({type: cc, payload: { ...state[cc], active: value } }) }}
+                    onChange={ value => sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value }) } 
+                    onSwitch={ value =>  sendControlChange(cc, { ...state[cc], active: value }) } 
                 />;
             case "selector":               
                 return <Selector 
@@ -36,10 +36,7 @@ const Section = ({ section }) => {
                     options={ control.options }
                     value={ currentValue } 
                     display={ control.options[currentValue] }
-                    onChange={ (value) => { 
-                        // setState({ type: cc, payload: isNaN(control.switch) ? value : { ...state[cc], value } }) 
-                        sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value } )
-                    }}
+                    onChange={ value => sendControlChange(cc, isNaN(control.switch) ? value : { ...state[cc], value } ) }
                 />
             case "switch":
                 return <Switch 
@@ -48,7 +45,7 @@ const Section = ({ section }) => {
                     label={control.label}
                     inline={true}
                     isActive={ state[cc]?.active }
-                    onChange={ (value) => { setState({type: cc, payload: { ...state[cc], active: value } }) }} 
+                    onChange={ value =>  sendControlChange(cc, { ...state[cc], active: value }) } 
                 />
             default:
                 return <div key={cc} className="w-16"></div>

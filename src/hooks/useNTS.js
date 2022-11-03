@@ -66,7 +66,6 @@ const NTSProvider = ({ children }) => {
   
     const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
-        console.log(rawValue)
         const control = controls[number];
         const hasSwitch = !isNaN(control.switch);
 
@@ -78,14 +77,15 @@ const NTSProvider = ({ children }) => {
     }, [controls, state]);
 
     const sendControlChange = (cc, value) => {
-        // TODO: parse  value
         const control = controls[cc];
         const hasSwitch = !isNaN(control?.switch);
+        const isActive = value?.active === undefined ? true : value?.active;
         const val = hasSwitch ? (value.value >= control.switch ? value.value + 1 : value.value) : value;
-        const parsed = control.options ? (val === control.options.length - 1 ? 127 : val * ( control.options.length  + (hasSwitch ? 0 : -1 ) )) : val;
-
-        console.log(parsed)
-        output && output.sendControlChange(cc, parsed, { channels: channels.output || null })
+        const options = control.options ? control.options.length  + (hasSwitch ? 0 : -1 ) : 1;
+        const step = control.options ? Math.floor( 127 / options ) : 1;
+        const parsed = control.options ? (val === options ? 127 : val * step) : val;
+        
+        output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
         dispatch({type: cc, payload: value })
     }
 
