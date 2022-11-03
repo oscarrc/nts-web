@@ -25,6 +25,10 @@ const NTSProvider = ({ children }) => {
         return random;
     };
 
+    //TODO: implement clock and sequencer
+    // input && input.addListener("clock", (e) => console.log(e) )
+    // According to the standard, there are 24 MIDI clocks for every quarter note
+
     // TODO: debug get user programs and why selectors don't update
     const getUserPrograms = useCallback(() => {
         let type = 0;
@@ -110,6 +114,7 @@ const NTSProvider = ({ children }) => {
     useEffect(() => {
         input && !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
         passthrough && !passthrough.hasListener("controlchange", receiveControlChange ) && passthrough.addListener("controlchange", receiveControlChange )
+        
         return () => {
             input && input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange );
             passthrough && passthrough.hasListener("controlchange", receiveControlChange ) && passthrough.removeListener("controlchange", receiveControlChange )

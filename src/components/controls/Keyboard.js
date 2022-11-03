@@ -27,7 +27,6 @@ const Keyboard = () => {
         const note = `${e.note._name}${!!e.note._accidental ? e.note._accidental : ""}${e.note._octave}`
         if(e.type === "noteon") setActiveNote(note)
         else setActiveNote(false)
-        console.log(note)
     }
 
     const events = {
