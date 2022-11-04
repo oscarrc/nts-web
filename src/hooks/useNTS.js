@@ -55,6 +55,7 @@ const NTSProvider = ({ children }) => {
         dispatch({type: cc, payload: value })
     }, [channels.output, controls, output]);
 
+    // TODO: update local storage on control change
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // useEffect(() => localStorage.setItem(`BANK_${bank}`, JSON.stringify(state)), [state])
     
@@ -81,15 +82,18 @@ const NTSProvider = ({ children }) => {
         }
     }, [receiveControlChange, input, passthrough]);  // Listen for input from NTS or passthrough device
 
-    //TODO User effects and oscilators get duplicated??
+    //TODO User effects and oscilators get duplicated. SOLVED?
     useEffect(() => {  
         let type = 0;
         let bank = 0;
         let controls = defaultControls;
         const index = [88, 89, 90, 53]; 
-        
+       
         const get = (e) => {
-            if (e.data.length === 53) controls[index[type-1]]?.options.push(decode(e.data));
+            if (e.data.length === 53){
+                const decoded = decode(e.data)
+                !controls[index[type-1]]?.options.includes(decoded) && controls[index[type-1]]?.options.push(decode(e.data))
+            };
 
             if(bank < 16){
                 bank++
