@@ -14,52 +14,21 @@ const NTSReducer = (state, action) => {
 const NTSProvider = ({ children }) => {
     const { input, output, passthrough, channels } = useMidi();
     const [ controls, setControls ] = useState(defaultControls);
-    const [ bank, setBank ] = useState(localStorage.getItem("bank") || 0);
+    const [ bank, setBank ] = useState(localStorage.getItem("BANK") || 0);
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
 
     const randomize = () => {
         const random = defaultValues(defaultControls, true);        
-        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) );
+        Object.keys(random).forEach( cc =>  sendControlChange(parseInt(cc), random[cc]) );
         dispatch({ type: "bank", payload: random })
     };
 
-    // TODO: test get user programs to check if they're repeated and why selectors don't update
-    const getUserPrograms = useCallback(() => {
-        let type = 0;
-        let bank = 0;
-        let controls = defaultControls;
-        const index = [88, 89, 90, 53];     
-
-        const decode = (data) => {
-            let name = data.slice(30, data.length -1 );
-            let decoded = "";
-            name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
-            return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
-        }
-
-        const get = async (e) => {
-            if (e.data.length === 53) controls[index[type-1]]?.options.push(decode(e.data));
-
-            if(bank < 16){
-                bank++
-                output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
-            }else if(type < 4){
-                bank = 0;
-                type ++
-                output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
-            }else{ 
-                setTimeout(()=> {
-                    input.removeListener("sysex", channels.input, get);
-                    setControls(controls)
-                }, 200);
-            }
-        }
-                
-        if(!input || !output) return setControls(controls);
-        input.addListener("sysex", channels.input, get);
-        output.sendSysex(sysex.vendor, [80, 0, 2]);
-        output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
-    }, [channels.input, input, output]);
+    const decode = (data) => {
+        let name = data.slice(30, data.length -1 );
+        let decoded = "";
+        name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
+        return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
+    }
   
     const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
@@ -84,30 +53,23 @@ const NTSProvider = ({ children }) => {
         
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
         dispatch({type: cc, payload: value })
-    }, [channels.output, controls, output])
+    }, [channels.output, controls, output]);
 
-    const switchBank = useCallback((b) => {
-        let bank = JSON.parse(localStorage.getItem(`bank${b}`));
-
-        if(!bank){
-            bank = defaultValues(controls, true);
-            localStorage.setItem(`bank${b}`, JSON.stringify(bank));
-        }
-
-        localStorage.setItem("bank", b);
-        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) )
-        
-        setBank(b);
-        dispatch({ type: "bank", payload: bank})
-    }, [controls, sendControlChange])
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // useEffect(() => localStorage.setItem(`BANK_${bank}`, JSON.stringify(state)), [state])
+    
     useEffect(() => {
-        const bank = localStorage.getItem("bank");
-        !isNaN(bank) && switchBank(bank);
-    }, [switchBank])
+        let b = JSON.parse(localStorage.getItem(`BANK_${bank}`));
 
-    useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
-    useEffect(() => localStorage.setItem(`bank${bank}`, JSON.stringify(state)), [bank, state]);
+        if(!b){
+            b = defaultValues(controls, true);
+            localStorage.setItem(`BANK_${bank}`, JSON.stringify(b));
+        }
+        
+        localStorage.setItem("BANK", bank);
+        Object.keys(b).forEach( cc =>  sendControlChange(parseInt(cc), b[cc]));
+        dispatch({type: "bank", payload: b});
+    }, [bank, controls, sendControlChange]); // Switch to another bank or create it if it doesn't exists
 
     useEffect(() => {
         input && !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
@@ -117,7 +79,38 @@ const NTSProvider = ({ children }) => {
             input && input.hasListener("controlchange", receiveControlChange ) && input.removeListener("controlchange", receiveControlChange );
             passthrough && passthrough.hasListener("controlchange", receiveControlChange ) && passthrough.removeListener("controlchange", receiveControlChange )
         }
-    }, [receiveControlChange, input, passthrough]);
+    }, [receiveControlChange, input, passthrough]);  // Listen for input from NTS or passthrough device
+
+    //TODO User effects and oscilators get duplicated??
+    useEffect(() => {  
+        let type = 0;
+        let bank = 0;
+        let controls = defaultControls;
+        const index = [88, 89, 90, 53]; 
+        
+        const get = (e) => {
+            if (e.data.length === 53) controls[index[type-1]]?.options.push(decode(e.data));
+
+            if(bank < 16){
+                bank++
+                output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
+            }else if(type < 4){
+                bank = 0;
+                type ++
+                output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, type, bank]);
+            }else{ 
+                setTimeout(()=> {
+                    input.removeListener("sysex", channels.input, get);
+                    setControls(controls)
+                }, 200);
+            }
+        }
+                         
+        if(!input || !output) return;        
+        input.addListener("sysex", channels.input, get);
+        output.sendSysex(sysex.vendor, [80, 0, 2]);
+        output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
+    }, [channels.input, input, output]) // Get user oscilators and effects
     
     return (
         <NTSContext.Provider 
@@ -127,7 +120,7 @@ const NTSProvider = ({ children }) => {
                 state, 
                 setState: sendControlChange,
                 bank,
-                switchBank
+                setBank
             }}
         >
             { children }
