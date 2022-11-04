@@ -19,15 +19,9 @@ const NTSProvider = ({ children }) => {
 
     const randomize = () => {
         const random = defaultValues(defaultControls, true);        
-        Object.keys(random).forEach( key =>  sendControlChange(parseInt(key), random[key]) );
+        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) );
         dispatch({ type: "bank", payload: random })
-
-        return random;
     };
-
-    //TODO: implement clock and sequencer
-    // input && input.addListener("clock", (e) => console.log(e) )
-    // According to the standard, there are 24 MIDI clocks for every quarter note
 
     // TODO: test get user programs to check if they're repeated and why selectors don't update
     const getUserPrograms = useCallback(() => {
@@ -79,7 +73,7 @@ const NTSProvider = ({ children }) => {
         dispatch({ type:number, payload: parsed })
     }, [controls, state]);
 
-    const sendControlChange = (cc, value) => {
+    const sendControlChange = useCallback((cc, value) => {
         const control = controls[cc];
         const hasSwitch = !isNaN(control?.switch);
         const isActive = value?.active === undefined ? true : value?.active;
@@ -90,9 +84,9 @@ const NTSProvider = ({ children }) => {
         
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
         dispatch({type: cc, payload: value })
-    }
+    }, [channels.output, controls, output])
 
-    const switchBank = (b) => {
+    const switchBank = useCallback((b) => {
         let bank = JSON.parse(localStorage.getItem(`bank${b}`));
 
         if(!bank){
@@ -101,14 +95,19 @@ const NTSProvider = ({ children }) => {
         }
 
         localStorage.setItem("bank", b);
-
-        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) );
-
+        Object.keys(bank).forEach( key =>  sendControlChange(parseInt(key), bank[key]) )
+        
         setBank(b);
         dispatch({ type: "bank", payload: bank})
-    }
+    }, [controls, sendControlChange])
+
+    useEffect(() => {
+        const bank = localStorage.getItem("bank");
+        !isNaN(bank) && switchBank(bank);
+    }, [switchBank])
 
     useEffect(() => { input && getUserPrograms() }, [getUserPrograms, input]);
+    useEffect(() => localStorage.setItem(`bank${bank}`, JSON.stringify(state)), [bank, state]);
 
     useEffect(() => {
         input && !input.hasListener("controlchange", receiveControlChange ) && input.addListener("controlchange", receiveControlChange )
