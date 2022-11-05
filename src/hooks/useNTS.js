@@ -41,7 +41,7 @@ const NTSProvider = ({ children }) => {
         const { rawValue, value, controller: { number }} = event;
         const control = controls[number];
         const hasSwitch = !isNaN(control.switch);
-
+        console.log(rawValue, value)
         let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
         
         if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}

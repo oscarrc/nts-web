@@ -31,4 +31,4 @@ const useSequencer = () => {
     }
 }
 
-export default useSequencer;
+export { useSequencer };
