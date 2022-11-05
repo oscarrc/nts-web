@@ -6,21 +6,28 @@ import { useMidi } from './useMidi';
 const NTSContext = createContext();
 
 const NTSReducer = (state, action) => {
-    if(action.type === "bank") return action.payload;
+    let updated;
+    const { bank, value } = action.payload;
+
+    if(action.type === "bank") updated = value;
     else if(state[action.type] === undefined) return state;
-    else return { ...state, [action.type]: action.payload }
+    else updated = { ...state, [action.type]: value }
+
+    localStorage.setItem(`BANK_${bank}`, JSON.stringify(updated));
+
+    return updated;
 }
 
 const NTSProvider = ({ children }) => {
     const { input, output, passthrough, channels } = useMidi();
-    const [ controls, setControls ] = useState(defaultControls);
+    const [ controls, setControls ] = useState(JSON.parse(localStorage.getItem("CONTROLS")) || defaultControls);
     const [ bank, setBank ] = useState(localStorage.getItem("BANK") || 0);
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
 
     const randomize = () => {
         const random = defaultValues(defaultControls, true);        
         Object.keys(random).forEach( cc =>  sendControlChange(parseInt(cc), random[cc]) );
-        dispatch({ type: "bank", payload: random })
+        dispatch({ type: "bank", payload: { bank: bank, value: random } })
     };
 
     const decode = (data) => {
@@ -39,8 +46,8 @@ const NTSProvider = ({ children }) => {
         
         if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
         
-        dispatch({ type:number, payload: parsed })
-    }, [controls, state]);
+        dispatch({ type:number, payload: { bank, value: parsed } })
+    }, [bank, controls, state]);
 
     const sendControlChange = useCallback((cc, value) => {
         const control = controls[cc];
@@ -52,24 +59,19 @@ const NTSProvider = ({ children }) => {
         const parsed = control.options ? (val === options ? 127 : val * step) : val;
         
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
-        dispatch({type: cc, payload: value })
-    }, [channels.output, controls, output]);
+        dispatch({type: cc, payload: { bank, value } })
+    }, [bank, channels.output, controls, output]);
 
     // TODO: update local storage on control change
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // useEffect(() => localStorage.setItem(`BANK_${bank}`, JSON.stringify(state)), [state])
     
     useEffect(() => {
-        let b = JSON.parse(localStorage.getItem(`BANK_${bank}`));
-
-        if(!b){
-            b = defaultValues(controls, true);
-            localStorage.setItem(`BANK_${bank}`, JSON.stringify(b));
-        }
+        let b = JSON.parse(localStorage.getItem(`BANK_${bank}`)) || defaultValues(controls, true);
         
         localStorage.setItem("BANK", bank);
         Object.keys(b).forEach( cc =>  sendControlChange(parseInt(cc), b[cc]));
-        dispatch({type: "bank", payload: b});
+        dispatch({type: "bank", payload: { bank, value: b }});
     }, [bank, controls, sendControlChange]); // Switch to another bank or create it if it doesn't exists
 
     useEffect(() => {
@@ -82,7 +84,6 @@ const NTSProvider = ({ children }) => {
         }
     }, [receiveControlChange, input, passthrough]);  // Listen for input from NTS or passthrough device
 
-    //TODO User effects and oscilators get duplicated. SOLVED?
     useEffect(() => {  
         let type = 0;
         let bank = 0;
@@ -105,6 +106,7 @@ const NTSProvider = ({ children }) => {
             }else{ 
                 setTimeout(()=> {
                     input.removeListener("sysex", channels.input, get);
+                    localStorage.setItem("CONTROLS", JSON.stringify(controls));
                     setControls(controls)
                 }, 200);
             }
