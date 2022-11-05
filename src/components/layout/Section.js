@@ -18,6 +18,8 @@ const Section = ({ section }) => {
                     label={ control.label }
                     value={ state[cc] }
                     onChange={ value => setState(cc, value) } 
+                    min={control.min}
+                    max={control.max}
                 />
             case "dropdown":
                 return <Dropdown 
