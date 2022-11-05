@@ -28,6 +28,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "postbuild": "npx cap sync @capacitor-community/electron",
+    "predeploy": "npm run build && cp build/index.html build/200.html",
+    "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
