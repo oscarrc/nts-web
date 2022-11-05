@@ -37,7 +37,7 @@ const NTSProvider = ({ children }) => {
         return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
     }
   
-    const receiveControlChange = useCallback(( event ) => {
+    const receiveControlChange = useCallback(( event ) => { //TODO: map value with min and max (aka. Arp length)
         const { rawValue, value, controller: { number }} = event;
         const control = controls[number];
         const hasSwitch = !isNaN(control.switch);
@@ -49,7 +49,7 @@ const NTSProvider = ({ children }) => {
         dispatch({ type:number, payload: { bank, value: parsed } })
     }, [bank, controls, state]);
 
-    const sendControlChange = useCallback((cc, value) => {
+    const sendControlChange = useCallback((cc, value) => { // TODO: map value with min and max (aka. Arp length)
         const control = controls[cc];
         const hasSwitch = !isNaN(control?.switch);
         const isActive = value?.active === undefined ? true : value?.active;
