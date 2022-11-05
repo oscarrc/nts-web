@@ -10,7 +10,7 @@ const NTSReducer = (state, action) => {
     const { bank, value } = action.payload;
 
     if(action.type === "bank") updated = value;
-    else if(state[action.type] === undefined) return state;
+    else if(state[action.type] === undefined) updated = state;
     else updated = { ...state, [action.type]: value }
 
     localStorage.setItem(`BANK_${bank}`, JSON.stringify(updated));
@@ -61,10 +61,6 @@ const NTSProvider = ({ children }) => {
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
         dispatch({type: cc, payload: { bank, value } })
     }, [bank, channels.output, controls, output]);
-
-    // TODO: update local storage on control change
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    // useEffect(() => localStorage.setItem(`BANK_${bank}`, JSON.stringify(state)), [state])
     
     useEffect(() => {
         let b = JSON.parse(localStorage.getItem(`BANK_${bank}`)) || defaultValues(controls, true);
