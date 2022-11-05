@@ -12,19 +12,17 @@ const App = () => {
     
   return (
     <div className="flex flex-col min-h-screen max-w-screen overflow-x-hidden xl:px-8 sm:px-4 px-2">
-      <MidiProvider>        
-        <LayoutProvider>
+      <MidiProvider>
           <ModalProvider>
-            <Header />
-            <main className="flex flex-col flex-1 min-h-full justify-between items-center py-8">
-              <NTSProvider>
-                  <Synth />
-                  <Live />
-              </NTSProvider>
-            </main>
+            <Header />        
+              <LayoutProvider>
+                  <NTSProvider>
+                      <Synth />
+                      <Live />
+                  </NTSProvider>
+              </LayoutProvider>
             <Footer />
           </ModalProvider>
-        </LayoutProvider>
       </MidiProvider>
     </div>
   );

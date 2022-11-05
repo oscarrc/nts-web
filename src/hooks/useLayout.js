@@ -49,12 +49,14 @@ const LayoutProvider = ({children}) => {
     return (
       <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint }}>
         {
-              windowDimensions.width < 380 ?
-                <div className="flex flex-1 flex-col gap-8 items-center justify-center">
-                  <h1 className="text-2xl text-center upercase font-bold">Window is to small!!</h1>
-                  <p className="text-center text-secondary">Make your window wider or get a device with a bigger screen</p>
-                </div> :
-                children
+          windowDimensions.width < 380 ?
+            <div className="flex flex-1 flex-col gap-8 items-center justify-center">
+              <h1 className="text-2xl text-center upercase font-bold">Window is to small!!</h1>
+              <p className="text-center text-secondary">Make your window wider or get a device with a bigger screen</p>
+            </div> :                
+            <main className="flex flex-col flex-1 min-h-full justify-between items-center py-8">
+              { children }
+            </main>
         }
       </ LayoutContext.Provider>
   )
