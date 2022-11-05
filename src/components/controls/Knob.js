@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import knob from "../../assets/knob.png";
 
-const Knob = ({value = 0, minValue = 0, maxValue = 127, step = 1, label, onChange}) => {
-    const [ currentValue, setValue ] = useState(value ? value : minValue);
+const Knob = ({value = 0, min = 0, max = 127, step = 1, label, onChange}) => {
+    const [ currentValue, setValue ] = useState(value ? value : min);
     const knobRef = useRef(null);
 
     const handleValue = useCallback((e) => {
@@ -38,8 +38,8 @@ const Knob = ({value = 0, minValue = 0, maxValue = 127, step = 1, label, onChang
                     data-sprites="100"
                     diameter="90" 
                     value={ currentValue }
-                    min={ minValue }
-                    max={ maxValue }
+                    min={ min }
+                    max={ max }
                     step={ step }
                     onChange={ handleValue }
                 />

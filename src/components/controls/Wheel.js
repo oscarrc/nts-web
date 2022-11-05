@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import wheel from "../../assets/wheel.png";
 
-const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoReturn = false, label, onChange}) => {
-    const [ value, setValue ] = useState(defaultValue ? defaultValue : (maxValue - minValue) / 2 );
+const Wheel = ({defaultValue = 50, min = 0, max = 100, step = 1, autoReturn = false, label, onChange}) => {
+    const [ value, setValue ] = useState(defaultValue ? defaultValue : (max - min) / 2 );
     const wheelRef = useRef(null);
 
     const handleValue = useCallback((e) => {
@@ -60,8 +60,8 @@ const Wheel = ({defaultValue = 50, minValue = 0, maxValue = 100, step = 1, autoR
                 data-height="120"
                 data-sprites="127"
                 value={ value }
-                min={minValue}
-                max={maxValue}
+                min={min}
+                max={max}
                 step={step}
                 onChange={handleValue}
             />
