@@ -97,11 +97,11 @@ const MidiProvider = ({ children }) => {
 
     useEffect(() => {
         !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("connected", parseDevices)
-        !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("disconnected", parseDevices)
+        !WebMidi.hasListener("disconnected", parseDevices) && WebMidi.addListener("disconnected", parseDevices)
 
         return () => {
             WebMidi.hasListener("connected", parseDevices) && WebMidi.removeListener("connected", parseDevices)
-            WebMidi.hasListener("connected", parseDevices) && WebMidi.removeListener("disconnected", parseDevices)
+            WebMidi.hasListener("disconnected", parseDevices) && WebMidi.removeListener("disconnected", parseDevices)
         }
     }, []);
 
