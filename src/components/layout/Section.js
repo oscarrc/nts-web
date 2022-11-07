@@ -37,7 +37,7 @@ const Section = ({ section }) => {
                     label={ control.label }
                     options={ control.options }
                     value={ currentValue } 
-                    display={ control.options[currentValue] }
+                    display={ control.options[currentValue] || "Unknown" }
                     onChange={ value => setState(cc, isNaN(control.switch) ? value : { ...state[cc], value } ) }
                 />
             case "switch":
