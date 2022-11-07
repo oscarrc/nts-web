@@ -1,5 +1,5 @@
 const messages = {
-    loading: {
+    midi: {
         title: "Allow MIDI usage",
         text: "Please, allow the app to use MIDI"
     },
@@ -13,7 +13,7 @@ const messages = {
     },
     nodevice: {
         title: "No NTS-1 detected",
-        text: "Connect the NTS-1 and reload the app"
+        text: "Please, connect one to use the app"
     },
     newdevice: {
         title: "New device detected",
