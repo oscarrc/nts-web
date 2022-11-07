@@ -108,7 +108,7 @@ const NTSProvider = ({ children }) => {
             }
         }
                          
-        if(!input || !output) return;        
+        if(!input || !output) return setControls(defaultControls);        
         input.addListener("sysex", channels.input, get);
         output.sendSysex(sysex.vendor, [80, 0, 2]);
         output.sendSysex(sysex.vendor, [48 + sysex.channel, 0, 1, sysex.device, 25, 1, 0]);
