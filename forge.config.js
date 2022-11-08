@@ -4,19 +4,34 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        name: "NTS-web"
+      },
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['darwin', 'linux'],
+      config: {
+          // Config here
+      }
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          maintainer: 'Oscar R.C.',
+          homepage: 'https://oscarrc.me'
+        }
+      }
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        options: {
+          maintainer: 'Oscar R.C.',
+          homepage: 'https://oscarrc.me'
+        }
+      }
     },
   ],
 };
