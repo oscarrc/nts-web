@@ -1,5 +1,7 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: 'src/assets/icons/icon'
+  },
   rebuildConfig: {},
   makers: [
     {
@@ -10,17 +12,15 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin', 'linux'],
-      config: {
-          // Config here
-      }
+      platforms: ['darwin', 'linux']
     },
     {
       name: '@electron-forge/maker-deb',
       config: {
         options: {
           maintainer: 'Oscar R.C.',
-          homepage: 'https://oscarrc.me'
+          homepage: 'https://oscarrc.me',
+          icon: 'src/assets/icons/icon.png'
         }
       }
     },
@@ -29,7 +29,8 @@ module.exports = {
       config: {
         options: {
           maintainer: 'Oscar R.C.',
-          homepage: 'https://oscarrc.me'
+          homepage: 'https://oscarrc.me',
+          icon: 'src/assets/icons/icon.png'
         }
       }
     },

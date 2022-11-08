@@ -27,9 +27,5 @@ yarn-error.log*
 .env
 .vscod
 
-android/app-release-bundle.aab
-android/app-release-unsigned-aligned.apk
-android/app-release-signed.apk.idsig
-android/app-release-signed.apk
-android/app/build
-android/.gradle
+electron
+android
