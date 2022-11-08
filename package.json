@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "electron-squirrel-startup": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -28,11 +29,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "npx cap sync @capacitor-community/electron",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron:start": "electron-forge start",
+    "electron:package": "npm run build && electron-forge package",
+    "electron:make": "npm run build && electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -55,9 +58,14 @@
   "devDependencies": {
     "@bubblewrap/cli": "^1.18.1",
     "@electron-forge/cli": "^6.0.0",
+    "@electron-forge/maker-deb": "^6.0.0",
+    "@electron-forge/maker-rpm": "^6.0.0",
+    "@electron-forge/maker-squirrel": "^6.0.0",
+    "@electron-forge/maker-zip": "^6.0.0",
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.12",
     "daisyui": "^2.33.0",
+    "electron": "^21.2.2",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.1"
   }
