@@ -32,7 +32,10 @@
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts eject",    
+    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory android/",
+    "bubblewrap:build": "bubblewrap build [--skipPwaValidation] [--skipSigning] [--manifest='<path-twa-manifest>'] [--signingKeyPath='<path-to-signing-key>'] [--signingKeyAlias='<key-alias>']",
+    "bubblewrap.update": "bubblewrap update --appVersionName 3.0.0 --manifest https://nts-web.oscarrc.me/manifest.json",
     "electron:start": "electron-forge start",
     "electron:package": "npm run build && electron-forge package",
     "electron:make": "npm run build && electron-forge make"
