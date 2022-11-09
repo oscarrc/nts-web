@@ -33,7 +33,7 @@ const Display = ({ children, bank, octave, devices, midi }) => {
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
             <div  className="relative flex-1 bg-neutral bg-grid font-sevenSegment text-xl rounded text-accent outline outline-base-100 outline-offset-2 outline-2">
                 {
-                    message ? <Message message={ message }/> :
+                    false ? <Message message={ message }/> :
                         <>                
                             <div className="flex flex-1 justify-between absolute top-0 left-0 w-full bg-transparent px-2">
                                 <div className="text-center">Bank {bank < 10 && 0 }{bank}</div>                       
