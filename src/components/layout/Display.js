@@ -7,7 +7,7 @@ import { useMidi } from "../../hooks/useMidi";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
-const Display = () => {
+const Display = ({mode, setMode}) => {
     const isPlaying = false;    
     const { enabled, input, output, passthrough, octave } = useMidi();
     const { bank } = useNTS();
@@ -50,8 +50,8 @@ const Display = () => {
                 </nav>
             </div>
             <div className="grid grid-cols-4 gap-4 justify-between">
-                <button className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
-                <button className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
+                <button onClick={() => setMode("synth") } className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
+                <button onClick={() => setMode("seq") } className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
                 <button className="btn btn-outline btn-accent btn-xs"> <BsFillCircleFill className="h-2 w-2" /> </button>
                 <button className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>

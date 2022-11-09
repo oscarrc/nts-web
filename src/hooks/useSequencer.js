@@ -10,22 +10,14 @@ const useSequencer = () => {
     const [patch, setPatch] = useState(0);
     const [patches, setPatches] = useState([]);
     const [step, setStep] = useState(0);
-    const [sequence, setSequence] = useState([
-        {
-            note: "C4",
-            duration: 24 //  1/4 Tiempo -> 96 clocks
-        },
-        {
-            note: "D3",
-            duration: 96 //  1 Tiempo -> 96 clocks
-        }
-    ]);
+    const [pattern, setPattern] = useState(0);
 
     return {
         clock,
         patch,
         patches,
-        sequence,
+        pattern,
+        setPattern,
         step,
         tempo
     }

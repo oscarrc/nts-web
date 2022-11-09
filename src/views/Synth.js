@@ -5,13 +5,13 @@ import { defaultLayout } from "../config/layout";
 import { useState } from "react";
 
 const Synth = () => {
-    const [ screen, setScreen ] = useState("bank");
-    
+    const [ mode, setMode ] = useState("synth");
+
     return (           
         <main className="flex flex-col flex-1 min-h-full justify-between items-center py-8">      
             <div className="grid w-full h-full xl:grid-cols-4 md:grid-cols-2 grid-cols-1 grid-rows-auto gap-8 grid-flow-row">
                 <div className="flex flex-col">
-                    <Display screen={screen} setScreen={setScreen} />
+                    <Display mode={mode} setMode={setMode} />
                     <Section section={defaultLayout.osc} />
                     <Section section={defaultLayout.arp} />
                 </div>
@@ -23,7 +23,7 @@ const Synth = () => {
                 </div>
                 <div className="flex flex-col">
                     <Section section={defaultLayout.vcf} />
-                    <Memory />
+                    <Memory mode={mode} setMode={setMode} />
                 </div>
             </div>
         </main>
