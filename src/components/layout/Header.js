@@ -1,7 +1,9 @@
 import { FaCog, FaFileExport, FaFileImport } from "react-icons/fa"
+import { MdPiano, MdPianoOff } from "react-icons/md"
 import { lazy, useRef } from "react";
 
 import korg from '../../assets/korg.svg';
+import { useLayout } from "../../hooks/useLayout";
 import { useModal } from "../../hooks/useModal";
 import { useNTS } from "../../hooks/useNTS";
 
@@ -9,11 +11,14 @@ const Header = () => {
     const { handleModal } = useModal();
     const selectorRef = useRef(null);
     const { restoreBank } = useNTS();
+    const { bottomDrawer, setBottomDrawer } = useLayout();
 
     const openSettings = () => {
         const Settings = lazy(() => import('../../views/Settings'));
         handleModal(<Settings />);
     }
+
+    const toggleLive = () => setBottomDrawer(b => !b);
 
     const selectData = () => selectorRef.current.click();
 
@@ -70,7 +75,12 @@ const Header = () => {
                     <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Export">
                         <button onClick={ exportData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> <span className="hidden sm:inline">Export</span></button>
                     </li>
-                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Settings">
+                    <li className="tooltip tooltip-bottom" data-tip="Live">
+                        <button onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
+                            { bottomDrawer ? <MdPianoOff className="h-5 w-5"/> : <MdPiano className="h-5 w-5"/>}
+                        </button>
+                    </li>
+                    <li className="tooltip tooltip-bottom" data-tip="Settings">
                         <button onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>

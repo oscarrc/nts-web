@@ -14,13 +14,13 @@ const App = () => {
     <div className="flex flex-col min-h-screen max-w-screen overflow-x-hidden xl:px-8 sm:px-4 px-2">
       <MidiProvider>
         <NTSProvider>
-          <ModalProvider>
-            <Header />        
+          <ModalProvider>        
             <LayoutProvider>
-                <Synth />
-                <Live />
+              <Header />
+                  <Synth />
+                  <Live />
+              <Footer />
             </LayoutProvider>
-            <Footer />
           </ModalProvider>
         </NTSProvider>
       </MidiProvider>
