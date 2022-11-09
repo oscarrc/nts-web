@@ -13,16 +13,16 @@ const App = () => {
   return (
     <div className="flex flex-col min-h-screen max-w-screen overflow-x-hidden xl:px-8 sm:px-4 px-2">
       <MidiProvider>
+        <NTSProvider>
           <ModalProvider>
             <Header />        
-              <LayoutProvider>
-                  <NTSProvider>
-                      <Synth />
-                      <Live />
-                  </NTSProvider>
-              </LayoutProvider>
+            <LayoutProvider>
+                <Synth />
+                <Live />
+            </LayoutProvider>
             <Footer />
           </ModalProvider>
+        </NTSProvider>
       </MidiProvider>
     </div>
   );
