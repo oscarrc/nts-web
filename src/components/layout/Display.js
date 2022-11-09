@@ -2,11 +2,14 @@ import { BsCaretDownFill, BsCaretUpFill, BsFillCircleFill, BsFillPauseFill, BsPl
 import { Suspense, lazy, useEffect, useState } from "react";
 
 import { messages } from "../../config/display";
+import { useMidi } from "../../hooks/useMidi";
+import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
-const Display = ({ bank, octave, devices, midi, screen }) => {
-    const isPlaying = false;
-    const { input, output, passthrough } = devices;
+const Display = ({ screen }) => {
+    const isPlaying = false;    
+    const { enabled, input, output, passthrough, octave } = useMidi();
+    const { bank, setBank } = useNTS();
     const { tempo } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
@@ -18,7 +21,7 @@ const Display = ({ bank, octave, devices, midi, screen }) => {
         switch (screen){
             case "bank":
                 Screen = lazy(() => import('../screens/Bank'));
-                props = { bank }
+                props = { bank, setBank }
                 break;
             default:
                 Screen = lazy(() => import('../screens/Message'));
@@ -30,14 +33,14 @@ const Display = ({ bank, octave, devices, midi, screen }) => {
     }
 
     useEffect(() => {
-        if(!midi) return setMessage(messages["midi"]);
+        if(!enabled) return setMessage(messages["midi"]);
         else if(!input || !output) return setMessage(messages["nodevice"]);
         else if(passthrough){
             setMessage(messages["newdevice"]);
             return setTimeout(() => setMessage(null), 5000)
         }else setMessage(null)
 
-    }, [midi, input, output, passthrough])
+    }, [enabled, input, output, passthrough])
 
     useEffect(() => { // TODO: this makes screen flicker
         let interval;

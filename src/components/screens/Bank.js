@@ -1,8 +1,4 @@
-import { useNTS } from "../../hooks/useNTS";
-
-const Bank = ({ bank }) => {
-    const { setBank } = useNTS();
-
+const Bank = ({ bank, setBank }) => {
     return (        
         <div className="flex flex-col flex-1 justify-center items-center">
             <div className="grid grid-cols-4 grid-rows-4 w-full text-center">
