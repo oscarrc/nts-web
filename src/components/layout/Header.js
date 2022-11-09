@@ -3,11 +3,12 @@ import { lazy, useRef } from "react";
 
 import korg from '../../assets/korg.svg';
 import { useModal } from "../../hooks/useModal";
-import { verifyValues } from "../../config/synth";
+import { useNTS } from "../../hooks/useNTS";
 
 const Header = () => {
     const { handleModal } = useModal();
     const selectorRef = useRef(null);
+    const { restoreBank } = useNTS();
 
     const openSettings = () => {
         const Settings = lazy(() => import('../../views/Settings'));
@@ -22,10 +23,7 @@ const Header = () => {
 
         reader.onload = (e) => {
             const data = JSON.parse(e.target.result);
-
-            Object.keys(data).forEach(b => {
-                verifyValues(b) && localStorage.setItem(`BANK_${b}`, JSON.stringify(data[b]));
-            })
+            Object.keys(data).forEach(b => restoreBank(b, data[b]))
         };
         
         // reader.onerror = reject;    

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
-import { defaultControls, defaultValues, sysex } from "../config/synth";
+import { defaultControls, defaultValues, sysex, verifyValues } from "../config/synth";
 
 import { useMidi } from './useMidi';
 
@@ -27,7 +27,7 @@ const NTSProvider = ({ children }) => {
     const randomize = () => {
         const random = defaultValues(defaultControls, true);        
         Object.keys(random).forEach( cc =>  sendControlChange(parseInt(cc), random[cc]) );
-        dispatch({ type: "bank", payload: { bank: bank, value: random } })
+        dispatch({ type: "bank", payload: { bank, value: random } })
     };
 
     const decode = (data) => {
@@ -36,12 +36,21 @@ const NTSProvider = ({ children }) => {
         name.forEach(e => { if(e) decoded = decoded + String.fromCharCode(e) });
         return decoded.replace(/[^a-zA-Z0-9 -]/g, "")
     }
+
+    const restoreBank = (b, data) => {
+        // if(!verifyValues(data, controls)) return;
+        if(b === bank){            
+            Object.keys(data).forEach( cc =>  sendControlChange(parseInt(cc), data[cc]) );
+            dispatch({type: "bank", payload: { bank, value: data } })
+        }
+        else localStorage.setItem(`BANK_${b}`, JSON.stringify(data));
+    }
   
     const receiveControlChange = useCallback(( event ) => { //TODO: map value with min and max (aka. Arp length)
         const { rawValue, value, controller: { number }} = event;
         const control = controls[number];
         const hasSwitch = !isNaN(control.switch);
-        console.log(rawValue, value)
+        
         let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
         
         if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
@@ -122,7 +131,8 @@ const NTSProvider = ({ children }) => {
                 state, 
                 setState: sendControlChange,
                 bank,
-                setBank
+                setBank,
+                restoreBank
             }}
         >
             { children }

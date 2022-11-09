@@ -219,7 +219,20 @@ const defaultValues = (controls, random = false) => {
 }
 
 const verifyValues = (values, controls) => {
-    return true;
+    let areValid = true;
+
+    Object.keys(controls).forEach(cc => {
+        let control = controls[cc];
+        let current = values[cc];
+
+        areValid = control.options ? 
+            ((current.value || current) < control.options.length ) && ( control.switch && current.active ) : 
+            (current >= ( control.min || 0) || current <= (control.max || 0) )
+
+        if(!areValid) return areValid;
+    })
+
+    return areValid;
 }
 
 export { defaultControls, sysex, defaultValues, verifyValues }
