@@ -25,7 +25,4 @@ yarn-error.log*
 
 .eslintcache
 .env
-.vscod
-
-electron
-android
+.vscode
