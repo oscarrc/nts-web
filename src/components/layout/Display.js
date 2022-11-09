@@ -24,7 +24,6 @@ const Display = ({ children, bank, octave, devices, midi }) => {
 
     useEffect(() => {
         let interval;
-        console.log((60/tempo)/2 )
         interval = setInterval(() => setBpmIndicator(b => !b), (60000/tempo)/2 );
         return () => clearInterval(interval);
     })
