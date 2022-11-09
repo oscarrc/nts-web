@@ -218,4 +218,8 @@ const defaultValues = (controls, random = false) => {
     return values;
 }
 
-export { defaultControls, sysex, defaultValues }
+const verifyValues = (values, controls) => {
+    return true;
+}
+
+export { defaultControls, sysex, defaultValues, verifyValues }
