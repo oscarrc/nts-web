@@ -1,4 +1,4 @@
-import { FaBug, FaDownload, FaHeart } from "react-icons/fa"
+import { FaBug, FaDownload, FaHeart, FaInfo } from "react-icons/fa"
 import { useEffect, useState } from "react";
 
 import { SiKofi } from "react-icons/si";
@@ -31,6 +31,9 @@ const Footer = () => {
             <div className="flex flex-col items-center sm:flex-row gap-2">
                 <a href="https://ko-fi.com/oscarrc" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><SiKofi className="h-3 w-3 mr-2" /> Buy me a coffee</a>
                 <div className="flex gap-2">
+                    <div className="tooltip" data-tip="Info">
+                        <button className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
+                    </div>
                     { supportsPWA && 
                         <div className="tooltip" data-tip="Install the app">
                             <button onClick={ install } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
