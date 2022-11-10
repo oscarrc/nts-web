@@ -4,7 +4,7 @@
   "description": "An NTS-1 web controller, editor and sequencer",
   "screenshots": [
     {
-      "src": "assets/img/screenshot.png",
+      "src": "static/media/screenshot.png",
       "type": "image/png",
       "sizes": "1600x1045"
     }
