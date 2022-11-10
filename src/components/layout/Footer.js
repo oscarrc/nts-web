@@ -32,14 +32,14 @@ const Footer = () => {
                 <a href="https://ko-fi.com/oscarrc" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><SiKofi className="h-3 w-3 mr-2" /> Buy me a coffee</a>
                 <div className="flex gap-2">
                     <div className="tooltip" data-tip="Info">
-                        <button className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
+                        <button aria-label="Info and help" className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
                     </div>
                     { supportsPWA && 
                         <div className="tooltip" data-tip="Install the app">
-                            <button onClick={ install } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
+                            <button aria-label="Install the app" onClick={ install } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
                         </div> 
                     }
-                    <div className="tooltip" data-tip="Report a bug"><a href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
+                    <div className="tooltip" data-tip="Report a bug"><a role="button" aria-label="Report a bug" href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
                 </div>
             </div>
         </footer>

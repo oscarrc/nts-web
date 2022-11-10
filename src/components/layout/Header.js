@@ -70,17 +70,17 @@ const Header = () => {
                 <ul className="menu menu-horizontal p-0 gap-4">
                     <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Import">
                         <input onChange={ importData } ref={ selectorRef } type="file" className="hidden" accept=".ntsweb"/>
-                        <button onClick={ selectData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/> <span className="hidden sm:inline">Import</span></button>
+                        <button aria-label="Import" onClick={ selectData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/> <span className="hidden sm:inline">Import</span></button>
                     </li>
                     <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Export">
-                        <button onClick={ exportData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> <span className="hidden sm:inline">Export</span></button>
+                        <button aria-label="Export" onClick={ exportData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> <span className="hidden sm:inline">Export</span></button>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">
-                        <button onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
+                        <button aria-label="Toggle Live Controls" onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
                             { bottomDrawer ? <MdPianoOff className="h-5 w-5"/> : <MdPiano className="h-5 w-5"/>}
                         </button>
                     </li>
-                    <li className="tooltip tooltip-bottom" data-tip="Settings">
+                    <li aria-label="Settings" className="tooltip tooltip-bottom" data-tip="Settings">
                         <button onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>

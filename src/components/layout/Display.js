@@ -2,6 +2,7 @@ import { BsCaretDownFill, BsCaretUpFill, BsFillCircleFill, BsFillPauseFill, BsPl
 import { useEffect, useState } from "react";
 
 import Message from "../screens/Message";
+import Sequencer from "../screens/Sequencer";
 import { messages } from "../../config/display";
 import { useMidi } from "../../hooks/useMidi";
 import { useNTS } from "../../hooks/useNTS";
@@ -40,20 +41,14 @@ const Display = ({mode, setMode}) => {
                     <div className={`text-center relative before:absolute before:bg-accent before:rounded-full before:top-3 before:-left-3 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
-                    message ? <Message message={message} /> : <div className="flex-1" />
+                    !message ? <Message message={message} /> : <Sequencer />
                 }
-                <nav className="grid grid-cols-4 gap-4 w-full bg-transparent font-sevenSegment text-sm px-2">
-                    <span className="text-center">Synth</span>
-                    <span className="text-center">Seq</span>
-                    <span className="text-center">Rec</span>
-                    <span className="text-center">Play</span>
-                </nav>
             </div>
             <div className="grid grid-cols-4 gap-4 justify-between">
-                <button onClick={() => setMode("synth") } className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
-                <button onClick={() => setMode("seq") } className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
-                <button className="btn btn-outline btn-accent btn-xs"> <BsFillCircleFill className="h-2 w-2" /> </button>
-                <button className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
+                <button aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
+                <button aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
+                <button aria-label="Toggle Record" className="btn btn-outline btn-accent btn-xs"> <BsFillCircleFill className="h-2 w-2" /> </button>
+                <button aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>
         </section>
     )

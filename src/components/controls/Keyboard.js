@@ -63,14 +63,14 @@ const Keyboard = () => {
                     return [...Array(7).keys()].map((n) => {
                         return (
                             <Fragment key={`${o}${n}`}>
-                                { [1,2,4,5,6].includes(n + 1) && <button {...events } data-note={ `${notes[n]}#${o + octave}`} className={`key relative btn btn-secondary row-start-1 top-3/4 w-3/4 left-2/3 h-3/4 rounded z-10 focus:shadow-inner shadow shadow-black ${ activeNote === `${notes[n]}#${o + octave}` && 'btn-pushed'}`}></button> }
-                                <button {...events } data-note={ `${notes[n]}${o + octave}` } className={`key btn btn-active btn-ghost row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black ${ activeNote === `${notes[n]}${o + octave}` && 'btn-pushed'}`}></button>
+                                { [1,2,4,5,6].includes(n + 1) && <button {...events } aria-label={ `${notes[n]}#${o + octave}`} data-note={ `${notes[n]}#${o + octave}`} className={`key relative btn btn-secondary row-start-1 top-3/4 w-3/4 left-2/3 h-3/4 rounded z-10 focus:shadow-inner shadow shadow-black ${ activeNote === `${notes[n]}#${o + octave}` && 'btn-pushed'}`}></button> }
+                                <button aria-label={`${notes[n]}${o + octave}`} {...events } data-note={ `${notes[n]}${o + octave}` } className={`key btn btn-active btn-ghost row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black ${ activeNote === `${notes[n]}${o + octave}` && 'btn-pushed'}`}></button>
                             </Fragment>
                         )
                     })
                 })
             }
-            { octaves && <button {...events } data-note={ `C${octave + octaves}` } className={`key btn btn-active btn-ghost row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black ${ activeNote === `C${octave + octaves}` && 'btn-pushed'}`}></button> }
+            { octaves && <button aria-label={ `C${octave + octaves}` } {...events } data-note={ `C${octave + octaves}` } className={`key btn btn-active btn-ghost row-start-2 w-full h-full rounded z-0 focus:shadow-inner shadow shadow-black ${ activeNote === `C${octave + octaves}` && 'btn-pushed'}`}></button> }
         </div>
     )
 }

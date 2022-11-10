@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useSequencer = () => {
     //TODO: implement clock and sequencer
@@ -6,18 +6,21 @@ const useSequencer = () => {
     // According to the standard, there are 24 MIDI clocks for every quarter note
 
     const [clock, setClock] = useState(null);
-    const [tempo, setTempo] = useState(60); // 60bpm
-    const [patch, setPatch] = useState(0);
-    const [patches, setPatches] = useState([]);
+    const [tempo, setTempo] = useState(60);
     const [step, setStep] = useState(0);
-    const [pattern, setPattern] = useState(0);
+    const [sequence, setSequence] = useState({});
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isRecording, setIsRecording] = useState(false);
+
+    useEffect(() => {
+        isPlaying && setIsRecording(false);
+        isRecording && setIsPlaying(false);
+    }, [isPlaying, isRecording])
 
     return {
         clock,
-        patch,
-        patches,
-        pattern,
-        setPattern,
+        sequence,
+        setSequence,
         step,
         tempo
     }
