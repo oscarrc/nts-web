@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef } from "react";
 
 import switchButton from "../../assets/switch.png";
 
-const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange }) => {
+const Switch = ({ id, isActive = false, isMomentary = false, label, inline, onChange }) => {
    
     const switchRef = useRef(null);
 
@@ -33,9 +33,10 @@ const Switch = ({ isActive = false, isMomentary = false, label, inline, onChange
 
     return (
         <div className={`flex items-center justify-center ${inline ? 'flex-row' : "flex-col-reverse"}`}>
-            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
+            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <div className="flex-1">
                 <input 
+                    {...(label ? {id: id} : {"aria-label": id}) }
                     ref={switchRef}
                     type="checkbox"
                     className="input-switch"

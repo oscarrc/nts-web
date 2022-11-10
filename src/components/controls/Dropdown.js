@@ -1,7 +1,7 @@
 import { SlArrowDown } from "react-icons/sl";
 import switchButton from "../../assets/switch.png";
 
-const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange, onSwitch }) => {
+const Dropdown = ({ id, label, value = 0, options, switchValue, isActive, onChange, onSwitch }) => {
     const handleSelection = (i) => {
         document.activeElement.blur()
         onChange && onChange(i)
@@ -9,9 +9,11 @@ const Dropdown = ({ label, value = 0, options, switchValue, isActive, onChange, 
    
     return (
         <div className={`input-select flex flex-1 px-4 items-center gap-4 ${isNaN(switchValue) && 'py-1.5'}`}>
-            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
+            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             { !isNaN(switchValue) && 
                 <input type="checkbox" 
+                    {...(label ? {id: id} : {"aria-label": id}) }
+                    name={label}
                     onChange={ (e) => onSwitch(e.target.checked) } 
                     checked={ isActive || false } 
                     className="input-switch" 

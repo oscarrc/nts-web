@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import selector from "../../assets/selector.png";
 
-const Selector = ({value = 0, options, label, onChange, display}) => {
+const Selector = ({id, value = 0, options, label, onChange, display}) => {
     const [ currentValue, setValue ] = useState(value ? value : 0);
     const selectorRef = useRef(null);
     
@@ -33,9 +33,10 @@ const Selector = ({value = 0, options, label, onChange, display}) => {
 
     return (
         <div className="flex flex-col items-center justify-center self-start">
-            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
+            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <div className="flex-1">
                 <input 
+                    {...(label ? {id: id} : {"aria-label": id}) }
                     ref={selectorRef}
                     type="range"
                     name={label}

@@ -7,7 +7,7 @@ import { useNTS } from "../../hooks/useNTS";
 const Section = ({ section }) => {
     const { state, setState, controls } = useNTS();
 
-    const renderControl = (cc, type = false) => {
+    const renderControl = (cc, section, type = false) => {
         const control = controls[cc]
         const currentValue = isNaN(control.switch) ? state[cc] : state[cc].value;
         
@@ -15,6 +15,7 @@ const Section = ({ section }) => {
             case "knob":
                 return <Knob 
                     key={cc}
+                    id={`${section}-${control.label}`}
                     label={ control.label }
                     value={ state[cc] }
                     onChange={ value => setState(cc, value) } 
@@ -24,6 +25,7 @@ const Section = ({ section }) => {
             case "dropdown":
                 return <Dropdown 
                     key={cc}
+                    id={`${section}-${control.label}`}
                     switchValue={ control?.switch }
                     isActive={ state[cc]?.active }
                     value={ currentValue } 
@@ -34,6 +36,7 @@ const Section = ({ section }) => {
             case "selector":               
                 return <Selector 
                     key={ cc }
+                    id={`${section}-${control.label}`}
                     label={ control.label }
                     options={ control.options }
                     value={ currentValue } 
@@ -43,6 +46,7 @@ const Section = ({ section }) => {
             case "switch":
                 return <Switch 
                     key={cc}
+                    id={`${section}-${control.label}`}
                     switchValue={control?.switch}
                     label={control.label}
                     inline={true}
@@ -59,13 +63,13 @@ const Section = ({ section }) => {
             <section>
                 <h2 key={ section.label } className="divider divider-primary font-semibold my-4">{ section.label }</h2>
                 <div className="flex justify-around gap-8 py-2">
-                    { section.controls?.map(control => renderControl(control, section?.type )) }
+                    { section.controls?.map(control => renderControl(control, section.label, section?.type )) }
                 </div>
                 { section?.sections?.map(section => (
                     <div key={ section.label }>
                         <h3 key={ section.label } className="divider text-secondary font-semibold my-4">{ section.label }</h3>
                         <div className="flex justify-around gap-8 py-2">
-                            { section.controls.map(control => renderControl(control)) }
+                            { section.controls.map(control => renderControl(control, section.label)) }
                         </div>
                     </div>
                 )) }

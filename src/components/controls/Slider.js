@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const Slider = ({value = 50, min = 0, max = 100, step = 1, defaultValue = 0, autoReturn = false, label, onChange}) => {
+const Slider = ({id, value = 50, min = 0, max = 100, step = 1, defaultValue = 0, autoReturn = false, label, onChange}) => {
     const [ currentValue, setValue ] = useState(value ? value : (max - min) / 2 );
     const sliderRef = useRef(null);
 
@@ -51,6 +51,7 @@ const Slider = ({value = 50, min = 0, max = 100, step = 1, defaultValue = 0, aut
         <span className="slider-wrapper flex flex-col items-center justify-center">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
             <input 
+                {...(label ? {id: id} : {"aria-label": id}) }
                 ref={sliderRef} 
                 orientation="vertical"
                 type="range"

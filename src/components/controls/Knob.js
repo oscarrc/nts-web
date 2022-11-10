@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import knob from "../../assets/knob.png";
 
-const Knob = ({value = 0, min = 0, max = 127, step = 1, label, onChange}) => {
+const Knob = ({id, value = 0, min = 0, max = 127, step = 1, label, onChange}) => {
     const [ currentValue, setValue ] = useState(value ? value : min);
     const knobRef = useRef(null);
 
@@ -27,9 +27,10 @@ const Knob = ({value = 0, min = 0, max = 127, step = 1, label, onChange}) => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
+            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <div className="flex-1">
                 <input 
+                    {...(label ? {id: id} : {"aria-label": id}) }
                     ref={knobRef}
                     type="range"
                     name={label}

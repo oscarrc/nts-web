@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import wheel from "../../assets/wheel.png";
 
-const Wheel = ({defaultValue = 50, min = 0, max = 100, step = 1, autoReturn = false, label, onChange}) => {
+const Wheel = ({id, defaultValue = 50, min = 0, max = 100, step = 1, autoReturn = false, label, onChange}) => {
     const [ value, setValue ] = useState(defaultValue ? defaultValue : (max - min) / 2 );
     const wheelRef = useRef(null);
 
@@ -50,8 +50,9 @@ const Wheel = ({defaultValue = 50, min = 0, max = 100, step = 1, autoReturn = fa
 
     return (
         <span className="flex flex-col items-center justify-center -mr-8 -mt-4">
-            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={label}>{label}</label> }
+            { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <input 
+                {...(label ? {id: id} : {"aria-label": id}) }
                 ref={wheelRef} 
                 type="range"
                 className="input-slider rotate-180"

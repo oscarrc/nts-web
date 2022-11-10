@@ -23,6 +23,7 @@ const Live = () => {
                 <MdClose className="h-5 w-5" />
             </button>
             <Slider
+                id="Pitchbend"
                 value={0}
                 min={-1}
                 max={1} 
