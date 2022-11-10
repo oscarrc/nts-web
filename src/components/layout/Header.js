@@ -1,4 +1,4 @@
-import { FaCog, FaFileExport, FaFileImport } from "react-icons/fa"
+import { FaCog, FaFileExport, FaFileImport, FaRandom } from "react-icons/fa"
 import { MdPiano, MdPianoOff } from "react-icons/md"
 import { lazy, useRef } from "react";
 
@@ -10,7 +10,7 @@ import { useNTS } from "../../hooks/useNTS";
 const Header = () => {
     const { handleModal } = useModal();
     const selectorRef = useRef(null);
-    const { restoreBank } = useNTS();
+    const { restoreBank, randomize } = useNTS();
     const { bottomDrawer, setBottomDrawer } = useLayout();
 
     const openSettings = () => {
@@ -69,13 +69,16 @@ const Header = () => {
                 </a>
             </div>
             <div className="flex-none">
-                <ul className="menu menu-horizontal p-0 gap-4">
-                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Import">
+                <ul className="menu menu-horizontal p-0 gap-2 sm:gap-4">
+                    <li className="tooltip tooltip-bottom" data-tip="Import">
                         <input onChange={ importData } ref={ selectorRef } type="file" className="hidden" accept=".ntsweb"/>
-                        <button aria-label="Import" onClick={ selectData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/> <span className="hidden sm:inline">Import</span></button>
+                        <button aria-label="Import" onClick={ selectData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/></button>
                     </li>
-                    <li className="max-sm:tooltip max-sm:tooltip-bottom" data-tip="Export">
-                        <button aria-label="Export" onClick={ exportData } className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/> <span className="hidden sm:inline">Export</span></button>
+                    <li className="tooltip tooltip-bottom" data-tip="Export">
+                        <button aria-label="Export" onClick={ exportData } className="btn btn-sm btn-primary rounded-0 md:rounded btn-outline py-0"><FaFileExport className="h-4 w-4"/></button>
+                    </li>
+                    <li className="tooltip tooltip-bottom" data-tip="Randomize">
+                        <button aria-label="Randomize" onClick={ randomize } className="btn btn-sm btn-primary btn-outline py-0"><FaRandom className="h-4 w-4"/></button>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">
                         <button aria-label="Toggle Live Controls" onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
