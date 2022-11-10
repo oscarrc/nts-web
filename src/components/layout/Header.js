@@ -57,7 +57,8 @@ const Header = () => {
             document.body.removeChild(a);
           }
     }
-
+    
+    // TODO: dropdown selection on import/export for all or just the current active bank
     return (
         <header className="navbar flex-col gap-4 sm:flex-row min-h-[4rem]">
             <div className="flex-1">
