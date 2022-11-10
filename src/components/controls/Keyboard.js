@@ -14,7 +14,7 @@ const Keyboard = () => {
     const notes = ["C", "D", "E", "F", "G", "A", "B"]
 
     const onPlayStart = (e) => {
-        if (window.navigator.vibrate) window.navigator.vibrate(10);
+        window.navigator.vibrate && window.navigator.vibrate(10);
         playNote(e.target.dataset.note);
     }
 

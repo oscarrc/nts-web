@@ -32,6 +32,22 @@ const Display = ({mode, setMode}) => {
         return () => clearInterval(interval);
     }, [tempo])
 
+    const handleUp = () => {        
+        window.navigator.vibrate && window.navigator.vibrate(10);
+    }
+
+    const handleDown = () => {        
+        window.navigator.vibrate && window.navigator.vibrate(10);
+    }
+
+    const togglePlay = () => {        
+        window.navigator.vibrate && window.navigator.vibrate(10);
+    }
+
+    const toggleRecording = () => {      
+        window.navigator.vibrate && window.navigator.vibrate(10);
+    }
+
     return (
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
             <div  className="flex flex-col flex-1 bg-neutral bg-grid font-sevenSegment text-xl rounded text-accent outline outline-base-100 outline-offset-2 outline-2 mt-2">                            
@@ -45,10 +61,10 @@ const Display = ({mode, setMode}) => {
                 }
             </div>
             <div className="grid grid-cols-4 gap-4 justify-between">
-                <button aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
-                <button aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
-                <button aria-label="Toggle Record" className="btn btn-outline btn-accent btn-xs"> <BsFillCircleFill className="h-2 w-2" /> </button>
-                <button aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
+                <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
+                <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
+                <button onClick={togglePlay} aria-label="Toggle Record" className="btn btn-outline btn-accent btn-xs"> <BsFillCircleFill className="h-2 w-2" /> </button>
+                <button onClick={toggleRecording} aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>
         </section>
     )
