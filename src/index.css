@@ -72,6 +72,16 @@
         @apply cursor-pointer bg-transparent checked:focus:bg-transparent hover:text-transparent focus:ring-0 focus:ring-offset-0
     }
 
+    .input-knob{
+        min-height: 64px;
+        max-width: 64px;
+    }
+
+    .input-switch{
+        min-height: 60px;
+        min-width: 60px;
+    }
+
     .input-knob, .input-slider {
         @apply cursor-pointer focus-visible:ring-0 focus-visible:ring-offset-0;
     }
@@ -119,7 +129,7 @@
         overflow: hidden;
     }
 
-    .slider::-webkit-slider-thumb {
+    .slider::-webkit-slider-thumb, .slider::-moz-range-progress {
         -webkit-appearance: none;
         appearance: none;
         width: 2px;
