@@ -5,11 +5,13 @@
 @font-face {
     font-family: 'Dot Matrix';
     src: url('assets/Square-Dot-Matrix.ttf') format('truetype');
+    font-display: swap;
+}
 
-
-}@font-face {
+@font-face {
     font-family: 'Seven Segment';
     src: url('assets/Seven-Segment.ttf') format('truetype');
+    font-display: swap;
 }
 
 @layer base {
