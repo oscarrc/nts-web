@@ -26,7 +26,7 @@ const Display = ({mode, setMode}) => {
 
     }, [enabled, input, output, passthrough])
 
-    useEffect(() => { // TODO: this makes screen flicker
+    useEffect(() => {
         let interval;
         interval = setInterval(() => setBpmIndicator(b => !b), (60000/tempo)/2 );
         return () => clearInterval(interval);
