@@ -7,7 +7,7 @@ const Wheel = ({id, defaultValue = 50, min = 0, max = 100, step = 1, autoReturn 
     const wheelRef = useRef(null);
 
     const handleValue = useCallback((e) => {
-        if (window.navigator.vibrate) window.navigator.vibrate(100);
+        if (window.navigator.vibrate) window.navigator.vibrate(5);
         setValue(e.target.value);
         onChange(e.target.value);
     }, [onChange])

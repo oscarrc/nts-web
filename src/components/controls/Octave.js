@@ -2,7 +2,7 @@ import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 
 const Octave = ({ octave, setOctave }) => {
     const handleClick = (q) => {
-        if (window.navigator.vibrate) window.navigator.vibrate(200);
+        if (window.navigator.vibrate) window.navigator.vibrate(10);
         if(q < 0 && octave > 0) setOctave(o => o - 1)
         if(q > 0 && octave < 6) setOctave(o => o + 1)
     }
