@@ -75,11 +75,33 @@
     .input-knob{
         min-height: 64px;
         max-width: 64px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        background: transparent;
     }
 
-    .input-switch{
+    .input-knob::-webkit-slider-thumb{
+        visibility: hidden;
+    }
+
+    .input-knob::-moz-range-thumb{
+        visibility: hidden;
+    }
+
+    .input-knob::-ms-thumb{
+        visibility: hidden;
+    }
+
+    .input-switch, .input-switch:checked{
         min-height: 60px;
         min-width: 60px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        background: transparent
     }
 
     .input-knob, .input-slider {
@@ -129,7 +151,7 @@
         overflow: hidden;
     }
 
-    .slider::-webkit-slider-thumb, .slider::-moz-range-progress {
+    .slider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 2px;
@@ -143,7 +165,19 @@
         box-shadow: 0px 0px 8px 1px #d32029;
     }
       
-    .slider::-moz-range-thumb {
+    .slider::-moz-range-thumb{
+        width: 2px;
+        height: 7rem;
+        background: #d32029;
+        cursor: pointer;
+        
+        background:  radial-gradient(circle, #d32029; 0%, #d32029 100%);
+        -webkit-box-shadow: 0px 0px 8px 1px #d32029;
+        -moz-box-shadow: 0px 0px 8px 1px #d32029;
+        box-shadow: 0px 0px 8px 1px #d32029;
+    }
+
+    .slider::-ms-thumb{
         width: 2px;
         height: 7rem;
         background: #d32029;
