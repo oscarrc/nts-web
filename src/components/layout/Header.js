@@ -80,8 +80,8 @@ const Header = () => {
                             { bottomDrawer ? <MdPianoOff className="h-5 w-5"/> : <MdPiano className="h-5 w-5"/>}
                         </button>
                     </li>
-                    <li aria-label="Settings" className="tooltip tooltip-bottom" data-tip="Settings">
-                        <button onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
+                    <li className="tooltip tooltip-bottom" data-tip="Settings">
+                        <button aria-label="Settings" onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>
             </div>
