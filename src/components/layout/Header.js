@@ -59,10 +59,12 @@ const Header = () => {
     }
 
     return (
-        <header className="navbar flex-col gap-4 sm:flex-row">
+        <header className="navbar flex-col gap-4 sm:flex-row min-h-[4rem]">
             <div className="flex-1">
                 <a href="/" className="flex items-end flex-wrap">
-                    <img className="h-16 max-h-32 min-h-8 max-w-[10rem] w-full" src={korg} alt="Korg NTS-web" />
+                    <span className="h-16 w-40">
+                        <img className="h-full w-full" src={korg} alt="Korg NTS-web" />
+                    </span>
                     <strong className="-mb-1">NTS-Web</strong>
                 </a>
             </div>
