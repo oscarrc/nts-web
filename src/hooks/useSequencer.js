@@ -22,6 +22,7 @@ const useSequencer = () => {
         sequence,
         setSequence,
         step,
+        setStep,
         tempo
     }
 }
