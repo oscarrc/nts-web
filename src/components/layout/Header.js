@@ -2,8 +2,11 @@ import { FaCog, FaFile, FaRandom, FaSave } from "react-icons/fa"
 import { MdPiano, MdPianoOff } from "react-icons/md"
 import { lazy, useRef } from "react";
 
+import { GiMetronome } from "react-icons/gi"
+import Tempo from "../../components/controls/Tempo";
 import korg from '../../assets/korg.svg';
 import { useLayout } from "../../hooks/useLayout";
+import { useMidi } from "../../hooks/useMidi";
 import { useModal } from "../../hooks/useModal";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
@@ -15,6 +18,7 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank } = useNTS();
     const { bottomDrawer, setBottomDrawer } = useLayout();
+    const { tempo, setTempo } = useMidi();
     const { setSequence } = useSequencer();
 
     const openSettings = () => {
@@ -111,7 +115,7 @@ const Header = () => {
                 </a>
             </div>
             <div className="flex-none">                
-                <ul className="menu menu-horizontal p-0 gap-2 sm:gap-4">
+                <ul className="menu menu-horizontal p-0 gap-4">
                     <li className="tooltip tooltip-bottom dropdown" data-tip="File"> 
                         <label aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFile className="h-4 w-4"/></label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
@@ -139,6 +143,12 @@ const Header = () => {
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Randomize">
                         <button aria-label="Randomize" onClick={ randomize } className="btn btn-sm btn-primary btn-outline py-0"><FaRandom className="h-4 w-4"/></button>
+                    </li>
+                    <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
+                        <label aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
+                        <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
+                            <Tempo tempo={tempo} onChange={setTempo} />
+                        </div>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">
                         <button aria-label="Toggle Live Controls" onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>

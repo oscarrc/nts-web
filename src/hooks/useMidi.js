@@ -45,6 +45,7 @@ const MidiProvider = ({ children }) => {
     const [channels, setChannels] = useReducer(ChannelReducer, defaultChannels);
     const [enabled, setEnabled] = useState(WebMidi.enabled);
     const [octave, setOctave] = useState(3);
+    const [tempo, setTempo] = useState(60);
     
     const input = useMemo(() => devices.inputDevices[devices.input], [devices.input, devices.inputDevices]);
     const output = useMemo(() => devices.outputDevices[devices.output], [devices.output, devices.outputDevices]);
@@ -127,6 +128,8 @@ const MidiProvider = ({ children }) => {
             playNote, 
             controlChange, 
             pitchBend,
+            tempo,
+            setTempo
         }}>
             { children }
         </MidiContext.Provider>
