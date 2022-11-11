@@ -20,6 +20,20 @@ module.exports = {
         },
         translate: {
           '5/4': '125%',
+        },
+        animation: {
+          'blink': 'blink 1500ms linear infinite',
+        },
+        keyframes: {
+          'blink': {
+            '0%': { backgroundColor: 'transparent' },
+            '50%': { 
+              backgroundColor: 'hsl(var(--af, var(--a)) / var(--tw-bg-opacity))',
+              color: 'hsl(var(--ac) / var(--tw-text-opacity))',
+              borderColor: 'hsl(var(--af, var(--a)) / var(--tw-border-opacity))'
+            },
+            '100%': { backgroundColor: 'transparent' }
+          }
         }
       },
     },
