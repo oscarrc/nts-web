@@ -19,7 +19,7 @@ A web controller for the Korg NTS-1.
 </table>
 
 ---
-s
+
 ### THIS IS A WORK IN PROGRESS
 
 This is still a work in progress, so expect some bugs and issues. 
@@ -37,7 +37,7 @@ If you miss any feature, please, request it.
 ### How it works
 
 1. Connect your [NTS-1 device](https://amzn.to/3j3yu2Q) to the computer
-2. Go to the [NTS-web page](https://nts-web.oscarrc.me) (if you're already there just refresh the page)
+2. Go to the [NTS-web page](https://nts-web.oscarrc.me) (if you're already there the device will just be detected, if not, refresh the page)
 3. Start tweaking parameters
 
 ### Features
