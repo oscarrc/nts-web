@@ -39,9 +39,10 @@ const NTSProvider = ({ children }) => {
 
     const restoreBank = (b, data) => {
         if(!verifyValues(data, controls)) return;
-        if(b === bank){            
+        
+        if(parseInt(b) === bank){    
+            dispatch({type: "bank", payload: { bank, value: data } });        
             Object.keys(data).forEach( cc =>  sendControlChange(parseInt(cc), data[cc]) );
-            dispatch({type: "bank", payload: { bank, value: data } })
         }
         else localStorage.setItem(`BANK_${b}`, JSON.stringify(data));
     }
