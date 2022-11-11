@@ -38,9 +38,8 @@ const NTSProvider = ({ children }) => {
     }
 
     const restoreBank = (b, data) => {
-        if(!verifyValues(data, controls)) return;
-        
-        if(parseInt(b) === bank){    
+        // if(!verifyValues(data, controls)) return; 
+        if(b === bank){
             dispatch({type: "bank", payload: { bank, value: data } });        
             Object.keys(data).forEach( cc =>  sendControlChange(parseInt(cc), data[cc]) );
         }

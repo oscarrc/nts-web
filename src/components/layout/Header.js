@@ -1,4 +1,4 @@
-import { FaCog, FaFileExport, FaFileImport, FaRandom } from "react-icons/fa"
+import { FaCog, FaFile, FaRandom, FaSave } from "react-icons/fa"
 import { MdPiano, MdPianoOff } from "react-icons/md"
 import { lazy, useRef } from "react";
 
@@ -6,13 +6,16 @@ import korg from '../../assets/korg.svg';
 import { useLayout } from "../../hooks/useLayout";
 import { useModal } from "../../hooks/useModal";
 import { useNTS } from "../../hooks/useNTS";
+import { useSequencer } from "../../hooks/useSequencer";
 
 const Header = () => {
     const { handleModal } = useModal();
     const dataSelectorRef = useRef(null);
     const bankSelectorRef = useRef(null);
+    const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank } = useNTS();
     const { bottomDrawer, setBottomDrawer } = useLayout();
+    const { setSequence } = useSequencer();
 
     const openSettings = () => {
         const Settings = lazy(() => import('../../views/Settings'));
@@ -38,39 +41,51 @@ const Header = () => {
         }
     }
 
-    const importData = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
+    const loadFile = (e) => {        
+        return new Promise((resolve, reject) => {            
+            const file = e.target.files[0];
+            const reader = new FileReader();
 
-        reader.onload = (e) => {
-            const data = JSON.parse(e.target.result);
-            Object.keys(data).forEach(b => restoreBank(b, data[b]))
-        };
-        
-        // reader.onerror = reject;    
-        reader.readAsText(file);
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                resolve(data)
+            };
+            
+            reader.onerror = reject;    
+            reader.readAsText(file);
+        })
     }
 
-    const importBank = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-           const data = JSON.parse(e.target.result);
-           restoreBank(bank, data);
-        };
-         
-        reader.readAsText(file);
+    const importData = async (e) => {
+        const data = await loadFile(e);
+        Object.keys(data.bank).forEach(b => restoreBank(b, data.bank[b]))
+        if(data.seq) setSequence(data.seq);
     }
 
-    // TODO: Add sequence and patch name to export
+    const importBank = async (e) => { 
+        const data = await loadFile(e);
+        restoreBank(bank, data)
+    };
+    
+    const importSequence = async (e) => {
+        const data = await loadFile(e);
+        setSequence(data)
+    };
+
+    // TODO: Add patch name to export
     const exportData = () => {
-        const data = {};
+        const data = {
+            bank: [],
+            seq: {}
+        };
         
         [...Array(15).keys()].forEach( (b) => {
             const bank = JSON.parse(localStorage.getItem(`BANK_${b}`));
-            if(bank) data[b] = bank;
+            if(bank) data.bank[b] = bank;
         });
+
+        const seq = JSON.parse(localStorage.getItem(`SEQ`));
+        if(seq) data.seq = seq;
         
         downloadFile(data, "ntsweb", "DATA");
     }
@@ -78,6 +93,11 @@ const Header = () => {
     const exportBank = () => {
         const data = JSON.parse(localStorage.getItem(`BANK_${bank}`));
         downloadFile(data, "ntsbank", `BANK_${bank}`);
+    }
+
+    const exportSequence = () => {
+        const data = JSON.parse(localStorage.getItem(`SEQ`));
+        downloadFile(data, "ntsseq", `SEQUENCE`);
     }
     
     return (
@@ -92,24 +112,29 @@ const Header = () => {
             </div>
             <div className="flex-none">                
                 <ul className="menu menu-horizontal p-0 gap-2 sm:gap-4">
-                    <li className="tooltip tooltip-bottom dropdown" data-tip="Import"> 
-                        <label aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFileImport className="h-4 w-4"/></label>
+                    <li className="tooltip tooltip-bottom dropdown" data-tip="File"> 
+                        <label aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFile className="h-4 w-4"/></label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
                             <li>                                
                                 <input onChange={ importData } ref={ dataSelectorRef } type="file" className="hidden" accept=".ntsweb"/>
-                                <button className="btn-sm" onClick={ () => dataSelectorRef.current.click() } aria-label="Import all">All</button>
+                                <button className="btn-sm" onClick={ () => dataSelectorRef.current.click() } aria-label="Open file">Open file</button>
                             </li>
                             <li> 
                                 <input onChange={ importBank } ref={ bankSelectorRef } type="file" className="hidden" accept=".ntsbank"/>
-                                <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Import current bank">Current bank</button>
+                                <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load bank">Load bank</button>
+                            </li>
+                            <li> 
+                                <input onChange={ importSequence } ref={ seqSelectorRef } type="file" className="hidden" accept=".ntsseq"/>
+                                <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
                             </li>
                         </ul>
                     </li>
-                    <li className="tooltip tooltip-bottom dropdown" data-tip="Export"> 
-                        <label aria-label="Export" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFileExport className="h-4 w-4"/></label>
+                    <li className="tooltip tooltip-bottom dropdown" data-tip="Save"> 
+                        <label aria-label="Export" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaSave className="h-4 w-4"/></label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
-                            <li><button className="btn-sm" onClick={ exportData } aria-label="Export all">All</button></li>
+                            <li><button className="btn-sm" onClick={ exportData } aria-label="Export all">Save All</button></li>
                             <li><button className="btn-sm" onClick={ exportBank } aria-label="Export current bank">Current bank</button></li>
+                            <li><button className="btn-sm" onClick={ exportSequence } aria-label="Export current bank">Sequence</button></li>
                         </ul>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Randomize">
