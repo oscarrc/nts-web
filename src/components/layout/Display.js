@@ -60,7 +60,7 @@ const Display = () => {
                     <div className={`text-center relative before:absolute before:bg-accent before:rounded-full before:top-3 before:-left-3 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
-                    !message ? <Message message={message} /> : <Sequencer step={step} />
+                    !message ? <Message message={message} /> : <Sequencer step={step} setStep={setStep} />
                 }
             </div>
             <div className="grid grid-cols-4 gap-4 justify-between">
