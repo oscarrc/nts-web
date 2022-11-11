@@ -188,6 +188,15 @@
         -moz-box-shadow: 0px 0px 8px 1px #d32029;
         box-shadow: 0px 0px 8px 1px #d32029;
     }
+
+    .sequencer::-webkit-scrollbar{
+       display: none
+    }
+
+    .sequencer{
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
 
 @layer utilities {

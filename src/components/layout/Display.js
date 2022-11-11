@@ -12,7 +12,7 @@ const Display = ({mode, setMode}) => {
     const isPlaying = false;    
     const { enabled, input, output, passthrough, octave } = useMidi();
     const { bank } = useNTS();
-    const { tempo, step, setStep } = useSequencer();
+    const { tempo, step, setStep, setIsPlaying, isRecording, setIsRecording } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
 
@@ -44,10 +44,12 @@ const Display = ({mode, setMode}) => {
 
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
+        setIsPlaying(p => !p);
     }
 
     const toggleRecording = () => {      
         window.navigator.vibrate && window.navigator.vibrate(10);
+        setIsRecording(r => !r)
     }
 
     return (

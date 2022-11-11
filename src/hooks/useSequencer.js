@@ -23,7 +23,11 @@ const useSequencer = () => {
         setSequence,
         step,
         setStep,
-        tempo
+        tempo,
+        isPlaying,
+        setIsPlaying,
+        isRecording,
+        setIsRecording
     }
 }
 
