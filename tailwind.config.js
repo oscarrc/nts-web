@@ -22,7 +22,7 @@ module.exports = {
           '5/4': '125%',
         },
         animation: {
-          'blink': 'blink 1500ms linear infinite',
+          'blink': 'blink 1000ms linear infinite',
         },
         keyframes: {
           'blink': {
