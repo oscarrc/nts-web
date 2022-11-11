@@ -13,8 +13,8 @@ const useSequencer = () => {
     const [isRecording, setIsRecording] = useState(false);
 
     useEffect(() => {
-        isPlaying && setIsRecording(false);
-        isRecording && setIsPlaying(false);
+        if (isPlaying) setIsRecording(false);
+        else if (isRecording) setIsPlaying(false);
     }, [isPlaying, isRecording])
 
     return {

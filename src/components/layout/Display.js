@@ -8,11 +8,10 @@ import { useMidi } from "../../hooks/useMidi";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
-const Display = () => {
-    const isPlaying = false;    
+const Display = () => {   
     const { enabled, input, output, passthrough, octave } = useMidi();
     const { bank } = useNTS();
-    const { tempo, step, setStep, setIsPlaying, isRecording, setIsRecording } = useSequencer();
+    const { tempo, step, setStep, isPlaying, setIsPlaying, isRecording, setIsRecording } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
 
@@ -68,7 +67,7 @@ const Display = () => {
                 <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
                 <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
                 <button onClick={toggleRecording} aria-label="Toggle Record" className={`btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
-                <button onClick={togglePlay} aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying && "btn-pushed"}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
+                <button onClick={togglePlay} aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>
         </section>
     )

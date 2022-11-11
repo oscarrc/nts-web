@@ -123,7 +123,7 @@
 
     .btn-pushed {
         animation: none;
-        transform: scale(var(--btn-focus-scale, 0.95));
+        transform: scale(var(--btn-focus-scale, 0.5));
     }
 
     .shadow-glow {
