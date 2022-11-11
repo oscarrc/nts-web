@@ -35,9 +35,9 @@ const ModalProvider = ({children}) => {
             { children }
             <div ref={overlay} className={`flex items-center justify-center transition-all duration-50 ease-in ${modal ? modalOpen  : 'opacity-0 modal'}`} onClick={ (e) => toggleModal(e) }>
                 <div className={`modal-box ${ isFullWidth && "max-w-none" } transition-all duration-200 ease-in-out overflow-visible bg-transparent shadow-none`}>   
-                <Suspense fallback={<div></div>}>
-                    { modal ? modalContent : null }
-                </Suspense>
+                    <Suspense fallback={<div></div>}>
+                        { modal ? modalContent : null }
+                    </Suspense>
                 </div>
             </div>
         </ ModalContext.Provider>
