@@ -12,10 +12,8 @@ const useSequencer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
 
-    useEffect(() => {
-        if (isPlaying) setIsRecording(false);
-        else if (isRecording) setIsPlaying(false);
-    }, [isPlaying, isRecording])
+    useEffect(() => { isPlaying && setIsRecording(false) }, [isPlaying]);
+    useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);
 
     return {
         clock,
@@ -24,6 +22,7 @@ const useSequencer = () => {
         step,
         setStep,
         tempo,
+        setTempo,
         isPlaying,
         setIsPlaying,
         isRecording,
