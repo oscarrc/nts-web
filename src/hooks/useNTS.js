@@ -46,27 +46,30 @@ const NTSProvider = ({ children }) => {
         else localStorage.setItem(`BANK_${b}`, JSON.stringify(data));
     }
   
-    const receiveControlChange = useCallback(( event ) => { //TODO: map value with min and max (aka. Arp length)
+    const receiveControlChange = useCallback(( event ) => {
         const { rawValue, value, controller: { number }} = event;
         const control = controls[number];
-        const hasSwitch = !isNaN(control.switch);
-        
-        let parsed = control?.options ? Math.round(value * (control.options.length + (hasSwitch ? 0 : -1 )  ) ) : rawValue;
+        const hasSwitch = !isNaN(control.switch);        
+        let parsed = control?.options ? 
+                    Math.round(value * (control.options.length + (hasSwitch ? 0 : -1))) : 
+                    control.min && control.max ? Math.round(control.min + ((control.max - control.min) / 127) * rawValue) : rawValue;
         
         if(hasSwitch) parsed = { ...state[number], ...( control.switch === rawValue ? { active: false } : { value: parsed, active: true })}
         
         dispatch({ type:number, payload: { bank, value: parsed } })
     }, [bank, controls, state]);
 
-    const sendControlChange = useCallback((cc, value) => { // TODO: map value with min and max (aka. Arp length)
+    const sendControlChange = useCallback((cc, value) => {
         const control = controls[cc];
         const hasSwitch = !isNaN(control?.switch);
         const isActive = value?.active === undefined ? true : value?.active;
         const val = hasSwitch ? (value.value >= control.switch ? value.value + 1 : value.value) : value;
         const options = control.options ? control.options.length  + (hasSwitch ? 0 : -1 ) : 1;
         const step = control.options ? Math.floor( 127 / options ) : 1;
-        const parsed = control.options ? (val === options ? 127 : val * step) : val;
-        
+        const parsed = control.options ? 
+                        val === options ? 127 : val * step : 
+                        control.min && control.max ? Math.round((127 / (control.max - control.min)) * (val - control.min)) : val;
+       
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
         dispatch({type: cc, payload: { bank, value } })
     }, [bank, channels.output, controls, output]);
