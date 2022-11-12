@@ -33,12 +33,14 @@ const Display = () => {
 
     const handleUp = () => {       
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
-        step > 0 && setStep(s => s-1);
+        if(step > 0) setStep(s => s-1);
+        else setStep(steps - 1);
     }
 
     const handleDown = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
-        setStep(s => s+1);
+        if(step < steps - 1) setStep(s => s+1);
+        else setStep(0);
     }
     
     const addStep = () => {        
