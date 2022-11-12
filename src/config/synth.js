@@ -42,11 +42,11 @@ const defaultControls = {
         type: "selector",
         options: [
             "Octave",
-            "Major Triad",
-            "Major Suspended",
-            "Major Augumented",
-            "Minor Triad",
-            "Minor Diminished"
+            "Maj Triad",
+            "Maj Suspended",
+            "Maj Augumented",
+            "Min Triad",
+            "Min Diminished"
         ]
     },
     119: {

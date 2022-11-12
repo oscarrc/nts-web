@@ -51,7 +51,7 @@ const Selector = ({id, value = 0, options, label, onChange, display}) => {
                     onChange={ handleValue }
                 />
             </div>
-            { display && <div className="bg-neutral bg-grid font-sevenSegment h-4 w-16 overflow-hidden text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1">{ display }</div>}
+            { display && <div className="bg-neutral bg-grid font-sevenSegment h-4 w-16 overflow-hidden text-xs text-center rounded text-accent outline outline-base-100 outline-offset-1 outline-1 whitespace-nowrap">{ display }</div>}
         </div>
     )
 }
