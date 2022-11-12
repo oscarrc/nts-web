@@ -1,4 +1,4 @@
-import { BsCaretDownFill, BsCaretUpFill, BsFillCircleFill, BsFillPauseFill, BsPlayFill } from "react-icons/bs";
+import { BsCaretDownFill, BsCaretUpFill, BsDash, BsFillCircleFill, BsFillPauseFill, BsPlayFill, BsPlus } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
 import Message from "../screens/Message";
@@ -40,6 +40,16 @@ const Display = () => {
         window.navigator.vibrate && window.navigator.vibrate(10);
         setStep(s => s+1);
     }
+    
+    const addStep = () => {        
+        window.navigator.vibrate && window.navigator.vibrate(10);
+        setSteps(s => s+1);
+    }
+    
+    const removeStep = () => {       
+        window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
+        step > 0 && setSteps(s => s-1);
+    }
 
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
@@ -63,11 +73,13 @@ const Display = () => {
                     !message ? <Message message={message} /> : <Sequencer step={step} setStep={setStep} steps={steps} setSteps={setSteps} />
                 }
             </div>
-            <div className="grid grid-cols-4 gap-4 justify-between">
+            <div className="grid grid-cols-8 gap-4 justify-between">
                 <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
                 <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
-                <button onClick={toggleRecording} aria-label="Toggle Record" className={`btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
-                <button onClick={togglePlay} aria-label="Play/Pause" className={`btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
+                <button onClick={removeStep} aria-label="Remove step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
+                <button onClick={addStep} aria-label="Add step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
+                <button onClick={toggleRecording} aria-label="Toggle Record" className={`col-span-2 btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
+                <button onClick={togglePlay} aria-label="Play/Pause" className={`col-span-2 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>
         </section>
     )
