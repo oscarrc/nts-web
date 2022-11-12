@@ -50,7 +50,7 @@ const Display = () => {
     
     const removeStep = () => {       
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
-        step > 0 && setSteps(s => s-1);
+        steps > 0 && setSteps(s => s-1);
     }
 
     const togglePlay = () => {        
