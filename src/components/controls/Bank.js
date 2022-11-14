@@ -1,4 +1,4 @@
-import {useRef, useState} from "react";
+import {useState} from "react";
 
 const Bank = ({index, name, selected, onClick, onRename}) => {
     const [dropdown, setDropdown] = useState(false);
