@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 const useSequencer = (tempo) => {
     //TODO: sequencer
-
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
     const [sequence, setSequence] = useState([]);
@@ -19,6 +18,10 @@ const useSequencer = (tempo) => {
 
         return () => clearInterval(interval);
     }, [isPlaying, setStep, steps, tempo]);
+
+    useEffect(() => {
+        console.log(sequence[step])
+    }, [step, sequence])
 
     return {
         sequence,
