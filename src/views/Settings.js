@@ -1,11 +1,11 @@
 import Dropdown from "../components/controls/Dropdown";
 import { channelList } from "../config/midi";
+import { useLayout } from "../hooks/useLayout";
 import { useMidi } from "../hooks/useMidi";
-import { useModal } from "../hooks/useModal";
 
 const Settings = () => {
-    const { handleModal } = useModal();
     const { devices, setDevices, channels, setChannels } = useMidi();
+    const { handleModal } = useLayout();
     
     const close = (e) => {
         e.preventDefault();
