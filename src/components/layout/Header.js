@@ -19,7 +19,7 @@ const Header = () => {
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer } = useLayout();
     const { tempo, setTempo } = useMidi();
-    const { setSequence } = useSequencer();
+    const { sequence, setSequence } = useSequencer();
 
     const openRenameBanks = () => {
         const Banks = lazy(() => import('../../views/Banks'));
@@ -96,7 +96,7 @@ const Header = () => {
             };
         });
 
-        const seq = JSON.parse(localStorage.getItem(`SEQ`));
+        const seq = JSON.parse(localStorage.getItem(`SEQ`)) || sequence;
         if(seq) data.seq = seq;
         
         downloadFile(data, "ntsweb", "DATA");
