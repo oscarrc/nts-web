@@ -1,8 +1,8 @@
-import { useModal } from "../hooks/useModal";
+import { useLayout } from "../hooks/useLayout";
 import { useNTS } from "../hooks/useNTS";
 
 const Banks = () => {
-    const { handleModal } = useModal();
+    const { handleModal } = useLayout();
     const { renameBank, bankNames } = useNTS();
     
     const close = (e) => {

@@ -7,17 +7,15 @@ import Tempo from "../../components/controls/Tempo";
 import korg from '../../assets/korg.svg';
 import { useLayout } from "../../hooks/useLayout";
 import { useMidi } from "../../hooks/useMidi";
-import { useModal } from "../../hooks/useModal";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
 const Header = () => {
-    const { handleModal } = useModal();
     const dataSelectorRef = useRef(null);
     const bankSelectorRef = useRef(null);
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
-    const { bottomDrawer, setBottomDrawer } = useLayout();
+    const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
     const { tempo, setTempo } = useMidi();
     const { sequence, setSequence } = useSequencer();
 
