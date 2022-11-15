@@ -21,7 +21,7 @@ const NTSReducer = (state, action) => {
 const NTSProvider = ({ children }) => {
     const { input, output, passthrough, channels } = useMidi();
     const [ controls, setControls ] = useState(JSON.parse(localStorage.getItem("CONTROLS")) || defaultControls);
-    const [ bank, setBank ] = useState(localStorage.getItem("BANK") || 0);
+    const [ bank, setBank ] = useState(parseInt(localStorage.getItem("BANK")) || 0);
     const [ bankNames, setBankNames] = useState(JSON.parse(localStorage.getItem("BANKS")) || {});
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
 
