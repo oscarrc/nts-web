@@ -16,7 +16,7 @@ const Header = () => {
     const dataSelectorRef = useRef(null);
     const bankSelectorRef = useRef(null);
     const seqSelectorRef = useRef(null);
-    const { restoreBank, randomize, bank } = useNTS();
+    const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer } = useLayout();
     const { tempo, setTempo } = useMidi();
     const { setSequence } = useSequencer();
@@ -81,7 +81,6 @@ const Header = () => {
         setSequence(data)
     };
 
-    // TODO: Add patch name to export
     const exportData = () => {
         const data = {
             bank: [],
@@ -90,7 +89,11 @@ const Header = () => {
         
         [...Array(15).keys()].forEach( (b) => {
             const bank = JSON.parse(localStorage.getItem(`BANK_${b}`));
-            if(bank) data.bank[b] = bank;
+            
+            if(bank) data.bank[b] = {
+                name: bankNames?.[b],
+                values: bank
+            };
         });
 
         const seq = JSON.parse(localStorage.getItem(`SEQ`));
@@ -100,8 +103,12 @@ const Header = () => {
     }
 
     const exportBank = () => {
-        const data = JSON.parse(localStorage.getItem(`BANK_${bank}`));
-        downloadFile(data, "ntsbank", `BANK_${bank}`);
+        const data = {
+            name: bankNames?.[bank],
+            values: JSON.parse(localStorage.getItem(`BANK_${bank}`))
+        }
+        
+        downloadFile(data, "ntsbank", data?.name || `BANK_${bank}`);
     }
 
     const exportSequence = () => {

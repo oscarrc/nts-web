@@ -41,10 +41,18 @@ const NTSProvider = ({ children }) => {
     const restoreBank = (b, data) => {
         // if(!verifyValues(data, controls)) return; 
         if(b === bank){
-            dispatch({type: "bank", payload: { bank, value: data } });        
-            Object.keys(data).forEach( cc =>  sendControlChange(parseInt(cc), data[cc]) );
+            dispatch({type: "bank", payload: { bank, value: data.values } });        
+            Object.keys(data.values).forEach( cc =>  sendControlChange(parseInt(cc), data.values[cc]) );
         }
-        else localStorage.setItem(`BANK_${b}`, JSON.stringify(data));
+        else localStorage.setItem(`BANK_${b}`, JSON.stringify(data.values));
+
+        if(data.name){
+            localStorage.setItem("BANKS", JSON.stringify({...bankNames, [b]: data.name}))
+            setBankNames( n => ({ ...n, [b]: data.name }));
+        }else{
+            localStorage.setItem("BANKS", JSON.stringify({...bankNames, [b]: null}))
+            setBankNames( n => ({ ...n, [b]: null }));
+        }
     }
 
     const renameBank = (b, name) => {
