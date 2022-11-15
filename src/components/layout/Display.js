@@ -9,9 +9,9 @@ import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
-    const { enabled, input, output, passthrough, octave, tempo } = useMidi();
+    const { enabled, input, output, passthrough, octave } = useMidi();
     const { bank, bankNames } = useNTS();
-    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording } = useSequencer(tempo);
+    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
 

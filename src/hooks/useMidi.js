@@ -45,7 +45,6 @@ const MidiProvider = ({ children }) => {
     const [channels, setChannels] = useReducer(ChannelReducer, defaultChannels);
     const [enabled, setEnabled] = useState(WebMidi.enabled);
     const [octave, setOctave] = useState(parseInt(localStorage.getItem("OCTAVE")) || 3);
-    const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     
     const input = useMemo(() => devices.inputDevices[devices.input], [devices.input, devices.inputDevices]);
     const output = useMemo(() => devices.outputDevices[devices.output], [devices.output, devices.outputDevices]);
@@ -96,7 +95,6 @@ const MidiProvider = ({ children }) => {
 
     useEffect(() => { init() }, [init]);
     useEffect(() => { localStorage.setItem("OCTAVE", octave) }, [octave]);
-    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
 
     useEffect(() => {
         !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("connected", parseDevices)
@@ -129,9 +127,7 @@ const MidiProvider = ({ children }) => {
             setOctave, 
             playNote, 
             controlChange, 
-            pitchBend,
-            tempo,
-            setTempo
+            pitchBend
         }}>
             { children }
         </MidiContext.Provider>

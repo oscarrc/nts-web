@@ -6,7 +6,6 @@ import { GiMetronome } from "react-icons/gi"
 import Tempo from "../../components/controls/Tempo";
 import korg from '../../assets/korg.svg';
 import { useLayout } from "../../hooks/useLayout";
-import { useMidi } from "../../hooks/useMidi";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
@@ -16,8 +15,7 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
-    const { tempo, setTempo } = useMidi();
-    const { sequence, setSequence } = useSequencer();
+    const { sequence, setSequence, tempo, setTempo } = useSequencer();
 
     const openRenameBanks = () => {
         const Banks = lazy(() => import('../../views/Banks'));

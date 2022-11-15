@@ -1,15 +1,19 @@
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const useSequencer = (tempo) => {
+const SequencerContext = createContext();
+
+const SequencerProvider = ({children}) => {
     //TODO: sequencer
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
     const [sequence, setSequence] = useState([]);
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
 
     useEffect(() => { isPlaying && setIsRecording(false) }, [isPlaying]);
-    useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);    
+    useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);
+    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => {
         let interval;
 
@@ -23,18 +27,30 @@ const useSequencer = (tempo) => {
         console.log(sequence[step])
     }, [step, sequence])
 
-    return {
-        sequence,
-        setSequence,
-        step,
-        setStep,
-        steps,
-        setSteps,
-        isPlaying,
-        setIsPlaying,
-        isRecording,
-        setIsRecording
-    }
+    return (
+        <SequencerContext.Provider value={{
+            sequence,
+            setSequence,
+            step,
+            setStep,
+            steps,
+            setSteps,
+            isPlaying,
+            setIsPlaying,
+            isRecording,
+            setIsRecording,
+            tempo,
+            setTempo
+        }}>
+            {children}
+        </SequencerContext.Provider>
+    )
 }
 
-export { useSequencer };
+const useSequencer = () => {
+    const context = useContext(SequencerContext);
+    if(context === undefined) throw new Error("useSequencer must be used within a SequencerProvider")
+    return context;
+}
+
+export { useSequencer, SequencerProvider };
