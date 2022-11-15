@@ -22,6 +22,7 @@ const NTSProvider = ({ children }) => {
     const { input, output, passthrough, channels } = useMidi();
     const [ controls, setControls ] = useState(JSON.parse(localStorage.getItem("CONTROLS")) || defaultControls);
     const [ bank, setBank ] = useState(localStorage.getItem("BANK") || 0);
+    const [ bankNames, setBankNames] = useState(JSON.parse(localStorage.getItem("BANKS")) || {});
     const [ state, dispatch ] = useReducer(NTSReducer, defaultValues(controls, true));
 
     const randomize = () => {
@@ -44,6 +45,12 @@ const NTSProvider = ({ children }) => {
             Object.keys(data).forEach( cc =>  sendControlChange(parseInt(cc), data[cc]) );
         }
         else localStorage.setItem(`BANK_${b}`, JSON.stringify(data));
+    }
+
+    const renameBank = (b, name) => {
+        const banks = {...bankNames, [b]: name } 
+        setBankNames(banks);
+        localStorage.setItem("BANKS", JSON.stringify(banks));
     }
   
     const receiveControlChange = useCallback(( event ) => {
@@ -75,7 +82,7 @@ const NTSProvider = ({ children }) => {
     }, [bank, channels.output, controls, output]);
     
     useEffect(() => {
-        let b = JSON.parse(localStorage.getItem(`BANK_${bank}`)) || defaultValues(controls, true);
+        const b = JSON.parse(localStorage.getItem(`BANK_${bank}`)) || defaultValues(controls, true);
         
         localStorage.setItem("BANK", bank);
         Object.keys(b).forEach( cc =>  sendControlChange(parseInt(cc), b[cc]));
@@ -134,8 +141,10 @@ const NTSProvider = ({ children }) => {
                 state, 
                 setState: sendControlChange,
                 bank,
+                bankNames,
                 setBank,
-                restoreBank
+                restoreBank,
+                renameBank
             }}
         >
             { children }
