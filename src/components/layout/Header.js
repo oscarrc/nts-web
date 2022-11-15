@@ -21,6 +21,11 @@ const Header = () => {
     const { tempo, setTempo } = useMidi();
     const { setSequence } = useSequencer();
 
+    const openRenameBanks = () => {
+        const Banks = lazy(() => import('../../views/Banks'));
+        handleModal(<Banks />);
+    }
+
     const openSettings = () => {
         const Settings = lazy(() => import('../../views/Settings'));
         handleModal(<Settings />);
@@ -129,7 +134,10 @@ const Header = () => {
                             </li>
                             <li> 
                                 <input onChange={ importSequence } ref={ seqSelectorRef } type="file" className="hidden" accept=".ntsseq"/>
-                                <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
+                                <button className="btn-sm" onClick={ () => seqSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
+                            </li>
+                            <li> 
+                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
                             </li>
                         </ul>
                     </li>
