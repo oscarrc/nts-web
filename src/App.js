@@ -17,8 +17,8 @@ const App = () => {
           <ModalProvider>        
             <LayoutProvider>
               <Header />
-                  <Synth />
-                  <Live />
+              <Synth />
+              <Live />
               <Footer />
             </LayoutProvider>
           </ModalProvider>
