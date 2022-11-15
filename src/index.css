@@ -197,6 +197,10 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
+    .dropdown-context:not(.dropdown-open) .dropdown-content{
+        visibility: hidden !important;
+    }
 }
 
 @layer utilities {

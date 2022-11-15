@@ -45,9 +45,7 @@ If you miss any feature, please, request it.
 * Installable, and works offline as a PWA
 * Control any parameter from within the app
     * Changes made on the NTS-1 device reflect on the app
-    * Import and export your patches from/to any of the sixteen patch banks
-    * Import / export all the state of the app
-* The app remembers all your settings and banks  (_**NEW**_)
+    * The app remembers all your settings and banks  (_**NEW**_)
 * Play with the on screen keyboard  (_**UPDATED**_)
     * Change the starting octave
     * Send pitch bend
@@ -55,7 +53,12 @@ If you miss any feature, please, request it.
 * Sequence melodies with the built-in sequencer (_**UPDATED**_)
     * Control the tempo of the sequencer
     * Play notes any octave
-* Save and load the whole app state including parameters, patches and sequences in one file
+* Sixteen memory banks for your patches (_**UPDATED**_)
+    * Rename memory banks for easy identification (_**NEW**_)
+* Save and load the state of your app
+    * Import / export your patches from/to any of the sixteen patch banks
+    * Import / export your sequences
+    * Import / export all the state of the app
 
 ### Found a bug?
 

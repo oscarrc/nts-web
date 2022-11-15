@@ -10,7 +10,7 @@ import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
     const { enabled, input, output, passthrough, octave, tempo } = useMidi();
-    const { bank } = useNTS();
+    const { bank, bankNames } = useNTS();
     const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording } = useSequencer(tempo);
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
@@ -66,20 +66,24 @@ const Display = () => {
     return (
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
             <div  className="flex flex-col flex-1 justify-between bg-neutral bg-grid font-sevenSegment text-xl rounded text-accent outline outline-base-100 outline-offset-2 outline-2 mt-2">                            
-                <div className="flex justify-between w-full bg-transparent px-2">
-                    <div className="text-center">Bank {bank < 10 && 0 }{bank}</div>                       
+                <div className="grid grid-cols-3 w-full bg-transparent px-2">
+                    <div className="text-left truncate">{bankNames?.[bank] ? bankNames?.[bank] : `Bank ${bank < 10 && 0 }${bank}`}</div>                       
                     <div className="text-center">Octave {octave} </div>
-                    <div className={`text-center relative before:absolute before:bg-accent before:rounded-full before:top-3 before:-left-3 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
+                    <div className={`text-right relative before:inline-block before:bg-accent before:rounded-full before:mb-0.5 before:mr-1 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
                     !message ? <Message message={message} /> : <Sequencer step={step} setStep={setStep} steps={steps} setSteps={setSteps} />
                 }
             </div>
             <div className="grid grid-cols-8 gap-4 justify-between">
-                <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
-                <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
-                <button onClick={removeStep} aria-label="Remove step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
-                <button onClick={addStep} aria-label="Add step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
+                <div className="flex col-span-2 gap-1">
+                    <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
+                    <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
+                </div>
+                <div className="flex col-span-2 gap-1">
+                    <button onClick={removeStep} aria-label="Remove step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
+                    <button onClick={addStep} aria-label="Add step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
+                </div>
                 <button onClick={toggleRecording} aria-label="Toggle Record" className={`col-span-2 btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
                 <button onClick={togglePlay} aria-label="Play/Pause" className={`col-span-2 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
             </div>
