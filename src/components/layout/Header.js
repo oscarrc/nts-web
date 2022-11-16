@@ -111,6 +111,8 @@ const Header = () => {
         const data = JSON.parse(localStorage.getItem(`SEQ`));
         downloadFile(data, "ntsseq", `SEQUENCE`);
     }
+
+    const clearSequence = () => setSequence({});
     
     return (
         <header className="navbar flex-col gap-4 sm:flex-row min-h-[4rem]">
@@ -136,11 +138,14 @@ const Header = () => {
                                 <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load bank">Load bank</button>
                             </li>
                             <li> 
+                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
+                            </li>
+                            <li> 
                                 <input onChange={ importSequence } ref={ seqSelectorRef } type="file" className="hidden" accept=".ntsseq"/>
                                 <button className="btn-sm" onClick={ () => seqSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
                             </li>
                             <li> 
-                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
+                                <button className="btn-sm" onClick={ clearSequence } aria-label="Manage banks">Clear sequence</button>
                             </li>
                         </ul>
                     </li>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const SequencerContext = createContext();
 
@@ -6,14 +6,39 @@ const SequencerProvider = ({children}) => {
     //TODO: sequencer
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
-    const [sequence, setSequence] = useState([]);
+    const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
+    const prevStep = useRef(0);
 
-    useEffect(() => { isPlaying && setIsRecording(false) }, [isPlaying]);
-    useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);
+    const stepStart = (note,bank) => {
+        prevStep.current = step;
+
+        setSequence( s => ({
+            ...s, 
+            [step]: {
+                note,
+                bank,
+                length: 1
+            }}
+        ))
+    }
+
+    const stepEnd = () => {
+        setSequence( s => ({
+            ...s,
+            [prevStep.current]: { 
+                ...s[prevStep.current],
+                length: step - prevStep.current + 1
+            }
+        }))
+    }
+
+    useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
+    // useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
+    useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
     useEffect(() => {
         let interval;
 
@@ -23,10 +48,6 @@ const SequencerProvider = ({children}) => {
         return () => clearInterval(interval);
     }, [isPlaying, setStep, steps, tempo]);
 
-    useEffect(() => {
-        console.log(sequence[step])
-    }, [step, sequence])
-
     return (
         <SequencerContext.Provider value={{
             sequence,
@@ -35,6 +56,8 @@ const SequencerProvider = ({children}) => {
             setStep,
             steps,
             setSteps,
+            stepStart,
+            stepEnd,
             isPlaying,
             setIsPlaying,
             isRecording,

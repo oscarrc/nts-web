@@ -11,7 +11,7 @@ import { useSequencer } from "../../hooks/useSequencer";
 const Display = () => {   
     const { enabled, input, output, passthrough, octave } = useMidi();
     const { bank, bankNames } = useNTS();
-    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo } = useSequencer();
+    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
 
@@ -72,7 +72,7 @@ const Display = () => {
                     <div className={`text-right relative before:inline-block before:bg-accent before:rounded-full before:mb-0.5 before:mr-1 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
-                    !message ? <Message message={message} /> : <Sequencer step={step} setStep={setStep} steps={steps} setSteps={setSteps} />
+                    !message ? <Message message={message} /> : <Sequencer step={step} setStep={setStep} steps={steps} setSteps={setSteps} banks={bankNames} sequence={sequence} />
                 }
             </div>
             <div className="grid grid-cols-8 gap-4 justify-between">
