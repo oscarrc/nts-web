@@ -1,31 +1,36 @@
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
 
-const SeqInput = (value, options, min, max, onChange) => {
-    const [currentValue, setCurrentValue] = useState(value);
+import { useState } from "react";
 
-    useEffect(() => {
-        max && currentValue > max && setCurrentValue(max);
-        min && currentValue < min && setCurrentValue(min);
-        options && !options[currentValue] && setCurrentValue(value);
-        onChange && onChange(currentValue)
-    }, [min, max, options, currentValue, value, onChange])
+const SeqInput = ({label, value, options, min, max, onChange, className}) => {
+    const [currentValue, setValue] = useState(value);
 
+    const handleValue = (value) => {
+        if(isNaN(value)) value = min;
+        if(!isNaN(min) && parseInt(value) < min ) value = min;
+        if(!isNaN(max) && parseInt(value) > max) value = max;
+        
+        onChange && onChange(value);
+        setValue(value);
+    }
+    
     return (
         <div className="flex w-full group">
             <input 
+                aria-label={label}
                 type="text"
-                min={min || 0}
-                max={ max || 0} 
-                className="flex-1 text-center bg-transparent font-sevenSegment text-xl px-0 input-sm w-full focus:border-none border-none focus:ring-0 outline-none" 
-                value={ currentValue ? (options.length ? options[currentValue] : currentValue) : '' } 
-                onChange={ onChange }
+                min={min}
+                max={max} 
+                className={`flex-1 bg-transparent font-sevenSegment text-xl px-0 input-sm w-full focus:border-none border-none focus:ring-0 outline-none ${className}`} 
+                value={ !isNaN(currentValue) ? ( options ? (options[currentValue] || `${label} ${currentValue}`) : currentValue) : '---' } 
+                onChange={ (e) => handleValue(e.target.value) }
+                disabled={options}
             />
             <div className="flex flex-col invisible group-hover:visible items-center">
-                <button className="flex-1 mx-1" onClick={() => setCurrentValue(v => v + 1) }>
+                <button aria-label={`increment ${label}`} className="flex-1 mx-1" onClick={() => handleValue(currentValue + 1) }>
                     <BsCaretUpFill className="h-3 w-3" />
                 </button>
-                <button className="flex-1 mx-1"  onClick={() => setCurrentValue(v => v - 1) }>
+                <button aria-label={`decrement ${label}`} className="flex-1 mx-1"  onClick={() => handleValue(currentValue - 1) }>
                     <BsCaretDownFill className="h-3 w-3" />
                 </button>
             </div>

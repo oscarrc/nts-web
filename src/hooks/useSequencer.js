@@ -4,6 +4,7 @@ const SequencerContext = createContext();
 
 const SequencerProvider = ({children}) => {
     //TODO: sequencer
+    //TODO: Audible metronome
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
     const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
@@ -26,11 +27,13 @@ const SequencerProvider = ({children}) => {
     }
 
     const stepEnd = () => {
+        const length =  step - prevStep.current + 1;
+
         setSequence( s => ({
             ...s,
             [prevStep.current]: { 
                 ...s[prevStep.current],
-                length: step - prevStep.current + 1
+                length: length < 1 ? 1 : length
             }
         }))
     }

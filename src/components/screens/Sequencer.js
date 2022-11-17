@@ -2,7 +2,7 @@ import { BsCaretRightFill } from "react-icons/bs";
 import SeqInput from "../controls/SeqInput";
 import { useEffect } from "react";
 
-const Sequencer = ({step, setStep, steps, setSteps, sequence, banks}) => {
+const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks}) => {
     useEffect(() => {
         // step === steps - 1 && setSteps(c => c + 16);
         document.getElementById(`step-${step}`).scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
@@ -15,21 +15,22 @@ const Sequencer = ({step, setStep, steps, setSteps, sequence, banks}) => {
                     <div className="flex items-center">{k === step && <BsCaretRightFill className="h-3 w-3 inline"/>} {k < 10 && '0'}{k}</div>
                     <div>{ sequence?.[k]?.note || "---" }</div>
                     <SeqInput 
+                        className="text-center"
+                        label="Duration"
                         value={ sequence?.[k]?.length } 
-                        min="1" 
-                        max={steps.length - 1 } 
+                        min={1} 
+                        max={steps - 1 } 
+                        onChange={ (v) => setSequence( s => ({...s, [k]: { ...s[k], length: parseInt(v) }}) ) }
                     />
-                    {/* <div>
-                        <input 
-                            type="number"
-                            className="text-center bg-transparent font-sevenSegment text-xl px-0 input-sm w-full focus:border-none border-none focus:ring-0 outline-none" 
-                            value={ sequence?.[k]?.length || 0 } 
-                            min="1" 
-                            max={steps.length - 1 } 
-                            readonly
-                        />
-                    </div> */}
-                    <div className="text-right truncate">{ !isNaN(sequence?.[k]?.bank) ? banks?.[sequence?.[k]?.bank] || `Bank ${sequence?.[k]?.bank}` : "---" }</div>
+                    <SeqInput 
+                        className="text-right"
+                        label="Bank"
+                        value={ sequence?.[k]?.bank } 
+                        min={ 0 } 
+                        max={ 15 }
+                        options={ banks }
+                        onChange={ (v) => setSequence( s => ({...s, [k]: { ...s[k], bank: parseInt(v) }}) ) }
+                    />
                 </div>
             )) }
         </div>
