@@ -1,5 +1,5 @@
 import { BsCaretDownFill, BsCaretUpFill, BsDash, BsFillCircleFill, BsFillPauseFill, BsPlayFill, BsPlus } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import Message from "../screens/Message";
 import Sequencer from "../screens/Sequencer";
@@ -9,27 +9,11 @@ import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
-    const { enabled, input, output, passthrough, octave } = useMidi();
-    const { bank, bankNames } = useNTS();
+    const { enabled, input, output, passthrough, octave, playNote } = useMidi();
+    const { bank, bankNames, setBank } = useNTS();
     const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
-
-    useEffect(() => {
-        if(!enabled) return setMessage(messages["midi"]);
-        else if(!input || !output) return setMessage(messages["nodevice"]);
-        else if(passthrough){
-            setMessage(messages["newdevice"]);
-            return setTimeout(() => setMessage(null), 5000)
-        }else setMessage(null)
-
-    }, [enabled, input, output, passthrough])
-
-    useEffect(() => {
-        let interval;
-        interval = setInterval(() => setBpmIndicator(b => !b), (60000/tempo)/2 );
-        return () => clearInterval(interval);
-    }, [tempo])
 
     const handleUp = () => {       
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
@@ -53,6 +37,11 @@ const Display = () => {
         steps > 0 && setSteps(s => s-1);
     }
 
+    const playStep = useCallback((step) => {
+        if(step.bank !== bank) setBank(step.bank)
+        playNote(step.note, true, false, step.duration);
+    }, [bank, playNote, setBank])
+
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
         setIsPlaying(p => !p);
@@ -62,6 +51,27 @@ const Display = () => {
         window.navigator.vibrate && window.navigator.vibrate(10);
         setIsRecording(r => !r)
     }
+    useEffect(() => {
+        if(!enabled) return setMessage(messages["midi"]);
+        else if(!input || !output) return setMessage(messages["nodevice"]);
+        else if(passthrough){
+            setMessage(messages["newdevice"]);
+            return setTimeout(() => setMessage(null), 5000)
+        }else setMessage(null)
+
+    }, [enabled, input, output, passthrough])
+
+    useEffect(() => {
+        let interval;
+        interval = setInterval(() => setBpmIndicator(b => !b), (60000/tempo)/2 );
+        return () => clearInterval(interval);
+    }, [tempo]);
+
+    useEffect(() => {
+        if(!isPlaying) return;
+        if(!steps[step].note) return;
+        playStep(step);
+    }, [isPlaying, playStep, step, steps])
 
     return (
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
