@@ -69,10 +69,10 @@ const Display = () => {
     }, [tempo]);
 
     useEffect(() => {
-        if(!isPlaying) return stopAll();
-        if(!steps?.[step]?.note) return;
-        playStep(step);
-    }, [isPlaying, playStep, step, steps, stopAll])
+        if(!isPlaying) return 
+        if(!sequence?.[step]?.note) return;
+        playStep(sequence?.[step]);
+    }, [isPlaying, playStep, step, sequence, stopAll])
 
     return (
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
@@ -83,7 +83,7 @@ const Display = () => {
                     <div className={`text-right relative before:inline-block before:bg-accent before:rounded-full before:mb-0.5 before:mr-1 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
-                    !message ? 
+                    message ? 
                         <Message message={message} /> : 
                         <Sequencer 
                             step={step} 
