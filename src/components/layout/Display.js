@@ -36,11 +36,12 @@ const Display = () => {
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
         steps > 0 && setSteps(s => s-1);
     }
-
+    
     const playStep = useCallback((step) => {
-        if(step.bank !== bank) setBank(step.bank)
-        playNote(step.note, true, false, step.duration);
-    }, [bank, playNote, setBank])
+        let duration = step.length * 60000/tempo
+        if(step.bank !== bank) setBank(step.bank);
+        playNote(step.note, true, false, duration);
+    }, [bank, playNote, setBank, tempo])
 
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);

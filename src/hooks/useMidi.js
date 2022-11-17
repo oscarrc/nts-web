@@ -74,7 +74,7 @@ const MidiProvider = ({ children }) => {
         let options = {
             channels: channelList[channels.output],
             ...( velocity && { velocity } ),
-            ...( duration && { duration } )
+            ...( duration && { duration: `+${duration}` } )
         }
         if(velocity) options.velocity = velocity;
         if(duration) options.duration = duration*1000;
