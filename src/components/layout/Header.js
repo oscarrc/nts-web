@@ -18,12 +18,12 @@ const Header = () => {
     const { sequence, setSequence, tempo, setTempo } = useSequencer();
 
     const openRenameBanks = () => {
-        const Banks = lazy(() => import('../../views/Banks'));
+        const Banks = lazy(() => import('../../views/modals/Banks'));
         handleModal(<Banks />);
     }
 
     const openSettings = () => {
-        const Settings = lazy(() => import('../../views/Settings'));
+        const Settings = lazy(() => import('../../views/modals/Settings'));
         handleModal(<Settings />);
     }
 

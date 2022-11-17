@@ -1,7 +1,7 @@
-import Dropdown from "../components/controls/Dropdown";
-import { channelList } from "../config/midi";
-import { useLayout } from "../hooks/useLayout";
-import { useMidi } from "../hooks/useMidi";
+import Dropdown from "../../components/controls/Dropdown";
+import { channelList } from "../../config/midi";
+import { useLayout } from "../../hooks/useLayout";
+import { useMidi } from "../../hooks/useMidi";
 
 const Settings = () => {
     const { devices, setDevices, channels, setChannels } = useMidi();
