@@ -1,17 +1,12 @@
 import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 
-import { useState } from "react";
-
 const SeqInput = ({label, value, options, min, max, onChange, className}) => {
-    const [currentValue, setValue] = useState(value);
-
     const handleValue = (value) => {
         if(isNaN(value)) value = min;
         if(!isNaN(min) && parseInt(value) < min ) value = min;
         if(!isNaN(max) && parseInt(value) > max) value = max;
         
         onChange && onChange(value);
-        setValue(value);
     }
     
     return (
@@ -22,15 +17,15 @@ const SeqInput = ({label, value, options, min, max, onChange, className}) => {
                 min={min}
                 max={max} 
                 className={`flex-1 bg-transparent font-sevenSegment text-xl px-0 input-sm w-full focus:border-none border-none focus:ring-0 outline-none ${className}`} 
-                value={ !isNaN(currentValue) ? ( options ? (options[currentValue] || `${label} ${currentValue}`) : currentValue) : '---' } 
+                value={ !isNaN(value) ? ( options ? (options[value] || `${label} ${value}`) : value) : '---' } 
                 onChange={ (e) => handleValue(e.target.value) }
                 disabled={options}
             />
             <div className="flex flex-col invisible group-hover:visible items-center">
-                <button aria-label={`increment ${label}`} className="flex-1 mx-1" onClick={() => handleValue(currentValue + 1) }>
+                <button aria-label={`increment ${label}`} className="flex-1 mx-1" onClick={() => handleValue(value + 1) }>
                     <BsCaretUpFill className="h-3 w-3" />
                 </button>
-                <button aria-label={`decrement ${label}`} className="flex-1 mx-1"  onClick={() => handleValue(currentValue - 1) }>
+                <button aria-label={`decrement ${label}`} className="flex-1 mx-1"  onClick={() => handleValue(value - 1) }>
                     <BsCaretDownFill className="h-3 w-3" />
                 </button>
             </div>

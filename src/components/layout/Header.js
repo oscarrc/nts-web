@@ -15,7 +15,7 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
-    const { sequence, setSequence, tempo, setTempo } = useSequencer();
+    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome } = useSequencer();
 
     const openRenameBanks = () => {
         const Banks = lazy(() => import('../../views/modals/Banks'));
@@ -163,7 +163,7 @@ const Header = () => {
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
                         <label aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
                         <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
-                            <Tempo tempo={tempo} onChange={setTempo} />
+                            <Tempo tempo={tempo} onChange={setTempo} onToggle={setMetronome} metronome={metronome} />
                         </div>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">

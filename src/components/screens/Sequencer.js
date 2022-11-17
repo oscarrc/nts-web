@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks}) => {
     useEffect(() => {
-        // step === steps - 1 && setSteps(c => c + 16);
         document.getElementById(`step-${step}`).scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
     }, [setSteps, step, steps])
 

@@ -10,6 +10,7 @@ const SequencerProvider = ({children}) => {
     const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [metronome, setMetronome] = useState(false);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     const prevStep = useRef(0);
 
@@ -39,7 +40,6 @@ const SequencerProvider = ({children}) => {
     }
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
-    // useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
     useEffect(() => {
@@ -66,7 +66,9 @@ const SequencerProvider = ({children}) => {
             isRecording,
             setIsRecording,
             tempo,
-            setTempo
+            setTempo,
+            metronome,
+            setMetronome
         }}>
             {children}
         </SequencerContext.Provider>
