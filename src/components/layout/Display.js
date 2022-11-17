@@ -9,7 +9,7 @@ import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
-    const { enabled, input, output, passthrough, octave, playNote } = useMidi();
+    const { enabled, input, output, passthrough, octave, playNote, stopAll } = useMidi();
     const { bank, bankNames, setBank } = useNTS();
     const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence } = useSequencer();
     const [ message, setMessage ] = useState(null);
@@ -69,10 +69,10 @@ const Display = () => {
     }, [tempo]);
 
     useEffect(() => {
-        if(!isPlaying) return;
-        if(!steps[step].note) return;
+        if(!isPlaying) return stopAll();
+        if(!steps?.[step]?.note) return;
         playStep(step);
-    }, [isPlaying, playStep, step, steps])
+    }, [isPlaying, playStep, step, steps, stopAll])
 
     return (
         <section className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">

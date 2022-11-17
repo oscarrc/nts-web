@@ -84,6 +84,12 @@ const MidiProvider = ({ children }) => {
             else output.stopNote(note, options);
         }
     }
+
+    const stopAll = () => {
+        output && output.sendAllNotesOff({
+            channels: channelList[channels.output]
+        });
+    }
     
     const controlChange = (cc, value) => {
         if(output) output.sendControlChange(cc, value, { channels: channelList[channels.output] } );
@@ -127,7 +133,8 @@ const MidiProvider = ({ children }) => {
             setOctave, 
             playNote, 
             controlChange, 
-            pitchBend
+            pitchBend,
+            stopAll
         }}>
             { children }
         </MidiContext.Provider>
