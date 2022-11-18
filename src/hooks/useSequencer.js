@@ -15,12 +15,12 @@ const SequencerProvider = ({children}) => {
 
     const audioContext = useRef(new AudioContext());
 
-    const playBeat = useCallback(() => {
+    const playBeat = useCallback((step) => {
         const osc = audioContext.current.createOscillator();
         const envelope = audioContext.current.createGain();
         const time = audioContext.current.currentTime;
        
-        osc.frequency.value = ((step + 2) % 4 === 0) ? 1000 : 800;
+        osc.frequency.value = (step % 4 === 0) ? 1000 : 800;
         envelope.gain.value = 1;
         envelope.gain.exponentialRampToValueAtTime(1, time + 0.001);
         envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.02);        
@@ -30,7 +30,7 @@ const SequencerProvider = ({children}) => {
 
         osc.start(time);
         osc.stop(time + 0.03);
-    }, [step])
+    }, [audioContext])
 
     const stepStart = (note,bank) => {
         prevStep.current = step;
@@ -58,20 +58,15 @@ const SequencerProvider = ({children}) => {
     }
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
+    useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step])  // TODO: first metronome beat doesn't play
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
 
-    useEffect(() => { // TODO: first metronome beat doesn't play
+    useEffect(() => {
         let interval;
         
-        if(isPlaying) {
-            interval = setInterval(() => {   
-                isRecording && metronome && playBeat();    
-                setStep(s => s === steps - 1 ? 0 : s + 1);
-            }, 60000/tempo);
-        }else{
-            clearInterval(interval)
-        };
+        if(isPlaying) interval = setInterval(() => setStep(s => s === steps - 1 ? 0 : s + 1), 60000/tempo);
+        else clearInterval(interval);
 
         return () => clearInterval(interval);
     }, [isPlaying, isRecording, playBeat, setStep, steps, tempo, metronome]);
