@@ -2,7 +2,7 @@ import { BsCaretRightFill } from "react-icons/bs";
 import SeqInput from "../controls/SeqInput";
 import { useEffect } from "react";
 
-const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks}) => {
+const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks, barLength }) => {
     useEffect(() => {
         document.getElementById(`step-${step}`).scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
     }, [setSteps, step, steps])
@@ -10,7 +10,7 @@ const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks
     return (
         <div className="sequencer w-full relative flex-1 px-2 max-h-[180px] overflow-y-scroll">
             { [...Array(steps).keys()].map(k => (
-                <div onClick={() => setStep(k)} id={`step-${k}`} key={k} className={`grid grid-cols-4 ${ k < steps - 1 && 'border-b'} border-accent cursor-pointer`}>
+                <div onClick={() => setStep(k)} id={`step-${k}`} key={k} className={`grid grid-cols-4 ${ k < steps - 1 && 'border-b'} ${ (k + 1) % barLength === 0 && 'border-b-2'} border-accent cursor-pointer`}>
                     <div className="flex items-center">{k === step && <BsCaretRightFill className="h-3 w-3 inline"/>} {k < 10 && '0'}{k}</div>
                     <div>{ sequence?.[k]?.note || "---" }</div>
                     <SeqInput 

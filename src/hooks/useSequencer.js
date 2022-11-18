@@ -10,7 +10,7 @@ const SequencerProvider = ({children}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [metronome, setMetronome] = useState(true);
-    const [barLength, setBarLength] = useState(4);
+    const [barLength, setBarLength] = useState(parseInt(localStorage.getItem("BAR")) || 4);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     const prevStep = useRef(0);
 
@@ -60,7 +60,8 @@ const SequencerProvider = ({children}) => {
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
     useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step])  // TODO: first metronome beat doesn't play
-    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
+    useEffect(() => { localStorage.setItem("TEMPO", barLength) }, [barLength]);
+    useEffect(() => { localStorage.setItem("BAR", barLength) }, [barLength]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
 
     useEffect(() => {

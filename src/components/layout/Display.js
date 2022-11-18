@@ -11,7 +11,7 @@ import { useSequencer } from "../../hooks/useSequencer";
 const Display = () => {   
     const { enabled, input, output, passthrough, octave, playNote, stopAll } = useMidi();
     const { bank, bankNames, setBank } = useNTS();
-    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence } = useSequencer();
+    const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(0)
 
@@ -93,6 +93,7 @@ const Display = () => {
                             banks={bankNames} 
                             sequence={sequence} 
                             setSequence={setSequence}
+                            barLength={barLength}
                         />
                 }
             </div>

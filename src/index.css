@@ -59,6 +59,10 @@
 }
 
 @layer components { 
+    .menu-horizontal > :where(li:first-child) > :where(*:not(ul)) {
+        @apply rounded;
+    }
+
     .divider-primary:before,.divider-primary:after{
         @apply bg-primary;
     }

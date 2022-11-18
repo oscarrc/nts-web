@@ -15,7 +15,7 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
-    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome } = useSequencer();
+    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome, barLength, setBarLength } = useSequencer();
 
     const openRenameBanks = () => {
         const Banks = lazy(() => import('../../views/modals/Banks'));
@@ -65,6 +65,8 @@ const Header = () => {
         const data = await loadFile(e);
         Object.keys(data.bank).forEach(b => restoreBank(b, data.bank[b]))
         if(data.seq) setSequence(data.seq);
+        if(data.tempo) setTempo(data.tempo);
+        if(data.barLength) setBarLength(data.barLength);
     }
 
     const importBank = async (e) => { 
@@ -80,7 +82,9 @@ const Header = () => {
     const exportData = () => {
         const data = {
             bank: [],
-            seq: {}
+            seq: JSON.parse(localStorage.getItem(`SEQ`)) || sequence,
+            tempo: JSON.parse(localStorage.getItem(`TEMPO`)) || tempo,            
+            barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength
         };
         
         [...Array(15).keys()].forEach( (b) => {
@@ -91,9 +95,6 @@ const Header = () => {
                 values: bank
             };
         });
-
-        const seq = JSON.parse(localStorage.getItem(`SEQ`)) || sequence;
-        if(seq) data.seq = seq;
         
         downloadFile(data, "ntsweb", "DATA");
     }
@@ -163,7 +164,7 @@ const Header = () => {
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
                         <label aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
                         <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
-                            <Tempo tempo={tempo} onChange={setTempo} onToggle={setMetronome} metronome={metronome} />
+                            <Tempo tempo={tempo} onTempoChange={setTempo} barLength={barLength} onBarChange={setBarLength} onToggle={setMetronome} metronome={metronome} />
                         </div>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">
