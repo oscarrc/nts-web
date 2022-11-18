@@ -59,6 +59,7 @@ const SequencerProvider = ({children}) => {
     }
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
+    useEffect(() => { isPlaying && isRecording && setIsRecording(false) }, [isPlaying, isRecording]);
     useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step]);
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => { localStorage.setItem("BAR", barLength) }, [barLength]);
