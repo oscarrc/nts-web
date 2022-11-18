@@ -1,9 +1,6 @@
 import { BsDash, BsPlus } from "react-icons/bs";
-import { useEffect, useRef } from "react";
 
 const Tempo = ({ tempo, metronome, barLength, onTempoChange, onBarChange, onToggle }) => {
-    const checkboxRef = useRef(null);
-
     const setTempo = (e) => {
         const value = parseInt(e)
         if(typeof value === "number" && value > 0) onTempoChange(value)
@@ -17,10 +14,6 @@ const Tempo = ({ tempo, metronome, barLength, onTempoChange, onBarChange, onTogg
     const toggleMetronome = (e) => {
         onToggle(!metronome)
     }
-
-    // useEffect(() => {
-    //     onToggle(checkboxRef.current.checked)
-    // }, [checkboxRef?.current?.checked, onToggle])
 
     return (
         <div className="flex flex-col gap-4">
