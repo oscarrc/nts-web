@@ -31,13 +31,15 @@ const Tempo = ({ tempo, metronome, onChange, onToggle }) => {
                 <button aria-label="BPM up" onClick={ () => setValue(tempo + 1) } className="px-2 btn btn-ghost btn-pushable outline-neutral border-secondary text-secondary btn-sm rounded-l-none"><BsPlus className="h-4 w-4" /></button>
             </div>
             <div className="form-control">
-                    <input 
-                        
+                <label className="cursor-pointer label"> 
+                    <span class="label-text">Metronome</span> 
+                    <input                         
                         aria-label="Metronome sound" 
                         type="radio" 
                         value="ON"
                         className="toggle toggle-secondary checked:toggle-accent " 
                     />
+                </label>
             </div>
         </div>
     )

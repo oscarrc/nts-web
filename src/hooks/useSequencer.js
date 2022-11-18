@@ -1,10 +1,9 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 const SequencerContext = createContext();
 
 const SequencerProvider = ({children}) => {
     //TODO: sequencer
-    //TODO: Audible metronome
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
     const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
@@ -13,6 +12,25 @@ const SequencerProvider = ({children}) => {
     const [metronome, setMetronome] = useState(false);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     const prevStep = useRef(0);
+
+    const audioContext = useRef(new AudioContext());
+
+    const playBeat = useCallback((step) => {
+        const osc = audioContext.current.createOscillator();
+        const envelope = audioContext.current.createGain();
+        const time = audioContext.current.currentTime;
+        
+        osc.frequency.value = (step % 4 === 0) ? 1000 : 800;
+        envelope.gain.value = 1;
+        envelope.gain.exponentialRampToValueAtTime(1, time + 0.001);
+        envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.02);        
+
+        osc.connect(envelope);
+        envelope.connect(audioContext.current.destination);
+
+        osc.start(time);
+        osc.stop(time + 0.03);
+    }, [audioContext])
 
     const stepStart = (note,bank) => {
         prevStep.current = step;
@@ -42,14 +60,22 @@ const SequencerProvider = ({children}) => {
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
+
     useEffect(() => {
         let interval;
-
-        if(isPlaying) interval = setInterval(() => { setStep( s => s === steps -1 ? 0 : s + 1) }, 60000/tempo);
-        else clearInterval(interval);
+        
+        if(isPlaying) {
+            interval = setInterval(() => { 
+                let next = step === steps - 1 ? 0 : step + 1
+                setStep(next);  
+                isRecording && playBeat(next);    
+            }, 60000/tempo);
+        }else{
+            clearInterval(interval)
+        };
 
         return () => clearInterval(interval);
-    }, [isPlaying, setStep, steps, tempo]);
+    }, [isPlaying, isRecording, playBeat, setStep, step, steps, tempo]);
 
     return (
         <SequencerContext.Provider value={{
