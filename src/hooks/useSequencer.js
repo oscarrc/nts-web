@@ -10,6 +10,7 @@ const SequencerProvider = ({children}) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [metronome, setMetronome] = useState(true);
+    const [barLength, setBarLength] = useState(4);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     const prevStep = useRef(0);
 
@@ -20,7 +21,7 @@ const SequencerProvider = ({children}) => {
         const envelope = audioContext.current.createGain();
         const time = audioContext.current.currentTime;
        
-        osc.frequency.value = (step % 4 === 0) ? 1000 : 800;
+        osc.frequency.value = (step % barLength === 0) ? 1000 : 800;
         envelope.gain.value = 1;
         envelope.gain.exponentialRampToValueAtTime(1, time + 0.001);
         envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.02);        
@@ -30,7 +31,7 @@ const SequencerProvider = ({children}) => {
 
         osc.start(time);
         osc.stop(time + 0.03);
-    }, [audioContext])
+    }, [barLength])
 
     const stepStart = (note,bank) => {
         prevStep.current = step;
@@ -73,6 +74,8 @@ const SequencerProvider = ({children}) => {
 
     return (
         <SequencerContext.Provider value={{
+            barLength,
+            setBarLength,
             sequence,
             setSequence,
             step,
