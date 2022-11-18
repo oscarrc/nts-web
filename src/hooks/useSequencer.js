@@ -59,8 +59,8 @@ const SequencerProvider = ({children}) => {
     }
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
-    useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step])  // TODO: first metronome beat doesn't play
-    useEffect(() => { localStorage.setItem("TEMPO", barLength) }, [barLength]);
+    useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step]);
+    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
     useEffect(() => { localStorage.setItem("BAR", barLength) }, [barLength]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
 

@@ -14,9 +14,9 @@ const Tempo = ({ tempo, metronome, barLength, onTempoChange, onBarChange, onTogg
         if(typeof value === "number" && value > 0) onBarChange(value)
     }
 
-    // const toggleMetronome = (e) => {
-    //     onToggle(e.target.checked)
-    // }
+    const toggleMetronome = (e) => {
+        onToggle(!metronome)
+    }
 
     // useEffect(() => {
     //     onToggle(checkboxRef.current.checked)
@@ -53,13 +53,15 @@ const Tempo = ({ tempo, metronome, barLength, onTempoChange, onBarChange, onTogg
                 </div>
             </div>
             <div className="form-control">
-                <label className="cursor-pointer label"> 
+                <label className="cursor-pointer label" onClick={ toggleMetronome }> 
                     <span className="label-text">Metronome</span> 
                     <input                         
                         aria-label="Metronome sound" 
-                        type="radio" 
-                        value="ON"
-                        className="toggle toggle-secondary checked:toggle-accent " 
+                        type="checkbox" 
+                        value="METRONOME_ON"
+                        checked={ metronome }
+                        className="toggle toggle-secondary checked:toggle-accent toggle-sm" 
+                        readOnly
                     />
                 </label>
             </div>
