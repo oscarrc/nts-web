@@ -10,7 +10,7 @@ const SeqInput = ({label, value, options, min, max, onChange, className}) => {
     }
     
     return (
-        <div className="flex w-full group">
+        <div className="flex w-full group gap-1">
             <input 
                 aria-label={label}
                 type="text"
@@ -22,10 +22,10 @@ const SeqInput = ({label, value, options, min, max, onChange, className}) => {
                 disabled={options}
             />
             <div className="flex flex-col invisible group-hover:visible items-center">
-                <button aria-label={`increment ${label}`} className="flex-1 mx-1" onClick={() => handleValue(value + 1) }>
+                <button aria-label={`increment ${label}`} className="flex-1" onClick={() => handleValue(value + 1) }>
                     <BsCaretUpFill className="h-3 w-3" />
                 </button>
-                <button aria-label={`decrement ${label}`} className="flex-1 mx-1"  onClick={() => handleValue(value - 1) }>
+                <button aria-label={`decrement ${label}`} className="flex-1"  onClick={() => handleValue(value - 1) }>
                     <BsCaretDownFill className="h-3 w-3" />
                 </button>
             </div>

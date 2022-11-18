@@ -32,7 +32,7 @@ const Tempo = ({ tempo, metronome, onChange, onToggle }) => {
             </div>
             <div className="form-control">
                 <label className="cursor-pointer label"> 
-                    <span class="label-text">Metronome</span> 
+                    <span className="label-text">Metronome</span> 
                     <input                         
                         aria-label="Metronome sound" 
                         type="radio" 

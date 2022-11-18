@@ -98,12 +98,12 @@ const Display = () => {
             </div>
             <div className="grid grid-cols-8 gap-4 justify-between">
                 <div className="flex col-span-2 gap-1">
-                    <button onClick={handleUp} aria-label="Up" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
-                    <button onClick={handleDown} aria-label="Down" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
+                    <button onClick={handleUp} aria-label="Up" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretUpFill className="h-4 w-4" /> </button>
+                    <button onClick={handleDown} aria-label="Down" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
                 </div>
                 <div className="flex col-span-2 gap-1">
-                    <button onClick={removeStep} aria-label="Remove step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
-                    <button onClick={addStep} aria-label="Add step" className="btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
+                    <button onClick={removeStep} aria-label="Remove step" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
+                    <button onClick={addStep} aria-label="Add step" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
                 </div>
                 <button onClick={toggleRecording} aria-label="Toggle Record" className={`col-span-2 btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
                 <button onClick={togglePlay} aria-label="Play/Pause" className={`col-span-2 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>
