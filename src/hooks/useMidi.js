@@ -76,10 +76,7 @@ const MidiProvider = ({ children }) => {
             ...( velocity && { velocity } ),
             ...( duration && { duration } )
         }
-        
-        if(velocity) options.velocity = velocity;
-        if(duration) options.duration = duration;
-            
+                    
         if(output){
             if(play) output.playNote(note, options);
             else output.stopNote(note, options);
