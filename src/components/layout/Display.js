@@ -13,7 +13,7 @@ const Display = () => {
     const { bank, bankNames, setBank } = useNTS();
     const { step, setStep, steps, setSteps, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
-    const [ bpmIndicator, setBpmIndicator ] = useState(0)
+    const [ bpmIndicator, setBpmIndicator ] = useState(1)
 
     const handleUp = () => {       
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
@@ -40,7 +40,6 @@ const Display = () => {
     const playStep = useCallback((step) => {
         let duration = step.length * 60000/tempo
         if(step.bank !== bank) setBank(step.bank);
-        console.log(typeof duration, duration)
         playNote(step.note, true, false, duration);
     }, [bank, playNote, setBank, tempo])
 
