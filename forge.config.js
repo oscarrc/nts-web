@@ -1,38 +1,24 @@
 module.exports = {
   packagerConfig: {
-    icon: 'src/assets/icons/icon'
+    name: "NTS-web"
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {
-        name: "NTS-web"
-      },
+      config: {},
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin', 'linux']
+      platforms: ['darwin'],
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {
-        options: {
-          maintainer: 'Oscar R.C.',
-          homepage: 'https://oscarrc.me',
-          icon: 'src/assets/icons/icon.png'
-        }
-      }
+      config: {},
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {
-        options: {
-          maintainer: 'Oscar R.C.',
-          homepage: 'https://oscarrc.me',
-          icon: 'src/assets/icons/icon.png'
-        }
-      }
+      config: {},
     },
   ],
 };

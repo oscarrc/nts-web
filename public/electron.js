@@ -25,6 +25,8 @@ function createWindow() {
     }
   });
 
+  win.setMenuBarVisibility(false);
+
   win.loadURL(
     isDev
       ? "http://localhost:3000"
