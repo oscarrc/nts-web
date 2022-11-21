@@ -1,6 +1,6 @@
 const path = require("path");
 
-const { app, BrowserWindow } = require("electron");
+const { app, screen, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 
 let installExtension, REACT_DEVELOPER_TOOLS;
@@ -15,29 +15,25 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-function createWindow() {
-  // Create the browser window.
+const createWindow = (width, height) => {
   const win = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width,
+    height,
     webPreferences: {
       nodeIntegration: true
     }
   });
-
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
-
-  if (isDev) {
-    win.webContents.openDevTools({ mode: "detach" });
-  }
+  
+  win.maximize();
+  win.setMenuBarVisibility(false);
+  win.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
+  
+  if (isDev) win.webContents.openDevTools({ mode: "detach" });
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  const {width, height} = screen.getPrimaryDisplay().workAreaSize;
+  createWindow(width, height);
 
   if (isDev) {
     installExtension(REACT_DEVELOPER_TOOLS)
@@ -54,6 +50,7 @@ app.on("window-all-closed", () => {
 
 app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
+    const {width, height} = screen.getPrimaryDisplay().workAreaSize;
+    createWindow(width, height);
   }
 });

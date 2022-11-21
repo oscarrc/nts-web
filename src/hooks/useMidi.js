@@ -45,7 +45,6 @@ const MidiProvider = ({ children }) => {
     const [channels, setChannels] = useReducer(ChannelReducer, defaultChannels);
     const [enabled, setEnabled] = useState(WebMidi.enabled);
     const [octave, setOctave] = useState(parseInt(localStorage.getItem("OCTAVE")) || 3);
-    const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
     
     const input = useMemo(() => devices.inputDevices[devices.input], [devices.input, devices.inputDevices]);
     const output = useMemo(() => devices.outputDevices[devices.output], [devices.output, devices.outputDevices]);
@@ -77,13 +76,17 @@ const MidiProvider = ({ children }) => {
             ...( velocity && { velocity } ),
             ...( duration && { duration } )
         }
-        if(velocity) options.velocity = velocity;
-        if(duration) options.duration = duration*1000;
-    
+                    
         if(output){
             if(play) output.playNote(note, options);
             else output.stopNote(note, options);
         }
+    }
+
+    const stopAll = () => {
+        output && output.sendAllNotesOff({
+            channels: channelList[channels.output]
+        });
     }
     
     const controlChange = (cc, value) => {
@@ -96,7 +99,6 @@ const MidiProvider = ({ children }) => {
 
     useEffect(() => { init() }, [init]);
     useEffect(() => { localStorage.setItem("OCTAVE", octave) }, [octave]);
-    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
 
     useEffect(() => {
         !WebMidi.hasListener("connected", parseDevices) && WebMidi.addListener("connected", parseDevices)
@@ -130,8 +132,7 @@ const MidiProvider = ({ children }) => {
             playNote, 
             controlChange, 
             pitchBend,
-            tempo,
-            setTempo
+            stopAll
         }}>
             { children }
         </MidiContext.Provider>

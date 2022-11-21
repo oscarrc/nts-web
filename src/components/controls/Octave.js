@@ -7,7 +7,7 @@ const Octave = ({ octave, setOctave }) => {
             window.navigator.vibrate(vibration);
         }
         if(q < 0 && octave > 0) setOctave(o => o - 1)
-        if(q > 0 && octave < 6) setOctave(o => o + 1)
+        if(q > 0 && octave < 11) setOctave(o => o + 1)
     }
 
     return (

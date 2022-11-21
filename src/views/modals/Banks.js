@@ -1,5 +1,5 @@
-import { useLayout } from "../hooks/useLayout";
-import { useNTS } from "../hooks/useNTS";
+import { useLayout } from "../../hooks/useLayout";
+import { useNTS } from "../../hooks/useNTS";
 
 const Banks = () => {
     const { handleModal } = useLayout();

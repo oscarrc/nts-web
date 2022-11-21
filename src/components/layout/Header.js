@@ -6,7 +6,6 @@ import { GiMetronome } from "react-icons/gi"
 import Tempo from "../../components/controls/Tempo";
 import korg from '../../assets/korg.svg';
 import { useLayout } from "../../hooks/useLayout";
-import { useMidi } from "../../hooks/useMidi";
 import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
@@ -16,16 +15,15 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
-    const { tempo, setTempo } = useMidi();
-    const { sequence, setSequence } = useSequencer();
+    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome, barLength, setBarLength } = useSequencer();
 
     const openRenameBanks = () => {
-        const Banks = lazy(() => import('../../views/Banks'));
+        const Banks = lazy(() => import('../../views/modals/Banks'));
         handleModal(<Banks />);
     }
 
     const openSettings = () => {
-        const Settings = lazy(() => import('../../views/Settings'));
+        const Settings = lazy(() => import('../../views/modals/Settings'));
         handleModal(<Settings />);
     }
 
@@ -67,6 +65,8 @@ const Header = () => {
         const data = await loadFile(e);
         Object.keys(data.bank).forEach(b => restoreBank(b, data.bank[b]))
         if(data.seq) setSequence(data.seq);
+        if(data.tempo) setTempo(data.tempo);
+        if(data.barLength) setBarLength(data.barLength);
     }
 
     const importBank = async (e) => { 
@@ -82,7 +82,9 @@ const Header = () => {
     const exportData = () => {
         const data = {
             bank: [],
-            seq: {}
+            seq: JSON.parse(localStorage.getItem(`SEQ`)) || sequence,
+            tempo: JSON.parse(localStorage.getItem(`TEMPO`)) || tempo,            
+            barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength
         };
         
         [...Array(15).keys()].forEach( (b) => {
@@ -93,9 +95,6 @@ const Header = () => {
                 values: bank
             };
         });
-
-        const seq = JSON.parse(localStorage.getItem(`SEQ`)) || sequence;
-        if(seq) data.seq = seq;
         
         downloadFile(data, "ntsweb", "DATA");
     }
@@ -113,6 +112,8 @@ const Header = () => {
         const data = JSON.parse(localStorage.getItem(`SEQ`));
         downloadFile(data, "ntsseq", `SEQUENCE`);
     }
+
+    const clearSequence = () => setSequence({});
     
     return (
         <header className="navbar flex-col gap-4 sm:flex-row min-h-[4rem]">
@@ -138,11 +139,14 @@ const Header = () => {
                                 <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load bank">Load bank</button>
                             </li>
                             <li> 
+                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
+                            </li>
+                            <li> 
                                 <input onChange={ importSequence } ref={ seqSelectorRef } type="file" className="hidden" accept=".ntsseq"/>
                                 <button className="btn-sm" onClick={ () => seqSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
                             </li>
                             <li> 
-                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
+                                <button className="btn-sm" onClick={ clearSequence } aria-label="Manage banks">Clear sequence</button>
                             </li>
                         </ul>
                     </li>
@@ -160,7 +164,7 @@ const Header = () => {
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
                         <label aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
                         <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
-                            <Tempo tempo={tempo} onChange={setTempo} />
+                            <Tempo tempo={tempo} onTempoChange={setTempo} barLength={barLength} onBarChange={setBarLength} onToggle={setMetronome} metronome={metronome} />
                         </div>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">

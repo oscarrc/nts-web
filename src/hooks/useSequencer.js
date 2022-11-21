@@ -1,40 +1,108 @@
-import { useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
-const useSequencer = (tempo) => {
+const SequencerContext = createContext();
+
+const SequencerProvider = ({children}) => {
     //TODO: sequencer
     const [step, setStep] = useState(0);
     const [steps, setSteps] = useState(16)
-    const [sequence, setSequence] = useState([]);
+    const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
+    const [metronome, setMetronome] = useState(true);
+    const [barLength, setBarLength] = useState(parseInt(localStorage.getItem("BAR")) || 4);
+    const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
+    const prevStep = useRef(0);
 
-    useEffect(() => { isPlaying && setIsRecording(false) }, [isPlaying]);
-    useEffect(() => { isRecording && setIsPlaying(false) }, [isRecording]);    
+    const audioContext = useRef(new AudioContext());
+
+    const playBeat = useCallback((step) => {
+        const osc = audioContext.current.createOscillator();
+        const envelope = audioContext.current.createGain();
+        const time = audioContext.current.currentTime;
+       
+        osc.frequency.value = (step % barLength === 0) ? 1000 : 800;
+        envelope.gain.value = 1;
+        envelope.gain.exponentialRampToValueAtTime(1, time + 0.001);
+        envelope.gain.exponentialRampToValueAtTime(0.001, time + 0.02);        
+
+        osc.connect(envelope);
+        envelope.connect(audioContext.current.destination);
+
+        osc.start(time);
+        osc.stop(time + 0.03);
+    }, [barLength])
+
+    const stepStart = (note,bank) => {
+        prevStep.current = step;
+
+        setSequence( s => ({
+            ...s, 
+            [step]: {
+                note,
+                bank,
+                length: 1
+            }}
+        ))
+    }
+
+    const stepEnd = () => {
+        const length =  step - prevStep.current + 1;
+
+        setSequence( s => ({
+            ...s,
+            [prevStep.current]: { 
+                ...s[prevStep.current],
+                length: length < 1 ? 1 : length
+            }
+        }))
+    }
+
+    useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
+    useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step]);
+    useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
+    useEffect(() => { localStorage.setItem("BAR", barLength) }, [barLength]);
+    useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
+
     useEffect(() => {
         let interval;
-
-        if(isPlaying) interval = setInterval(() => { setStep( s => s === steps -1 ? 0 : s + 1) }, 60000/tempo);
+        
+        if(isPlaying) interval = setInterval(() => setStep(s => s === steps - 1 ? 0 : s + 1), 60000/tempo);
         else clearInterval(interval);
 
         return () => clearInterval(interval);
-    }, [isPlaying, setStep, steps, tempo]);
+    }, [isPlaying, isRecording, playBeat, setStep, steps, tempo, metronome]);
 
-    useEffect(() => {
-        console.log(sequence[step])
-    }, [step, sequence])
-
-    return {
-        sequence,
-        setSequence,
-        step,
-        setStep,
-        steps,
-        setSteps,
-        isPlaying,
-        setIsPlaying,
-        isRecording,
-        setIsRecording
-    }
+    return (
+        <SequencerContext.Provider value={{
+            barLength,
+            setBarLength,
+            sequence,
+            setSequence,
+            step,
+            setStep,
+            steps,
+            setSteps,
+            stepStart,
+            stepEnd,
+            isPlaying,
+            setIsPlaying,
+            isRecording,
+            setIsRecording,
+            tempo,
+            setTempo,
+            metronome,
+            setMetronome
+        }}>
+            {children}
+        </SequencerContext.Provider>
+    )
 }
 
-export { useSequencer };
+const useSequencer = () => {
+    const context = useContext(SequencerContext);
+    if(context === undefined) throw new Error("useSequencer must be used within a SequencerProvider")
+    return context;
+}
+
+export { useSequencer, SequencerProvider };
