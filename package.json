@@ -6,8 +6,9 @@
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com",
     "url": "https://oscarrc.me"
-  },  
+  },
   "main": "public/electron.js",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

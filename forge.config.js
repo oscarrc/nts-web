@@ -1,6 +1,8 @@
 module.exports = {
   packagerConfig: {
-    name: "NTS-web"
+    name: "NTS-web",
+    asar: true,
+    ignore: ["^/android$"]
   },
   rebuildConfig: {},
   makers: [
