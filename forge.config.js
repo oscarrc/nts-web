@@ -2,7 +2,7 @@ module.exports = {
   packagerConfig: {
     name: "NTS-web",
     asar: true,
-    ignore: ["^/android$"]
+    ignore: ["^/android$", "^/build$", "^/public$"]
   },
   rebuildConfig: {},
   makers: [
@@ -12,15 +12,25 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      platforms: ['win32'],
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          maintainer: 'Oscar R.C.',
+          homepage: 'https://oscarrc.me'
+        }
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      config: {
+        options: {
+          maintainer: 'Oscar R.C.',
+          homepage: 'https://oscarrc.me'
+        }
+      },
     },
   ],
 };
