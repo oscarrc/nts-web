@@ -15,8 +15,8 @@ const Selector = ({id, value = 0, options, label, onChange, display}) => {
     useEffect(() => setValue(value), [value]);
     useEffect(() => { // TODO: debug selector not being updated en realtime
         if(selectorRef.current) selectorRef.current.max = options.length - 1;
-        typeof selectorRef.current?.refresh === "function" && selectorRef.current?.refresh()
-        typeof selectorRef.current?.redraw === "function" && selectorRef.current?.redraw();
+        (typeof selectorRef.current?.refresh === "function") && selectorRef.current?.refresh()
+        (typeof selectorRef.current?.redraw === "function") && selectorRef.current?.redraw();
     }, [options.length, selectorRef.current?.max]);
 
     useEffect(() => {
