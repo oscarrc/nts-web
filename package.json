@@ -26,7 +26,8 @@
     "bubblewrap:build": "bubblewrap build --manifest https://nts-web.oscarrc.me/manifest.json",
     "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
-    "electron:build": "npm run build && electron-builder build -lw --x64 --ia32"
+    "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
+    "electron:build:linux": "npm run build && electron-builder build -l --x64 --ia32"
   },
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
