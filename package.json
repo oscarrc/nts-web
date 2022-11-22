@@ -40,7 +40,8 @@
     },
     "win": {
       "target": ["nsis", "portable", "squirrel"],
-      "icon": "src/assets/icon.ico"
+      "icon": "src/assets/icon.ico",
+      "iconUrl": "https://raw.githubusercontent.com/oscarrc/nts-web/master/public/icon.ico"
     },
     "linux": {
       "target": ["deb", "rpm", "AppImage"],
