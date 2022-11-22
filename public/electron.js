@@ -4,14 +4,31 @@ const url = require("url");
 
 let installExtension, REACT_DEVELOPER_TOOLS;
 
-if (!app.isPackaged) {
-  const devTools = require("electron-devtools-installer");
-  installExtension = devTools.default;
-  REACT_DEVELOPER_TOOLS = devTools.REACT_DEVELOPER_TOOLS;
-}
+// if (!app.isPackaged) {
+//   const devTools = require("electron-devtools-installer");
+//   installExtension = devTools.default;
+//   REACT_DEVELOPER_TOOLS = devTools.REACT_DEVELOPER_TOOLS;
+// }
 
-if (require("electron-squirrel-startup")) {
-  app.quit();
+const handleStartup = () => {
+  if (process.platform !== 'win32') return false;
+
+  let squirrelCommand = process.argv[1];
+
+  switch (squirrelCommand) {
+    case '--squirrel-install':
+    case '--squirrel-updated':
+      app.quit();
+      return true;
+    case '--squirrel-uninstall':
+      app.quit();
+      return true;
+    case '--squirrel-obsolete':
+      app.quit();
+      return true;
+    default:
+      break;
+  }
 }
 
 const createWindow = () => {  
@@ -35,26 +52,26 @@ const createWindow = () => {
 }
 
 const setupLocalFilesNormalizerProxy = () =>  {
-  protocol.registerHttpProtocol("file",
-    (request, callback) => {
+  protocol.registerHttpProtocol("file", (request, callback) => {
+    if(!request.url) console.error("Failed to register protocol");
+    else {        
       const url = request.url.substr(8);
       callback({ path: path.normalize(`${__dirname}/${url}`) });
-    },
-    (error) => {
-      if (error) console.error("Failed to register protocol");
     }
-  );
+  });
 }
+
+handleStartup();
 
 app.whenReady().then(() => {
   createWindow();
   setupLocalFilesNormalizerProxy();
 
-  if (!app.isPackaged ) {
-    installExtension(REACT_DEVELOPER_TOOLS)
-      .then(name => console.log(`Added Extension:  ${name}`))
-      .catch(error => console.log(`An error occurred: , ${error}`));
-  }
+  // if (!app.isPackaged ) {
+  //   installExtension(REACT_DEVELOPER_TOOLS)
+  //     .then(name => console.log(`Added Extension:  ${name}`))
+  //     .catch(error => console.log(`An error occurred: , ${error}`));
+  // }
 });
 
 app.on("activate", () => {
