@@ -2,10 +2,10 @@ import { BsCaretRightFill } from "react-icons/bs";
 import SeqInput from "../controls/SeqInput";
 import { useEffect } from "react";
 
-const Sequencer = ({step, setStep, steps, setSteps, sequence, setSequence, banks, barLength }) => {
+const Sequencer = ({step, setStep, steps, sequence, setSequence, banks, barLength }) => {
     useEffect(() => {
         document.getElementById(`step-${step}`).scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
-    }, [setSteps, step, steps])
+    }, [step, steps])
 
     return (
         <div className="sequencer w-full relative flex-1 px-2 max-h-[180px] overflow-y-scroll">
