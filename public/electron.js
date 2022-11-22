@@ -2,14 +2,6 @@ const { app, BrowserWindow, protocol, screen } = require("electron");
 const path = require("path");
 const url = require("url");
 
-let installExtension, REACT_DEVELOPER_TOOLS;
-
-// if (!app.isPackaged) {
-//   const devTools = require("electron-devtools-installer");
-//   installExtension = devTools.default;
-//   REACT_DEVELOPER_TOOLS = devTools.REACT_DEVELOPER_TOOLS;
-// }
-
 const handleStartup = () => {
   if (process.platform !== 'win32') return false;
 
@@ -66,12 +58,6 @@ handleStartup();
 app.whenReady().then(() => {
   createWindow();
   setupLocalFilesNormalizerProxy();
-
-  // if (!app.isPackaged ) {
-  //   installExtension(REACT_DEVELOPER_TOOLS)
-  //     .then(name => console.log(`Added Extension:  ${name}`))
-  //     .catch(error => console.log(`An error occurred: , ${error}`));
-  // }
 });
 
 app.on("activate", () => {
