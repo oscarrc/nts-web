@@ -16,7 +16,7 @@ const Sequencer = ({step, setStep, steps, sequence, setSequence, banks, barLengt
                         className="text-left"
                         label="Note"
                         value={ sequence?.[k]?.note } 
-                        validation="^[C,D,E,F,G,A,B]{1}[\#]??(10|[1-9]){1}"
+                        validation="^([CcDdEeFfGgAaBb]){1}[\#]??(10|[1-9]){1}"
                         onChange={ (v) => setSequence( s => ({...s, [k]: { ...s[k], note: v }}) ) }
                     />
                     <SeqInput 
