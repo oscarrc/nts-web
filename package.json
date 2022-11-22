@@ -7,13 +7,51 @@
     "email": "oscarrc.web@gmail.com",
     "url": "https://oscarrc.me"
   },
-  "main": "build/electron.js",
+  "repository": {
+    "url": "https://github.com/oscarrc/nts-web",
+    "type": "git"
+  },
+  "main": "public/electron.js",
   "homepage": "./",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "compress-cra",
+    "predeploy": "npm run build && cp build/index.html build/200.html",
+    "deploy": "surge build nts-web.oscarrc.me",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory android/",
+    "bubblewrap:build": "bubblewrap build --manifest https://nts-web.oscarrc.me/manifest.json",
+    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
+    "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
+    "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
+    "electron:build:linux": "npm run build && electron-builder build -l --x64 --ia32"
+  },
+  "build": {
+    "appId": "me.oscarrc.nts_web.twa",
+    "productName": "NTS-web",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "src/assets/icon.ico"
+    },
+    "linux": {
+      "target": ["deb", "rpm", "AppImage"],
+      "maintainer": "Oscar R.C. <https://oscrrc.me>",
+      "synopsis": "A web controller for the Korg NTS-1",
+      "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
+      "icon": "src/assets/512x512.png"
+    }
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -33,20 +71,22 @@
     "workbox-strategies": "^6.5.4",
     "workbox-streams": "^6.5.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "compress-cra",
-    "predeploy": "npm run build && cp build/index.html build/200.html",
-    "deploy": "surge build nts-web.oscarrc.me",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory android/",
-    "bubblewrap:build": "bubblewrap build --manifest https://nts-web.oscarrc.me/manifest.json",
-    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
-    "electron:start": "electron-forge start",
-    "electron:package": "npm run build && electron-forge package",
-    "electron:make": "npm run build && electron-forge make"
+  "devDependencies": {
+    "@bubblewrap/cli": "^1.18.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "autoprefixer": "^10.4.12",
+    "compress-create-react-app": "^1.3.1",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "daisyui": "^2.41.0",
+    "electron": "^21.2.2",
+    "electron-builder": "^23.6.0",
+    "electronmon": "^2.0.2",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1",
+    "wait-on": "^6.0.1"
   },
   "eslintConfig": {
     "extends": [
@@ -66,22 +106,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@bubblewrap/cli": "^1.18.1",
-    "@electron-forge/cli": "^6.0.3",
-    "@electron-forge/maker-deb": "^6.0.3",
-    "@electron-forge/maker-rpm": "^6.0.3",
-    "@electron-forge/maker-squirrel": "^6.0.3",
-    "@electron-forge/maker-zip": "^6.0.3",
-    "autoprefixer": "^10.4.12",
-    "compress-create-react-app": "^1.3.1",
-    "daisyui": "^2.41.0",
-    "electron": "^21.2.2",
-    "electron-devtools-installer": "^3.2.0",
-    "electron-is-dev": "^2.0.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.1"
   }
 }

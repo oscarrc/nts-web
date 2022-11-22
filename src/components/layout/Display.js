@@ -27,14 +27,14 @@ const Display = () => {
         else setStep(0);
     }
     
-    const addStep = () => {        
+    const addBar = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
-        setSteps(s => s+1);
+        setSteps(s => s + barLength);
     }
     
-    const removeStep = () => {       
+    const removeBar = () => {       
         window.navigator.vibrate && window.navigator.vibrate(step > 0 ? 10 : 50);
-        steps > 0 && setSteps(s => s-1);
+        steps > barLength && setSteps(s => s - barLength);
     }
     
     const playStep = useCallback((step) => {
@@ -103,8 +103,8 @@ const Display = () => {
                     <button onClick={handleDown} aria-label="Down" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsCaretDownFill className="h-4 w-4" /> </button>
                 </div>
                 <div className="flex col-span-2 gap-1">
-                    <button onClick={removeStep} aria-label="Remove step" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
-                    <button onClick={addStep} aria-label="Add step" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
+                    <button onClick={removeBar} aria-label="Add bar" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsDash className="h-4 w-4" /> </button>
+                    <button onClick={addBar} aria-label="Remove bar" className="flex-1 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs"> <BsPlus className="h-4 w-4" /> </button>
                 </div>
                 <button onClick={toggleRecording} aria-label="Toggle Record" className={`col-span-2 btn btn-outline btn-accent btn-xs ${isRecording ? "animate-blink" : ""}`}> <BsFillCircleFill className="h-2 w-2" /> </button>
                 <button onClick={togglePlay} aria-label="Play/Pause" className={`col-span-2 btn btn-ghost btn-pushable border-secondary text-secondary btn-xs ${isPlaying ? "btn-pushed" : ""}`}> { isPlaying ? <BsFillPauseFill className="h-4 w-4"/> : <BsPlayFill className="h-4 w-4" />} </button>

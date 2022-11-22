@@ -1,21 +1,10 @@
+const { app, BrowserWindow, protocol, screen } = require("electron");
 const path = require("path");
+const url = require("url");
 
-const { app, screen, BrowserWindow } = require("electron");
-const isDev = require("electron-is-dev");
+const createWindow = () => {  
+  const {width, height} = screen.getPrimaryDisplay().workAreaSize;
 
-let installExtension, REACT_DEVELOPER_TOOLS;
-
-if (isDev) {
-  const devTools = require("electron-devtools-installer");
-  installExtension = devTools.default;
-  REACT_DEVELOPER_TOOLS = devTools.REACT_DEVELOPER_TOOLS;
-}
-
-if (require("electron-squirrel-startup")) {
-  app.quit();
-}
-
-const createWindow = (width, height) => {
   const win = new BrowserWindow({
     width,
     height,
@@ -23,34 +12,37 @@ const createWindow = (width, height) => {
       nodeIntegration: true
     }
   });
+
+  const appUrl = !app.isPackaged ? "http://localhost:3000" : url.format({ pathname: path.join(__dirname, "index.html"), protocol: "file:", slashes: true })
   
   win.maximize();
   win.setMenuBarVisibility(false);
-  win.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
+  win.loadURL(appUrl);
   
-  if (isDev) win.webContents.openDevTools({ mode: "detach" });
+  if (!app.isPackaged ) win.webContents.openDevTools({ mode: "detach" });
+}
+
+const setupLocalFilesNormalizerProxy = () =>  {
+  protocol.registerHttpProtocol("file", (request, callback) => {
+    if(!request.url) console.error("Failed to register protocol");
+    else {        
+      const url = request.url.substr(8);
+      callback({ path: path.normalize(`${__dirname}/${url}`) });
+    }
+  });
 }
 
 app.whenReady().then(() => {
-  const {width, height} = screen.getPrimaryDisplay().workAreaSize;
-  createWindow(width, height);
+  createWindow();
+  setupLocalFilesNormalizerProxy();
+});
 
-  if (isDev) {
-    installExtension(REACT_DEVELOPER_TOOLS)
-      .then(name => console.log(`Added Extension:  ${name}`))
-      .catch(error => console.log(`An error occurred: , ${error}`));
-  }
+app.on("activate", () => {
+  if (BrowserWindow.getAllWindows().length === 0) createWindow();
 });
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    const {width, height} = screen.getPrimaryDisplay().workAreaSize;
-    createWindow(width, height);
   }
 });
