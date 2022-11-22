@@ -2,27 +2,6 @@ const { app, BrowserWindow, protocol, screen } = require("electron");
 const path = require("path");
 const url = require("url");
 
-const handleStartup = () => {
-  if (process.platform !== 'win32') return false;
-
-  let squirrelCommand = process.argv[1];
-
-  switch (squirrelCommand) {
-    case '--squirrel-install':
-    case '--squirrel-updated':
-      app.quit();
-      return true;
-    case '--squirrel-uninstall':
-      app.quit();
-      return true;
-    case '--squirrel-obsolete':
-      app.quit();
-      return true;
-    default:
-      break;
-  }
-}
-
 const createWindow = () => {  
   const {width, height} = screen.getPrimaryDisplay().workAreaSize;
 
@@ -52,8 +31,6 @@ const setupLocalFilesNormalizerProxy = () =>  {
     }
   });
 }
-
-handleStartup();
 
 app.whenReady().then(() => {
   createWindow();
