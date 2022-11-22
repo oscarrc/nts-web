@@ -19,17 +19,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "icon192.png",
+      "src": "static/media/icons/icon192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "icon512.png",
+      "src": "static/media/icons/icon512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "icon.png",
+      "src": "static/media/icons/icon.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
