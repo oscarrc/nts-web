@@ -59,6 +59,12 @@ const SequencerProvider = ({children}) => {
         }))
     }
 
+    const clearStep = (step) => {
+        let s = sequence;
+        delete s[step];
+        setSequence(s);
+    }
+
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
     useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step]);
     
@@ -82,21 +88,22 @@ const SequencerProvider = ({children}) => {
             setBars,
             barLength,
             setBarLength,
-            sequence,
-            setSequence,
-            step,
-            steps,
-            setStep,
-            stepStart,
-            stepEnd,
             isPlaying,
             setIsPlaying,
             isRecording,
             setIsRecording,
-            tempo,
-            setTempo,
             metronome,
-            setMetronome
+            setMetronome,
+            sequence,
+            setSequence,
+            step,
+            setStep,
+            clearStep,
+            steps,
+            stepStart,
+            stepEnd,
+            tempo,
+            setTempo
         }}>
             {children}
         </SequencerContext.Provider>

@@ -37,12 +37,14 @@ const Display = () => {
         bars > 1 && setBars(b => b - 1);
     }
     
+    //TODO: Do not switch app bank when playing or recording
     const playStep = useCallback((step) => {
         let duration = step.length * 60000/tempo
         if(step.bank !== bank) setBank(step.bank);
         playNote(step.note, true, false, duration);
     }, [bank, playNote, setBank, tempo])
-
+    
+    //TODO: Go back to current selected bank on stop
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
         setIsPlaying(p => !p);
