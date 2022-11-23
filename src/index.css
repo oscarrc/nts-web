@@ -205,6 +205,11 @@
     .dropdown-context:not(.dropdown-open) .dropdown-content{
         visibility: hidden !important;
     }
+
+    .tab.tab-active {
+        border-color: hsl(var(--p) / var(--tw-border-opacity));
+        color: hsl(var(--p))
+    }
 }
 
 @layer utilities {
