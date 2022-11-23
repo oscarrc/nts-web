@@ -10,7 +10,7 @@ import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
     const { enabled, input, output, passthrough, octave, playNote, stopAll } = useMidi();
-    const { bank, bankNames, setBank } = useNTS();
+    const { bank, bankNames, state, sendControlChange } = useNTS();
     const { step, steps, setStep, bars, setBars, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(1)
@@ -37,16 +37,26 @@ const Display = () => {
         bars > 1 && setBars(b => b - 1);
     }
     
-    //TODO: Do not switch app bank when playing or recording
     const playStep = useCallback((step) => {
-        let duration = step.length * 60000/tempo
-        if(step.bank !== bank) setBank(step.bank);
+        let duration = step.length * 60000/tempo;
+        
+        if(step.bank !== bank) {
+            let b = JSON.stringify(localStorage.getItem(`BANK_${step.bank}`))
+            if(!b) return;
+
+            Object.keys(b).forEach(cc =>  sendControlChange(parseInt(cc), b[cc]));
+        };
+
         playNote(step.note, true, false, duration);
-    }, [bank, playNote, setBank, tempo])
+    }, [bank, playNote, sendControlChange, tempo])    
     
-    //TODO: Go back to current selected bank on stop
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
+
+        if(isPlaying){
+            Object.keys(state).forEach(cc =>  sendControlChange(parseInt(cc), state[cc]));
+        }
+
         setIsPlaying(p => !p);
     }
 
@@ -54,13 +64,17 @@ const Display = () => {
         window.navigator.vibrate && window.navigator.vibrate(10);
         setIsRecording(r => !r)
     }
+
+    const setScreenMessage = (message, timed) => {
+        setMessage(message);
+        if(timed) return setTimeout(() => setMessage(null), 5000)
+    }
+
     useEffect(() => {
         if(!enabled) return setMessage(messages["midi"]);
         else if(!input || !output) return setMessage(messages["nodevice"]);
-        else if(passthrough){
-            setMessage(messages["newdevice"]);
-            return setTimeout(() => setMessage(null), 5000)
-        }else setMessage(null)
+        else if(passthrough) setScreenMessage(messages["newdevice"], true);
+        else setMessage(null);
 
     }, [enabled, input, output, passthrough])
 
