@@ -152,7 +152,8 @@ const NTSProvider = ({ children }) => {
                 bankNames,
                 setBank,
                 restoreBank,
-                renameBank
+                renameBank,
+                sendControlChange
             }}
         >
             { children }

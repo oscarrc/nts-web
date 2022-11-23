@@ -52,7 +52,7 @@ const Display = () => {
     
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
-
+        
         if(isPlaying){
             Object.keys(state).forEach(cc =>  sendControlChange(parseInt(cc), state[cc]));
         }
