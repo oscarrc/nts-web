@@ -1,10 +1,15 @@
+import { AiFillWindows } from "react-icons/ai";
+import { SiLinux } from "react-icons/si";
 import { useLayout } from "../../hooks/useLayout";
+import { usePWA } from "../../hooks/usePWA";
 import { useState } from "react";
 
 const Info = () => {
     const { handleModal } = useLayout();
+    const { supportsPWA, installPWA } = usePWA();
+
     const [ active, setActive ] = useState(0);
-    const sections = ["How it works", "Installation", "Compatibility"]
+    const sections = ["How it works", "Compatibility", "Installation"]
 
     return(
         <div className="card w-full max-w-lg bg-neutral shadow-xl overflow-visible">
@@ -12,15 +17,58 @@ const Info = () => {
                 <div className="tabs">
                     { sections.map((s, i) => <button onClick={ () => setActive(i) } key={i} aria-label={s} className={`flex-1 tab tab-bordered ${ i === active ? "tab-active" : ""}`}>{s}</button>) }
                 </div>
-                <div className="flex">
-                    <div className={`${active === 0 ? "visible" : "hidden" }`}>
-                        TEST 1
+                <div className="flex text-secondary mt-4">
+                    <div className={`${active === 0 ? "visible" : "hidden" } flex-1`}>
+                        <video controls className="w-full h-auto my-4">
+                            <source src="static/media/explainer.mp4" type="video/mp4" />
+                        </video>
                     </div>
-                    <div className={`${active === 1 ? "visible" : "hidden" }`}>
-                        TEST 2
+                    <div className={`${active === 1 ? "visible" : "hidden" } flex-1`}>
+                        <p className="text-justify mb-4">This app makes use of the Web Midi API and the AudioContext API.</p>
+                        <p className="text-justify mb-4">Make sure your browser support those by checking the links below.</p>
+                        <ul className="mb-4">
+                            <li><a className="link link-primary" href="https://caniuse.com/midi" target="_BLANK" rel="noreferrer noopener">Web Midi API</a></li>
+                            <li><a className="link link-primary" href="https://caniuse.com/audio-api" target="_BLANK" rel="noreferrer noopener">Web Audio API </a></li>
+                        </ul>
+                        <p>Due on how Apple handle simple and standard things, this app will not work on any Mac OS or iOS devices.</p>
                     </div>
-                    <div className={`${active === 2 ? "visible" : "hidden" }`}>
-                        TEST 3
+                    <div className={`${active === 2 ? "visible" : "hidden" } flex-1`}>
+                        <div class="flex w-full items-center justify-center">
+                            <a className="inline" href="https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa" target="_BLANK" rel="noreferrer noopener">
+                                <img width="200" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Play Store"/>
+                            </a>     
+                            {
+                                true &&               
+                                <buton className="p-3 cursor-pointer" onClick={ installPWA } aria-label="install pwa" href="https://nts-web.oscarrc.me" target="_BLANK" rel="noreferrer noopener">
+                                    <img width="175" src="https://user-images.githubusercontent.com/3104648/28969264-d14f6178-791b-11e7-9399-e7820d6aaa39.png" alt="PWA" />
+                                </buton>
+                            }
+                        </div>
+                        <span className="divider divider-primary font-semibold my-4">OR</span>                        
+                        <div class="flex w-full items-center justify-center">
+                            <div class="dropdown m-4 flex-1">
+                                <label role="button" tabIndex="0" className="btn btn-info btn-outline w-full" >
+                                    <AiFillWindows className="h-6 w-6 mr-1" /> Windows
+                                </label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral text-info border border-info rounded p-0 -top-px w-full">
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">64 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">32 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">Portable</a></li>
+                                </ul>
+                            </div>                            
+                            <div class="dropdown m-4 flex-1">                                
+                                <label role="button" tabIndex="0" className="btn btn-secondary w-full">
+                                    <SiLinux className="h-6 w-6 mr-1" /> Linux
+                                </label>
+                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral text-secondary border border-secondary rounded p-0 -top-px w-full">
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">Deb 64 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">Deb 32 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">RPM 64 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">RPM 32 bits</a></li>
+                                    <li><a href="https://github.com/oscarrc/nts-web/releases/latest" target="_BLANK" rel="noreferrer noopener">AppImage</a></li>
+                                </ul>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
                 <div className="card-actions justify-end gap-2 mt-4 col-span-2">
