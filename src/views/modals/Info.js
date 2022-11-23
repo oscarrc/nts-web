@@ -40,7 +40,7 @@ const Info = () => {
                         <p>Due on how Apple handle simple and standard things, this app will not work on any Mac OS or iOS devices.</p>
                     </div>
                     <div className={`${active === 2 ? "visible" : "hidden" } flex-1`}>
-                        <div class="flex w-full items-center justify-center">
+                        <div className="flex w-full items-center justify-center">
                             <a className="inline" href="https://play.google.com/store/apps/details?id=me.oscarrc.nts_web.twa" target="_BLANK" rel="noreferrer noopener">
                                 <img width="200" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Play Store"/>
                             </a>     
@@ -52,22 +52,22 @@ const Info = () => {
                             }
                         </div>
                         <span className="divider divider-primary font-semibold my-8 text-primary">OR</span>                        
-                        <div class="flex w-full items-center justify-center">
-                            <div class="dropdown m-4 flex-1">
+                        <div className="flex w-full items-center justify-center">
+                            <div className="dropdown m-4 flex-1">
                                 <label role="button" tabIndex="0" className="btn btn-info btn-outline w-full" >
                                     <AiFillWindows className="h-6 w-6 mr-1" /> Windows
                                 </label>
-                                <ul tabIndex="0" class="dropdown-content menu menu-info p-2 shadow rounded p-0 -top-px w-full">
+                                <ul tabIndex="0" className="dropdown-content menu menu-info p-2 shadow rounded p-0 -top-px w-full">
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">64 bits</a></li>
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">32 bits</a></li>
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">Portable</a></li>
                                 </ul>
                             </div>                            
-                            <div class="dropdown m-4 flex-1">                                
+                            <div className="dropdown m-4 flex-1">                                
                                 <label role="button" tabIndex="0" className="btn btn-secondary w-full">
                                     <SiLinux className="h-6 w-6 mr-1" /> Linux
                                 </label>
-                                <ul tabIndex="0" class="dropdown-content menu menu-secondary p-2 shadow rounded p-0 -top-px w-full">
+                                <ul tabIndex="0" className="dropdown-content menu menu-secondary p-2 shadow rounded p-0 -top-px w-full">
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">Deb 64 bits</a></li>
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">Deb 32 bits</a></li>
                                     <li><a href="https://github.com/oscarrc/nts-web/releases/latest/download/{asset_name}" target="_BLANK" rel="noreferrer noopener">RPM 64 bits</a></li>
