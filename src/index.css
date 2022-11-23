@@ -63,6 +63,22 @@
         @apply rounded;
     }
 
+    .menu-info {
+        @apply bg-neutral text-info border border-info
+    }
+
+    .menu-info li a{
+        @apply hover:bg-info hover:text-info-content focus:bg-info focus:text-info-content
+    }
+
+    .menu-secondary {
+        @apply bg-neutral text-secondary border border-secondary
+    }
+
+    .menu-secondary li a{
+        @apply hover:bg-secondary hover:text-neutral focus:bg-secondary focus:text-neutral
+    }
+
     .divider-primary:before,.divider-primary:after{
         @apply bg-primary;
     }
