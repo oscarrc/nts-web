@@ -1,36 +1,18 @@
 import { FaBug, FaDownload, FaHeart, FaInfo } from "react-icons/fa"
-import { useEffect, useState } from "react";
 
 import { SiKofi } from "react-icons/si";
 import { lazy } from "react";
 import { useLayout } from "../../hooks/useLayout";
+import { usePWA } from "../../hooks/usePWA";
 
 const Footer = () => {
-    const [supportsPWA, setSupportsPWA] = useState(false);
-    const [promptInstall, setPromptInstall] = useState(null);
     const { handleModal } = useLayout();
-
-    const install = evt => {
-        evt.preventDefault();
-        if(promptInstall) promptInstall.prompt();
-        promptInstall.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') setSupportsPWA(false);
-        });
-    };
-
+    const { supportsPWA, installPWA } = usePWA();
+    
     const openInfo = () => {
         const Info = lazy(() => import('../../views/modals/Info'));
         handleModal(<Info />);
     }
-
-    useEffect(() => {
-        const handler = e => {
-            e.preventDefault();
-            setSupportsPWA(true);
-            setPromptInstall(e);
-          };
-          window.addEventListener("beforeinstallprompt", handler);
-    }, []);
 
     return (
         <footer className="footer items-center justify-items-center	 md:justify-between p-2 gap-y-4">
@@ -44,7 +26,7 @@ const Footer = () => {
                     </div>
                     { supportsPWA && 
                         <div className="tooltip" data-tip="Install the app">
-                            <button aria-label="Install the app" onClick={ install } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
+                            <button aria-label="Install the app" onClick={ installPWA } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
                         </div> 
                     }
                     <div className="tooltip" data-tip="Report a bug"><a role="button" aria-label="Report a bug" href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
