@@ -1,17 +1,18 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 
 const SequencerContext = createContext();
 
 const SequencerProvider = ({children}) => {
     //TODO: sequencer
     const [barLength, setBarLength] = useState(parseInt(localStorage.getItem("BAR")) || 4);
+    const [bars, setBars] = useState(parseInt(localStorage.getItem("BARS")) || 1);
     const [step, setStep] = useState(0);
-    const [steps, setSteps] = useState(barLength)
     const [sequence, setSequence] = useState(JSON.parse(localStorage.getItem("SEQ")) || {});
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [metronome, setMetronome] = useState(true);
     const [tempo, setTempo] = useState(parseInt(localStorage.getItem("TEMPO")) || 60);
+    const steps = useMemo(() => bars * barLength, [bars, barLength])
     const prevStep = useRef(0);
 
     const audioContext = useRef(new AudioContext());
@@ -58,17 +59,18 @@ const SequencerProvider = ({children}) => {
         }))
     }
 
-    const adjustSteps = useCallback(() => {
-        if(steps % barLength !== 0) setSteps((steps + barLength) - (steps % barLength));
-    }, [steps, barLength])
+    const clearStep = (step) => {
+        let s = sequence;
+        delete s[step];
+        setSequence(s);
+    }
 
     useEffect(() => { !isPlaying && setIsRecording(false) }, [isPlaying]);
     useEffect(() => { isPlaying && isRecording && metronome && playBeat(step) }, [isPlaying, isRecording, metronome, playBeat, step]);
+    
     useEffect(() => { localStorage.setItem("TEMPO", tempo) }, [tempo]);
-    useEffect(() => { 
-        localStorage.setItem("BAR", barLength) 
-    }, [barLength, adjustSteps]);
-
+    useEffect(() => { localStorage.setItem("BAR", barLength) }, [barLength]);
+    useEffect(() => { localStorage.setItem("BARS", bars) }, [bars]);
     useEffect(() => { localStorage.setItem("SEQ", JSON.stringify(sequence)) }, [sequence]);
 
     useEffect(() => {
@@ -78,28 +80,30 @@ const SequencerProvider = ({children}) => {
         else clearInterval(interval);
 
         return () => clearInterval(interval);
-    }, [isPlaying, isRecording, playBeat, setStep, steps, tempo, metronome]);
+    }, [isPlaying, isRecording, playBeat, setStep, tempo, metronome, steps]);
 
     return (
         <SequencerContext.Provider value={{
+            bars,
+            setBars,
             barLength,
             setBarLength,
-            sequence,
-            setSequence,
-            step,
-            setStep,
-            steps,
-            setSteps,
-            stepStart,
-            stepEnd,
             isPlaying,
             setIsPlaying,
             isRecording,
             setIsRecording,
-            tempo,
-            setTempo,
             metronome,
-            setMetronome
+            setMetronome,
+            sequence,
+            setSequence,
+            step,
+            setStep,
+            clearStep,
+            steps,
+            stepStart,
+            stepEnd,
+            tempo,
+            setTempo
         }}>
             {children}
         </SequencerContext.Provider>
