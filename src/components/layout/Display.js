@@ -40,7 +40,7 @@ const Display = () => {
     const playStep = useCallback((step) => {
         let duration = step.length * 60000/tempo;
         
-        if(step.bank !== bank) {
+        if(!isNaN(step?.bank) && step.bank !== bank) {
             let b = JSON.stringify(localStorage.getItem(`BANK_${step.bank}`))
             if(!b) return;
 

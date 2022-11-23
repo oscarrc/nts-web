@@ -81,7 +81,7 @@ const NTSProvider = ({ children }) => {
         const val = hasSwitch ? (value.value >= control.switch ? value.value + 1 : value.value) : value;
         const options = control.options ? control.options.length  + (hasSwitch ? 0 : -1 ) : 1;
         const step = control.options ? Math.floor( 127 / options ) : 1;
-        const parsed = control.options ? 
+        const parsed = control?.options ? 
                         val === options ? 127 : val * step : 
                         control.min && control.max ? Math.round((127 / (control.max - control.min)) * (val - control.min)) : val;
        
