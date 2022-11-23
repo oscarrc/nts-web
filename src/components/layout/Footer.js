@@ -2,10 +2,13 @@ import { FaBug, FaDownload, FaHeart, FaInfo } from "react-icons/fa"
 import { useEffect, useState } from "react";
 
 import { SiKofi } from "react-icons/si";
+import { lazy } from "react";
+import { useLayout } from "../../hooks/useLayout";
 
 const Footer = () => {
     const [supportsPWA, setSupportsPWA] = useState(false);
     const [promptInstall, setPromptInstall] = useState(null);
+    const { handleModal } = useLayout();
 
     const install = evt => {
         evt.preventDefault();
@@ -14,6 +17,11 @@ const Footer = () => {
             if (choiceResult.outcome === 'accepted') setSupportsPWA(false);
         });
     };
+
+    const openInfo = () => {
+        const Info = lazy(() => import('../../views/modals/Info'));
+        handleModal(<Info />);
+    }
 
     useEffect(() => {
         const handler = e => {
@@ -32,7 +40,7 @@ const Footer = () => {
                 <a href="https://ko-fi.com/oscarrc" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><SiKofi className="h-3 w-3 mr-2" /> Buy me a coffee</a>
                 <div className="flex gap-2">
                     <div className="tooltip" data-tip="Info">
-                        <button aria-label="Info and help" className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
+                        <button onClick={openInfo} aria-label="Info and help" className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
                     </div>
                     { supportsPWA && 
                         <div className="tooltip" data-tip="Install the app">
