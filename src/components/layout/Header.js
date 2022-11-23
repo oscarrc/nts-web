@@ -15,7 +15,7 @@ const Header = () => {
     const seqSelectorRef = useRef(null);
     const { restoreBank, randomize, bank, bankNames } = useNTS();
     const { bottomDrawer, setBottomDrawer, handleModal } = useLayout();
-    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome, barLength, setBarLength } = useSequencer();
+    const { sequence, setSequence, tempo, setTempo, metronome, setMetronome, bars, setBars, barLength, setBarLength } = useSequencer();
 
     const openRenameBanks = () => {
         const Banks = lazy(() => import('../../views/modals/Banks'));
@@ -67,6 +67,7 @@ const Header = () => {
         if(data.seq) setSequence(data.seq);
         if(data.tempo) setTempo(data.tempo);
         if(data.barLength) setBarLength(data.barLength);
+        if(data.bars) setBars(data.bars);
     }
 
     const importBank = async (e) => { 
@@ -84,7 +85,8 @@ const Header = () => {
             bank: [],
             seq: JSON.parse(localStorage.getItem(`SEQ`)) || sequence,
             tempo: JSON.parse(localStorage.getItem(`TEMPO`)) || tempo,            
-            barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength
+            barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength,                        
+            bars: JSON.parse(localStorage.getItem(`BARS`)) || bars
         };
         
         [...Array(15).keys()].forEach( (b) => {
