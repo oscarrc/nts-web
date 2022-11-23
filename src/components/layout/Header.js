@@ -175,7 +175,7 @@ const Header = () => {
                         </button>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Settings">
-                        <button aria-label="Settings" onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0"><FaCog className="h-4 w-4"/></button>
+                        <button aria-label="Settings" onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0 rounded"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>
             </div>
