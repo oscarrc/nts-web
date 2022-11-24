@@ -32,6 +32,7 @@
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
     "productName": "NTS-web",
+    "artigactName":"NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
