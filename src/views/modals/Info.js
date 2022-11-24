@@ -2,12 +2,10 @@ import { AiFillWindows } from "react-icons/ai";
 import { BsCaretRightFill } from "react-icons/bs";
 import { SiLinux } from "react-icons/si";
 import { useLayout } from "../../hooks/useLayout";
-import { usePWA } from "../../hooks/usePWA";
 import { useState } from "react";
 
 const Info = () => {
-    const { handleModal } = useLayout();
-    const { supportsPWA, installPWA } = usePWA();
+    const { handleModal, supportsPWA, installPWA } = useLayout();
 
     const [ active, setActive ] = useState(0);
     const sections = ["How it works", "Compatibility", "Installation"]

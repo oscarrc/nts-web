@@ -3,11 +3,9 @@ import { FaBug, FaDownload, FaHeart, FaInfo } from "react-icons/fa"
 import { SiKofi } from "react-icons/si";
 import { lazy } from "react";
 import { useLayout } from "../../hooks/useLayout";
-import { usePWA } from "../../hooks/usePWA";
 
 const Footer = () => {
-    const { handleModal } = useLayout();
-    const { supportsPWA, installPWA } = usePWA();
+    const { handleModal, supportsPWA, installPWA} = useLayout();
     
     const openInfo = () => {
         const Info = lazy(() => import('../../views/modals/Info'));

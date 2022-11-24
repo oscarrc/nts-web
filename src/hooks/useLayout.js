@@ -38,6 +38,8 @@ const LayoutProvider = ({children}) => {
     const [ modal, setModal ] = useState(false); 
     const [ isFullWidth, setIsFullWidth ] = useState(false);
     const [ modalContent, setModalContent ] = useState(false);
+    const [supportsPWA, setSupportsPWA] = useState(false);
+    const [promptInstall, setPromptInstall] = useState(null);
 
     const overlay = useRef(null);
     const modalOpen = "fixed top-0 left-0 right-0 bottom-0 min-w-screen min-h-screen bg-neutral bg-opacity-75 z-50 opacity-100 visible";
@@ -51,6 +53,23 @@ const LayoutProvider = ({children}) => {
     const toggleModal = (event) => {
       if(event.target === overlay.current || event.key === "Escape") handleModal();
     }
+    
+    const installPWA = evt => {
+      evt.preventDefault();
+      if(promptInstall) promptInstall.prompt();
+      promptInstall.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') setSupportsPWA(false);
+      });
+    };
+
+    useEffect(() => {
+      const handler = e => {
+          e.preventDefault();
+          setSupportsPWA(true);
+          setPromptInstall(e);
+        };
+        window.addEventListener("beforeinstallprompt", handler);
+    }, []);
 
     useEffect(() => {
       document.addEventListener("keydown", toggleModal, false);
@@ -73,7 +92,7 @@ const LayoutProvider = ({children}) => {
     }, []);
 
     return (
-      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint, handleModal }}>
+      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint, handleModal, supportsPWA, installPWA }}>
         {
           windowDimensions.width < 380 ?
             <div className="flex flex-1 flex-col gap-8 items-center justify-center">
