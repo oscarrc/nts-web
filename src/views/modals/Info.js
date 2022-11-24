@@ -66,10 +66,8 @@ const Info = () => {
                                     <SiLinux className="h-6 w-6 mr-1" /> Linux
                                 </label>
                                 <ul tabIndex="0" className="dropdown-content menu menu-secondary p-2 shadow rounded p-0 -top-px w-full">
-                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-x64-${process.env.REACT_APP_VERSION}.deb`} target="_BLANK" rel="noreferrer noopener">Deb 64 bits</a></li>
-                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-ia32-${process.env.REACT_APP_VERSION}.deb`} target="_BLANK" rel="noreferrer noopener">Deb 32 bits</a></li>
-                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-x64-${process.env.REACT_APP_VERSION}.rpm`} target="_BLANK" rel="noreferrer noopener">RPM 64 bits</a></li>
-                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-ia32-${process.env.REACT_APP_VERSION}.rpm`} target="_BLANK" rel="noreferrer noopener">RPM 32 bits</a></li>
+                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-amd64-${process.env.REACT_APP_VERSION}.deb`} target="_BLANK" rel="noreferrer noopener">Deb 64 bits</a></li>
+                                    <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-x86_64-${process.env.REACT_APP_VERSION}.rpm`} target="_BLANK" rel="noreferrer noopener">RPM 64 bits</a></li>
                                     <li><a href={`https://github.com/oscarrc/nts-web/releases/latest/download/NTS-web_linux-${process.env.REACT_APP_VERSION}.AppImage`} target="_BLANK" rel="noreferrer noopener">AppImage</a></li>
                                 </ul>
                             </div>

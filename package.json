@@ -27,12 +27,12 @@
     "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
     "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
-    "electron:build:linux": "npm run build && electron-builder build -l --x64 --ia32"
+    "electron:build:linux": "npm run build && electron-builder build -l --x64"
   },
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
     "productName": "NTS-web",
-    "artigactName":"NTS-web_${os}-${arch}-${version}.${ext}",
+    "artifactName":"NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -49,6 +49,7 @@
       "maintainer": "Oscar R.C. <https://oscrrc.me>",
       "synopsis": "A web controller for the Korg NTS-1",
       "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
+      "category": "Audio",
       "icon": "src/assets/512x512.png"
     }
   },
