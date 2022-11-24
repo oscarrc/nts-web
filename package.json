@@ -22,7 +22,7 @@
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory android/",
+    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory dist/android/",
     "bubblewrap:build": "bubblewrap build --manifest https://nts-web.oscarrc.me/manifest.json",
     "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
@@ -38,11 +38,12 @@
       "node_modules/**/*"
     ],
     "directories": {
-      "buildResources": "public"
+      "buildResources": "public",
+      "output": "dist/${platform}"
     },
     "win": {
       "target": ["nsis", "portable"],
-      "icon": "src/assets/icon.ico"
+      "icon": "/src/assets/icon.ico"
     },
     "linux": {
       "target": ["deb", "rpm", "AppImage"],
@@ -50,7 +51,7 @@
       "synopsis": "A web controller for the Korg NTS-1",
       "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
       "category": "Audio",
-      "icon": "src/assets/512x512.png"
+      "icon": "/src/assets/512x512.png"
     }
   },
   "dependencies": {
