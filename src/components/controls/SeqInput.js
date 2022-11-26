@@ -11,7 +11,7 @@ const SeqInput = ({label, value, options, validation, min, max, onChange, classN
     const handleValidation = (val) => {
         if(!validation) return;        
         const regex = new RegExp(validation, 'g');
-        !regex.test(val) && onChange('---')
+        !regex.test(val) && onChange()
     }
     
     return (

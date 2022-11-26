@@ -39,12 +39,12 @@ const Display = () => {
     
     const playStep = useCallback((step) => {
         let duration = step.length * 60000/tempo;
-        
-        if(!isNaN(step?.bank) && step.bank !== bank) {
-            let b = JSON.stringify(localStorage.getItem(`BANK_${step.bank}`))
-            if(!b) return;
 
-            Object.keys(b).forEach(cc =>  sendControlChange(parseInt(cc), b[cc]));
+        if(!step?.note) return;
+        if(!isNaN(step?.bank) && step.bank !== bank) {
+            let b = JSON.parse(localStorage.getItem(`BANK_${step.bank}`))
+            if(!b) return;
+            Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc]));
         };
 
         playNote(step.note, true, false, duration);
@@ -99,7 +99,7 @@ const Display = () => {
                     <div className={`text-right relative before:inline-block before:bg-accent before:rounded-full before:mb-0.5 before:mr-1 before:w-2 before:h-2 ${ bpmIndicator ? 'before:opacity-1': 'before:opacity-0'}`}>{tempo} BPM</div>
                 </div>
                 {
-                    !message ? 
+                    message ? 
                         <Message message={message} /> : 
                         <Sequencer 
                             step={step} 
