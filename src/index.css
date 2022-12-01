@@ -232,7 +232,12 @@
     }
 
     .tour.introjs-tooltip{
-        @apply shadow py-4 bg-neutral
+        @apply shadow bg-neutral;
+        width: 18rem;
+    }
+
+    .tour.intro.introjs-tooltip{
+        @apply py-4
     }
 
     .tour .introjs-tooltip-header {
@@ -260,8 +265,12 @@
     }
 
     .tour .introjs-button {
-        @apply btn btn-outline btn-primary text-primary h-auto min-h-0  font-semibold;
+        @apply btn btn-outline btn-primary btn-sm text-primary h-auto min-h-0 font-semibold;
         text-shadow: none;
+    }
+
+    .tour .introjs-arrow{
+        @apply border-b-neutral border-t-neutral !important
     }
 
     .tour .introjs-button:hover, .tour .introjs-button:focus, .tour .introjs-button:active {
