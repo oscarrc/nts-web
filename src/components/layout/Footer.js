@@ -5,11 +5,15 @@ import { lazy } from "react";
 import { useLayout } from "../../hooks/useLayout";
 
 const Footer = () => {
-    const { handleModal, supportsPWA, installPWA} = useLayout();
+    const { handleModal } = useLayout();
     
     const openInfo = () => {
-        const Info = lazy(() => import('../../views/modals/Info'));
-        handleModal(<Info />);
+        
+    }
+
+    const openDownload = () => {
+        const Download = lazy(() => import('../../views/modals/Download'));
+        handleModal(<Download />);
     }
 
     return (
@@ -22,11 +26,9 @@ const Footer = () => {
                     <div className="tooltip" data-tip="Info">
                         <button onClick={openInfo} aria-label="Info and help" className="btn btn-primary btn-outline btn-xs"><FaInfo className="h-3 w-3" /></button>
                     </div>
-                    { supportsPWA && 
-                        <div className="tooltip" data-tip="Install the app">
-                            <button aria-label="Install the app" onClick={ installPWA } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
-                        </div> 
-                    }
+                    <div className="tooltip" data-tip="Install the app">
+                        <button aria-label="Install the app" onClick={ openDownload } className="btn btn-primary btn-outline btn-xs"><FaDownload className="h-3 w-3" /></button>
+                    </div> 
                     <div className="tooltip" data-tip="Report a bug"><a role="button" aria-label="Report a bug" href="https://github.com/oscarrc/nts-web/issues" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><FaBug className="h-3 w-3" /></a></div>
                 </div>
             </div>
