@@ -117,7 +117,8 @@ const LayoutProvider = ({children}) => {
               <Steps
                 enabled={ tourEnabled }
                 steps={intro}
-                initialStep={0}
+                initialStep={0}                
+                options={{ hideNext: false, nextToDone: true }}
                 onExit={() => setTourEnabled(false) }
               />
             </>
