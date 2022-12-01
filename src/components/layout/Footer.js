@@ -5,10 +5,10 @@ import { lazy } from "react";
 import { useLayout } from "../../hooks/useLayout";
 
 const Footer = () => {
-    const { handleModal } = useLayout();
+    const { handleModal, setTourEnabled } = useLayout();
     
     const openInfo = () => {
-        
+        setTourEnabled(true)
     }
 
     const openDownload = () => {

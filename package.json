@@ -32,7 +32,7 @@
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
     "productName": "NTS-web",
-    "artifactName":"NTS-web_${os}-${arch}-${version}.${ext}",
+    "artifactName": "NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -42,11 +42,18 @@
       "output": "dist/${platform}"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "/src/assets/icon.ico"
     },
     "linux": {
-      "target": ["deb", "rpm", "AppImage"],
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
       "maintainer": "Oscar R.C. <https://oscrrc.me>",
       "synopsis": "A web controller for the Korg NTS-1",
       "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
@@ -55,6 +62,8 @@
     }
   },
   "dependencies": {
+    "intro.js": "^6.0.0",
+    "intro.js-react": "^0.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
