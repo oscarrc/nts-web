@@ -14,7 +14,7 @@ const Footer = () => {
 
     return (
         <footer className="footer items-center justify-items-center	 md:justify-between p-2 gap-y-4">
-            <p className="inline text-center">Made with <FaHeart className="text-accent h-3 w-3 inline" /> by <a className="font-semibold hover:text-accent transition-all transition-200" href="https://oscarrc.me" rel="noreferrer" target="_BLANK">Oscar R.C.</a></p>
+            <p className="inline text-center">Made with <FaHeart className="text-accent h-3 w-3 inline" /> by <a className="font-semibold hover:text-accent transition-all transition-200" href="https://oscarrc.me" rel="noreferrer" target="_BLANK">Oscar R.C.</a> and released under <a href="https://github.com/oscarrc/nts-web/blob/master/LICENSE" target="_BLANK" rel="noreferrer noopener">MIT License</a></p>
             <p className="text-secondary text-center italic">This page is not affiliated or endorsed by Korg</p>
             <div className="flex flex-col items-center sm:flex-row gap-2">
                 <a href="https://ko-fi.com/oscarrc" rel="noreferrer noopener" target="_blank" className="btn btn-primary btn-outline btn-xs"><SiKofi className="h-3 w-3 mr-2" /> Buy me a coffee</a>
