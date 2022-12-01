@@ -118,7 +118,12 @@ const LayoutProvider = ({children}) => {
                 enabled={ tourEnabled }
                 steps={intro}
                 initialStep={0}                
-                options={{ hideNext: false, nextToDone: true }}
+                options={{
+                  hideNext: false,
+                  nextToDone: true,
+                  exitOnEsc: true,
+                  overlayOpacity: 0.8
+                }}
                 onExit={() => setTourEnabled(false) }
               />
             </>
