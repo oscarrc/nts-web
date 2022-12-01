@@ -46,7 +46,8 @@
         "nsis",
         "portable"
       ],
-      "icon": "/src/assets/icon.ico"
+      "icon": "media/icons/icon.ico",
+      "oneClick": false
     },
     "linux": {
       "target": [
@@ -58,7 +59,7 @@
       "synopsis": "A web controller for the Korg NTS-1",
       "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
       "category": "Audio",
-      "icon": "/src/assets/512x512.png"
+      "icon": "media/icons/icon512.png"
     }
   },
   "dependencies": {
@@ -110,7 +111,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "last 1 electron version"
     ],
     "development": [
       "last 1 electron version",
