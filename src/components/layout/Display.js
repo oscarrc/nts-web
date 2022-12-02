@@ -13,7 +13,6 @@ const Display = () => {
     const { bank, bankNames, state, sendControlChange } = useNTS();
     const { step, steps, setStep, bars, setBars, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
-    const [ backTo, setBackTo ] = useState(null);
 
     const [ bpmIndicator, setBpmIndicator ] = useState(1)
 
@@ -39,21 +38,21 @@ const Display = () => {
         bars > 1 && setBars(b => b - 1);
     }
     
-    const playStep = useCallback((step) => { //TODO: Restore bank if previous step extends longer than current
+    const playStep = useCallback((step) => { //TODO: Test restore bank if previous step extends longer than current
         const current = sequence?.[step];
         const prev = sequence?.[step - 1];
-        // const next = sequence?.[step + 1];    
         let duration = current?.length * 60000/tempo;
-
-        if(!current?.note) return;
-
-        if(!isNaN(current?.bank) && current.bank !== prev?.bank) {
-            let b = JSON.parse(localStorage.getItem(`BANK_${current.bank}`))
+        const found = Object.keys(sequence).find((s, i) => sequence[s]?.length || 0 + i >= current.length + step + 1);
+        
+        const setBank = (bank) => {
+            let b = JSON.parse(localStorage.getItem(`BANK_${bank}`))
             if(!b) return;
             Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc], false));
-        };
-
-        playNote(current.note, true, false, duration);
+        }
+        
+        !isNaN(current?.bank) && current.bank !== prev?.bank && setBank(current.bank);        
+        found && setTimeout(() => setBank(sequence[found]?.bank), [duration]);  
+        current?.note && playNote(current.note, true, false, duration);
     }, [playNote, sendControlChange, tempo, sequence])    
     
     const togglePlay = () => {        
