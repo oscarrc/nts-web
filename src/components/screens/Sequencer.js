@@ -24,7 +24,7 @@ const Sequencer = ({step, setStep, steps, sequence, setSequence, banks, barLengt
                         label="Duration"
                         value={ sequence?.[k]?.length } 
                         min={1} 
-                        max={steps - 1 } 
+                        max={steps} 
                         onChange={ (v) => setSequence( s => ({...s, [k]: { ...s[k], length: parseInt(v) }}) ) }
                     />
                     <SeqInput 

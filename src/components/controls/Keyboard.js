@@ -3,12 +3,14 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { octaveLayout } from "../../config/layout";
 import { useLayout } from "../../hooks/useLayout"
 import { useMidi } from "../../hooks/useMidi";
+import { useNTS } from "../../hooks/useNTS";
 import { useSequencer } from "../../hooks/useSequencer";
 
 const Keyboard = () => {
     const { breakpoint } = useLayout();
     const { playNote, octave, input, passthrough } = useMidi();
     const { isRecording, stepStart, stepEnd } = useSequencer();
+    const { bank } = useNTS();
     const [ octaves, setOctaves ] = useState( octaveLayout[breakpoint] );
     const [ activeNote, setActiveNote ] = useState(null);
 
@@ -17,7 +19,7 @@ const Keyboard = () => {
 
     const onPlayStart = (e) => {
         window.navigator.vibrate && window.navigator.vibrate(10);
-        isRecording && stepStart(e.target.dataset.note, 0);
+        isRecording && stepStart(e.target.dataset.note, bank);
         playNote(e.target.dataset.note);
     }
 
