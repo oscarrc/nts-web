@@ -43,8 +43,8 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "portable"
+        "portable",
+        "nsis"
       ],
       "icon": "static/media/icons/icon.ico"
     },
