@@ -13,6 +13,8 @@ const Display = () => {
     const { bank, bankNames, state, sendControlChange } = useNTS();
     const { step, steps, setStep, bars, setBars, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
+    const [ backTo, setBackTo ] = useState(null);
+
     const [ bpmIndicator, setBpmIndicator ] = useState(1)
 
     const handleUp = () => {       
@@ -37,27 +39,31 @@ const Display = () => {
         bars > 1 && setBars(b => b - 1);
     }
     
-    const playStep = useCallback((step, prev) => {
-        let duration = step.length * 60000/tempo;
+    const playStep = useCallback((step) => { //TODO: Restore bank if previous step extends longer than current
+        const current = sequence?.[step];
+        const prev = sequence?.[step - 1];
+        // const next = sequence?.[step + 1];    
+        let duration = current?.length * 60000/tempo;
 
-        if(!step?.note) return;
+        if(!current?.note) return;
 
-        if(!isNaN(step?.bank) && step.bank !== prev?.bank) {
-            let b = JSON.parse(localStorage.getItem(`BANK_${step.bank}`))
+        if(!isNaN(current?.bank) && current.bank !== prev?.bank) {
+            let b = JSON.parse(localStorage.getItem(`BANK_${current.bank}`))
             if(!b) return;
             Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc], false));
         };
 
-        playNote(step.note, true, false, duration);
-    }, [playNote, sendControlChange, tempo])    
+        playNote(current.note, true, false, duration);
+    }, [playNote, sendControlChange, tempo, sequence])    
     
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
         
-        if(isPlaying){
+        if(isPlaying){            
+            stopAll();
             Object.keys(state).forEach(cc =>  sendControlChange(parseInt(cc), state[cc]));
         }
-
+        
         setIsPlaying(p => !p);
     }
 
@@ -86,10 +92,9 @@ const Display = () => {
     }, [tempo]);
 
     useEffect(() => {
-        if(!isPlaying) return 
-        if(!sequence?.[step]?.note) return;
-        playStep(sequence?.[step], sequence?.[step - 1]);
-    }, [isPlaying, playStep, step, sequence, stopAll])
+        if(!isPlaying) return
+        playStep(step);
+    }, [isPlaying, playStep, step])
 
     return (
         <section id="display" className="sticky md:relative flex flex-col gap-4 flex-1 h-full min-h-[235px] mx-4 my-2">
