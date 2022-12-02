@@ -37,18 +37,19 @@ const Display = () => {
         bars > 1 && setBars(b => b - 1);
     }
     
-    const playStep = useCallback((step) => {
+    const playStep = useCallback((step, prev) => {
         let duration = step.length * 60000/tempo;
 
         if(!step?.note) return;
-        if(!isNaN(step?.bank) && step.bank !== bank) {
+
+        if(!isNaN(step?.bank) && step.bank !== prev?.bank) {
             let b = JSON.parse(localStorage.getItem(`BANK_${step.bank}`))
             if(!b) return;
-            Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc]));
+            Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc], false));
         };
 
         playNote(step.note, true, false, duration);
-    }, [bank, playNote, sendControlChange, tempo])    
+    }, [playNote, sendControlChange, tempo])    
     
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
@@ -87,7 +88,7 @@ const Display = () => {
     useEffect(() => {
         if(!isPlaying) return 
         if(!sequence?.[step]?.note) return;
-        playStep(sequence?.[step]);
+        playStep(sequence?.[step], sequence?.[step - 1]);
     }, [isPlaying, playStep, step, sequence, stopAll])
 
     return (

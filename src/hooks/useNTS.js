@@ -74,7 +74,7 @@ const NTSProvider = ({ children }) => {
         dispatch({ type:number, payload: { bank, value: parsed } })
     }, [bank, controls, state]);
 
-    const sendControlChange = useCallback((cc, value) => {
+    const sendControlChange = useCallback((cc, value, update = true) => {
         const control = controls[cc];
         const hasSwitch = !isNaN(control?.switch);
         const isActive = value?.active === undefined ? true : value?.active;
@@ -86,7 +86,7 @@ const NTSProvider = ({ children }) => {
                         control.min && control.max ? Math.round((127 / (control.max - control.min)) * (val - control.min)) : val;
        
         output && output.sendControlChange(cc, isActive ? parsed : control.switch, { channels: channels.output || null })
-        dispatch({type: cc, payload: { bank, value } })
+        update && dispatch({type: cc, payload: { bank, value } })
     }, [bank, channels.output, controls, output]);
     
     useEffect(() => {
