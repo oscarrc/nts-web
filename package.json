@@ -48,6 +48,9 @@
       ],
       "icon": "static/media/icons/icon.ico"
     },
+    "portable": {
+      "artifactName": "NTS-web_${os}-${arch}-${version}_portable.${ext}"
+    },
     "nsis": {
       "oneClick": false
     },
