@@ -42,7 +42,7 @@ const Display = () => {
         const current = sequence?.[step];
         const prev = sequence?.[step - 1];
         const duration = current?.length * 60000/tempo;
-        const found = Object.keys(sequence).slice(0, step).reverse().find(s => (sequence[s]?.length + parseInt(s) >= (current?.length || 0) + step + 1) && s < step);
+        const found = Object.keys(sequence).slice(0, step).reverse().find(s => (sequence[s]?.length + parseInt(s) >= (current?.length || 0) + step + 1) && s < step && sequence[s]?.note);
         
         const setBank = (bank) => {
             let b = JSON.parse(localStorage.getItem(`BANK_${bank}`))
