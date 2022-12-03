@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 const Sequencer = ({step, setStep, steps, sequence, setSequence, banks, barLength }) => {
     useEffect(() => {
-        document.getElementById(`step-${step}`).scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
+        document.getElementById(`step-${step}`)?.scrollIntoView({block: "nearest", inline: "nearest", behavior: "smooth"});
     }, [step, steps])
 
     return (
@@ -24,7 +24,7 @@ const Sequencer = ({step, setStep, steps, sequence, setSequence, banks, barLengt
                         label="Duration"
                         value={ sequence?.[k]?.length } 
                         min={1} 
-                        max={steps} 
+                        max={steps - k} 
                         onChange={ (v) => setSequence( s => ({...s, [k]: { ...s[k], length: parseInt(v) }}) ) }
                     />
                     <SeqInput 

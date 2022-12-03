@@ -41,8 +41,8 @@ const Display = () => {
     const playStep = useCallback((step) => { //TODO: Test restore bank if previous step extends longer than current
         const current = sequence?.[step];
         const prev = sequence?.[step - 1];
-        let duration = current?.length * 60000/tempo;
-        const found = Object.keys(sequence).find((s, i) => sequence[s]?.length || 0 + i >= current.length + step + 1);
+        const duration = current?.length * 60000/tempo;
+        const found = Object.keys(sequence).find(s => (sequence[s]?.length + parseInt(s) >= (current?.length || 0) + step + 1) && s < step);
         
         const setBank = (bank) => {
             let b = JSON.parse(localStorage.getItem(`BANK_${bank}`))
