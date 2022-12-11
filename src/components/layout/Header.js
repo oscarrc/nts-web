@@ -63,7 +63,7 @@ const Header = () => {
 
     const importData = async (e) => {
         const data = await loadFile(e);
-        Object.keys(data.bank).forEach(b => restoreBank(b, data.bank[b]))
+        Object.keys(data.banks).forEach(b => restoreBank(b, data.bank[b]))
         if(data.seq) setSequence(data.seq);
         if(data.tempo) setTempo(data.tempo);
         if(data.barLength) setBarLength(data.barLength);
@@ -77,12 +77,15 @@ const Header = () => {
     
     const importSequence = async (e) => {
         const data = await loadFile(e);
-        setSequence(data)
+        if(data.seq) setSequence(data.seq);
+        if(data.tempo) setTempo(data.tempo);
+        if(data.barLength) setBarLength(data.barLength);
+        if(data.bars) setBars(data.bars);
     };
 
     const exportData = () => {
         const data = {
-            bank: [],
+            banks: [],
             seq: JSON.parse(localStorage.getItem(`SEQ`)) || sequence,
             tempo: JSON.parse(localStorage.getItem(`TEMPO`)) || tempo,            
             barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength,                        
@@ -92,7 +95,7 @@ const Header = () => {
         [...Array(15).keys()].forEach( (b) => {
             const bank = JSON.parse(localStorage.getItem(`BANK_${b}`));
             
-            if(bank) data.bank[b] = {
+            if(bank) data.banks[b] = {
                 name: bankNames?.[b],
                 values: bank
             };
@@ -111,7 +114,12 @@ const Header = () => {
     }
 
     const exportSequence = () => {
-        const data = JSON.parse(localStorage.getItem(`SEQ`));
+        const data = {
+            seq: JSON.parse(localStorage.getItem(`SEQ`)),
+            tempo: JSON.parse(localStorage.getItem(`TEMPO`)) || tempo,            
+            barLength: JSON.parse(localStorage.getItem(`BAR`)) || barLength,                        
+            bars: JSON.parse(localStorage.getItem(`BARS`)) || bars
+        };
         downloadFile(data, "ntsseq", `SEQUENCE`);
     }
 
