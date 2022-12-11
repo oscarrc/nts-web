@@ -39,6 +39,8 @@ const NTSProvider = ({ children }) => {
     }
 
     const restoreBank = (b, data) => {
+        if(!data?.values) return;
+        
         // if(!verifyValues(data, controls)) return; 
         if(b === bank){
             dispatch({type: "bank", payload: { bank, value: data.values } });        
