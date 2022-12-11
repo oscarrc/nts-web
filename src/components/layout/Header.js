@@ -63,7 +63,7 @@ const Header = () => {
 
     const importData = async (e) => {
         const data = await loadFile(e);
-        Object.keys(data.banks).forEach(b => restoreBank(b, data.bank[b]))
+        Object.keys(data.banks).forEach(b => restoreBank(b, data.banks[b]))
         if(data.seq) setSequence(data.seq);
         if(data.tempo) setTempo(data.tempo);
         if(data.barLength) setBarLength(data.barLength);
