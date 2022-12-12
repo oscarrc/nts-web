@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>    
-    <title>NTS-web | Korg NTS-1 Web editor</title>
-    <meta name="description" content="Korg NTS-1 Web editor" />
+    <title>NTS-web | Korg NTS-1 Web controller</title>
+    <meta name="description" content="Korg NTS-1 Web controller" />
     <meta charset="utf-8" />
     
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#212121" />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@oscarrc_web" />
     <meta name="twitter:title" content="NTS-web" />
     <meta name="twitter:description" content="A web editor and sequencer for the Korg NTS-1" />
-    <meta name="twitter:image" content="%PUBLIC_URL%/assets/img/screenshot.png" />
+    <meta name="twitter:image" content="%PUBLIC_URL%/static/media/screenshot.png" />
 
-    <meta property="og:url" content="https://oscarrc.github.io/nts-web" />
+    <meta property="og:url" content="%PUBLIC_URL%" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NTS-web" />
     <meta property="og:description" content="A web editor and sequencer for the Korg NTS-1" />
-    <meta property="og:image" content="%PUBLIC_URL%/assets/img/screenshot.png" />
+    <meta property="og:image" content="%PUBLIC_URL%/static/media/screenshot.png" />
+
+    <link rel="preconnect" href="%PUBLIC_URL%">
     
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icon192.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/static/media/icons/icon192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <link rel="assetlinks.json" href="%PUBLIC_URL%/.well-known/assetlinks.json">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script src="%PUBLIC_URL%/static/js/input-knobs.js"></script>
   </body>
 </html>

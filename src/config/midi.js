@@ -1,4 +1,4 @@
-const channels = [
+const channelList = [
     "all",
     "1",
     "2",
@@ -18,19 +18,19 @@ const channels = [
     "16"
 ]
 
-const defaults = {
+const defaultDevices = {
     inputDevices: [],
-    inputDevice: "",
-    inputChannel: "all",
     outputDevices: [],
-    outputDevice: "",
-    outputChannel: "all",
     passthroughDevices: [],
-    passthroughDevice: "",
-    passthroughChannel: "all",
-    sysexVendor: 66,
-    sysexChannel: 0,
-    sysexDevice: 87
+    input: null,
+    output: null,
+    passthrough: null
 }
 
-export { channels, defaults }
+const defaultChannels = {
+    input: 0,
+    output: 0,
+    passthrough: 0
+}
+
+export { channelList, defaultChannels, defaultDevices }

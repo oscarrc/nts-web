@@ -25,11 +25,4 @@ yarn-error.log*
 
 .eslintcache
 .env
-.vscod
-
-android/app-release-bundle.aab
-android/app-release-unsigned-aligned.apk
-android/app-release-signed.apk.idsig
-android/app-release-signed.apk
-android/app/build
-android/.gradle
+.vscode
