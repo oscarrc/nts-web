@@ -134,7 +134,8 @@ const MidiProvider = ({ children }) => {
             playNote, 
             controlChange, 
             pitchBend,
-            stopAll
+            stopAll,
+            parseDevices
         }}>
             { children }
         </MidiContext.Provider>
