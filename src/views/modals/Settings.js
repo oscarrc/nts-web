@@ -4,12 +4,17 @@ import { useLayout } from "../../hooks/useLayout";
 import { useMidi } from "../../hooks/useMidi";
 
 const Settings = () => {
-    const { devices, setDevices, channels, setChannels } = useMidi();
+    const { devices, setDevices, channels, setChannels, parseDevices } = useMidi();
     const { handleModal } = useLayout();
     
     const close = (e) => {
         e.preventDefault();
         handleModal();
+    }
+
+    const rescan = (e) => {        
+        e.preventDefault();
+        parseDevices();
     }
 
     return (
@@ -60,6 +65,7 @@ const Settings = () => {
                         />                        
                     </div>
                     <div className="card-actions justify-end gap-2 mt-4">
+                        <button onClick={ rescan } className="btn btn-sm btn-primary btn-link no-underline">Re-scan</button>
                         <button onClick={ close } className="btn btn-sm btn-primary btn-outline">Close</button>
                     </div>
                 </form>
