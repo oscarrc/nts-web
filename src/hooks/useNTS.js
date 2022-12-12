@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useReducer, useState } from 'react'
-import { defaultControls, defaultValues, sysex, verifyValues } from "../config/synth";
+import { defaultControls, defaultValues, sysex } from "../config/synth";
 
 import { useMidi } from './useMidi';
 
