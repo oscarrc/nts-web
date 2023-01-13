@@ -39,7 +39,7 @@ const defaultControls = {
     },
     118: {
         label: "Scale",
-        type: "selector",
+        type: "knob",
         options: [
             "Octave",
             "Maj Triad",
