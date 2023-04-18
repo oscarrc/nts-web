@@ -4,9 +4,9 @@
   "description": "An NTS-1 web controller, editor and sequencer",
   "screenshots": [
     {
-      "src": "static/media/Feature graphic.png",
+      "src": "static/media/feature.png",
       "type": "image/png",
-      "sizes": "1024*500"
+      "sizes": "1024x500"
     }
   ],
   "categories": ["Music", "Midi", "Synthesizer"],
@@ -15,7 +15,7 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "64x64",
       "type": "image/x-icon"
     },
     {
@@ -31,7 +31,7 @@
     {
       "src": "static/media/icons/icon.png",
       "type": "image/png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "purpose": "maskable"
     }
   ],
