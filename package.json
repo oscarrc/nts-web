@@ -24,7 +24,7 @@
     "eject": "react-scripts eject",
     "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.webmanifest --directory dist/android/",
     "bubblewrap:build": "cd dist/android && bubblewrap build",
-    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.webmanifest",
+    "bubblewrap:update": "bubblewrap update --manifest https://nts-web.oscarrc.me/manifest.webmanifest",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
     "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
     "electron:build:linux": "npm run build && electron-builder build -l --x64"
