@@ -1,7 +1,7 @@
 {
   "name": "nts-web",
   "description": "A web controller for the Korg NTS-1",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com",
@@ -22,9 +22,9 @@
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory dist/android/",
+    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.webmanifest --directory dist/android/",
     "bubblewrap:build": "cd dist/android && bubblewrap build",
-    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
+    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.webmanifest",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
     "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
     "electron:build:linux": "npm run build && electron-builder build -l --x64"
