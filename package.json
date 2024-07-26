@@ -1,7 +1,7 @@
 {
   "name": "nts-web",
   "description": "A web controller for the Korg NTS-1",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com",
@@ -15,16 +15,16 @@
   "homepage": "./",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "compress-cra",
+    "start": "vite --host",
+    "dev": "vite preview",
+    "build": "vite build",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.json --directory dist/android/",
-    "bubblewrap:build": "bubblewrap build --manifest https://nts-web.oscarrc.me/manifest.json",
-    "bubblewrap:update": "bubblewrap update --appVersionName 3 --manifest https://nts-web.oscarrc.me/manifest.json",
+    "bubblewrap:init": "bubblewrap init --manifest https://nts-web.oscarrc.me/manifest.webmanifest --directory dist/android/",
+    "bubblewrap:build": "cd dist/android && bubblewrap build",
+    "bubblewrap:update": "bubblewrap update --manifest https://nts-web.oscarrc.me/manifest.webmanifest",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
     "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
     "electron:build:linux": "npm run build && electron-builder build -l --x64"
@@ -32,7 +32,7 @@
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
     "productName": "NTS-web",
-    "artifactName":"NTS-web_${os}-${arch}-${version}.${ext}",
+    "artifactName": "NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -42,54 +42,57 @@
       "output": "dist/${platform}"
     },
     "win": {
-      "target": ["nsis", "portable"],
-      "icon": "/src/assets/icon.ico"
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "icon": "static/media/icons/icon.ico"
+    },
+    "portable": {
+      "artifactName": "NTS-web_${os}-${arch}-${version}_portable.${ext}"
+    },
+    "nsis": {
+      "oneClick": false
     },
     "linux": {
-      "target": ["deb", "rpm", "AppImage"],
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ],
       "maintainer": "Oscar R.C. <https://oscrrc.me>",
       "synopsis": "A web controller for the Korg NTS-1",
       "description": "A handy web controller for the Korg NTS-1 with memory banks and sequencer. Unleash your NTS-1 true power.",
       "category": "Audio",
-      "icon": "/src/assets/512x512.png"
+      "icon": "static/media/icons/icon512.png"
     }
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "webmidi": "^3.0.21",
-    "workbox-background-sync": "^6.5.4",
-    "workbox-broadcast-update": "^6.5.4",
-    "workbox-cacheable-response": "^6.5.4",
-    "workbox-core": "^6.5.4",
-    "workbox-expiration": "^6.5.4",
-    "workbox-google-analytics": "^6.5.4",
-    "workbox-navigation-preload": "^6.5.4",
-    "workbox-precaching": "^6.5.4",
-    "workbox-range-requests": "^6.5.4",
-    "workbox-routing": "^6.5.4",
-    "workbox-strategies": "^6.5.4",
-    "workbox-streams": "^6.5.4"
+    "intro.js": "^7.2.0",
+    "intro.js-react": "^1.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.2.1",
+    "vite": "^5.3.5",
+    "web-vitals": "^4.2.2",
+    "webmidi": "^3.1.9"
   },
   "devDependencies": {
-    "@bubblewrap/cli": "^1.18.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.12",
-    "compress-create-react-app": "^1.3.1",
-    "concurrently": "^7.6.0",
+    "@bubblewrap/cli": "^1.21.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
-    "daisyui": "^2.41.0",
-    "electron": "^21.2.2",
-    "electron-builder": "^23.6.0",
-    "electronmon": "^2.0.2",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.1",
-    "wait-on": "^6.0.1"
+    "daisyui": "^4.12.10",
+    "electron": "^31.3.0",
+    "electron-builder": "^24.13.3",
+    "electronmon": "^2.0.3",
+    "postcss": "^8.4.40",
+    "tailwindcss": "^3.4.7",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-pwa": "^0.20.1",
+    "vite-plugin-svgr": "^4.2.0",
+    "wait-on": "^7.2.0"
   },
   "eslintConfig": {
     "extends": [
@@ -101,7 +104,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "last 1 electron version"
     ],
     "development": [
       "last 1 electron version",
