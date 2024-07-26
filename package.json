@@ -12,7 +12,7 @@
     "url": "https://github.com/oscarrc/nts-web",
     "type": "git"
   },
-  "main": "public/electron.js",
+  "main": "public/electron.cjs",
   "homepage": "./",
   "private": true,
   "scripts": {
@@ -36,7 +36,7 @@
     "artifactName": "NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
-      "public/electron.js",
+      "public/electron.cjs",
       "node_modules/**/*"
     ],
     "directories": {
