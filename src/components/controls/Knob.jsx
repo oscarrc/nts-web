@@ -26,7 +26,7 @@ const Knob = ({id, value = 0, min = 0, max = 127, step = 1, label, onChange}) =>
     }, [handleValue])
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center knob-control">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <div className="flex-1">
                 <input 

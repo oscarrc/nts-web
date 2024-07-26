@@ -128,9 +128,9 @@ const Header = () => {
                 </a>
             </div>
             <div className="flex-none">                
-                <ul className="menu menu-horizontal p-0 gap-4">
+                <ul id="menu" className="menu menu-horizontal p-0 gap-4">
                     <li className="tooltip tooltip-bottom dropdown" data-tip="File"> 
-                        <label aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFile className="h-4 w-4"/></label>
+                        <label id="file" aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFile className="h-4 w-4"/></label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
                             <li>                                
                                 <input onChange={ importData } ref={ dataSelectorRef } type="file" className="hidden" accept=".ntsweb"/>
@@ -153,7 +153,7 @@ const Header = () => {
                         </ul>
                     </li>
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Save"> 
-                        <label aria-label="Export" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaSave className="h-4 w-4"/></label>
+                        <label id="save" aria-label="Export" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaSave className="h-4 w-4"/></label>
                         <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
                             <li><button className="btn-sm" onClick={ exportData } aria-label="Export all">Save All</button></li>
                             <li><button className="btn-sm" onClick={ exportBank } aria-label="Export current bank">Current bank</button></li>
@@ -161,21 +161,21 @@ const Header = () => {
                         </ul>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Randomize">
-                        <button aria-label="Randomize" onClick={ randomize } className="btn btn-sm btn-primary btn-outline py-0"><FaRandom className="h-4 w-4"/></button>
+                        <button id="randomize" aria-label="Randomize" onClick={ randomize } className="btn btn-sm btn-primary btn-outline py-0"><FaRandom className="h-4 w-4"/></button>
                     </li>
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
-                        <label aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
+                        <label id="tempo" aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
                         <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
                             <Tempo tempo={tempo} onTempoChange={setTempo} barLength={barLength} onBarChange={setBarLength} onToggle={setMetronome} metronome={metronome} />
                         </div>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Live">
-                        <button aria-label="Toggle Live Controls" onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
+                        <button id="toggleLive" aria-label="Toggle Live Controls" onClick={ toggleLive } className={`btn btn-sm ${ bottomDrawer ? 'btn-accent' : 'btn-primary' } btn-outline py-0`}>
                             { bottomDrawer ? <MdPianoOff className="h-5 w-5"/> : <MdPiano className="h-5 w-5"/>}
                         </button>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Settings">
-                        <button aria-label="Settings" onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0 rounded"><FaCog className="h-4 w-4"/></button>
+                        <button id="settings" aria-label="Settings" onClick={ openSettings } className="btn btn-sm btn-primary btn-outline py-0 rounded"><FaCog className="h-4 w-4"/></button>
                     </li>
                 </ul>
             </div>

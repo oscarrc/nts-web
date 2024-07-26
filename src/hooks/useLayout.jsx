@@ -1,4 +1,9 @@
+import 'intro.js/introjs.css';
+
 import { Suspense, createContext, useContext, useEffect, useRef, useState } from "react";
+
+import { Steps } from 'intro.js-react';
+import { intro } from "../config/tour";
 
 const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -40,6 +45,7 @@ const LayoutProvider = ({children}) => {
     const [ modalContent, setModalContent ] = useState(false);
     const [supportsPWA, setSupportsPWA] = useState(false);
     const [promptInstall, setPromptInstall] = useState(null);
+    const [tourEnabled, setTourEnabled] = useState(false);
 
     const overlay = useRef(null);
     const modalOpen = "fixed top-0 left-0 right-0 bottom-0 min-w-screen min-h-screen bg-neutral bg-opacity-75 z-50 opacity-100 visible";
@@ -92,7 +98,7 @@ const LayoutProvider = ({children}) => {
     }, []);
 
     return (
-      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint, handleModal, supportsPWA, installPWA }}>
+      <LayoutContext.Provider value={{ getWindowDimensions, windowDimensions, bottomDrawer, setBottomDrawer, breakpoint, getCurrentBreakpoint, handleModal, supportsPWA, installPWA, setTourEnabled }}>
         {
           windowDimensions.width < 380 ?
             <div className="flex flex-1 flex-col gap-8 items-center justify-center">
@@ -108,6 +114,18 @@ const LayoutProvider = ({children}) => {
                     </Suspense>
                   </div>
               </div>
+              <Steps
+                enabled={ tourEnabled }
+                steps={intro}
+                initialStep={0}                
+                options={{
+                  hideNext: false,
+                  nextToDone: true,
+                  exitOnEsc: true,
+                  overlayOpacity: 0.8
+                }}
+                onExit={() => setTourEnabled(false) }
+              />
             </>
         }
       </ LayoutContext.Provider>

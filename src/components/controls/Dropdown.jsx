@@ -8,7 +8,7 @@ const Dropdown = ({ id, label, value = 0, options, switchValue, isActive, onChan
     }
    
     return (
-        <div className={`input-select flex flex-1 px-4 items-center gap-4 ${isNaN(switchValue) && 'py-1.5'}`}>
+        <div className={`dropdown-control input-select flex flex-1 px-4 items-center gap-4 ${isNaN(switchValue) && 'py-1.5'}`}>
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             { !isNaN(switchValue) && 
                 <input type="checkbox" 

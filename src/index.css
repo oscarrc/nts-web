@@ -226,6 +226,56 @@
         border-color: hsl(var(--p) / var(--tw-border-opacity));
         color: hsl(var(--p))
     }
+
+    .tour *{
+        @apply bg-transparent
+    }
+
+    .tour.introjs-tooltip{
+        @apply shadow bg-neutral;
+        width: 18rem;
+    }
+
+    .tour.intro.introjs-tooltip{
+        @apply py-4
+    }
+
+    .tour .introjs-tooltip-header {
+        @apply text-primary border-b-0
+    }
+
+    .tour .introjs-tooltiptext{
+        @apply text-secondary
+    }
+
+    .tour .introjs-bullets ul li a.active{
+        @apply bg-secondary
+    }
+
+    .tour .introjs-bullets ul li a{
+        @apply bg-base-100
+    }
+
+    .tour .introjs-skipbutton {
+        @apply text-base-100 hover:text-base-100
+    }
+
+    .tour .introjs-tooltipbuttons {
+        @apply border-t-0 p-4
+    }
+
+    .tour .introjs-button {
+        @apply btn btn-outline btn-primary btn-sm text-primary h-auto min-h-0 font-semibold;
+        text-shadow: none;
+    }
+
+    .tour .introjs-arrow{
+        @apply border-b-neutral border-t-neutral !important
+    }
+
+    .tour .introjs-button:hover, .tour .introjs-button:focus, .tour .introjs-button:active {
+        @apply bg-transparent border-accent text-accent
+    }
 }
 
 @layer utilities {

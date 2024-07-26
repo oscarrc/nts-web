@@ -32,7 +32,7 @@ const Selector = ({id, value = 0, options, label, onChange, display}) => {
     }, [handleValue])
 
     return (
-        <div className="flex flex-col items-center justify-center self-start">
+        <div className="flex flex-col items-center justify-center self-start selector-control">
             { label && <label className="text-secondary text-xs uppercase font-bold" htmlFor={id}>{label}</label> }
             <div className="flex-1">
                 <input 
