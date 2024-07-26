@@ -10,7 +10,7 @@ import { useSequencer } from "../../hooks/useSequencer";
 
 const Display = () => {   
     const { enabled, input, output, passthrough, octave, playNote, stopAll } = useMidi();
-    const { bank, bankNames, state, sendControlChange } = useNTS();
+    const { bank, bankNames, setBank } = useNTS();
     const { step, steps, setStep, bars, setBars, isPlaying, setIsPlaying, isRecording, setIsRecording, tempo, sequence, setSequence, barLength } = useSequencer();
     const [ message, setMessage ] = useState(null);
     const [ bpmIndicator, setBpmIndicator ] = useState(1)
@@ -41,22 +41,15 @@ const Display = () => {
         let duration = step.length * 60000/tempo;
 
         if(!step?.note) return;
-        if(!isNaN(step?.bank) && step.bank !== bank) {
-            let b = JSON.parse(localStorage.getItem(`BANK_${step.bank}`))
-            if(!b) return;
-            Object.keys(b).forEach(cc => sendControlChange(parseInt(cc), b[cc]));
-        };
+        if(!isNaN(step?.bank)) setBank(step.bank);
 
         playNote(step.note, true, false, duration);
-    }, [bank, playNote, sendControlChange, tempo])    
+    }, [bank, playNote, tempo])    
     
     const togglePlay = () => {        
         window.navigator.vibrate && window.navigator.vibrate(10);
         
-        if(isPlaying){
-            Object.keys(state).forEach(cc =>  sendControlChange(parseInt(cc), state[cc]));
-        }
-
+        if(isPlaying) setBank(step.bank);
         setIsPlaying(p => !p);
     }
 
