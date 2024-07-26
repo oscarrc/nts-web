@@ -1,7 +1,8 @@
 {
   "name": "nts-web",
   "description": "A web controller for the Korg NTS-1",
-  "version": "3.0.1",
+  "version": "4.0.0",
+  "type": "module",
   "author": {
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com",
@@ -11,13 +12,13 @@
     "url": "https://github.com/oscarrc/nts-web",
     "type": "git"
   },
-  "main": "public/electron.js",
+  "main": "public/electron.cjs",
   "homepage": "./",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "postbuild": "compress-cra",
+    "start": "vite --host",
+    "dev": "vite preview",
+    "build": "vite build",
     "predeploy": "npm run build && cp build/index.html build/200.html",
     "deploy": "surge build nts-web.oscarrc.me",
     "test": "react-scripts test",
@@ -26,8 +27,8 @@
     "bubblewrap:build": "cd dist/android && bubblewrap build",
     "bubblewrap:update": "bubblewrap update --manifest https://nts-web.oscarrc.me/manifest.webmanifest",
     "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\"",
-    "electron:build:win": "npm run build && electron-builder build -w --x64 --ia32",
-    "electron:build:linux": "npm run build && electron-builder build -l --x64"
+    "electron:build:win": "electron-builder build -w --x64 --ia32",
+    "electron:build:linux": "electron-builder build -l --x64"
   },
   "build": {
     "appId": "me.oscarrc.nts_web.twa",
@@ -35,6 +36,7 @@
     "artifactName": "NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
+      "public/electron.cjs",
       "node_modules/**/*"
     ],
     "directories": {
@@ -68,8 +70,6 @@
     }
   },
   "dependencies": {
-    "intro.js": "^6.0.0",
-    "intro.js-react": "^0.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
@@ -90,16 +90,13 @@
     "workbox-streams": "^6.5.4"
   },
   "devDependencies": {
-    "@bubblewrap/cli": "^1.18.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "autoprefixer": "^10.4.12",
-    "compress-create-react-app": "^1.3.1",
-    "concurrently": "^7.6.0",
+    "@bubblewrap/cli": "^1.21.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "daisyui": "^2.41.0",
-    "electron": "^22.0.0",
+    "electron": "^21.2.2",
     "electron-builder": "^23.6.0",
     "electronmon": "^2.0.2",
     "postcss": "^8.4.18",
