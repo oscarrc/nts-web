@@ -1,7 +1,8 @@
 {
   "name": "nts-web",
   "description": "A web controller for the Korg NTS-1",
-  "version": "3.0.1",
+  "version": "4.0.0",
+  "type": "module",
   "author": {
     "name": "Oscar R.C.",
     "email": "oscarrc.web@gmail.com",
