@@ -36,6 +36,7 @@
     "artifactName": "NTS-web_${os}-${arch}-${version}.${ext}",
     "files": [
       "build/**/*",
+      "public/electron.js",
       "node_modules/**/*"
     ],
     "directories": {
