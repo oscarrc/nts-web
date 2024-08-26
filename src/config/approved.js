@@ -1,3 +1,3 @@
-const APPROVED = false;
+const APPROVED = true;
 
 export default APPROVED;
