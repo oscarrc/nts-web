@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import viteCompression from 'vite-plugin-compression';
 
-export default () => {
+const config = () => {
     return defineConfig({
         base: '/',
         server: {    
@@ -18,7 +18,7 @@ export default () => {
             outDir: "build",
             emptyOutDir: true
         },
-        plugins: [,
+        plugins: [
             react(),
             VitePWA({ 
                 registerType: 'autoUpdate',
@@ -88,3 +88,5 @@ export default () => {
         ]
     })
 }
+
+export default config;
