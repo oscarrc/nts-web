@@ -131,33 +131,33 @@ const Header = () => {
                 <ul id="menu" className="menu menu-horizontal p-0 gap-4">
                     <li className="tooltip tooltip-bottom dropdown" data-tip="File"> 
                         <label id="file" aria-label="Import" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaFile className="h-4 w-4"/></label>
-                        <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
+                        <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded z-10">
                             <li>                                
                                 <input onChange={ importData } ref={ dataSelectorRef } type="file" className="hidden" accept=".ntsweb"/>
-                                <button className="btn-sm" onClick={ () => dataSelectorRef.current.click() } aria-label="Open file">Open file</button>
+                                <button className="btn-sm whitespace-nowrap" onClick={ () => dataSelectorRef.current.click() } aria-label="Open file">Open file</button>
                             </li>
                             <li> 
                                 <input onChange={ importBank } ref={ bankSelectorRef } type="file" className="hidden" accept=".ntsbank"/>
-                                <button className="btn-sm" onClick={ () => bankSelectorRef.current.click() } aria-label="Load bank">Load bank</button>
+                                <button className="btn-sm whitespace-nowrap" onClick={ () => bankSelectorRef.current.click() } aria-label="Load bank">Load bank</button>
                             </li>
                             <li> 
-                                <button className="btn-sm" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
+                                <button className="btn-sm whitespace-nowrap" onClick={ openRenameBanks } aria-label="Manage banks">Rename banks</button>
                             </li>
                             <li> 
                                 <input onChange={ importSequence } ref={ seqSelectorRef } type="file" className="hidden" accept=".ntsseq"/>
-                                <button className="btn-sm" onClick={ () => seqSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
+                                <button className="btn-sm whitespace-nowrap" onClick={ () => seqSelectorRef.current.click() } aria-label="Load sequence">Load sequence</button>
                             </li>
                             <li> 
-                                <button className="btn-sm" onClick={ clearSequence } aria-label="Manage banks">Clear sequence</button>
+                                <button className="btn-sm whitespace-nowrap" onClick={ clearSequence } aria-label="Manage banks">Clear sequence</button>
                             </li>
                         </ul>
                     </li>
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Save"> 
                         <label id="save" aria-label="Export" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><FaSave className="h-4 w-4"/></label>
-                        <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded">
-                            <li><button className="btn-sm" onClick={ exportData } aria-label="Export all">Save All</button></li>
-                            <li><button className="btn-sm" onClick={ exportBank } aria-label="Export current bank">Current bank</button></li>
-                            <li><button className="btn-sm" onClick={ exportSequence } aria-label="Export current bank">Sequence</button></li>
+                        <ul tabIndex="0" className="dropdown-content menu p-2 shadow-lg bg-neutral text-secondary rounded z-10">
+                            <li><button className="btn-sm whitespace-nowrap" onClick={ exportData } aria-label="Export all">Save All</button></li>
+                            <li><button className="btn-sm whitespace-nowrap" onClick={ exportBank } aria-label="Export current bank">Current bank</button></li>
+                            <li><button className="btn-sm whitespace-nowrap" onClick={ exportSequence } aria-label="Export current bank">Sequence</button></li>
                         </ul>
                     </li>
                     <li className="tooltip tooltip-bottom" data-tip="Randomize">
@@ -165,7 +165,7 @@ const Header = () => {
                     </li>
                     <li className="tooltip tooltip-bottom dropdown" data-tip="Tempo"> 
                         <label id="tempo" aria-label="Tempo" role="button" tabIndex="0" className="btn btn-sm btn-primary btn-outline py-0"><GiMetronome className="h-5 w-5"/></label>
-                        <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded">
+                        <div tabIndex="0" className="dropdown-content shadow-lg bg-neutral text-secondary rounded z-10">
                             <Tempo tempo={tempo} onTempoChange={setTempo} barLength={barLength} onBarChange={setBarLength} onToggle={setMetronome} metronome={metronome} />
                         </div>
                     </li>
