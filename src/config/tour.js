@@ -51,7 +51,7 @@ const intro = [
     },
     {
         title: "Controls",
-        intro: "NTS-web has 4 types of controls, to change paramaters on your NTS-1",
+        intro: "NTS-web has 4 types of controls, to change parameters on your NTS-1",
         tooltipClass: 'tour intro',
     },
     {
