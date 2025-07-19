@@ -1,6 +1,6 @@
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y43D7I3)
 
-## NTS-web 3.0.0
+## NTS-web 4.0.1
 
 A web controller for the Korg NTS-1.
 
@@ -22,7 +22,7 @@ A web controller for the Korg NTS-1.
 
 ### THIS IS A WORK IN PROGRESS
 
-This is still a work in progress, so expect some bugs and issues. 
+This is still a work in progress, so expect some bugs and issues.
 
 #### TODOs
 
@@ -42,23 +42,23 @@ If you miss any feature, please, request it.
 
 ### Features
 
-* Installable, and works offline as a PWA
-* Control any parameter from within the app
-    * Changes made on the NTS-1 device reflect on the app
-    * The app remembers all your settings and banks  (_**NEW**_)
-* Play with the on screen keyboard  (_**UPDATED**_)
-    * Change the starting octave
-    * Send pitch bend
-* Use any USB Midi controller to play the NTS-1
-* Sequence melodies with the built-in sequencer (_**UPDATED**_)
-    * Control the tempo of the sequencer
-    * Play notes any octave
-* Sixteen memory banks for your patches (_**UPDATED**_)
-    * Rename memory banks for easy identification (_**NEW**_)
-* Save and load the state of your app
-    * Import / export your patches from/to any of the sixteen patch banks
-    * Import / export your sequences
-    * Import / export all the state of the app
+- Installable, and works offline as a PWA
+- Control any parameter from within the app
+  - Changes made on the NTS-1 device reflect on the app
+  - The app remembers all your settings and banks (_**NEW**_)
+- Play with the on screen keyboard (_**UPDATED**_)
+  - Change the starting octave
+  - Send pitch bend
+- Use any USB Midi controller to play the NTS-1
+- Sequence melodies with the built-in sequencer (_**UPDATED**_)
+  - Control the tempo of the sequencer
+  - Play notes any octave
+- Sixteen memory banks for your patches (_**UPDATED**_)
+  - Rename memory banks for easy identification (_**NEW**_)
+- Save and load the state of your app
+  - Import / export your patches from/to any of the sixteen patch banks
+  - Import / export your sequences
+  - Import / export all the state of the app
 
 ### Found a bug?
 
