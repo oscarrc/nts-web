@@ -20,17 +20,13 @@ A web controller for the Korg NTS-1.
 
 ---
 
-### THIS IS A WORK IN PROGRESS
-
-This is still a work in progress, so expect some bugs and issues.
-
 #### TODOs
 
 - [x] Implement midi passthrough
 - [x] Compile standalone apps
 - [x] Get names of user oscilators and effects
 - [x] Detect changes on plugged devices and act accordingly
-- [ ] Test the sequencer for real-time performance
+- [x] Test the sequencer for real-time performance
 
 If you miss any feature, please, request it.
 
